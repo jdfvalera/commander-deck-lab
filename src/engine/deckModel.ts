@@ -42,6 +42,54 @@ export interface ModelCard {
   fetchesBasic: boolean;
   /** Cost reduces with the board (the Pride): the mana tool can't time it, the goldfish can. */
   boardDependentCost: boolean;
+  /** What the card draws, for the mana model's card-draw step. */
+  draw: DrawProfile | null;
+}
+
+export interface DrawProfile {
+  /** Cards drawn when cast or when it enters. */
+  onCast: number;
+  /** "Draw X": spend leftover mana on X. */
+  x: boolean;
+  /** Extra cards every turn once it's on the battlefield (Phyrexian Arena, Rhystic Study ≈ 1). */
+  perTurn: number;
+  /** A repeatable activation: pay `cost` (and tap) to draw `n` then discard `discard`, once a turn. */
+  activated: { cost: number; n: number; tap: boolean; discard: number } | null;
+  /** Cards discarded after the on-cast draw (looting). */
+  discard: number;
+  permanent: boolean;
+}
+
+function drawProfile(tags: CardTags, typeLine: string): DrawProfile | null {
+  const p = (k: TagKey) => tags[k]?.params ?? {};
+  const d: DrawProfile = { onCast: 0, x: false, perTurn: 0, activated: null, discard: 0, permanent: !/\b(Instant|Sorcery)\b/.test(typeLine) };
+  if (tags.draw_n) {
+    const n = Number(p('draw_n').n);
+    if (n > 0) d.onCast += n;
+    else d.x = true;
+  }
+  if (tags.etb_draw) d.onCast += Number(p('etb_draw').n);
+  if (tags.loot) {
+    d.onCast += Number(p('loot').draw);
+    d.discard += Number(p('loot').discard);
+  }
+  if (tags.dig) d.onCast += Math.max(1, Number(p('dig').take));
+  if (tags.impulse) d.onCast += Math.max(1, Number(p('impulse').n));
+  // Triggers that need other players or other cards fire about once a turn cycle in a 4-player game.
+  if (tags.repeat_draw) d.perTurn += Number(p('repeat_draw').n) || 1;
+  if (tags.activated_draw) {
+    const a = p('activated_draw');
+    d.activated = { cost: parseManaCost(String(a.cost)).mv, n: Number(a.n) || 1, tap: !!a.tap, discard: Number(a.discard ?? 0) };
+  }
+  for (const k of CUSTOM_KEYS) {
+    const c = tags[k]?.params;
+    if (!c || c.effect !== 'draw') continue;
+    const n = Number(c.amount) || 1;
+    if (c.when === 'cast' || c.when === 'etb') d.onCast += n;
+    else if (c.when === 'activated') d.activated = { cost: parseManaCost(String(c.cost)).mv, n, tap: !!c.tap, discard: 0 };
+    else if (c.when === 'upkeep' || c.when === 'cast_spell') d.perTurn += n;
+  }
+  return d.onCast || d.x || d.perTurn || d.activated ? d : null;
 }
 
 export interface CommanderAbility {
@@ -129,6 +177,7 @@ export function modelCard(card: ScryfallCard, qty: number, tags: CardTags, ident
     rampLandsTapped: tags.ramp_spell ? !!p('ramp_spell').tapped : true,
     fetchesBasic: !!tags.land_fetch,
     boardDependentCost: !!tags.self_cost_reduction && p('self_cost_reduction').by !== 'control_turtle' && p('self_cost_reduction').by !== 'other',
+    draw: drawProfile(tags, type),
   };
 }
 

@@ -242,6 +242,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
   const [rules, setRules] = useState(DEFAULT_RULES);
   const [trials, setTrials] = useState(10000);
   const [seedText, setSeedText] = useState('1');
+  const [cardDraw, setCardDraw] = useState(true);
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [result, setResult] = useState<MulliganSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -250,7 +251,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
   const run = () => {
     setError(null);
     setProgress({ done: 0, total: trials });
-    const job = startJob({ kind: 'mulligan', model, seed: parseSeed(seedText), trials, rules, opts: { turns: 10, drawOnTurnOne } }, (done, total) => setProgress({ done, total }));
+    const job = startJob({ kind: 'mulligan', model, seed: parseSeed(seedText), trials, rules, opts: { turns: 10, drawOnTurnOne, cardDraw } }, (done, total) => setProgress({ done, total }));
     cancelRef.current = job.cancel;
     job.promise
       .then((r) => r.kind === 'mulligan' && setResult(r.result))
@@ -266,7 +267,8 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
       `Rules: ${rules.minLands}–${rules.maxLands} lands, ≥${rules.minEarlyPlays} plays with MV≤2, max ${rules.maxMulligans} mulligans, free first: ${rules.freeFirstMulligan}`,
       `Kept first 7: ${pct(result.keepFirst, 1)}; mulligans: ${result.mulliganDist.map((d, i) => `${i}: ${pct(d, 1)}`).join(', ')}`,
       `Average cards kept ${result.avgCardsKept.toFixed(2)}, lands kept ${result.avgLandsKept.toFixed(2)}, forced keeps ${pct(result.forcedKeeps, 1)}`,
-      `Mana by turn (median): ${result.mana.median.map((m, i) => `T${i + 1} ${m}`).join(', ')}`,
+      `Mana by turn (median${cardDraw ? ', with card draw' : ', no card draw'}): ${result.mana.median.map((m, i) => `T${i + 1} ${m}`).join(', ')}`,
+      `Extra cards drawn by T3/T5/T8 (average): ${[2, 4, 7].map((i) => result.extraDrawn[i].toFixed(1)).join(' / ')}`,
       c ? `${c.name} castable by T3/T4/T5: ${[2, 3, 4].map((i) => pct(c.byTurn[i], 1)).join(' / ')} (always keeping 7: ${[2, 3, 4].map((i) => pct(result.baseline!.byTurn[i], 1)).join(' / ')})` : 'Commander timing: needs the goldfish (cost depends on the board).',
     ].join('\n');
   };
@@ -278,6 +280,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
       <div className="row small">
         <label>Hands <input type="number" min={100} max={100000} step={1000} value={trials} onChange={(e) => setTrials(Number(e.target.value))} style={{ width: 90 }} /></label>
         <label>Seed <input value={seedText} onChange={(e) => setSeedText(e.target.value)} style={{ width: 90 }} /></label>
+        <label><input type="checkbox" checked={cardDraw} onChange={(e) => setCardDraw(e.target.checked)} /> include card draw</label>
         <button className="primary" onClick={run} disabled={!!progress}>Run</button>
       </div>
       {progress && <Progress {...progress} onCancel={() => cancelRef.current()} />}
@@ -288,8 +291,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
             <p>London mulligan with Commander’s free first mulligan: each mulligan draws a fresh 7 and puts cards on the bottom (none for the free one). Bottoming keeps the hand closest to your rules (excess lands first, else the most expensive spells).</p>
             <p>
               Mana by turn and commander timing use a simple mana model: one land a turn (preferring untapped lands that add a missing color), then mana rocks,
-              mana creatures (usable the next turn), land auras and land-ramp spells, cheapest first. It ignores card draw, so it’s pessimistic
-              for draw-heavy decks. Mana on a turn is what your lands and ramp can make after that turn’s land drop; ramp cast that turn counts from the next. “Always keep 7” replays the same shuffles without mulliganing.
+              mana creatures (usable the next turn), land auras and land-ramp spells, cheapest first. It’s pessimistic for draw-heavy decks unless “include card draw” is on: then leftover mana goes to card draw (most cards per mana first): cantrips, creatures that draw when they enter, looting, digging, activated draws like Arcane Encyclopedia (once a turn), and engines like Phyrexian Arena or Rhystic Study (counted as one extra card a turn). Cards drawn can be played as land drops and ramp the same turn. Custom “draw” effects count too. Mana on a turn is what your lands and ramp can make after that turn’s land drop; ramp cast that turn counts from the next. “Always keep 7” replays the same shuffles without mulliganing.
             </p>
           </ResultsHeader>
           <div className="stat-row">
@@ -302,7 +304,11 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
             <thead><tr><th>Mulligans</th>{result.mulliganDist.map((_, i) => <th key={i} className="num">{i}{i === 1 && rules.freeFirstMulligan ? ' (free)' : ''}</th>)}</tr></thead>
             <tbody><tr><td>Share of games</td>{result.mulliganDist.map((d, i) => <td key={i} className="num">{pct(d, 1)}</td>)}</tr></tbody>
           </table>
-          <ManaHeatmap title="Mana available by turn (share of games)" dist={result.mana} />
+          <ManaHeatmap title={`Mana available by turn (share of games${result.extraDrawn.some((x) => x > 0) ? ', with card draw' : ''})`} dist={result.mana} />
+          <div className="small">
+            <span className="muted">Extra cards drawn (average, beyond draw steps): </span>
+            {result.extraDrawn.map((x, i) => `T${i + 1} ${x.toFixed(1)}`).join(' · ')}
+          </div>
           {result.commander ? (
             <TimingChart
               title={`${result.commander.name} castable by turn`}

@@ -138,3 +138,31 @@ describe('mana by turn', () => {
     expect(p.mana.median[3]).toBeGreaterThanOrEqual(3);
   });
 });
+
+describe('card draw in the mana model', () => {
+  const on = summarizeMulligans(vhal, 5, 1500, DEFAULT_RULES, { turns: 8, drawOnTurnOne: true, cardDraw: true });
+  const off = summarizeMulligans(vhal, 5, 1500, DEFAULT_RULES, { turns: 8, drawOnTurnOne: true, cardDraw: false });
+
+  it('draws extra cards only when enabled, and the total only grows', () => {
+    expect(off.extraDrawn.every((x) => x === 0)).toBe(true);
+    expect(on.extraDrawn[7]).toBeGreaterThan(0.5);
+    for (let t = 1; t < 8; t++) expect(on.extraDrawn[t]).toBeGreaterThanOrEqual(on.extraDrawn[t - 1]);
+  });
+
+  it('extra cards find lands: mana by turn 8 is at least as high on average', () => {
+    expect(on.mana.mean[7]).toBeGreaterThanOrEqual(off.mana.mean[7] - 0.05);
+  });
+
+  it('logs the draws in the hand sampler', () => {
+    const r = simulateHand(vhal, 11, DEFAULT_RULES, { turns: 8, drawOnTurnOne: true, log: true });
+    expect(r.extraDrawnByTurn).toHaveLength(8);
+    if (r.extraDrawnByTurn[7] > 0) expect(r.log.join('\n')).toMatch(/: draw /);
+  });
+
+  it('activated draws come from tags (Arcane Encyclopedia: {3}, tap, draw 1)', () => {
+    const enc = vhal.library.find((c) => c.name === 'Arcane Encyclopedia')!;
+    expect(enc.draw?.activated).toEqual({ cost: 3, n: 1, tap: true, discard: 0 });
+    const tome = vhal.library.find((c) => c.name === "Urza's Tome")!;
+    expect(tome.draw?.activated?.discard).toBe(1);
+  });
+});
