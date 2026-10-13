@@ -1,0 +1,66 @@
+1 Clan Crafter (CLB) 651 *F*
+1 Vhal, Candlekeep Researcher (CLB) 387 *F*
+1 Access Denied (NEC) 11
+1 Aetherize (BLC) 161
+1 Animation Module (KLD) 194
+1 Arcane Denial (M3C) 176
+1 Arcane Encyclopedia (CLB) 297
+1 Aura of Dominion (CHK) 51
+1 Blackblade Reforged (ZNC) 107
+1 Capsize (TMP) 55
+1 Cascading Cataracts (M3C) 326
+1 Cogwork Assembler (AER) 145
+1 Consuming Tide (VOW) 53
+1 Crab Umbra (ROE) 58
+1 Disciple of the Ring (2X2) 46
+1 Dramatic Reversal (KLD) 44
+1 Drown in Dreams (M3C) 181
+1 Energy Refractor (BRO) 234
+1 Folio of Fancies (ELD) 46
+1 Fortune Teller's Talent (BLC) 14
+1 Freed from the Real (SOK) 38
+1 Future Sight (MH1) 53
+1 Gemstone Array (5DN) 124
+1 Genesis Chamber (BBD) 235
+1 Hard Cover (M20) 63
+1 Hornswoggle (RIX) 39
+1 Imprisoned in the Moon (FDN) 156
+1 Increasing Confusion (DKA) 41
+1 Inspired Sphinx (KHC) 40
+1 Intruder Alarm (8ED) 86
+35 Island (DFT) 282
+1 Liquimetal Coating (BRR) 91
+1 Liquimetal Torque (BRC) 145
+1 Magus of the Future (TSR) 75
+1 Memory Lapse (STA) 16
+1 Mirror Shield (THB) 234
+1 Miscast (M21) 57
+1 Mm'menon, the Right Hand (EOE) 68
+1 Myr Matrix (DST) 132
+1 Mystic Forge (CMM) 964
+1 Negate (BBD) 123
+1 Nerd Rage (PIP) 34
+1 One with the Multiverse (DSC) 121
+1 Patriar's Seal (CLB) 332
+1 Pemmin's Aura (PLST) SCG-45
+1 Precognition Field (DOM) 61
+1 Prismite (M20) 235
+1 Ring of Evos Isle (M13) 211
+1 Rise and Shine (MOC) 233
+1 River Song's Diary (WHO) 182
+1 Sai, Master Thopterist (DRC) 82
+1 Sky Diamond (CLB) 337
+1 Slagwurm Armor (MRD) 243
+1 Spell Swindle (MOC) 237
+1 Staff of Domination (CMR) 343
+1 Stonework Packbeast (ZNR) 255
+1 Sword of the Paruns (RVR) 395
+1 Thassa's Ire (JOU) 54
+1 The Reality Chip (NEO) 74
+1 Thopter Spy Network (J22) 361
+1 Thornbite Staff (MB2) 99
+1 Umbral Mantle (MB2) 101
+1 Urn of Godfire (MOM) 266
+1 Urza's Tome (DOM) 235
+1 Voltaic Construct (DST) 156
+1 Wash Out (2X2) 67

@@ -18,5 +18,5 @@
     "skipLibCheck": true,
     "types": ["vite/client"]
   },
-  "include": ["src", "tests", "fixtures"]
+  "include": ["src", "fixtures"]
 }

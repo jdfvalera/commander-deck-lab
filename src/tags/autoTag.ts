@@ -1,6 +1,8 @@
-// Oracle text -> tags. Each oracle line ("ability") is run through the rules below. A line no rule
-// understands becomes part of the card's `unmodelled` tag, so the UI can show exactly what the
-// simulator ignores. Heuristics only need to be good, not perfect: the tag editor fixes the rest.
+// Oracle text -> tags. Each oracle line ("ability") is run through the rules below, first as a whole
+// and then sentence by sentence. A sentence no rule understands goes into `unmodelled` when it could
+// change a game, or `ignored_text` when it can't (life gain, creature types, peeking at cards), so the
+// UI can show exactly what the simulator ignores. Heuristics only need to be good, not perfect: the
+// tag editor fixes the rest.
 
 import type { ScryfallCard } from '../data/types';
 import { playedFace } from '../data/names';
@@ -14,20 +16,75 @@ const KEYWORD_TAGS: Record<string, TagKey> = {
 };
 // Keywords that don't change how a game plays out in this simulator.
 // "Enchant" only says what an aura can attach to; the aura's own tag covers the effect.
-const IRRELEVANT_KEYWORDS = new Set(['devoid', 'partner', 'friends forever', 'choose a background', 'enchant']);
+const IRRELEVANT_KEYWORDS = new Set([
+  'devoid', 'partner', 'friends forever', 'choose a background', 'enchant', 'changeling', "doctor's companion",
+  // Life gain and small combat or cost tweaks: real, but they don't move goldfish or matchup numbers much.
+  'lifelink', 'extort', 'prowess', 'exalted', 'cycling', 'landcycling', 'basic landcycling', 'flashback', 'convoke',
+  'affinity', 'delve', 'improvise', 'kicker', 'multikicker', 'buyback', 'retrace', 'escape', 'level up', 'hideaway',
+  'evolve', 'transmute', 'reconfigure', 'mentor', 'training', 'menace', 'first strike', 'double strike',
+]);
 
-const NUM_WORDS: Record<string, number> = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, ten: 10 };
-const num = (s: string) => NUM_WORDS[s] ?? Number(s);
+const NUM_WORDS: Record<string, number> = {
+  a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, x: 0,
+};
+const num = (s: string) => NUM_WORDS[s] ?? (Number(s) || 0);
+const NUM = '(a|an|one|two|three|four|five|six|seven|x|\\d+)';
 const costOf = (s: string) => (s.match(/\{[^}]+\}/g) ?? []).filter((x) => x !== '{t}').join('').toUpperCase();
 
 interface Ctx {
   tags: CardTags;
   card: ScryfallCard;
   type: string; // played face type line, lowercased
+  line: string; // the whole ability line being read, lowercased
   set(key: TagKey, params?: TagParams): void;
 }
 
-type Rule = { re: RegExp; apply?: (m: RegExpMatchArray, ctx: Ctx) => void };
+/** `apply` may return false to say "this matched, but isn't what it looks like": the text stays unmodelled. */
+type Rule = { re: RegExp; apply?: (m: RegExpMatchArray, ctx: Ctx) => void | false };
+
+/** Text that doesn't matter to a goldfish or matchup simulation. Checked only when no rule understood it. */
+const IGNORE: RegExp[] = [
+  /^(?:(?:when|whenever|at) [^,]+, )?(?:you |each player |target player |its controller )?(?:gains?|loses?) (?:\d+|x|that much|twice that much|half [^.]*) life\b[^.]*\.?$/,
+  /\bgains? life equal to\b/,
+  /^(?:\{[^}]+\}(?:, )?)+(?:, \{t\})?: (?:you )?gain \d+ life\.?$/,
+  /^if you would gain life, you gain twice that much life instead\.?$/,
+  /^~ is also an? /,
+  /\bis every creature type\b/,
+  /^you may look at the top card of your library any time\.?$/,
+  /^play with the top card of your library revealed\.?$/,
+  /^(?:its controller|that spell's controller|its owner|that player) /,
+  /^when ~ enters, return a land you control to its owner's hand\.?$/,
+  /^(?:when ~ enters, )?(?:scry|surveil) \d+\.?$/,
+  /^as ~ enters, you may pay \d+ life\.?$/,
+  /^~ (?:can't block|attacks each combat if able)\.?$/,
+  /^~ gets [+-]\d+\/[+-]\d+ until end of turn\.?$/,
+  /^draw a card if an opponent has cast a [a-z ]+ spell this turn\.?$/,
+  /\bfood tokens?\b/,
+  /^(?:\{[^}]+\}(?:, )?)*\{t\}, sacrifice ~: you gain \d+ life\.?$/,
+];
+
+/** Structural text: understood, carries no effect of its own. */
+const STRUCTURAL: RegExp[] = [
+  /^choose (?:one|two|three|one or both|one or more|any number)(?: —| -)?(?: [^.]*)?\.?$/,
+  /^activate (?:only|no more than) [^.]*\.?$/,
+  /^this effect can't reduce the mana in that cost to less than one mana\.?$/,
+  /^spend this mana only [^.]*\.?$/,
+  /^as (?:~|this [a-z]+) enters, choose a (?:creature type|color|card type|basic land type|creature|opponent)\.?$/,
+  /^choose a (?:creature type|color)\.?$/,
+  /^(?:this ability|it) triggers only once each turn\.?$/,
+  /^(?:it|they) can't be regenerated\.?$/,
+  /^you may choose new targets for the copy\.?$/,
+  /^as an additional cost to cast this spell, (?:sacrifice|discard|exile|pay|tap|return) [^.]*\.?$/,
+  /^if you control a commander as you cast this spell, you may choose [^.]*\.?$/,
+  /^exile ~\.?$/,
+  /^enchant [a-z, ]+$/,
+  /^[^"]*: choose (?:one|two|one or both)(?: —)?$/,
+  /^if that spell is countered this way, [^.]*\.?$/,
+  /^then if you control (?:four|\w+) or more lands, untap that land\.?$/,
+  /^if this spell was cast from a graveyard, [^.]*\.?$/,
+  /^then shuffle\.?$/,
+  /^~ is (?:the chosen type|every creature type) in addition to its other types\.?$/,
+];
 
 // Order doesn't matter: every rule runs on every line, and any match marks the line as understood.
 const RULES: Rule[] = [
@@ -51,14 +108,57 @@ const RULES: Rule[] = [
   },
   { re: /^enchant (?:land|forest|creature|creature you control|permanent)\.?$/ },
   { re: /^as ~ enters, choose a color\.?$/ },
+  { re: /^(?:you have|players have) no maximum hand size\.?$/, apply: (_m, ctx) => ctx.set('no_max_hand_size') },
   {
-    re: /^\{t\}, sacrifice ~: search your library for an? basic land card, put it onto the battlefield( tapped)?/,
-    apply: (m, ctx) => ctx.set('land_fetch', { tapped: !!m[1] }),
+    // Fetch lands and land-ramp spells/abilities alike: "search your library for ... land/Forest ... onto the battlefield".
+    re: /search your library for ([^.]*?)(?:basic land|land|forest|plains|island|swamp|mountain) cards?[^.]*?(?:put (one|them|it|that card|those cards|one of them) onto the battlefield( tapped)?)/,
+    apply: (m, ctx) => {
+      if (/ their library/.test(m[0])) return false;
+      const tapped = !!m[3];
+      if (ctx.type.includes('land')) return ctx.set('land_fetch', { tapped });
+      const upTo = m[1].match(/up to (\w+)/);
+      const lands = m[2] === 'them' || m[2] === 'those cards' ? num(upTo?.[1] ?? 'two') : 1;
+      ctx.set('ramp_spell', { lands, tapped });
+    },
   },
-  { re: /^you have no maximum hand size\.?$/, apply: (_m, ctx) => ctx.set('no_max_hand_size') },
+  { re: /(?:if you don't|unless [^,]+), (?:~|it) enters tapped\.?$/, apply: (_m, ctx) => ctx.set('enters_tapped', { conditional: true }) },
   {
-    re: /search your library for (?:up to (\w+) )?basic land cards?,? .*put (?:them|it|those cards) onto the battlefield( tapped)?/,
-    apply: (m, ctx) => ctx.set('ramp_spell', { lands: m[1] ? num(m[1]) : 1, tapped: !!m[2] }),
+    re: /^((?:\{[^}]+\})+)(, \{t\})?(?:, [^:]+)?: add (.+)$/,
+    apply: (m, ctx) => {
+      const c = costOf(m[1]);
+      if (!c) return; // plain {T}: add, handled above
+      if (ctx.type.includes('land')) return;
+      const tap = !!m[2] || m[1].includes('{t}');
+      const { amount } = manaAmount(m[3]);
+      if (!tap) return ctx.set('mana_filter', { cost: c });
+      if (ctx.tags.ramp_rock || ctx.tags.ramp_dork) return;
+      ctx.set(isCreature(ctx) ? 'ramp_dork' : 'ramp_rock', { amount, cost: c });
+    },
+  },
+  { re: /^remove (?:a|one) [a-z]+ counter from ~: add /, apply: (_m, ctx) => mergeParams(ctx, 'mana_filter', {}) },
+  { re: /^\{\d+\}(?:, \{t\})?: put a [a-z]+ counter on ~\.?$/, apply: (_m, ctx) => mergeParams(ctx, 'mana_filter', {}) },
+  { re: /^add ((?:\{[wubrgc]\})+)\.?$/, apply: (m, ctx) => ctx.set('ritual', { amount: m[1].split('}{').length }) },
+  {
+    re: /^sacrifice (?:a|an|another) (?:creature|artifact|permanent): add ((?:\{[wubrgc]\})+)\.?$/,
+    apply: (m, ctx) => ctx.set('ritual', { amount: m[1].split('}{').length }),
+  },
+  { re: /^whenever you cast a spell, add ((?:\{[wubrgc]\})+)\.?$/, apply: (_m, ctx) => ctx.set('ritual', { amount: 1 }) },
+  { re: /^exile this card from your hand: add ((?:\{[wubrgc]\})+)\.?$/, apply: (m, ctx) => ctx.set('ritual', { amount: m[1].split('}{').length }) },
+  { re: /^add (one|two|three|four|five|x) mana\b/, apply: (m, ctx) => ctx.set('ritual', { amount: num(m[1]) }) },
+  {
+    re: new RegExp(`\\bcreate ${NUM} (?:tapped )?treasure tokens?`),
+    apply: (m, ctx) => {
+      const t = triggerOf(ctx.line);
+      ctx.set('treasure', { n: num(m[1]) || 1, trigger: t === 'etb' ? 'etb' : t === 'activated' ? 'activated' : t === 'cast' ? 'cast' : 'repeating' });
+    },
+  },
+  {
+    re: /you may (?:play (?:an|two) additional lands?|put a land card from your hand onto the battlefield)/,
+    apply: (_m, ctx) => ctx.set('extra_land_drop'),
+  },
+  {
+    re: /^(?:[a-z]+ )?(?:artifacts|creatures|lands|permanents) you control have "\{t\}: add ([^"]+)"/,
+    apply: (m, ctx) => ctx.set('mana_grant', { scope: ctx.line.match(/^([a-z ]+?) you control/)?.[1] ?? '', restricted: /spend this mana only/.test(m[1]) }),
   },
 
   // ---- body ----
@@ -146,7 +246,55 @@ const RULES: Rule[] = [
       if (has.includes('shroud') || has.includes('hexproof')) ctx.set('protection', { kind: 'equip_shroud' });
     },
   },
-  { re: /^equip \{(\d+)\}$/, apply: (m, ctx) => mergeParams(ctx, 'equipment', { equip: Number(m[1]) }) },
+  { re: /^equip(?: [a-z ]+?)? \{(\d+)\}\.?$/, apply: (m, ctx) => mergeParams(ctx, 'equipment', { equip: Number(m[1]) }) },
+  {
+    re: /^equipped creature gets ([+-]\d+)\/([+-]\d+)(?: and (?:has|gains) ([a-z, ]+?))?(?:\.|$| and ")/,
+    apply: (m, ctx) => {
+      const has = m[3] ?? '';
+      mergeParams(ctx, 'equipment', { power: Number(m[1]), toughness: Number(m[2]), haste: has.includes('haste'), hexproof: has.includes('hexproof'), shroud: has.includes('shroud') });
+    },
+  },
+  {
+    re: /^enchanted creature gets ([+-]\d+)\/([+-]\d+)(?: and has ([a-z, ]+?))?\.?$/,
+    apply: (m, ctx) => mergeParams(ctx, 'aura', { power: Number(m[1]), toughness: Number(m[2]), flying: (m[3] ?? '').includes('flying') }),
+  },
+  {
+    re: /^(?:([^:"]+): )?(?:you may )?untap (target [a-z ]+?|all [a-z ]+?|enchanted creature|equipped creature|~|up to [a-z ]+?)\.?$/,
+    apply: (m, ctx) => ctx.set('untapper', { cost: costOf(m[1] ?? ''), scope: m[2] }),
+  },
+  {
+    re: /^(?:([^:"]+): )?(?:you may )?tap (target [a-z ]+?|enchanted creature|equipped creature|up to [a-z ]+?)\.?$/,
+    apply: (m, ctx) => (/you control/.test(m[2]) ? false : ctx.set('tapper', { cost: costOf(m[1] ?? ''), scope: m[2] })),
+  },
+  {
+    re: /^(?:([^:"]+): )?(?:you may )?tap or untap (target [a-z ]+?|enchanted creature|equipped creature|~)\.?$/,
+    apply: (m, ctx) => {
+      ctx.set('untapper', { cost: costOf(m[1] ?? ''), scope: m[2] });
+      ctx.set('tapper', { cost: costOf(m[1] ?? ''), scope: m[2] });
+    },
+  },
+  {
+    re: /^creatures you control get ([+-]\d+)\/([+-]\d+)\.?$/,
+    apply: (m, ctx) => ctx.set('team_pump', { power: Number(m[1]), toughness: Number(m[2]), until_eot: false }),
+  },
+  {
+    re: /^(?:[a-z]+ )?creatures you control get \+(\d+)\/\+(\d+)\.?$/,
+    apply: (m, ctx) => ctx.set('team_pump', { power: Number(m[1]), toughness: Number(m[2]), until_eot: false }),
+  },
+  {
+    re: new RegExp(`\\bcreate ${NUM} (?:tapped )?(\\d+|x)\\/(\\d+|x) ([^.]*?)creature tokens?([^.]*)`),
+    apply: (m, ctx) => {
+      if (/^(?:its controller|that player|each opponent|target opponent)/.test(ctx.line)) return false;
+      if (/sacrificed creature's|where x is/.test(ctx.line)) return; // variable-size token: covered by a specific tag or left to the user
+      if (num(m[3]) === 0) return false; // 0/0 tokens grown by counters: size depends on the game
+      const t = triggerOf(ctx.line);
+      ctx.set('token_maker', {
+        count: num(m[1]) || 1, power: num(m[2]), toughness: num(m[3]),
+        flying: /flying/.test(m[4] + m[5]) || /^[^.]*with flying/.test(m[5]),
+        trigger: t === 'repeating' ? 'upkeep' : t, cost: t === 'activated' ? costOf(ctx.line.split(':')[0]) : '',
+      });
+    },
+  },
 
   // ---- evasion enablers ----
   {
@@ -164,7 +312,7 @@ const RULES: Rule[] = [
     },
   },
   {
-    re: /^equipped creature can't be blocked( except by walls)?\.?$/,
+    re: /^(?:equipped|enchanted) creature can't be blocked( except by walls)?\.?$/,
     apply: (m, ctx) => {
       ctx.set('unblockable_enabler', { kind: 'equip', tap: false, walls_can_block: !!m[1] });
       mergeParams(ctx, 'equipment', {});
@@ -211,44 +359,213 @@ const RULES: Rule[] = [
   },
   { re: /^return target card from your graveyard to your hand\.?$/, apply: (_m, ctx) => ctx.set('recursion', { filter: 'any' }) },
   {
+    re: /^return (?:up to (?:one|two) )?target ((?:[a-z]+ )*?)cards? from your graveyard to your hand\.?$/,
+    apply: (m, ctx) => ctx.set('recursion', { filter: /instant|sorcery/.test(m[1]) ? 'instant_sorcery' : /creature/.test(m[1]) ? 'creature' : /permanent|artifact|enchantment/.test(m[1]) ? 'permanent' : 'any', etb: /^when ~ enters/.test(ctx.line) }),
+  },
+  {
+    re: /return target [a-z ]*?card from (?:your|a) graveyard to the battlefield|put target [a-z ]*?card from a graveyard onto the battlefield under your control/,
+    apply: (_m, ctx) => ctx.set('reanimate'),
+  },
+  {
+    re: /^((?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+)(?:, (?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+))*): (?:you )?draw (a|one|two|three|x) cards?(?:, then discard (a|one|two|three) cards?)?(?:\.|$)/,
+    apply: (m, ctx) =>
+      ctx.set('activated_draw', {
+        cost: costOf(m[1]), n: num(m[2]) || 1, tap: m[1].includes('{t}'), sacrifice: /sacrifice/.test(m[1]), discard: m[3] ? num(m[3]) : 0,
+      }),
+  },
+  { re: new RegExp(`^draw ${NUM} cards?, then discard ${NUM} cards?`), apply: (m, ctx) => ctx.set('loot', { draw: num(m[1]), discard: num(m[2]) }) },
+  { re: new RegExp(`^discard ${NUM} cards?, then draw ${NUM} cards?`), apply: (m, ctx) => ctx.set('loot', { draw: num(m[2]), discard: num(m[1]) }) },
+  {
+    re: new RegExp(`^(?:•\\s*)?(?:target player|you) draws? ${NUM} cards?\\.?$`),
+    apply: (m, ctx) => ctx.set('draw_n', { n: num(m[1]) }),
+  },
+  {
+    re: /^you draw (a|one|two) cards? at the beginning of the next turn's upkeep\.?$/,
+    apply: (m, ctx) => ctx.set('draw_n', { n: num(m[1]) }),
+  },
+  {
+    re: /draw cards equal to the number of opponents you have/,
+    apply: (_m, ctx) => ctx.set(/^when ~ enters/.test(ctx.line) ? 'etb_draw' : 'draw_n', { n: 3 }),
+  },
+  {
+    re: /^when ~ enters, (?:you )?(?:may )?draw (a|one|two|three) cards?/,
+    apply: (m, ctx) => ctx.set('etb_draw', { n: num(m[1]) }),
+  },
+  {
+    re: /^at the beginning of (your upkeep|your draw step|your end step|each end step|each upkeep|your precombat main phase)[^,]*, (?:you )?(?:may )?draw (a|an additional|one|two) cards?/,
+    apply: (m, ctx) => ctx.set('repeat_draw', { n: m[2] === 'two' ? 2 : 1, when: /end step/.test(m[1]) ? 'end_step' : 'upkeep' }),
+  },
+  {
+    re: /^whenever you cast (?:or copy )?(?:an? |your )?(?:[a-z, ]+ )?spell[^,]*, (?:you may )?draw (a|one|two) cards?/,
+    apply: (m, ctx) => ctx.set('repeat_draw', { n: num(m[1]), when: 'cast_spell' }),
+  },
+  {
+    re: /^whenever an opponent casts a spell, you may draw a card unless that player pays/,
+    apply: (_m, ctx) => ctx.set('repeat_draw', { n: 1, when: 'opponent_casts' }),
+  },
+  {
+    re: /^whenever (~|equipped creature|enchanted creature|one or more artifact creatures you control) deals? combat damage to a player, (?:you may )?draw (a|one|two) cards?/,
+    apply: (m, ctx) => ctx.set('combat_damage_draw', { n: num(m[2]), scope: m[1] === '~' ? 'self' : m[1].startsWith('one or more') ? 'artifact_creatures' : 'equipped' }),
+  },
+  {
+    re: /each player (?:discards|shuffles) their hand[^.]*(?:,|then|\.) (?:then )?(?:each player )?draws? (seven|\w+) cards/,
+    apply: (m, ctx) => ctx.set('wheel', { n: num(m[1]) || 7 }),
+  },
+  { re: new RegExp(`\\bcreate ${NUM} clue tokens?`), apply: (m, ctx) => ctx.set('clue', { n: num(m[1]) || 1 }) },
+  {
+    re: /you may (play lands and cast spells|cast spells|play cards|play lands and cast [a-z ]+? spells|cast [a-z ]+? spells|play lands) (?:[a-z ]+ )?from the top of your library/,
+    apply: (m, ctx) => ctx.set('play_from_top', { scope: m[1] }),
+  },
+  {
+    re: /^([a-z ,]*?)spells you cast(?: [a-z ]+?)? cost \{(\d+)\} less to cast/,
+    apply: (m, ctx) => ctx.set('spell_cost_reducer', { amount: Number(m[2]), filter: m[1].trim() }),
+  },
+  {
+    re: /^this spell costs \{(\d+)\} less to cast\b/,
+    apply: (m, ctx) => {
+      if (ctx.tags.self_cost_reduction) return;
+      ctx.set('self_cost_reduction', { by: 'other', amount: Number(m[1]) });
+    },
+  },
+  {
+    re: /search your library for (?:a|an|up to one) ((?:[a-z]+,? )*?)cards?(?: with [^,.]+)?,? (?:reveal (?:it|that card), )?(?:then shuffle and )?(put (?:it|that card) into your hand|put (?:that card|it) on top|put (?:it|that card) onto the battlefield)/,
+    apply: (m, ctx) => {
+      if (/land|forest|plains|island|swamp|mountain/.test(m[1]) && /battlefield/.test(m[2])) return;
+      ctx.set('tutor', { filter: m[1].trim(), to: /top/.test(m[2]) ? 'top' : /battlefield/.test(m[2]) ? 'battlefield' : 'hand' });
+    },
+  },
+  {
+    re: /(target player|each opponent|target opponent|each player) mills (?:twice )?(?:(x|a|one|two|three|four|five|ten|\d+|\w+) cards?|cards equal to)/,
+    apply: (m, ctx) => ctx.set('mill', { n: num(m[2] ?? 'x'), target: m[1].startsWith('each opponent') ? 'opponents' : 'player' }),
+  },
+  {
+    re: /^((?:\{[^}]+\})+)(?:, \{t\})?: each player draws (x|a|one|two|three) cards?\.?$/,
+    apply: (m, ctx) => ctx.set('activated_draw', { cost: costOf(m[1]), n: num(m[2]), tap: ctx.line.includes('{t}') }),
+  },
+  { re: /^then discard a card unless /, apply: (_m, ctx) => mergeParams(ctx, 'activated_draw', { discard: 1 }) },
+  {
+    re: /^(?:(?:\{[^}]+\})+|\{t\})(?:, (?:\{t\}|pay \d+ life))*: exile the top card of your library\.?$/,
+    apply: (_m, ctx) => (ctx.tags.play_from_top ? undefined : false),
+  },
+  {
+    re: /^((?:\{[^}]+\})+): (?:equipped|enchanted) creature gains (hexproof|shroud|indestructible)(?: and [a-z]+)? until end of turn\.?$/,
+    apply: (_m, ctx) => ctx.set('protection', { kind: 'single_hexproof_indestructible' }),
+  },
+  {
     re: /^when ~ enters, you may return target (instant or sorcery|creature|permanent) card from your graveyard to your hand\.?$/,
     apply: (m, ctx) => ctx.set('recursion', { filter: m[1] === 'instant or sorcery' ? 'instant_sorcery' : m[1], etb: true }),
   },
 
-  // ---- interaction ----
   {
-    re: /^counter target (noncreature |instant or sorcery |instant |creature )?spell( unless its controller pays \{\d+\})?\./,
-    apply: (m, ctx) => {
-      const scope = (m[1] ?? 'any').trim().replace(' or ', '_');
-      ctx.set('counterspell', { scope, soft: !!m[2] });
-    },
-  },
-  { re: /spells you control can't be countered this turn/, apply: (_m, ctx) => ctx.set('protection', { kind: 'uncounterable' }) },
-  {
-    re: /^permanents you control gain hexproof and indestructible until end of turn\.?$/,
-    apply: (_m, ctx) => ctx.set('protection', { kind: 'team_hexproof_indestructible' }),
+    re: /^if you control a commander, you may cast this spell without paying its mana cost\.?$/,
+    apply: (_m, ctx) => ctx.set('self_cost_reduction', { by: 'other', amount: ctx.card.cmc }),
   },
   {
-    re: /target creature you control\. it gains (?:[a-z]+, )*hexproof,? and indestructible until end of turn\.?$/,
-    apply: (_m, ctx) => ctx.set('protection', { kind: 'single_hexproof_indestructible' }),
+    re: /^(?:when ~ enters, )?(?:you may )?return (?:up to (?:one|two) )?target ((?:[a-z]+ )*?)cards? from your graveyard to your hand\.?$/,
+    apply: (m, ctx) => ctx.set('recursion', { filter: /instant|sorcery/.test(m[1]) ? 'instant_sorcery' : /creature/.test(m[1]) ? 'creature' : /permanent|artifact|enchantment/.test(m[1]) ? 'permanent' : 'any', etb: /^when ~ enters/.test(ctx.line) }),
   },
   {
-    re: /^(?!when|whenever|at )(?:.*\. )?(destroy|exile) target (creature|nonland permanent|permanent|artifact or enchantment|artifact|enchantment)\b/,
-    apply: (m, ctx) => ctx.set('spot_removal', { kind: m[1], targets: removalTargets(m[2]) }),
+    re: /^whenever a creature you control deals combat damage to a player, (?:you may )?draw (a|one|two) cards?\.?$/,
+    apply: (m, ctx) => ctx.set('combat_damage_draw', { n: num(m[1]) }),
   },
   {
-    re: /^(?!when|whenever|at )(?:.*\. )?return target (creature|nonland permanent) to its owner's hand\b/,
-    apply: (m, ctx) => ctx.set('spot_removal', { kind: 'bounce', targets: removalTargets(m[1]) }),
+    re: /^(?:landfall — )?whenever (?:a|an|another|one or more)(?: other)? (?:nontoken )?(creatures?|lands?|artifacts?)[^,]*? you control[^,]*? enters?, (?:you may )?draw a card/,
+    apply: (m, ctx) => ctx.set(m[1].startsWith('creature') ? 'creature_etb_draw' : 'repeat_draw', m[1].startsWith('creature') ? {} : { n: 1, when: 'other' }),
+  },
+  { re: /^(?:when ~ enters, )?mill (a|one|two|three|four|five|\d+) cards?\.?$/, apply: (m, ctx) => ctx.set('mill', { n: num(m[1]), target: 'self' }) },
+  {
+    re: /^(?:when ~ enters, )?each (?:player|opponent) sacrifices (?:a|an) (?:nontoken )?creature/,
+    apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'edict', targets: 'creature' }),
   },
   {
-    re: /^(?!when|whenever|at )~ deals (\d+) damage to (?:any target|target creature)/,
+    re: /^(?:([^:"]+): )?target creature (?:an opponent controls )?gets -(\d+|x)\/-(\d+|x) until end of turn\.?$/,
     apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'damage', targets: 'creature' }),
   },
   {
-    re: /^(?:.*\. )?destroy all (creatures|nonland permanents|artifacts, creatures, and enchantments|artifacts and creatures)\b/,
-    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'destroy', artifacts: m[1] !== 'creatures' }),
+    re: /^creatures you control (?:of the chosen (?:type|color) )?get \+(\d+)\/\+(\d+)\.?$/,
+    apply: (m, ctx) => ctx.set('team_pump', { power: Number(m[1]), toughness: Number(m[2]), until_eot: false }),
   },
-  { re: /^(?:.*\. )?exile all (creatures|nonland permanents)\b/, apply: (m, ctx) => ctx.set('board_wipe', { kind: 'exile', artifacts: m[1] !== 'creatures' }) },
+  {
+    re: /^(?:other )?creatures you control have ([a-z, ]+?)\.?$/,
+    apply: (m, ctx) => {
+      if (m[1].includes('haste')) return ctx.set('haste_enabler', { scope: 'team', tap: false });
+      if (/hexproof/.test(m[1])) return ctx.set('team_hexproof', { when: 'always' });
+      return false;
+    },
+  },
+  { re: /^spells you control can't be countered\.?$/, apply: (_m, ctx) => ctx.set('protection', { kind: 'uncounterable' }) },
+  // ---- interaction ----
+  {
+    re: /(?:^|\. )counter target ((?:[a-z]+(?:,| or)? )*?)spell( unless its controller pays \{[^}]+\})?/,
+    apply: (m, ctx) => {
+      const t = m[1].trim();
+      const scope = !t ? 'any' : t.includes('noncreature') ? 'noncreature' : t === 'instant or sorcery' ? 'instant_sorcery' : t === 'instant' ? 'instant' : t === 'creature' ? 'creature' : 'noncreature';
+      ctx.set('counterspell', { scope, soft: !!m[2] });
+    },
+  },
+  { re: /^counter target (?:activated|triggered) (?:or triggered )?ability/, apply: (_m, ctx) => ctx.set('counterspell', { scope: 'ability' }) },
+  { re: /^(?:this spell|~) can't be countered\.?$/, apply: (_m, ctx) => ctx.set('uncounterable') },
+  { re: /spells you control can't be countered this turn/, apply: (_m, ctx) => ctx.set('protection', { kind: 'uncounterable' }) },
+  {
+    re: /^(?:all )?(?:other )?(?:permanents|creatures) you control (?:gain|have) ([a-z, ]+?)(?: until end of turn| until your next turn)?\.?$/,
+    apply: (m, ctx) => {
+      if (!/hexproof|indestructible|protection|shroud/.test(m[1])) return false;
+      ctx.set('protection', { kind: 'team_hexproof_indestructible' });
+    },
+  },
+  { re: /^you and permanents you control gain hexproof from [a-z]+(?: and from [a-z]+)? until end of turn\.?$/, apply: (_m, ctx) => mergeParams(ctx, 'protection', {}) },
+  { re: /^all permanents you control phase out\.?$/, apply: (_m, ctx) => ctx.set('protection', { kind: 'team_hexproof_indestructible' }) },
+  {
+    re: /(?:put a \+1\/\+1 counter on )?target (?:creature|permanent) you control(?:\. it)? gains ([a-z, ]+?) until end of turn\.?$/,
+    apply: (m, ctx) => {
+      if (!/hexproof|indestructible|protection|shroud/.test(m[1])) return false;
+      ctx.set('protection', { kind: 'single_hexproof_indestructible' });
+    },
+  },
+  {
+    re: /^(?:([^:"]+): )?(?:.*\. )?(destroy|exile) (?:up to one )?target ((?:[a-z]+(?:,| or| and)? )*?(?:creature|permanent|artifact|enchantment|planeswalker|land))s?\b/,
+    apply: (m, ctx) => {
+      if (/^(?:whenever|at the beginning)/.test(ctx.line) || / you control$/.test(m[3])) return false;
+      ctx.set('spot_removal', { kind: m[2], targets: removalTargets(m[3]), cost: m[1] && m[1].includes('{') ? costOf(m[1]) : '' });
+    },
+  },
+  {
+    re: /^(?:([^:"]+): )?(?:.*\. )?return (?:up to (?:one|two) )?target ((?:[a-z]+(?:,| or)? )*?(?:creature|permanent|artifact|enchantment|planeswalker))s?( you control| you don't control| an opponent controls)? to (?:its|their) owners?'s? hands?/,
+    apply: (m, ctx) => {
+      // Bouncing your own permanent is a save or a reset, not removal.
+      if (/^(?:whenever|at the beginning)/.test(ctx.line) || m[3] === ' you control') return false;
+      ctx.set('spot_removal', { kind: 'bounce', targets: removalTargets(m[2]), cost: m[1] && m[1].includes('{') ? costOf(m[1]) : '' });
+    },
+  },
+  { re: /the owner of target (?:nonland )?permanent shuffles it into their library/, apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'tuck', targets: 'permanent' }) },
+  {
+    re: /^(?:target player|each opponent|target opponent) sacrifices (?:a|an|one) (?:nontoken )?(creature|creature or planeswalker|attacking creature|permanent)/,
+    apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'edict', targets: 'creature' }),
+  },
+  {
+    re: /^enchanted (?:creature|permanent) (?:can't attack or block|is a colorless land|loses all abilities|is a \d+\/\d+)/,
+    apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'neutralize', targets: 'creature' }),
+  },
+  {
+    re: /^(?!when|whenever|at )(?:([^:"]+): )?~ deals (\d+|x) damage to (?:any target|target creature|target creature or planeswalker)/,
+    apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'damage', targets: 'creature' }),
+  },
+  {
+    re: /(?:^|\. |• )destroy all (other )?((?:[a-z]+(?:,| and| or)? )*?(?:creatures|permanents|artifacts|enchantments|planeswalkers))( you don't control| your opponents control)?\b/,
+    apply: (m, ctx) => mergeParams(ctx, 'board_wipe', { kind: 'destroy', artifacts: /artifact|nonland permanents/.test(m[2]), one_sided: !!m[3] }),
+  },
+  {
+    re: /(?:^|\. |• )exile all (other )?((?:[a-z]+(?:,| and| or)? )*?(?:creatures|permanents|artifacts|enchantments|planeswalkers))( you don't control| your opponents control)?\b/,
+    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'exile', artifacts: /artifact|nonland permanents/.test(m[2]), one_sided: !!m[3] }),
+  },
+  {
+    re: /(?:^|\. )return all (?!attacking)(.+?) to their owners'? hands?/,
+    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'bounce', artifacts: !/creatures$/.test(m[1]), one_sided: /you don't control|your opponents control/.test(m[1]) }),
+  },
+  {
+    re: /^(?:.*\. )?all (other )?creatures( your opponents control)? get -(\d+|x)\/-(\d+|x) until end of turn/,
+    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'minus', x: num(m[3]), one_sided: !!m[2] }),
+  },
   {
     re: /^(?:.*\. )?~ deals (\d+|x) damage to each creature\b/,
     apply: (m, ctx) => ctx.set('board_wipe', { kind: 'damage', x: m[1] === 'x' ? 0 : Number(m[1]) }),
@@ -266,10 +583,82 @@ function isCreature(ctx: Ctx) {
 }
 
 function removalTargets(t: string): string {
-  if (t === 'creature') return 'creature';
-  if (t === 'nonland permanent') return 'nonland';
-  if (t === 'permanent') return 'permanent';
+  if (/nonland|noncreature/.test(t)) return 'nonland';
+  if (/permanent|land/.test(t)) return 'permanent';
+  if (/creature|planeswalker/.test(t)) return 'creature';
   return 'artifact_enchantment';
+}
+
+/** How an effect on this line happens: cast, enters, an activated ability, or a trigger. */
+function triggerOf(line: string): 'cast' | 'etb' | 'activated' | 'repeating' | 'cast_trigger' | 'other' {
+  if (/^[^"]*?:/.test(line) && /^(?:\{|sacrifice|discard|tap|pay|remove|exile|put)/.test(line)) return 'activated';
+  if (/^when ~ enters/.test(line)) return 'etb';
+  if (/^at the beginning of/.test(line)) return 'repeating';
+  if (/^whenever you cast/.test(line)) return 'cast_trigger';
+  if (/^(?:when|whenever)/.test(line)) return 'other';
+  return 'cast';
+}
+
+/** Splits a line into sentences, keeping quoted abilities whole. Returns [start, end) offsets. */
+function sentenceSpans(line: string): [number, number][] {
+  const spans: [number, number][] = [];
+  let start = 0;
+  let quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') quoted = !quoted;
+    if (!quoted && ch === '.' && line[i + 1] === ' ' && i + 2 < line.length) {
+      spans.push([start, i + 1]);
+      start = i + 2;
+    }
+  }
+  spans.push([start, line.length]);
+  return spans.filter(([a, b]) => line.slice(a, b).trim());
+}
+
+function runRules(text: string, ctx: Ctx): [number, number][] {
+  const covered: [number, number][] = [];
+  for (const rule of RULES) {
+    const m = text.match(rule.re);
+    if (!m || m.index === undefined) continue;
+    if (rule.apply?.(m, ctx) === false) continue;
+    covered.push([m.index, m.index + m[0].length]);
+  }
+  return covered;
+}
+
+/** Reads one ability line: whole-line rules first, then any sentence they didn't cover. */
+function readLine(rawLine: string, ctx: Ctx): { unknown: string[]; skipped: string[] } {
+  // Ability words ("Landfall —", "Magecraft —") and modal labels ("• Buy information —") carry no rules meaning.
+  const line = rawLine.replace(/^(•\s*)?[A-Za-z' ]+ — (?=[A-Za-z{~])/, '$1');
+  const lower = line.toLowerCase();
+  ctx.line = lower;
+  const covered = runRules(lower, ctx);
+  const unknown: string[] = [];
+  const skipped: string[] = [];
+  for (const [a, b] of sentenceSpans(lower)) {
+    const inside = covered.some(([ca, cb]) => ca <= a + 1 && cb >= b - 1);
+    if (inside) continue;
+    const sentence = lower.slice(a, b).trim().replace(/^•\s*/, '');
+    if (STRUCTURAL.some((re) => re.test(sentence))) continue;
+    if (runRules(sentence, ctx).length) continue;
+    const original = line.slice(a, b).trim();
+    if (IGNORE.some((re) => re.test(sentence))) skipped.push(original);
+    else unknown.push(original);
+  }
+  return { unknown, skipped };
+}
+
+/** Amount of mana an "add ..." clause makes. */
+function manaAmount(text: string): { amount: number; perDefender: boolean; perToughness: boolean } {
+  let amount = 1;
+  const symbols = text.match(/^((?:\{[wubrgc]\})+)[ .,]?/);
+  if (symbols && !/ or /.test(text.split('.')[0])) amount = symbols[1].split('}{').length;
+  const words = text.match(/^(one|two|three|four|five|x) mana\b/);
+  if (words) amount = num(words[1]);
+  const perDefender = /for each creature you control with defender|where x is the number of creatures you control with defender/.test(text);
+  const perToughness = /equal to ~'s toughness|equal to its toughness/.test(text);
+  return { amount: perToughness ? 0 : amount, perDefender, perToughness };
 }
 
 function mergeParams(ctx: Ctx, key: TagKey, params: TagParams) {
@@ -283,17 +672,12 @@ function teamPump(p: number, t: number, gains: string, cost: string, ctx: Ctx) {
 }
 
 function manaAbility(text: string, ctx: Ctx) {
-  let amount = 1;
-  let perDefender = false;
-  const symbols = text.match(/^((?:\{[wubrgc]\})+)[ .]/);
-  if (symbols && !/ or /.test(text.split('.')[0])) amount = symbols[1].split('}{').length;
-  if (/for each creature you control with defender|where x is the number of creatures you control with defender/.test(text)) {
-    perDefender = true;
-  }
+  const { amount, perDefender, perToughness } = manaAmount(text.replace(/^an amount of /, ''));
   const abilitiesOnly = /spend this mana only to activate abilities/.test(text);
+  const restricted = abilitiesOnly || /can't be spent to cast spells from your hand/.test(text);
   if (ctx.type.includes('land')) return;
-  if (ctx.type.includes('creature')) ctx.set('ramp_dork', { amount, per_defender: perDefender });
-  else if (ctx.type.includes('artifact')) ctx.set('ramp_rock', { amount, abilities_only: abilitiesOnly });
+  if (ctx.type.includes('creature')) ctx.set('ramp_dork', { amount, per_defender: perDefender, per_toughness: perToughness, restricted });
+  else ctx.set('ramp_rock', { amount, abilities_only: abilitiesOnly });
 }
 
 function stripReminder(text: string): string {
@@ -332,6 +716,7 @@ export function autoTag(card: ScryfallCard): CardTags {
     tags,
     card,
     type: face.type_line.toLowerCase(),
+    line: '',
     set(key, params = {}) {
       tags[key] = { source: 'auto', params: withDefaults(key, params) };
     },
@@ -346,8 +731,8 @@ export function autoTag(card: ScryfallCard): CardTags {
   }
 
   const unmodelled: string[] = [];
+  const ignored: string[] = [];
   for (const line of abilityLines(card)) {
-    const lower = line.toLowerCase();
     const kws = keywordLine(line, card);
     if (kws) {
       for (const kw of kws) {
@@ -359,19 +744,15 @@ export function autoTag(card: ScryfallCard): CardTags {
         } else if (tag) ctx.set(tag);
         else if (kw === 'umbra armor') mergeParams(ctx, 'aura', { umbra_armor: true });
         else if (kw.startsWith('equip')) mergeParams(ctx, 'equipment', { equip: Number(kw.match(/\{(\d+)\}/)?.[1] ?? 0) });
-        else if (!IRRELEVANT_KEYWORDS.has(kw) && !IRRELEVANT_KEYWORDS.has(base)) unmodelled.push(line);
+        else if (base === 'enchant') continue; // what an aura attaches to; the aura's own tag covers the effect
+        else if (IRRELEVANT_KEYWORDS.has(kw) || IRRELEVANT_KEYWORDS.has(base) || kw.startsWith('partner')) ignored.push(line);
+        else unmodelled.push(line);
       }
       continue;
     }
-    let understood = false;
-    for (const rule of RULES) {
-      const m = lower.match(rule.re);
-      if (m) {
-        understood = true;
-        rule.apply?.(m, ctx);
-      }
-    }
-    if (!understood) unmodelled.push(line);
+    const { unknown, skipped } = readLine(line, ctx);
+    unmodelled.push(...unknown);
+    ignored.push(...skipped);
   }
 
   // The keywords array also covers keywords granted inside text we already parsed.
@@ -385,6 +766,7 @@ export function autoTag(card: ScryfallCard): CardTags {
   if (colors && (tags.land || tags.ramp_rock || tags.ramp_dork || tags.ramp_land_aura)) ctx.set('produces_colors', { colors });
 
   if (unmodelled.length) ctx.set('unmodelled', { text: [...new Set(unmodelled)].join('\n') });
+  if (ignored.length) ctx.set('ignored_text', { text: [...new Set(ignored)].join('\n') });
   return tags;
 }
 

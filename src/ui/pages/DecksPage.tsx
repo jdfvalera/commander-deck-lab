@@ -5,7 +5,7 @@ import { validateDeck } from '../../data/validateDeck';
 import { addVersion, diffLists, newId } from '../../data/storage';
 import { EXAMPLE_DECKS } from '../../data/examples';
 import type { DeckList, SavedDeck } from '../../data/types';
-import { CardTable, TagChips } from '../components/CardTable';
+import { CardTable } from '../components/CardTable';
 import { TagEditor } from '../components/TagEditor';
 
 export function DecksPage() {
@@ -137,9 +137,10 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
 
   const loaded = names.length > 0 && names.every((n) => !!card(n) || notFound.includes(n));
   const issues = loaded ? validateDeck(list, cards) : [];
-  const unmodelled = loaded
-    ? names.filter((n, i) => names.indexOf(n) === i && tagsFor(n)?.unmodelled).map((n) => ({ name: n, text: String(tagsFor(n)!.unmodelled!.params.text) }))
-    : [];
+  const unique = loaded ? names.filter((n, i) => names.indexOf(n) === i && card(n)) : [];
+  const textOf = (n: string, key: 'unmodelled' | 'ignored_text') => String(tagsFor(n)?.[key]?.params.text ?? '');
+  const unmodelled = unique.filter((n) => tagsFor(n)?.unmodelled).map((n) => ({ name: n, text: textOf(n, 'unmodelled') }));
+  const ignored = unique.filter((n) => tagsFor(n)?.ignored_text).map((n) => ({ name: n, text: textOf(n, 'ignored_text') }));
 
   const versions = deck?.versions ?? [];
   const vIndex = versions.findIndex((v) => v.id === versionId);
@@ -265,38 +266,58 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
         </div>
       )}
 
-      {unmodelled.length > 0 && (
-        <details className="card">
-          <summary>
-            <strong>What the simulator doesn’t understand</strong> <span className="muted">({unmodelled.length} cards)</span>
-          </summary>
-          <p className="muted small" style={{ marginTop: 8 }}>
-            This oracle text matched no rule, so the simulator ignores it. If it matters, click the card and add a tag.
-          </p>
-          <table className="plain">
-            <tbody>
-              {unmodelled.map((u) => (
-                <tr key={u.name}>
-                  <td>
-                    <button className="link" onClick={() => setSelected(u.name)}>
-                      {u.name}
-                    </button>
-                    <div>
-                      <TagChips tags={tagsFor(u.name)!} />
-                    </div>
-                  </td>
-                  <td className="small" style={{ whiteSpace: 'pre-wrap' }}>
-                    {u.text}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </details>
+      {loaded && unique.length > 0 && (
+        <div className="card stack">
+          <div>
+            <h2 style={{ margin: 0 }}>What the simulator understands</h2>
+            <p className="muted small" style={{ margin: '4px 0 0' }}>
+              {unique.length - unmodelled.length} of {unique.length} cards are fully understood from their oracle text. You don’t
+              have to tag anything: text the simulator doesn’t understand is simply ignored. Add a tag only when that text is part
+              of how your deck wins.
+            </p>
+          </div>
+          {unmodelled.length > 0 && (
+            <details>
+              <summary>
+                <strong>Could matter, not modelled</strong> <span className="muted">({unmodelled.length} cards)</span>
+              </summary>
+              <TextList rows={unmodelled} onSelect={setSelected} />
+            </details>
+          )}
+          {ignored.length > 0 && (
+            <details>
+              <summary>
+                <strong>Ignored on purpose</strong> <span className="muted">({ignored.length} cards: life gain, creature types, minor keywords…)</span>
+              </summary>
+              <TextList rows={ignored} onSelect={setSelected} />
+            </details>
+          )}
+        </div>
       )}
 
       {selected && <TagEditor name={selected} onClose={() => setSelected(null)} />}
     </div>
+  );
+}
+
+function TextList({ rows, onSelect }: { rows: { name: string; text: string }[]; onSelect: (name: string) => void }) {
+  return (
+    <table className="plain" style={{ marginTop: 8 }}>
+      <tbody>
+        {rows.map((u) => (
+          <tr key={u.name}>
+            <td style={{ width: '35%' }}>
+              <button className="link" onClick={() => onSelect(u.name)}>
+                {u.name}
+              </button>
+            </td>
+            <td className="small" style={{ whiteSpace: 'pre-wrap' }}>
+              {u.text}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 

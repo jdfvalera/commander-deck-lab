@@ -34,7 +34,8 @@ describe('UI smoke', () => {
 
     expect(el.textContent).toContain('Revised (16 swaps)');
     expect(el.textContent).toContain('Damage = toughness');
-    expect(el.textContent).toContain('What the simulator doesn’t understand');
+    expect(el.textContent).toContain('What the simulator understands');
+    expect(el.textContent).toMatch(/\d+ of \d+ cards are fully understood/);
 
     const row = [...el.querySelectorAll('.card-row')].find((b) => b.textContent!.includes('The Pride of Hull Clade'))! as HTMLButtonElement;
     await act(async () => row.click());

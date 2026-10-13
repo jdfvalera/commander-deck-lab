@@ -6,7 +6,7 @@ import { ManaCost } from './ManaCost';
 
 const GROUPS = ['Commander', 'Creature', 'Planeswalker', 'Artifact', 'Enchantment', 'Instant', 'Sorcery', 'Battle', 'Land', 'Other'] as const;
 // Shown elsewhere in the row, or too common to be useful as a chip.
-const HIDDEN_CHIPS = new Set<TagKey>(['power', 'toughness', 'land', 'produces_colors', 'unmodelled']);
+const HIDDEN_CHIPS = new Set<TagKey>(['power', 'toughness', 'land', 'produces_colors', 'unmodelled', 'ignored_text']);
 
 function groupOf(card: ScryfallCard): (typeof GROUPS)[number] {
   const t = playedFace(card).type_line;
@@ -21,7 +21,17 @@ function chipText(key: TagKey, tags: CardTags): string {
   switch (key) {
     case 'ramp_rock':
     case 'ramp_dork':
-      return `${TAG_DEFS[key].label} +${p.per_defender ? 'X' : p.amount}`;
+      return `${TAG_DEFS[key].label} +${p.per_defender ? 'X' : p.per_toughness ? 'T' : p.amount}${p.cost ? ` for ${p.cost}` : ''}`;
+    case 'activated_draw':
+      return `Draw ${p.n || 'X'} for ${p.cost}${p.tap ? ', T' : ''}`;
+    case 'repeat_draw':
+      return `Draw each ${String(p.when).replace('_', ' ')}`;
+    case 'spot_removal':
+      return `Removal (${p.kind})`;
+    case 'board_wipe':
+      return `Wipe (${p.kind})`;
+    case 'untapper':
+      return `Untap ${p.scope}${p.cost ? ` for ${p.cost}` : ''}`;
     case 'defender_can_attack':
     case 'grant_toughness_draw':
     case 'unblockable_enabler':
@@ -48,7 +58,7 @@ export function TagChips({ tags }: { tags: CardTags }) {
           {chipText(k, tags)}
         </span>
       ))}
-      {tags.unmodelled && <span className="chip unmodelled" title={String(tags.unmodelled.params.text)}>unmodelled text</span>}
+      {tags.unmodelled && <span className="chip unmodelled" title={String(tags.unmodelled.params.text)}>not modelled</span>}
     </span>
   );
 }
