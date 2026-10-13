@@ -1,7 +1,7 @@
 import { useApp } from '../state';
 import { playedFace } from '../../data/names';
 import type { DeckList, ScryfallCard } from '../../data/types';
-import { TAG_DEFS, type CardTags, type TagKey } from '../../tags/schema';
+import { TAG_DEFS, describeCustom, type CardTags, type TagKey } from '../../tags/schema';
 import { ManaCost } from './ManaCost';
 
 const GROUPS = ['Commander', 'Creature', 'Planeswalker', 'Artifact', 'Enchantment', 'Instant', 'Sorcery', 'Battle', 'Land', 'Other'] as const;
@@ -44,6 +44,10 @@ function chipText(key: TagKey, tags: CardTags): string {
       return `Counter ${String(p.scope).replace('_', '/')}`;
     case 'ward':
       return `Ward ${p.cost}`;
+    case 'custom_effect':
+    case 'custom_effect_2':
+    case 'custom_effect_3':
+      return describeCustom(p);
     default:
       return TAG_DEFS[key].label;
   }

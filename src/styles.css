@@ -168,3 +168,11 @@ table.plain th, table.plain td { text-align: left; padding: 4px 8px; border-bott
   .card-row .tags { grid-column: 2 / -1; }
   .brand span { display: none; }
 }
+
+/* ---- combos ---- */
+.combo-list { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.combo { border-left: 3px solid var(--accent); padding: 4px 0 4px 10px; }
+.combo-missing { text-decoration: underline; text-decoration-color: var(--warn); text-underline-offset: 3px; font-weight: 600; }
+.combo-group { margin: 6px 0 0 8px; }
+details > summary { cursor: pointer; }
+.custom-summary { font-size: 0.9rem; font-weight: 500; color: var(--manual); }

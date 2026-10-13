@@ -3,11 +3,11 @@ import { useApp } from '../state';
 import { nameKey } from '../../data/names';
 import { autoTag } from '../../tags/autoTag';
 import { resetOverride, setOverride } from '../../tags/overrides';
-import { TAG_DEFS, TAG_KEYS, withDefaults, type ParamType, type ParamValue, type TagDef, type TagKey, type TagParams } from '../../tags/schema';
+import { CUSTOM_KEYS, TAG_DEFS, TAG_KEYS, describeCustom, withDefaults, type ParamType, type ParamValue, type TagDef, type TagKey, type TagParams } from '../../tags/schema';
 import { ManaCost } from './ManaCost';
 
 const GROUP_LABELS: Record<TagDef['group'], string> = {
-  mana: 'Mana', body: 'Body', plan: 'Plan pieces', flow: 'Card flow', interaction: 'Interaction', meta: 'Other',
+  mana: 'Mana', body: 'Body', plan: 'Plan pieces', flow: 'Card flow', interaction: 'Interaction', custom: 'Custom', meta: 'Other',
 };
 
 /** Side panel: a card's oracle text next to its tags, with every tag editable. */
@@ -27,8 +27,10 @@ export function TagEditor({ name, onClose }: { name: string; onClose: () => void
   const auto = autoTag(c);
   const cardOverrides = overrides[key] ?? {};
   const removed = (Object.keys(cardOverrides) as TagKey[]).filter((k) => cardOverrides[k] === null && auto[k]);
-  const present = TAG_KEYS.filter((k) => tags[k]);
-  const addable = TAG_KEYS.filter((k) => !tags[k]);
+  // Unmodelled text is shown as a notice below, not as an editable tag.
+  const present = TAG_KEYS.filter((k) => tags[k] && k !== 'unmodelled');
+  const addable = TAG_KEYS.filter((k) => !tags[k] && !(CUSTOM_KEYS as readonly TagKey[]).includes(k));
+  const nextCustom = CUSTOM_KEYS.find((k) => !tags[k]);
 
   const edit = (tag: TagKey, params: TagParams) => updateOverrides((m) => setOverride(m, key, tag, { params }));
   const remove = (tag: TagKey) => updateOverrides((m) => (auto[tag] ? setOverride(m, key, tag, null) : resetOverride(m, key, tag)));
@@ -84,7 +86,11 @@ export function TagEditor({ name, onClose }: { name: string; onClose: () => void
                   remove
                 </button>
               </div>
-              <div className="muted small">{def.help}</div>
+              {(CUSTOM_KEYS as readonly TagKey[]).includes(k) ? (
+                <div className="custom-summary">{describeCustom(t.params)}</div>
+              ) : (
+                <div className="muted small">{def.help}</div>
+              )}
               {def.params && (
                 <div className="tag-params">
                   {Object.entries(def.params).map(([p, pd]) => (
@@ -114,6 +120,15 @@ export function TagEditor({ name, onClose }: { name: string; onClose: () => void
           </div>
         )}
 
+        {tags.unmodelled && (
+          <div className="notice warn small">
+            <strong>Not modelled:</strong> {String(tags.unmodelled.params.text)}
+            <div>If this matters, add a built-in tag below or describe it as a custom effect.</div>
+          </div>
+        )}
+        {nextCustom && (
+          <button onClick={() => edit(nextCustom, withDefaults(nextCustom))}>+ Custom effect</button>
+        )}
         <label className="field">
           Add a tag
           <select

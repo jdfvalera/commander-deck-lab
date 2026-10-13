@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import cardsJson from '../fixtures/scryfall/cards.json';
+import comboSubset from '../fixtures/spellbook/combos-subset.json';
 import { idbCardCache } from '../src/data/cardCache';
 import type { ScryfallCard } from '../src/data/types';
 import { App } from '../src/ui/App';
@@ -21,7 +22,11 @@ describe('UI smoke', () => {
   it('loads the example deck, validates it, shows tags and opens the tag editor', async () => {
     // Pre-fill the card cache so no network is needed; fail loudly if Scryfall is called anyway.
     await idbCardCache.putMany(cardsJson as ScryfallCard[]);
-    vi.stubGlobal('fetch', () => Promise.reject(new Error('network disabled in tests')));
+    vi.stubGlobal('fetch', (url: string) =>
+      String(url).endsWith('combos.json')
+        ? Promise.resolve(new Response(JSON.stringify(comboSubset)))
+        : Promise.reject(new Error('network disabled in tests')),
+    );
 
     const el = document.createElement('div');
     document.body.appendChild(el);
@@ -42,5 +47,19 @@ describe('UI smoke', () => {
     const editor = el.querySelector('.editor')!;
     expect(editor.textContent).toContain('{2}{U}{U}: Until end of turn');
     expect(editor.textContent).toContain('Grants “draw = toughness”');
+
+    // Custom effect: add one and see its sentence.
+    const add = [...editor.querySelectorAll('button')].find((b) => b.textContent === '+ Custom effect')!;
+    await act(async () => add.click());
+    expect(el.querySelector('.editor')!.textContent).toContain('Activated (free): draw 1 card');
+    const close = el.querySelector('.editor button[aria-label="Close"]') as HTMLButtonElement;
+    await act(async () => close.click());
+
+    // Combos panel loads the shipped database and lists results with Spellbook links.
+    const find = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Find combos')!;
+    await act(async () => find.click());
+    await until(() => el.textContent!.includes('One card away'));
+    expect(el.textContent).toContain('In your deck');
+    expect(el.querySelector('a[href^="https://commanderspellbook.com/combo/"]') || el.textContent!.includes('No complete combos found')).toBeTruthy();
   });
 });

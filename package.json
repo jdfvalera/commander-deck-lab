@@ -11,7 +11,8 @@
     "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && tsc -p tsconfig.test.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "snapshot:scryfall": "node scripts/snapshot-scryfall.ts"
+    "snapshot:scryfall": "node scripts/snapshot-scryfall.ts",
+    "build:combos": "node scripts/build-combos.ts"
   },
   "dependencies": {
     "idb-keyval": "^6.3.0",

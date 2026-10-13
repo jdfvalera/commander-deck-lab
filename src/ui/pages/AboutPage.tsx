@@ -23,6 +23,14 @@ export function AboutPage() {
         <li><strong>Mana &amp; Hands</strong>: exact hypergeometric odds, color sources, London mulligan with the free first mulligan.</li>
         <li><strong>Matchups</strong>: your deck card by card against opponent <em>profiles</em> built from their decklists. An approximation: compare versions on the same seeds rather than trusting absolute win rates.</li>
       </ul>
+      <h2>Combos</h2>
+      <p>
+        The Combos panel on the Decks page checks your list against{' '}
+        <a href="https://commanderspellbook.com" target="_blank" rel="noreferrer">
+          Commander Spellbook
+        </a>
+        ’s community-maintained combo database, refreshed weekly. Each combo links back to Spellbook for the full steps.
+      </p>
       <p className="muted small">
         Card data and text © Wizards of the Coast, provided by Scryfall. This site is unofficial Fan Content and is not
         approved or endorsed by Wizards.

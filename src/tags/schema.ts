@@ -6,7 +6,7 @@ export type ParamType = 'number' | 'boolean' | 'text' | 'cost' | 'colors' | read
 export type ParamValue = number | boolean | string;
 export type TagParams = Record<string, ParamValue>;
 
-export type TagGroup = 'mana' | 'body' | 'plan' | 'flow' | 'interaction' | 'meta';
+export type TagGroup = 'mana' | 'body' | 'plan' | 'flow' | 'interaction' | 'custom' | 'meta';
 
 export interface TagDef {
   group: TagGroup;
@@ -15,10 +15,36 @@ export interface TagDef {
   params?: Record<string, { type: ParamType; default: ParamValue; help?: string }>;
 }
 
-const n = (d: number, help?: string) => ({ type: 'number' as const, default: d, help });
-const b = (d = false, help?: string) => ({ type: 'boolean' as const, default: d, help });
-const cost = (d = '', help?: string) => ({ type: 'cost' as const, default: d, help });
-const one = <T extends string>(opts: readonly T[], d: T, help?: string) => ({ type: opts, default: d, help });
+function n(d: number, help?: string) {
+  return { type: 'number' as const, default: d, help };
+}
+function b(d = false, help?: string) {
+  return { type: 'boolean' as const, default: d, help };
+}
+function cost(d = '', help?: string) {
+  return { type: 'cost' as const, default: d, help };
+}
+function one<T extends string>(opts: readonly T[], d: T, help?: string) {
+  return { type: opts, default: d, help };
+}
+
+export const CUSTOM_WHEN = ['cast', 'etb', 'activated', 'upkeep', 'cast_spell', 'attacks', 'combat_damage', 'static'] as const;
+export const CUSTOM_EFFECTS = ['draw', 'add_mana', 'token', 'untap', 'pump', 'mill', 'remove', 'protect', 'tutor', 'extra_land'] as const;
+export const CUSTOM_TARGETS = ['self', 'attached', 'target_creature', 'your_creatures', 'target_opponent', 'each_opponent'] as const;
+const CUSTOM_HELP = 'Describe what this card does when no built-in tag fits. The simulators use it like any other tag.';
+const CUSTOM_PARAMS = {
+  when: one(CUSTOM_WHEN, 'activated', 'cast = when you cast it; etb = when it enters; activated = an ability you pay for; static = always on.'),
+  cost: cost('', 'Mana to activate, e.g. {1} or {2}{U}. Leave empty if free.'),
+  tap: b(false, 'Tapping is part of the cost.'),
+  effect: one(CUSTOM_EFFECTS, 'draw'),
+  amount: n(1, 'Cards, mana, tokens, or counters.'),
+  colors: { type: 'colors' as const, default: '', help: 'For mana: which colors (e.g. U, GU, WUBRG). Empty = colorless.' },
+  power: n(0, 'Token power, or the +power of a pump.'),
+  toughness: n(0, 'Token toughness, or the +toughness of a pump.'),
+  target: one(CUSTOM_TARGETS, 'self', '"attached" = the creature this aura or equipment is on.'),
+  once_per_turn: b(false),
+  note: { type: 'text' as const, default: '', help: 'Anything else you want to remember about this card.' },
+};
 
 export const TAG_DEFS = {
   // ---- mana ----
@@ -109,6 +135,11 @@ export const TAG_DEFS = {
   attack_tax: { group: 'interaction', label: 'Attack tax', help: 'Creatures can’t attack you unless their controller pays per creature (Propaganda).', params: { per: n(2) } },
   fog: { group: 'interaction', label: 'Fog', help: 'Prevents combat damage this turn.' },
 
+  // ---- custom effects (user-described; up to three per card) ----
+  custom_effect: { group: 'custom', label: 'Custom effect', help: CUSTOM_HELP, params: CUSTOM_PARAMS },
+  custom_effect_2: { group: 'custom', label: 'Custom effect 2', help: CUSTOM_HELP, params: CUSTOM_PARAMS },
+  custom_effect_3: { group: 'custom', label: 'Custom effect 3', help: CUSTOM_HELP, params: CUSTOM_PARAMS },
+
   // ---- meta ----
   unmodelled: { group: 'meta', label: 'Unmodelled text', help: 'Oracle text that could change a game but that the simulator doesn’t understand. Add a tag if it matters to you.', params: { text: { type: 'text', default: '' } } },
   ignored_text: { group: 'meta', label: 'Ignored text', help: 'Oracle text that doesn’t affect these simulations (life gain, creature types, looking at cards).', params: { text: { type: 'text', default: '' } } },
@@ -133,4 +164,36 @@ export function withDefaults(key: TagKey, params: TagParams = {}): TagParams {
   const out: TagParams = {};
   for (const [p, d] of Object.entries(defs)) out[p] = params[p] ?? d.default;
   return out;
+}
+
+export const CUSTOM_KEYS = ['custom_effect', 'custom_effect_2', 'custom_effect_3'] as const satisfies readonly TagKey[];
+
+/** A plain-English sentence for a custom effect, e.g. "Activated ({1}): enchanted creature gets +0/+1". */
+export function describeCustom(p: TagParams): string {
+  const when: Record<string, string> = {
+    cast: 'When cast', etb: 'When it enters', upkeep: 'Each upkeep', cast_spell: 'Whenever you cast a spell',
+    attacks: 'Whenever it attacks', combat_damage: 'On combat damage to a player', static: 'Always',
+  };
+  const costText = [p.cost, p.tap ? '{T}' : ''].filter(Boolean).join(', ');
+  const head = p.when === 'activated' ? `Activated (${costText || 'free'})` : when[String(p.when)] ?? String(p.when);
+  const target: Record<string, string> = {
+    self: 'this', attached: 'the attached creature', target_creature: 'target creature', your_creatures: 'your creatures',
+    target_opponent: 'target opponent', each_opponent: 'each opponent',
+  };
+  const t = target[String(p.target)] ?? String(p.target);
+  const a = Number(p.amount);
+  const sign = (x: unknown) => (Number(x) >= 0 ? `+${x}` : String(x));
+  const body: Record<string, string> = {
+    draw: `draw ${a} card${a === 1 ? '' : 's'}`,
+    add_mana: `add ${a} mana${p.colors ? ` (${p.colors})` : ' (colorless)'}`,
+    token: `create ${a} ${p.power}/${p.toughness} token${a === 1 ? '' : 's'}`,
+    untap: `untap ${t}`,
+    pump: `${t} gets ${sign(p.power)}/${sign(p.toughness)}`,
+    mill: `${t === 'this' ? 'you mill' : `${t} mills`} ${a}`,
+    remove: `remove ${t}`,
+    protect: `protect ${t}`,
+    tutor: 'search your library for a card',
+    extra_land: 'play an extra land',
+  };
+  return `${head}: ${body[String(p.effect)] ?? String(p.effect)}${p.once_per_turn ? ' (once per turn)' : ''}`;
 }

@@ -7,6 +7,7 @@ import { EXAMPLE_DECKS } from '../../data/examples';
 import type { DeckList, SavedDeck } from '../../data/types';
 import { CardTable } from '../components/CardTable';
 import { TagEditor } from '../components/TagEditor';
+import { ComboPanel } from '../components/ComboPanel';
 
 export function DecksPage() {
   const { ready, decks, updateDecks, storageOk } = useApp();
@@ -294,6 +295,8 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
           )}
         </div>
       )}
+
+      {loaded && list.commanders.length > 0 && <ComboPanel list={list} />}
 
       {selected && <TagEditor name={selected} onClose={() => setSelected(null)} />}
     </div>

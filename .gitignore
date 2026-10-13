@@ -3,3 +3,4 @@ node_modules.nosync
 dist
 *.tsbuildinfo
 .DS_Store
+public/combos.json
