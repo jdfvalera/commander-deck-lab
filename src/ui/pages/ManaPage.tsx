@@ -4,6 +4,7 @@ import { DeckPicker } from '../components/DeckPicker';
 import { Progress, ResultsHeader, pct } from '../components/Results';
 import { CurveChart, roleCounts } from '../components/charts/CurveChart';
 import { TimingChart } from '../components/charts/TimingChart';
+import { ManaHeatmap } from '../components/charts/ManaHeatmap';
 import { ManaCost } from '../components/ManaCost';
 import { cardsSeen, hypergeomAtLeast, hypergeomPmf } from '../../engine/hypergeo';
 import { colorReports, DEFAULT_COLOR_OPTIONS, type ColorOptions } from '../../engine/colorReqs';
@@ -265,6 +266,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
       `Rules: ${rules.minLands}–${rules.maxLands} lands, ≥${rules.minEarlyPlays} plays with MV≤2, max ${rules.maxMulligans} mulligans, free first: ${rules.freeFirstMulligan}`,
       `Kept first 7: ${pct(result.keepFirst, 1)}; mulligans: ${result.mulliganDist.map((d, i) => `${i}: ${pct(d, 1)}`).join(', ')}`,
       `Average cards kept ${result.avgCardsKept.toFixed(2)}, lands kept ${result.avgLandsKept.toFixed(2)}, forced keeps ${pct(result.forcedKeeps, 1)}`,
+      `Mana by turn (median): ${result.mana.median.map((m, i) => `T${i + 1} ${m}`).join(', ')}`,
       c ? `${c.name} castable by T3/T4/T5: ${[2, 3, 4].map((i) => pct(c.byTurn[i], 1)).join(' / ')} (always keeping 7: ${[2, 3, 4].map((i) => pct(result.baseline!.byTurn[i], 1)).join(' / ')})` : 'Commander timing: needs the goldfish (cost depends on the board).',
     ].join('\n');
   };
@@ -285,9 +287,9 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
           <ResultsHeader seed={result.seed} runs={result.trials} runsLabel="hands" deckLabel={deckLabel} copyText={text}>
             <p>London mulligan with Commander’s free first mulligan: each mulligan draws a fresh 7 and puts cards on the bottom (none for the free one). Bottoming keeps the hand closest to your rules (excess lands first, else the most expensive spells).</p>
             <p>
-              Commander timing uses a simple mana model: one land a turn (preferring untapped lands that add a missing color), then mana rocks,
+              Mana by turn and commander timing use a simple mana model: one land a turn (preferring untapped lands that add a missing color), then mana rocks,
               mana creatures (usable the next turn), land auras and land-ramp spells, cheapest first. It ignores card draw, so it’s pessimistic
-              for draw-heavy decks. “Always keep 7” replays the same shuffles without mulliganing.
+              for draw-heavy decks. Mana on a turn is what your lands and ramp can make after that turn’s land drop; ramp cast that turn counts from the next. “Always keep 7” replays the same shuffles without mulliganing.
             </p>
           </ResultsHeader>
           <div className="stat-row">
@@ -300,6 +302,7 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
             <thead><tr><th>Mulligans</th>{result.mulliganDist.map((_, i) => <th key={i} className="num">{i}{i === 1 && rules.freeFirstMulligan ? ' (free)' : ''}</th>)}</tr></thead>
             <tbody><tr><td>Share of games</td>{result.mulliganDist.map((d, i) => <td key={i} className="num">{pct(d, 1)}</td>)}</tr></tbody>
           </table>
+          <ManaHeatmap title="Mana available by turn (share of games)" dist={result.mana} />
           {result.commander ? (
             <TimingChart
               title={`${result.commander.name} castable by turn`}

@@ -46,6 +46,7 @@ export interface HandResult {
   earlyKept: number;
   /** First turn the commander is castable, null if not within `turns`, undefined if the model can't tell. */
   commanderTurn: number | null | undefined;
+  manaByTurn: number[];
   /** The next cards drawn after keeping (for the hand sampler). */
   nextDraws: ModelCard[];
   log: string[];
@@ -97,16 +98,24 @@ interface Permanent {
   readyTurn: number;
 }
 
-/** Plays out lands and ramp from a kept hand; returns the first turn the commander can be cast. */
+export interface ManaDevelopment {
+  /** First turn the commander is castable; null if not within the turns; undefined if the model can't time it. */
+  commanderTurn: number | null | undefined;
+  /** Mana available on each turn 1..turns, after that turn's land drop (ramp cast this turn counts from next turn). */
+  manaByTurn: number[];
+}
+
+/** Plays out lands and ramp from a kept hand for every turn: mana available each turn, and when the commander fits. */
 export function developMana(
   model: DeckModel,
   kept: ModelCard[],
   library: ModelCard[],
   opts: HandOptions,
   log: string[],
-): number | null | undefined {
+): ManaDevelopment {
   const commander = timedCommander(model);
-  if (!commander) return undefined;
+  let commanderTurn: number | null | undefined = commander ? null : undefined;
+  const manaByTurn: number[] = [];
   const say = (s: string) => opts.log && log.push(s);
   const hand = [...kept];
   const lib = [...library];
@@ -114,7 +123,7 @@ export function developMana(
   const rocks: Permanent[] = [];
   const dorks: Permanent[] = [];
   let auras = 0;
-  const needColors = (['W', 'U', 'B', 'R', 'G'] as Color[]).filter((c) => commander.cost.pips[c] > 0);
+  const needColors = commander ? (['W', 'U', 'B', 'R', 'G'] as Color[]).filter((c) => commander.cost.pips[c] > 0) : [];
 
   for (let turn = 1; turn <= opts.turns; turn++) {
     if (turn > 1 || opts.drawOnTurnOne) {
@@ -149,11 +158,12 @@ export function developMana(
     const colorsReady = () =>
       new Set([...lands, ...rocks, ...dorks].filter((x) => x.readyTurn <= turn && !x.card.rampRestricted).flatMap((x) => x.card.produces));
     let spent = 0;
-    const canCastCommander = () => mana() - spent >= commander.mv && needColors.every((c) => colorsReady().has(c));
+    manaByTurn.push(mana());
+    const canCastCommander = () => !!commander && commanderTurn === null && mana() - spent >= commander.mv && needColors.every((c) => colorsReady().has(c));
 
     if (canCastCommander()) {
-      say(`  ${mana() - spent} mana: cast ${commander.name}`);
-      return turn;
+      say(`  ${mana() - spent} mana: ${commander!.name} is castable`);
+      commanderTurn = turn;
     }
     // Cast ramp, cheapest first, while it fits.
     const ramp = hand
@@ -176,12 +186,12 @@ export function developMana(
       say(`  cast ${c.name}`);
     }
     if (canCastCommander()) {
-      say(`  ${mana() - spent} mana left: cast ${commander.name}`);
-      return turn;
+      say(`  ${mana() - spent} mana left: ${commander!.name} is castable`);
+      commanderTurn = turn;
     }
-    say(`  ${mana()} mana available`);
+    say(`  ${manaByTurn[turn - 1]} mana this turn`);
   }
-  return null;
+  return { commanderTurn, manaByTurn };
 }
 
 /** One opening-hand sequence: draw 7, mulligan by the rules (London), then develop mana. */
@@ -205,12 +215,12 @@ export function simulateHand(model: DeckModel, seed: number, rules: KeepRules, o
         log.push(`Kept ${keep.length} after ${mulligans} mulligan${mulligans === 1 ? '' : 's'}${forced ? ' (forced)' : ''}: ${keep.map((c) => c.name).join(', ')}`);
         if (bottom.length) log.push(`Bottomed: ${bottom.map((c) => c.name).join(', ')}`);
       }
-      const commanderTurn = developMana(model, keep, library, opts, log);
+      const { commanderTurn, manaByTurn } = developMana(model, keep, library, opts, log);
       return {
         mulligans, hands, kept: keep, bottomed: bottom, forced,
         landsKept: keep.filter((c) => c.isLand).length,
         earlyKept: keep.filter(isEarlyPlay).length,
-        commanderTurn, nextDraws: library.slice(0, 4), log,
+        commanderTurn, manaByTurn, nextDraws: library.slice(0, 4), log,
       };
     }
     mulligans++;
@@ -230,6 +240,29 @@ export interface MulliganSummary {
   commander: CommanderTiming | null;
   /** Same seeds, always keeping the first 7: what mulligans buy you. */
   baseline: CommanderTiming | null;
+  mana: ManaDistribution;
+}
+
+export const MANA_CAP = 15;
+
+export interface ManaDistribution {
+  /** share[t][m]: share of games with exactly m mana on turn t+1 (m = MANA_CAP means MANA_CAP or more). */
+  share: number[][];
+  median: number[];
+  mean: number[];
+}
+
+function manaDistribution(rows: number[][], turns: number): ManaDistribution {
+  const share = Array.from({ length: turns }, () => new Array(MANA_CAP + 1).fill(0));
+  const median: number[] = [];
+  const mean: number[] = [];
+  for (let t = 0; t < turns; t++) {
+    const vals = rows.map((r) => r[t] ?? 0).sort((a, b) => a - b);
+    for (const v of vals) share[t][Math.min(MANA_CAP, v)] += 1 / rows.length;
+    median.push(vals[Math.floor(vals.length / 2)] ?? 0);
+    mean.push(vals.reduce((a, b) => a + b, 0) / Math.max(1, vals.length));
+  }
+  return { share, median, mean };
 }
 
 export interface CommanderTiming {
@@ -261,6 +294,7 @@ export function summarizeMulligans(
   let forced = 0;
   const cmd: (number | null | undefined)[] = [];
   const base: (number | null | undefined)[] = [];
+  const manaRows: number[][] = [];
   for (let i = 0; i < trials; i++) {
     const s = deriveSeed(seed, i);
     const r = simulateHand(model, s, rules, opts);
@@ -269,6 +303,7 @@ export function summarizeMulligans(
     lands += r.landsKept;
     if (r.forced) forced++;
     cmd.push(r.commanderTurn);
+    manaRows.push(r.manaByTurn);
     base.push(simulateHand(model, s, rules, { ...opts, neverMulligan: true }).commanderTurn);
     if (onProgress && i % 250 === 249) onProgress(i + 1);
   }
@@ -282,5 +317,6 @@ export function summarizeMulligans(
     avgLandsKept: lands / trials,
     commander: timing(name, cmd, opts.turns),
     baseline: timing(name, base, opts.turns),
+    mana: manaDistribution(manaRows, opts.turns),
   };
 }

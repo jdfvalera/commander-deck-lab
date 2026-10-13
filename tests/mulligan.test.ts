@@ -121,3 +121,20 @@ describe('color requirements (Karsten method)', () => {
     expect(g.weighted).toBeLessThan(g.sources.land + g.sources.rock + g.sources.dork + g.sources.aura);
   });
 });
+
+describe('mana by turn', () => {
+  const sum = summarizeMulligans(vhal, 3, 1000, DEFAULT_RULES, { turns: 8, drawOnTurnOne: true });
+  it('each turn is a distribution that sums to 1', () => {
+    for (const row of sum.mana.share) expect(row.reduce((a, b) => a + b, 0)).toBeCloseTo(1, 10);
+  });
+  it('mana grows turn over turn and the median is at most one land a turn plus ramp', () => {
+    for (let t = 1; t < sum.mana.mean.length; t++) expect(sum.mana.mean[t]).toBeGreaterThanOrEqual(sum.mana.mean[t - 1]);
+    expect(sum.mana.median[0]).toBeLessThanOrEqual(1);
+    expect(sum.mana.median[3]).toBeGreaterThanOrEqual(3);
+  });
+  it('works for board-dependent commanders too (the Pride)', () => {
+    const p = summarizeMulligans(pride, 3, 300, DEFAULT_RULES, { turns: 8, drawOnTurnOne: true });
+    expect(p.commander).toBeNull();
+    expect(p.mana.median[3]).toBeGreaterThanOrEqual(3);
+  });
+});

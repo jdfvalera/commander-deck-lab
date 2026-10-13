@@ -77,5 +77,6 @@ describe('UI smoke', () => {
     await act(async () => runBtn.click());
     await until(() => el.textContent!.includes('keep the first 7'), 15000);
     expect(el.textContent).toContain('cast turn comes from the goldfish');
+    expect(el.textContent).toContain('Mana available by turn');
   }, 30000);
 });
