@@ -3,9 +3,9 @@ import { HashRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { AppProvider } from './state';
 import { DecksPage } from './pages/DecksPage';
 import { AboutPage } from './pages/AboutPage';
-import { ComingSoon } from './pages/ComingSoon';
 import { ManaPage } from './pages/ManaPage';
 import { GoldfishPage } from './pages/GoldfishPage';
+import { MatchupsPage } from './pages/MatchupsPage';
 
 type Theme = 'system' | 'light' | 'dark';
 
@@ -80,7 +80,7 @@ export function App() {
             <Route path="/" element={<DecksPage />} />
             <Route path="/goldfish" element={<GoldfishPage />} />
             <Route path="/mana" element={<ManaPage />} />
-            <Route path="/matchups" element={<ComingSoon title="Matchup simulator" milestone="M4" />} />
+            <Route path="/matchups" element={<MatchupsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<DecksPage />} />
           </Routes>

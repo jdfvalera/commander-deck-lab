@@ -136,7 +136,7 @@ export const TAG_DEFS = {
   clue: { group: 'flow', label: 'Makes Clues', help: 'Creates Clue tokens ({2}, sacrifice: draw).', params: { n: n(1) } },
 
   // ---- interaction ----
-  board_wipe: { group: 'interaction', label: 'Board wipe', help: 'Removes many creatures at once.', params: { kind: one(['destroy', 'damage', 'exile', 'bounce', 'toughness_le', 'minus'] as const, 'destroy'), x: n(0, 'Damage / toughness threshold, 0 = all.'), artifacts: b(false, 'Also hits noncreature artifacts.'), one_sided: b(false, 'Only hits opponents’ permanents.') } },
+  board_wipe: { group: 'interaction', label: 'Board wipe', help: 'Removes many creatures at once.', params: { kind: one(['destroy', 'damage', 'exile', 'bounce', 'toughness_le', 'minus', 'sacrifice_colored'] as const, 'destroy'), x: n(0, 'Damage / toughness threshold, 0 = all.'), artifacts: b(false, 'Also hits noncreature artifacts.'), one_sided: b(false, 'Only hits opponents’ permanents.') } },
   spot_removal: { group: 'interaction', label: 'Spot removal', help: 'Removes one target.', params: { kind: one(['destroy', 'exile', 'bounce', 'damage', 'tuck', 'edict', 'neutralize'] as const, 'destroy'), targets: one(['creature', 'permanent', 'nonland', 'artifact_enchantment'] as const, 'creature'), cost: cost('', 'Activation cost, if it’s an ability.') } },
   counterspell: { group: 'interaction', label: 'Counterspell', help: 'Counters a spell.', params: { scope: one(['any', 'noncreature', 'instant', 'instant_sorcery', 'creature', 'ability'] as const, 'any'), soft: b(false, 'Opponent can pay to avoid it.') } },
   uncounterable: { group: 'interaction', label: 'Can’t be countered', help: 'This spell can’t be countered.' },

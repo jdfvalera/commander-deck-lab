@@ -7,7 +7,7 @@ import type { Color } from '../../data/types';
 import type { ManaCost } from '../manaCost';
 import type { Game, Opponent, Perm } from '../game';
 import type { Strategy, StrategySettings } from './types';
-import { activateAbilities, attachIfNeeded, attackAll, castDraw, castRamp, castWhile, equip, isRamp, playLand } from './common';
+import { activateAbilities, attachIfNeeded, attackAll, castDraw, castRamp, castWhile, equip, isRamp, makeUnblockable, playLand } from './common';
 
 const NO_COST: ManaCost = { generic: 0, pips: { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 }, hybrid: [], x: 0, mv: 0 };
 
@@ -25,6 +25,7 @@ export const prideStrategy: Strategy = {
     { key: 'wallsAttack', label: 'Spend leftover mana letting walls attack (Walking Bulwark / Assault Formation)', type: 'boolean', default: true },
     { key: 'castDrawDoubler', label: 'Cast draw doublers (Alhammarret’s Archive)', help: 'Doubles every Pride draw; raises the decking risk.', type: 'boolean', default: true },
     { key: 'useGeralf', label: 'Use Geralf-style “sacrifice → X/X flier” when Triumph isn’t in hand', type: 'boolean', default: true },
+    { key: 'handSlack', label: 'Extra cards it may draw past what fits in hand (without Reliquary Tower)', help: 'Draws past 7 cards in hand are discarded at end of turn.', type: 'number', default: 3, min: 0, max: 30 },
     { key: 'developBeforeCombat', label: 'Also cast creatures before combat once the Pride is out', help: 'Off: leftover mana after the Pride’s ability goes to walls attacking; new cards are cast after combat.', type: 'boolean', default: false },
   ],
 
@@ -136,6 +137,11 @@ function drawTargetScore(g: Game, p: Perm, s: StrategySettings): number {
   if (t <= 0) return -Infinity;
   // Every draw already queued this turn counts against the library buffer, not just this one.
   if (g.lib.length - pendingDraws(g, p) < Number(s.minLibrary)) return -Infinity;
+  // Without a "no maximum hand size" card, cards drawn past what you can keep are discarded at end of turn.
+  if (!g.has((d) => d.noMaxHandSize)) {
+    const keepable = 7 - g.hand.length + Math.ceil(g.manaAvailable('hand') / 2) + Number(s.handSlack);
+    if (pendingDraws(g, p) > Math.max(keepable, Number(s.preferMin))) return -Infinity;
+  }
   const lo = Number(s.preferMin);
   const hi = Number(s.preferMax);
   if (t >= lo && t <= hi) return 100 + t;
@@ -156,12 +162,31 @@ function drawEngine(g: Game, s: StrategySettings) {
       .filter((x) => x.score > -Infinity)
       .sort((a, b) => b.score - a.score);
     if (!targets.length) return;
-    const t = targets[0].p;
+    // Against blockers, only aim at a creature that will connect: evasive, or made unblockable.
+    let chosen: Perm | null = null;
+    let target: Opponent | null = null;
+    let needsEnabler = false;
+    for (const { p } of targets) {
+      const open = g.alive().filter((o) => g.connects(p, o)).sort((a, b) => b.life - a.life);
+      if (open.length) {
+        chosen = p;
+        target = open[0];
+        break;
+      }
+      if (makeUnblockable(g, p, { dryRun: true }) && g.manaAvailable('ability') >= cost.mv + 2) {
+        chosen = p;
+        needsEnabler = true;
+        break;
+      }
+    }
+    if (!chosen) return;
     g.pay(cost, 'ability');
-    t.eot.canAttack = true;
-    t.eot.drawOnHit = true;
-    t.eot.power += 1;
-    g.say(`Pride ability on ${g.name(t)} (toughness ${g.toughness(t)})`);
+    chosen.eot.canAttack = true;
+    chosen.eot.drawOnHit = true;
+    chosen.eot.power += 1;
+    if (needsEnabler && !makeUnblockable(g, chosen)) g.say(`couldn't make ${g.name(chosen)} unblockable`);
+    if (g.isTable) chosen.attackTarget = target ?? g.alive().sort((a, b) => b.life - a.life)[0] ?? null;
+    g.say(`Pride ability on ${g.name(chosen)} (toughness ${g.toughness(chosen)})`);
   }
 }
 
@@ -192,6 +217,10 @@ function wallsAttack(g: Game) {
     if (!e) return;
     const dmgIfEnabled = e.butt || g.assignsToughness(w) ? g.toughness(w) : g.power(w);
     if (dmgIfEnabled <= 0) continue;
+    // Against blockers, a wall only attacks where it gets through (and it won't be home to block).
+    const open = g.alive().filter((o) => g.connects(w, o));
+    if (g.isTable && !open.length) continue;
+    if (g.isTable) w.attackTarget = open.sort((a, b) => a.life - b.life)[0];
     g.pay(e.cost, 'ability');
     w.eot.canAttack = true;
     if (e.butt) w.eot.butt = true;
@@ -243,10 +272,16 @@ export function triumphPlan(g: Game, s: StrategySettings) {
   const need = (o: Opponent) => Math.max(0, 10 - o.poison - (useProlif ? 1 : 0));
   if (useProlif) budget -= g.def(prolif.def).proliferate!.mv;
 
+  // Veil of Summer first when an opponent could counter Triumph.
+  const veil = g.opponentsMayCounter() ? g.hand.find((i) => g.def(i).protectionKind === 'uncounterable') : undefined;
+  if (veil !== undefined) budget -= g.def(veil).mv;
+
   const remaining = [...attackers].sort((a, b) => b.damage - a.damage);
   const plan: { a: Attacker; target: Opponent }[] = [];
   for (const o of [...g.alive()].sort((a, b) => need(b) - need(a))) {
     let n = need(o);
+    // Triumph grants trample: each of their untapped blockers soaks its toughness from one attacker.
+    const blockers = (o.creatures ?? []).filter((b) => !b.tapped).map((b) => ({ ...b })).sort((a, b) => b.toughness - a.toughness);
     while (n > 0) {
       const affordable = remaining.filter((a) => a.cost.mv <= budget && a.damage > 0);
       if (!affordable.length) return null;
@@ -254,16 +289,25 @@ export function triumphPlan(g: Game, s: StrategySettings) {
       const a = affordable.sort((x, y) => (x.cost.mv === 0 ? -1 : 0) - (y.cost.mv === 0 ? -1 : 0) || y.damage / Math.max(1, y.cost.mv) - x.damage / Math.max(1, x.cost.mv))[0];
       remaining.splice(remaining.indexOf(a), 1);
       budget -= a.cost.mv;
-      n -= a.damage;
+      const bi = blockers.findIndex((b) => g.canBlock(a.perm, b));
+      const soak = bi >= 0 ? blockers.splice(bi, 1)[0].toughness : 0;
+      n -= Math.max(0, a.damage - soak);
       plan.push({ a, target: o });
     }
   }
-  return { triumph, tower, plan, prolif: useProlif ? prolif : null };
+  return { triumph, tower, veil, plan, prolif: useProlif ? prolif : null };
 }
 
 function tryTriumph(g: Game, s: StrategySettings): boolean {
+  // The win turn spends everything, including mana held for protection.
+  const reserve = g.reserve;
+  g.reserve = 0;
   const plan = triumphPlan(g, s);
-  if (!plan) return false;
+  if (!plan) {
+    g.reserve = reserve;
+    return false;
+  }
+  if (plan.veil !== undefined) g.cast(plan.veil);
   // Enablers first (they can use ability-only mana), then the spells.
   for (const { a } of plan.plan) {
     if (a.cost.mv && !g.pay(a.cost, 'ability')) {
@@ -274,6 +318,7 @@ function tryTriumph(g: Game, s: StrategySettings): boolean {
   }
   if (g.cast(plan.triumph) === false) return false;
   if (plan.tower !== undefined) g.cast(plan.tower);
+  if (!g.team.infect) return true; // Triumph was countered: no poison alpha strike this turn
   g.combat(plan.plan.filter(({ a }) => g.canAttack(a.perm)).map(({ a, target }) => ({ perm: a.perm, target })));
   if (!g.over() && plan.prolif) {
     const d = g.def(plan.prolif.def);

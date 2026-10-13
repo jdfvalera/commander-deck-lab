@@ -241,3 +241,5 @@ table.plain td.num, table.plain th.num { text-align: right; font-variant-numeric
 .heatmap-scale .bin { display: inline-flex; align-items: center; gap: 3px; color: var(--muted); font-size: 0.75rem; }
 .event-list { margin: 0; padding-left: 22px; max-height: 320px; overflow: auto; background: var(--surface-2); border-radius: 6px; padding-top: 6px; padding-bottom: 6px; }
 .event-list li { margin: 1px 0; }
+.opp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.opp-card input[type='range'] { width: 100%; }

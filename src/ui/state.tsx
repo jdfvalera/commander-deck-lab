@@ -41,6 +41,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [cardProgress, setCardProgress] = useState<LoadProgress | null>(null);
   const [cardError, setCardError] = useState<string | null>(null);
   const cardsRef = useRef(cards);
+  // Requests already on their way (so re-renders never ask Scryfall twice) and names Scryfall doesn't know.
+  const inflight = useRef(new Map<string, Promise<void>>());
+  const unknown = useRef(new Set<string>());
 
   useEffect(() => {
     let live = true;
@@ -72,25 +75,30 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const ensureCards = useCallback(async (names: string[]) => {
-    const missing = [...new Set(names)].filter((n) => !cardsRef.current.has(nameKey(n)));
-    if (!missing.length) return [];
-    setCardError(null);
-    try {
-      const res = await fetchCards(missing, {
-        cache: idbCardCache,
-        onProgress: (done, total) => setCardProgress(total ? { done, total } : null),
-      });
-      const next = new Map(cardsRef.current);
-      for (const [k, c] of res.cards) next.set(k, c);
-      cardsRef.current = next;
-      setCards(next);
-      return res.notFound;
-    } catch (e) {
-      setCardError(`Couldn't reach Scryfall: ${e instanceof Error ? e.message : String(e)}`);
-      return [];
-    } finally {
-      setCardProgress(null);
+    const keys = [...new Set(names)].map((n) => ({ n, k: nameKey(n) }));
+    const missing = keys.filter(({ k }) => !cardsRef.current.has(k) && !inflight.current.has(k) && !unknown.current.has(k));
+    if (missing.length) {
+      setCardError(null);
+      const run = fetchCards(
+        missing.map((m) => m.n),
+        { cache: idbCardCache, onProgress: (done, total) => setCardProgress(total ? { done, total } : null) },
+      )
+        .then((res) => {
+          const next = new Map(cardsRef.current);
+          for (const [k, c] of res.cards) next.set(k, c);
+          for (const n of res.notFound) unknown.current.add(nameKey(n));
+          cardsRef.current = next;
+          setCards(next);
+        })
+        .catch((e) => setCardError(`Couldn't reach Scryfall: ${e instanceof Error ? e.message : String(e)}`))
+        .finally(() => {
+          for (const { k } of missing) inflight.current.delete(k);
+          setCardProgress(null);
+        });
+      for (const { k } of missing) inflight.current.set(k, run);
     }
+    await Promise.all(keys.map(({ k }) => inflight.current.get(k)).filter(Boolean));
+    return keys.filter(({ k }) => unknown.current.has(k)).map(({ n }) => n);
   }, []);
 
   const autoTags = useMemo(() => {

@@ -12,7 +12,7 @@ import { prideStrategy } from './strategies/prideOfHullClade';
 import { defaults, type Strategy, type StrategySettings } from './strategies/types';
 
 export const STRATEGIES: Strategy[] = [genericStrategy, prideStrategy];
-export const WIN_TYPES: WinType[] = ['combat', 'poison', 'pings', 'combo'];
+export const WIN_TYPES: WinType[] = ['combat', 'poison', 'pings', 'combo', 'outlasted'];
 
 export interface GoldfishOptions {
   games: number;

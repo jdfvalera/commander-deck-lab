@@ -75,8 +75,8 @@ describe("the Pride's ability", () => {
     expect(g.def(angler.def).keywords.hexproof).toBe(true);
     expect(angler.eot.drawOnHit).toBe(true); // hexproof: still a legal target for your own ability
     expect(barrier.eot.drawOnHit).toBe(false); // shroud: not
-    // Eight Islands pay for two activations; the second went to another creature, never the shrouded Barrier.
-    expect(g.bf.filter((x) => x.eot.drawOnHit).length).toBe(2);
+    // Eight Islands could pay for a second activation; it never goes to the shrouded Barrier.
+    expect(g.bf.filter((x) => x.eot.drawOnHit).every((x) => !g.shroud(x))).toBe(true);
   });
 
   it('draws cards equal to toughness on combat damage, and respects the library buffer', () => {

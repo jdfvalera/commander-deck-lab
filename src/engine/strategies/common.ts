@@ -131,18 +131,71 @@ export function activateAbilities(g: Game, keep = 0, minLibrary = 0) {
   }
 }
 
-/** Attacks with every creature that can, each at the opponent closest to dying. */
+/**
+ * Attacks with every creature that can, each at the opponent closest to dying that it can get through to.
+ * Against real blockers (matchups), a creature that would only bounce off a blocker stays home to defend.
+ */
 export function attackAll(g: Game, filter: (p: Perm) => boolean = () => true) {
   const attackers = g.creatures().filter((p) => g.canAttack(p) && filter(p) && g.combatDamage(p) > 0);
   const plan: { perm: Perm; target: Opponent }[] = [];
   const pending = new Map<Opponent, number>();
   for (const p of attackers.sort((a, b) => g.combatDamage(b) - g.combatDamage(a))) {
-    const alive = g.alive().filter((o) => (g.team.infect ? 10 - o.poison : o.life) - (pending.get(o) ?? 0) > 0);
-    if (!alive.length) break;
     const remaining = (o: Opponent) => (g.team.infect ? 10 - o.poison : o.life) - (pending.get(o) ?? 0);
-    const target = alive.sort((a, b) => remaining(a) - remaining(b))[0];
+    const alive = g.alive().filter((o) => remaining(o) > 0);
+    if (!alive.length) break;
+    let target: Opponent | undefined = p.attackTarget && alive.includes(p.attackTarget) ? p.attackTarget : undefined;
+    if (!target) {
+      const open = alive.filter((o) => g.connects(p, o)).sort((a, b) => remaining(a) - remaining(b));
+      target = open[0];
+      // Nothing gets through: only big creatures that survive a block still swing.
+      if (!target && (g.toughness(p) >= 8 || g.team.infect)) {
+        const blockers = (o: Opponent) => (o.creatures ?? []).filter((b) => g.canBlock(p, b)).length;
+        target = [...alive].sort((a, b) => blockers(a) - blockers(b))[0];
+      }
+    }
+    if (!target) continue;
     pending.set(target, (pending.get(target) ?? 0) + g.combatDamage(p));
     plan.push({ perm: p, target });
   }
   g.combat(plan);
+}
+
+/**
+ * Makes a creature unblockable this turn with something on the battlefield (Key to the City, Rogue's
+ * Passage, Access/Escape Tunnel, Suspicious Bookcase, Prowler's Helm), cheapest first. Returns true on success.
+ */
+export function makeUnblockable(g: Game, p: Perm, opts: { dryRun?: boolean } = {}): boolean {
+  const sources = g
+    .onBattlefield((d, q) => !!d.unblockableEnabler && d.unblockableEnabler.kind !== 'attack_trigger' && (!d.unblockableEnabler.tap || (!q.tapped && !(d.types.creature && q.sick))))
+    .sort((a, b) => g.def(a.def).unblockableEnabler!.cost.mv - g.def(b.def).unblockableEnabler!.cost.mv);
+  for (const src of sources) {
+    const e = g.def(src.def).unblockableEnabler!;
+    if (src === p && e.tap) continue; // tapping itself would stop it attacking
+    if (e.maxPower && g.power(p) > e.maxPower) continue;
+    if (e.discard && !g.hand.length) continue;
+    if (e.kind === 'equip') {
+      const eq = g.def(src.def).equipment;
+      const cost = { generic: eq?.equip ?? 2, pips: { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 }, hybrid: [], x: 0, mv: eq?.equip ?? 2 };
+      if (src.attachedTo === p.id) return true;
+      // Don't pull it off a creature that's already counting on it this turn.
+      const holder = src.attachedTo ? g.bf.find((q) => q.id === src.attachedTo) : undefined;
+      if (holder && (holder.eot.drawOnHit || holder.eot.canAttack)) continue;
+      if (!g.canPay(cost, 'ability')) continue;
+      if (opts.dryRun) return true;
+      g.pay(cost, 'ability');
+      src.attachedTo = p.id;
+      g.say(`equip ${g.name(src)} to ${g.name(p)}`);
+      return true;
+    }
+    if (!g.canPay(e.cost, 'ability', e.tap ? new Set([src.id]) : undefined)) continue;
+    if (opts.dryRun) return true;
+    g.pay(e.cost, 'ability', { avoidPerms: e.tap ? new Set([src.id]) : undefined });
+    if (e.tap) src.tapped = true;
+    if (e.discard) g.discardWorst(1);
+    if (e.sacrifice) g.destroy(src);
+    p.eot.unblockable = true;
+    g.say(`${g.name(src)} makes ${g.name(p)} unblockable`);
+    return true;
+  }
+  return false;
 }

@@ -4,6 +4,7 @@ import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import cardsJson from '../fixtures/scryfall/cards.json';
 import comboSubset from '../fixtures/spellbook/combos-subset.json';
+import wideJson from '../fixtures/scryfall/decks-wide.json';
 import { idbCardCache } from '../src/data/cardCache';
 import type { ScryfallCard } from '../src/data/types';
 import { App } from '../src/ui/App';
@@ -21,7 +22,7 @@ const until = async (fn: () => boolean, ms = 5000) => {
 describe('UI smoke', () => {
   it('loads the example deck, validates it, shows tags and opens the tag editor', async () => {
     // Pre-fill the card cache so no network is needed; fail loudly if Scryfall is called anyway.
-    await idbCardCache.putMany(cardsJson as ScryfallCard[]);
+    await idbCardCache.putMany([...(cardsJson as ScryfallCard[]), ...(wideJson as ScryfallCard[])]);
     vi.stubGlobal('fetch', (url: string) =>
       String(url).endsWith('combos.json')
         ? Promise.resolve(new Response(JSON.stringify(comboSubset)))
@@ -94,5 +95,25 @@ describe('UI smoke', () => {
     await until(() => el.textContent!.includes('Sample game'), 20000);
     expect(el.textContent).toContain('median win turn');
     expect(el.textContent).toContain('Hand after the draw');
-  }, 60000);
+
+    // Matchups: presets build profiles from their decklists; run a small pod without the matrix.
+    const muLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Matchups')!;
+    await act(async () => muLink.click());
+    await until(() => el.textContent!.includes('of their power flies'), 20000);
+    expect(el.textContent).toContain('This is an approximation');
+    const setNumber = async (labelStart: string, v: string) => {
+      const input = [...el.querySelectorAll('label')].find((l) => l.textContent!.startsWith(labelStart))!.querySelector('input') as HTMLInputElement;
+      await act(async () => {
+        Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, v);
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    };
+    await setNumber('Games per pod', '60');
+    const matrixBox = [...el.querySelectorAll('label')].find((l) => l.textContent!.includes('matchup matrix'))!.querySelector('input') as HTMLInputElement;
+    await act(async () => matrixBox.click());
+    const runMu = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Run matchups')!;
+    await act(async () => runMu.click());
+    await until(() => el.textContent!.includes('How you lost'), 30000);
+    expect(el.textContent).toContain('Your pod:');
+  }, 90000);
 });

@@ -7,7 +7,7 @@ import { mulberry32, shuffle } from './rng';
 import { reduceGeneric, type ManaCost } from './manaCost';
 import type { CardDef, CompiledDeck } from './cards';
 
-export type WinType = 'combat' | 'poison' | 'pings' | 'combo';
+export type WinType = 'combat' | 'poison' | 'pings' | 'combo' | 'outlasted';
 export type ManaRestriction = 'abilities' | 'nonhand' | null;
 
 export interface Perm {
@@ -23,13 +23,32 @@ export interface Perm {
   commander: boolean;
   token: { power: number; toughness: number; flying: boolean; name: string } | null;
   /** Until end of turn. */
-  eot: { power: number; toughness: number; canAttack: boolean; butt: boolean; haste: boolean; drawOnHit: boolean };
+  eot: { power: number; toughness: number; canAttack: boolean; butt: boolean; haste: boolean; drawOnHit: boolean; unblockable: boolean; reach: boolean };
+  /** Which opponent this creature attacks this turn, if a strategy chose one. */
+  attackTarget?: Opponent | null;
+  /** Damage marked this turn (blocking / being blocked); Adamantoise keeps its damage. */
+  damage: number;
   usedThisTurn: Set<string>;
+}
+
+/** An opposing creature (matchups only; goldfish opponents have none). */
+export interface OppCreature {
+  name: string;
+  power: number;
+  toughness: number;
+  flying: boolean;
+  reach: boolean;
+  trample: boolean;
+  unblockable: boolean;
+  defender: boolean;
+  tapped: boolean;
+  sick: boolean;
 }
 
 export interface Opponent {
   life: number;
   poison: number;
+  creatures?: OppCreature[];
 }
 
 export interface GameSettings {
@@ -64,7 +83,7 @@ interface SourceUnit {
   shrink: boolean;
 }
 
-const EOT = () => ({ power: 0, toughness: 0, canAttack: false, butt: false, haste: false, drawOnHit: false });
+const EOT = () => ({ power: 0, toughness: 0, canAttack: false, butt: false, haste: false, drawOnHit: false, unblockable: false, reach: false });
 
 export class Game {
   readonly d: CompiledDeck;
@@ -96,6 +115,8 @@ export class Game {
   extraDrawnByTurn: number[] = [];
   landsByTurn: number[] = [];
   manaByTurn: number[] = [];
+  /** End-of-turn board: total power, flying power, trample power, creature count (used to profile opponents). */
+  boardByTurn: { power: number; flying: number; trample: number; creatures: number }[] = [];
   firstSeen = new Map<number, number>();
   mulligans = 0;
   cardsSeen = 0;
@@ -278,7 +299,14 @@ export class Game {
    * colors, lands before creatures), then generic. Excess from multi-mana sources floats until the phase ends.
    * Returns false (changing nothing) if it can't be paid.
    */
-  pay(cost: ManaCost, kind: 'hand' | 'commander' | 'ability', opts: { avoidPerms?: Set<number>; dryRun?: boolean } = {}): boolean {
+  /** Mana held back for instant-speed protection (matchups). Main-phase payments won't dip into it. */
+  reserve = 0;
+
+  pay(cost: ManaCost, kind: 'hand' | 'commander' | 'ability', opts: { avoidPerms?: Set<number>; dryRun?: boolean; ignoreReserve?: boolean } = {}): boolean {
+    if (this.reserve > 0 && !opts.ignoreReserve) {
+      const need = cost.generic + Object.values(cost.pips).reduce((a, b) => a + b, 0) + cost.hybrid.length;
+      if (this.manaAvailable(kind) - need < this.reserve) return false;
+    }
     const usable = (r: ManaRestriction) => r === null || (r === 'nonhand' && kind !== 'hand') || (r === 'abilities' && kind === 'ability');
     const floating = this.floating.map((f) => ({ ...f }));
     const units = this.sources().filter((u) => usable(u.restriction) && !opts.avoidPerms?.has(u.perm.id));
@@ -338,8 +366,8 @@ export class Game {
     this.treasures = treasures;
     return true;
   }
-  canPay(cost: ManaCost, kind: 'hand' | 'commander' | 'ability', avoidPerms?: Set<number>): boolean {
-    return this.pay(cost, kind, { dryRun: true, avoidPerms });
+  canPay(cost: ManaCost, kind: 'hand' | 'commander' | 'ability', avoidPerms?: Set<number>, ignoreReserve = false): boolean {
+    return this.pay(cost, kind, { dryRun: true, avoidPerms, ignoreReserve });
   }
   endPhase() {
     this.floating = [];
@@ -393,8 +421,20 @@ export class Game {
       this.say(`WIN (${this.winType})`);
     }
   }
+  /** Turn on which spells you control can't be countered (Veil of Summer). */
+  uncounterableTurn = -1;
+  /** Matchups: might an opponent counter a key spell? (goldfish: never) */
+  opponentsMayCounter(): boolean {
+    return false;
+  }
+  /** Matchups: you died. */
+  lost: string | null = null;
   over(): boolean {
-    return this.winTurn !== null || this.decked;
+    return this.winTurn !== null || this.decked || this.lost !== null;
+  }
+  /** Matchups: opponents may counter it. Returns true if the spell was countered. */
+  protected countered(_defIdx: number, _fromCommandZone: boolean): boolean {
+    return false;
   }
 
   // ---------------- casting ----------------
@@ -425,6 +465,11 @@ export class Game {
     } else this.hand.splice(this.hand.indexOf(defIdx), 1);
     const paid = cost.generic + Object.values(cost.pips).reduce((a, b) => a + b, 0);
     this.say(`cast ${d.name}${paid !== d.mv || opts.fromCommandZone ? ` for ${paid}` : ''}`);
+    if (this.countered(defIdx, !!opts.fromCommandZone)) {
+      if (opts.fromCommandZone) this.commandZone.push(defIdx);
+      else this.gy.push(defIdx);
+      return null;
+    }
     if (!d.permanent) {
       this.resolveSpell(d, opts.xMana ?? 0);
       this.gy.push(defIdx);
@@ -439,7 +484,7 @@ export class Game {
     const conditionalUntapped = d.entersTapped === 'conditional' && this.lands().length >= 2;
     const p: Perm = {
       id: this.nextId++, def: defIdx, tapped: opts.tapped ?? (d.entersTapped === 'yes' || (d.entersTapped === 'conditional' && !conditionalUntapped)),
-      sick: true, counters: 0, minusToughness: 0, attachedTo: null, commander: !!opts.commander, token: null, eot: EOT(), usedThisTurn: new Set(),
+      sick: true, counters: 0, minusToughness: 0, attachedTo: null, commander: !!opts.commander, token: null, eot: EOT(), usedThisTurn: new Set(), damage: 0,
     };
     this.bf.push(p);
     if (d.types.creature) this.creatureEntered(p);
@@ -484,6 +529,7 @@ export class Game {
     if (d.tokenMaker && d.tokenMaker.trigger === 'cast') this.makeTokens(d);
     if (d.drain?.trigger === 'cast') this.loseLife(d.drain.amount, 'pings');
     if (d.massInfect) this.team.infect = true;
+    if (d.protectionKind === 'uncounterable') this.uncounterableTurn = this.turn;
     if (d.teamPumpEot) {
       this.team.power += d.teamPumpEot.power;
       this.team.toughness += d.teamPumpEot.toughness;
@@ -526,7 +572,7 @@ export class Game {
   makeToken(power: number, toughness: number, flying: boolean, name: string): Perm {
     const p: Perm = {
       id: this.nextId++, def: -1, tapped: false, sick: true, counters: 0, minusToughness: 0, attachedTo: null, commander: false,
-      token: { power, toughness, flying, name }, eot: EOT(), usedThisTurn: new Set(),
+      token: { power, toughness, flying, name }, eot: EOT(), usedThisTurn: new Set(), damage: 0,
     };
     this.bf.push(p);
     this.say(`create ${name} (${power}/${toughness})`);
@@ -563,6 +609,22 @@ export class Game {
         break;
     }
   }
+  /** A permanent leaves: commanders go to the command zone, tokens vanish, attachments fall off. */
+  destroy(p: Perm, to: 'graveyard' | 'hand' | 'library' = 'graveyard') {
+    const i = this.bf.indexOf(p);
+    if (i < 0) return;
+    this.bf.splice(i, 1);
+    for (const a of this.bf.filter((x) => x.attachedTo === p.id)) {
+      if (this.def(a.def).types.aura) this.destroy(a);
+      else a.attachedTo = null;
+    }
+    if (p.token) return;
+    if (p.commander) this.commandZone.push(p.def);
+    else if (to === 'hand') this.hand.push(p.def);
+    else if (to === 'library') this.lib.push(p.def);
+    else this.gy.push(p.def);
+  }
+
   /** Discards the cards the plan needs least: interaction the goldfish can't use, then excess lands, then the priciest. */
   discardWorst(n: number) {
     for (let i = 0; i < n && this.hand.length; i++) {
@@ -571,7 +633,8 @@ export class Game {
         const d = this.def(c);
         if (d.massInfect || d.teamToughnessPump) return -100;
         if (d.types.land) return lands >= 7 ? 50 : lands >= 5 ? 20 : -50;
-        if (d.interaction || d.protection) return 40;
+        // Interaction is dead weight in a goldfish but your lifeline in a matchup.
+        if (d.interaction || d.protection) return this.isTable ? -20 : 40;
         return d.mv;
       };
       const pick = [...this.hand].sort((a, b) => score(b) - score(a))[0];
@@ -583,13 +646,56 @@ export class Game {
 
   // ---------------- combat ----------------
   /** Attacks with these creatures, each at one opponent. Nobody blocks in a goldfish. */
+  /** Can this opposing creature block that attacker? (Flying, unblockable, Prowler's Helm, Tetsuko.) */
+  canBlock(attacker: Perm, b: OppCreature): boolean {
+    if (b.tapped) return false;
+    if (attacker.eot.unblockable || (!attacker.token && this.def(attacker.def).keywords.unblockable)) return false;
+    const flying = attacker.token ? attacker.token.flying : this.def(attacker.def).keywords.flying || this.attachments(attacker).some((a) => this.def(a.def).aura?.flying);
+    if (flying && !b.flying && !b.reach) return false;
+    if (this.attachments(attacker).some((a) => this.def(a.def).unblockable === 'walls') && !b.defender) return false;
+    const small = this.onBattlefield((d) => d.smallUnblockable > 0)[0];
+    if (small) {
+      const max = this.def(small.def).smallUnblockable;
+      if (this.power(attacker) <= max || this.toughness(attacker) <= max) return false;
+    }
+    return true;
+  }
+  /** Matchups have opposing creatures; the goldfish doesn't. */
+  get isTable(): boolean {
+    return this.opps.some((o) => o.creatures !== undefined);
+  }
+  /** True when no untapped creature of that opponent could block it. */
+  connects(attacker: Perm, o: Opponent): boolean {
+    return !(o.creatures ?? []).some((b) => this.canBlock(attacker, b));
+  }
+  /** Matchups: Aetherize-style responses and blocks. Returns, per attacker, the blocker (if any). */
+  protected declareBlocks(_attacks: { perm: Perm; target: Opponent }[]): Map<Perm, OppCreature | null> {
+    return new Map();
+  }
+  protected beforeDamage(attacks: { perm: Perm; target: Opponent }[]): { perm: Perm; target: Opponent }[] {
+    return attacks;
+  }
+
   combat(attacks: { perm: Perm; target: Opponent }[]) {
     if (!attacks.length) return;
-    const dealt: Perm[] = [];
-    for (const { perm, target } of attacks) {
+    for (const { perm } of attacks) {
       const d = perm.token ? null : this.def(perm.def);
       if (!d?.keywords.vigilance) perm.tapped = true;
-      const dmg = this.combatDamage(perm);
+    }
+    attacks = this.beforeDamage(attacks);
+    const blocks = this.declareBlocks(attacks);
+    const dealt: Perm[] = [];
+    for (const { perm, target } of attacks) {
+      let dmg = this.combatDamage(perm);
+      const blocker = blocks.get(perm);
+      if (blocker) {
+        const trample = this.team.trample || (!perm.token && this.def(perm.def).keywords.trample);
+        const toBlocker = Math.min(dmg, Math.max(1, blocker.toughness));
+        if (toBlocker >= blocker.toughness) blocker.toughness = 0; // marked for death
+        perm.damage += blocker.power;
+        this.say(`${this.name(perm)} is blocked by ${blocker.name}`);
+        dmg = trample ? dmg - toBlocker : 0;
+      }
       if (dmg <= 0) continue;
       if (this.team.infect) {
         target.poison += dmg;
@@ -598,6 +704,7 @@ export class Game {
       dealt.push(perm);
       this.say(`${this.name(perm)} hits for ${dmg}${this.team.infect ? ' poison' : ''}`);
     }
+    this.afterCombat(attacks.map((a) => a.target));
     this.checkWin('combat');
     // Combat-damage triggers: the Pride's "draw cards equal to its toughness", Ohran Frostfang.
     for (const p of dealt) {
@@ -611,6 +718,9 @@ export class Game {
     }
   }
 
+  /** Matchups: remove dead creatures after combat. */
+  protected afterCombat(_targets: Opponent[]) {}
+
   // ---------------- turn structure ----------------
   beginTurn() {
     this.turn++;
@@ -619,6 +729,7 @@ export class Game {
       p.tapped = false;
       p.sick = false;
       p.eot = EOT();
+      p.attackTarget = null;
       p.usedThisTurn.clear();
     }
     this.team = { infect: false, power: 0, toughness: 0, trample: false };
@@ -644,6 +755,15 @@ export class Game {
     if (!noMax && this.hand.length > maxHand) this.discardWorst(this.hand.length - maxHand);
     // Damage on creatures and end-of-turn effects wear off at cleanup.
     this.landsByTurn.push(this.lands().length);
+    const cs = this.creatures();
+    const flies = (p: Perm) => (p.token ? p.token.flying : this.def(p.def).keywords.flying);
+    this.boardByTurn.push({
+      power: cs.reduce((a, p) => a + Math.max(0, this.power(p)), 0),
+      flying: cs.filter(flies).reduce((a, p) => a + Math.max(0, this.power(p)), 0),
+      trample: cs.filter((p) => !p.token && this.def(p.def).keywords.trample).reduce((a, p) => a + Math.max(0, this.power(p)), 0),
+      creatures: cs.length,
+    });
+    for (const p of this.bf) if (!(!p.token && this.def(p.def).damageRedirect)) p.damage = 0;
     if (this.turn === 6) {
       this.cardsSeenBy6 = this.cardsSeen;
       this.landsSeenBy6 = this.landsSeen;

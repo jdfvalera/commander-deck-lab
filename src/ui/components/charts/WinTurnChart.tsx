@@ -3,10 +3,10 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import type { GoldfishSummary } from '../../../engine/goldfish';
 import type { WinType } from '../../../engine/game';
 
-export const WIN_LABELS: Record<WinType, string> = { combat: 'Combat damage', poison: 'Poison (infect)', pings: 'Life loss (pings)', combo: 'Spellbook combo' };
+export const WIN_LABELS: Record<WinType, string> = { combat: 'Combat damage', poison: 'Poison (infect)', pings: 'Life loss (pings)', combo: 'Spellbook combo', outlasted: 'Outlasted (opponents died to each other)' };
 // Fixed slot order: color follows the win type.
-const WIN_COLORS: Record<WinType, string> = { combat: 'var(--series-1)', poison: 'var(--series-2)', pings: 'var(--series-3)', combo: 'var(--series-4)' };
-const ORDER: WinType[] = ['combat', 'poison', 'pings', 'combo'];
+const WIN_COLORS: Record<WinType, string> = { combat: 'var(--series-1)', poison: 'var(--series-2)', pings: 'var(--series-3)', combo: 'var(--series-4)', outlasted: 'var(--series-5)' };
+const ORDER: WinType[] = ['combat', 'poison', 'pings', 'combo', 'outlasted'];
 
 function Tip({ active, payload, label }: { active?: boolean; payload?: { dataKey: WinType; value: number }[]; label?: number }) {
   if (!active || !payload?.length) return null;

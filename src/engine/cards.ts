@@ -62,6 +62,24 @@ export interface CardDef extends ModelCard {
   drain: { amount: number; trigger: string } | null;
   custom: CustomEffect[];
   unmodelled: boolean;
+  // ---- matchups ----
+  /** "walls" = Prowler's Helm style (only walls can block the equipped creature). */
+  unblockable: 'walls' | null;
+  unblockableEnabler: { cost: ManaCost; kind: string; maxPower: number; tap: boolean; discard: boolean; sacrifice: boolean; wallsCanBlock: boolean } | null;
+  smallUnblockable: number;
+  spotRemoval: { kind: string; targets: string } | null;
+  boardWipe: { kind: string; x: number; artifacts: boolean; oneSided: boolean } | null;
+  counterspell: { scope: string; soft: boolean } | null;
+  protectionKind: string | null;
+  uncounterable: boolean;
+  teamHexproof: string | null;
+  ward: number;
+  targetTax: { amount: number; scope: string } | null;
+  damageRedirect: boolean;
+  aetherize: boolean;
+  attackTax: number;
+  /** Reach bought with an activation (Wall of Tanglecord: {G}). */
+  reachCost: ManaCost | null;
 }
 
 const cost = (s: unknown): ManaCost => parseManaCost(String(s ?? ''));
@@ -152,6 +170,26 @@ export function compileCard(card: ScryfallCard, tags: CardTags, identity: Set<Co
     drain: tags.drain ? { amount: Number(p('drain').amount), trigger: String(p('drain').trigger) } : null,
     custom: customEffects(tags, identity),
     unmodelled: has('unmodelled'),
+    unblockable: tags.unblockable_enabler && p('unblockable_enabler').kind === 'equip' && p('unblockable_enabler').walls_can_block ? 'walls' : null,
+    unblockableEnabler: tags.unblockable_enabler
+      ? {
+          cost: cost(p('unblockable_enabler').cost), kind: String(p('unblockable_enabler').kind), maxPower: Number(p('unblockable_enabler').max_power),
+          tap: !!p('unblockable_enabler').tap, discard: !!p('unblockable_enabler').discard, sacrifice: !!p('unblockable_enabler').sacrifice, wallsCanBlock: !!p('unblockable_enabler').walls_can_block,
+        }
+      : null,
+    smallUnblockable: tags.small_unblockable_grant ? Number(p('small_unblockable_grant').max) : 0,
+    spotRemoval: tags.spot_removal ? { kind: String(p('spot_removal').kind), targets: String(p('spot_removal').targets) } : null,
+    boardWipe: tags.board_wipe ? { kind: String(p('board_wipe').kind), x: Number(p('board_wipe').x), artifacts: !!p('board_wipe').artifacts, oneSided: !!p('board_wipe').one_sided } : null,
+    counterspell: tags.counterspell ? { scope: String(p('counterspell').scope), soft: !!p('counterspell').soft } : null,
+    protectionKind: tags.protection ? String(p('protection').kind) : null,
+    uncounterable: has('uncounterable'),
+    teamHexproof: tags.team_hexproof ? String(p('team_hexproof').when) : null,
+    ward: tags.ward ? Number(p('ward').cost) : 0,
+    targetTax: tags.target_tax ? { amount: Number(p('target_tax').amount), scope: String(p('target_tax').scope) } : null,
+    damageRedirect: has('damage_redirect'),
+    aetherize: has('aetherize'),
+    attackTax: tags.attack_tax ? Number(p('attack_tax').per) : 0,
+    reachCost: tags.reach && p('reach').cost ? cost(p('reach').cost) : null,
   };
 }
 

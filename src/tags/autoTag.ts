@@ -664,8 +664,23 @@ const RULES: Rule[] = [
     apply: (_m, ctx) => ctx.set('spot_removal', { kind: 'damage', targets: 'creature' }),
   },
   {
-    re: /(?:^|\. |• )destroy all (other )?((?:[a-z]+(?:,| and| or)? )*?(?:creatures|permanents|artifacts|enchantments|planeswalkers))( you don't control| your opponents control)?\b/,
+    re: /(?:^|\. |• |: )destroy all (other )?((?:[a-z]+(?:,| and| or)? )*?(?:creatures|permanents|artifacts|enchantments|planeswalkers))( you don't control| your opponents control)?\b/,
     apply: (m, ctx) => mergeParams(ctx, 'board_wipe', { kind: 'destroy', artifacts: /artifact|nonland permanents/.test(m[2]), one_sided: !!m[3] }),
+  },
+  {
+    re: /(?:^|\. |• |: )destroy each (?:other )?((?:[a-z]+(?:,| and| or)? )*?(?:artifact|creature|enchantment|planeswalker|nonland permanent)s?)\b(.*)$/,
+    apply: (m, ctx) => {
+      if (/with mana value|whose controller|that player controls|dealt (?:combat )?damage/.test(m[2])) return false; // conditional, not a wipe
+      mergeParams(ctx, 'board_wipe', { kind: 'destroy', artifacts: /artifact|nonland permanent/.test(m[1]) });
+    },
+  },
+  {
+    re: /^each player sacrifices all permanents they control that are one or more colors\.?$/,
+    apply: (_m, ctx) => ctx.set('board_wipe', { kind: 'sacrifice_colored', artifacts: true }),
+  },
+  {
+    re: /^for each creature your opponents control, create an? (\d+)\/(\d+) [^.]*token\. each of those tokens fights (?:up to one target creature you don't control|a different one of those creatures)\.?$/,
+    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'toughness_le', x: Number(m[1]), one_sided: true }),
   },
   {
     re: /(?:^|\. |• )exile all (other )?((?:[a-z]+(?:,| and| or)? )*?(?:creatures|permanents|artifacts|enchantments|planeswalkers))( you don't control| your opponents control)?\b/,
@@ -676,8 +691,8 @@ const RULES: Rule[] = [
     apply: (m, ctx) => ctx.set('board_wipe', { kind: 'bounce', artifacts: !/creatures$/.test(m[1]), one_sided: /you don't control|your opponents control/.test(m[1]) }),
   },
   {
-    re: /^(?:.*\. )?all (other )?creatures( your opponents control)? get -(\d+|x)\/-(\d+|x) until end of turn/,
-    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'minus', x: num(m[3]), one_sided: !!m[2] }),
+    re: /^(?:.*\. )?all (other )?creatures( your opponents control)? get -(\d+|x)\/-(\d+|x) until end of turn( for each)?/,
+    apply: (m, ctx) => ctx.set('board_wipe', { kind: 'minus', x: m[5] ? 0 : num(m[3]), one_sided: !!m[2] }),
   },
   {
     re: /^(?:.*\. )?~ deals (\d+|x) damage to each creature\b/,
