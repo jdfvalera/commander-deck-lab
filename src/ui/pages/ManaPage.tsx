@@ -9,10 +9,14 @@ import { ManaCost } from '../components/ManaCost';
 import { cardsSeen, hypergeomAtLeast, hypergeomPmf } from '../../engine/hypergeo';
 import { colorReports, DEFAULT_COLOR_OPTIONS, type ColorOptions } from '../../engine/colorReqs';
 import { ROLES, ROLE_LABELS, type DeckModel, type Role } from '../../engine/deckModel';
-import { DEFAULT_RULES, simulateHand, type KeepRules, type MulliganSummary } from '../../engine/mulligan';
+import { DEFAULT_RULES, simulateHand, type MulliganSummary } from '../../engine/mulligan';
 import { formatCost } from '../../engine/manaCost';
+import { RulesForm } from '../components/RulesForm';
 import { parseSeed } from '../../engine/rng';
 import { CancelledError, startJob } from '../../worker/client';
+import { useApp } from '../state';
+import { compileDeck } from '../../engine/cards';
+import { DEFAULT_GOLDFISH, defaultStrategyFor, playFromHand } from '../../engine/goldfish';
 
 const COLOR_NAMES: Record<string, string> = { W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green' };
 
@@ -219,25 +223,6 @@ function ColorSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel; d
   );
 }
 
-function RulesForm({ rules, onChange }: { rules: KeepRules; onChange: (r: KeepRules) => void }) {
-  const num = (k: keyof KeepRules, label: string, min: number, max: number) => (
-    <label>
-      {label} <input type="number" min={min} max={max} value={Number(rules[k])} onChange={(e) => onChange({ ...rules, [k]: Number(e.target.value) })} style={{ width: 52 }} />
-    </label>
-  );
-  return (
-    <div className="row small">
-      <span className="muted">Keep if:</span>
-      {num('minLands', 'lands from', 0, 7)}
-      {num('maxLands', 'to', 0, 7)}
-      {num('minEarlyPlays', 'and plays with MV ≤ 2: at least', 0, 7)}
-      <label><input type="checkbox" checked={rules.rampCountsAsLand} onChange={(e) => onChange({ ...rules, rampCountsAsLand: e.target.checked })} /> cheap rocks/dorks count as lands</label>
-      {num('maxMulligans', 'max mulligans', 0, 6)}
-      <label><input type="checkbox" checked={rules.freeFirstMulligan} onChange={(e) => onChange({ ...rules, freeFirstMulligan: e.target.checked })} /> free first mulligan</label>
-    </div>
-  );
-}
-
 function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel; deckLabel: string; drawOnTurnOne: boolean }) {
   const [rules, setRules] = useState(DEFAULT_RULES);
   const [trials, setTrials] = useState(10000);
@@ -326,6 +311,29 @@ function MulliganSection({ model, deckLabel, drawOnTurnOne }: { model: DeckModel
   );
 }
 
+/** What this exact hand does in the goldfish over its first four turns. */
+function GoldfishPreview({ hand, library, drawOnTurnOne }: { hand: string[]; library: string[]; drawOnTurnOne: boolean }) {
+  const { card, tagsFor } = useApp();
+  const active = useActiveDeck();
+  const list = active.list;
+  const game = useMemo(() => {
+    if (!list) return null;
+    const deck = compileDeck(list, card, tagsFor);
+    const strategy = defaultStrategyFor(deck);
+    return playFromHand(deck, hand, library, { ...DEFAULT_GOLDFISH, drawOnTurnOne, strategy: strategy.id, settings: {} }, 4);
+  }, [list, card, tagsFor, hand, library, drawOnTurnOne]);
+  if (!game) return null;
+  return (
+    <div className="stack" style={{ gap: 4 }}>
+      <strong className="small">
+        In the goldfish, turns 1–4: {game.lands().length} lands, {game.creatures().length} creatures, {game.extraDrawn} extra cards drawn
+        {game.commanderTurn ? `, commander on turn ${game.commanderTurn}` : ', commander not cast yet'}
+      </strong>
+      <div className="mana-log">{game.logs.map((l) => `T${l.turn}: ${l.events.join('; ') || 'nothing'}`).join('\n')}</div>
+    </div>
+  );
+}
+
 function HandSampler({ model, drawOnTurnOne }: { model: DeckModel; drawOnTurnOne: boolean }) {
   const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1e9));
   const [mulls, setMulls] = useState(0);
@@ -363,11 +371,11 @@ function HandSampler({ model, drawOnTurnOne }: { model: DeckModel; drawOnTurnOne
         ))}
       </div>
       <div className="small"><span className="muted">Next draws:</span> {r.nextDraws.map((c) => c.name).join(', ')}</div>
+      <GoldfishPreview hand={r.kept.map((c) => c.name)} library={r.library.map((c) => c.name)} drawOnTurnOne={drawOnTurnOne} />
       <details>
-        <summary className="small">First 5 turns with the simple mana model</summary>
+        <summary className="small">Simple mana model for the same hand</summary>
         <div className="mana-log">{r.log.join('\n')}</div>
       </details>
-      <p className="muted small" style={{ margin: 0 }}>Full turn-by-turn play of this hand arrives with the goldfish simulator.</p>
     </div>
   );
 }

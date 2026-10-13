@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`goldfish runs > golden: a fixed seed gives exactly the same summary 1`] = `
+{
+  "by10": 0.39666666666666667,
+  "decked": 0.02,
+  "median": 11,
+  "pride4": 0.7133333333333334,
+}
+`;

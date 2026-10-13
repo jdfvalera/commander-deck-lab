@@ -54,7 +54,7 @@ export interface DrawProfile {
   /** Extra cards every turn once it's on the battlefield (Phyrexian Arena, Rhystic Study ≈ 1). */
   perTurn: number;
   /** A repeatable activation: pay `cost` (and tap) to draw `n` then discard `discard`, once a turn. */
-  activated: { cost: number; n: number; tap: boolean; discard: number } | null;
+  activated: { cost: number; n: number; tap: boolean; discard: number; sacrifice: 'none' | 'self' | 'other' } | null;
   /** Cards discarded after the on-cast draw (looting). */
   discard: number;
   permanent: boolean;
@@ -79,14 +79,17 @@ function drawProfile(tags: CardTags, typeLine: string): DrawProfile | null {
   if (tags.repeat_draw) d.perTurn += Number(p('repeat_draw').n) || 1;
   if (tags.activated_draw) {
     const a = p('activated_draw');
-    d.activated = { cost: parseManaCost(String(a.cost)).mv, n: Number(a.n) || 1, tap: !!a.tap, discard: Number(a.discard ?? 0) };
+    d.activated = {
+      cost: parseManaCost(String(a.cost)).mv, n: Number(a.n) || 1, tap: !!a.tap, discard: Number(a.discard ?? 0),
+      sacrifice: a.sacrifice_self ? 'self' : a.sacrifice ? 'other' : 'none',
+    };
   }
   for (const k of CUSTOM_KEYS) {
     const c = tags[k]?.params;
     if (!c || c.effect !== 'draw') continue;
     const n = Number(c.amount) || 1;
     if (c.when === 'cast' || c.when === 'etb') d.onCast += n;
-    else if (c.when === 'activated') d.activated = { cost: parseManaCost(String(c.cost)).mv, n, tap: !!c.tap, discard: 0 };
+    else if (c.when === 'activated') d.activated = { cost: parseManaCost(String(c.cost)).mv, n, tap: !!c.tap, discard: 0, sacrifice: 'none' };
     else if (c.when === 'upkeep' || c.when === 'cast_spell') d.perTurn += n;
   }
   return d.onCast || d.x || d.perTurn || d.activated ? d : null;

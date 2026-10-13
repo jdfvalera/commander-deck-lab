@@ -161,7 +161,7 @@ describe('card draw in the mana model', () => {
 
   it('activated draws come from tags (Arcane Encyclopedia: {3}, tap, draw 1)', () => {
     const enc = vhal.library.find((c) => c.name === 'Arcane Encyclopedia')!;
-    expect(enc.draw?.activated).toEqual({ cost: 3, n: 1, tap: true, discard: 0 });
+    expect(enc.draw?.activated).toEqual({ cost: 3, n: 1, tap: true, discard: 0, sacrifice: 'none' });
     const tome = vhal.library.find((c) => c.name === "Urza's Tome")!;
     expect(tome.draw?.activated?.discard).toBe(1);
   });

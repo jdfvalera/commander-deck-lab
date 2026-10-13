@@ -52,6 +52,8 @@ export interface HandResult {
   extraDrawnByTurn: number[];
   /** The next cards drawn after keeping (for the hand sampler). */
   nextDraws: ModelCard[];
+  /** The whole library after keeping, top first. */
+  library: ModelCard[];
   log: string[];
 }
 
@@ -68,19 +70,19 @@ export function handOk(hand: ModelCard[], rules: KeepRules): boolean {
 }
 
 /** London mulligan: choose `n` cards to bottom from a 7-card hand, trying to make it keepable. */
-export function chooseBottom(hand: ModelCard[], n: number, rules: KeepRules): { keep: ModelCard[]; bottom: ModelCard[] } {
+export function chooseBottom<T extends ModelCard>(hand: T[], n: number, rules: KeepRules): { keep: T[]; bottom: T[] } {
   if (n <= 0) return { keep: [...hand], bottom: [] };
-  const byWorstSpell = (a: ModelCard, b: ModelCard) => b.mv - a.mv;
+  const byWorstSpell = (a: T, b: T) => b.mv - a.mv;
   const lands = hand.filter((c) => c.isLand).sort((a, b) => (a.entersTapped === 'yes' ? -1 : 0) - (b.entersTapped === 'yes' ? -1 : 0));
   const spells = hand.filter((c) => !c.isLand).sort(byWorstSpell);
-  const candidates: ModelCard[][] = [];
+  const candidates: T[][] = [];
   for (let fromLands = 0; fromLands <= n; fromLands++) {
     const fromSpells = n - fromLands;
     if (fromLands > lands.length || fromSpells > spells.length) continue;
     candidates.push([...lands.slice(0, fromLands), ...spells.slice(0, fromSpells)]);
   }
   // Prefer a keepable result with 3–4 lands, then any keepable one, then the most lands-balanced.
-  const score = (bottom: ModelCard[]) => {
+  const score = (bottom: T[]) => {
     const keep = hand.filter((c) => !bottom.includes(c));
     const l = landCount(keep, rules);
     return (handOk(keep, rules) ? 100 : 0) - Math.abs(l - 3.5) * 10 + keep.filter(isEarlyPlay).length;
@@ -264,12 +266,20 @@ export function developMana(
       if (!progressed) break;
     }
     if (cardDraw) {
-      for (const a of activators) {
+      for (const a of [...activators]) {
         const act = a.card.draw!.activated!;
-        if (a.readyTurn > turn || act.cost > left()) continue;
+        // Sacrificing another permanent isn't something the model does for free; sacrificing itself is one use.
+        if (act.sacrifice === 'other' || a.readyTurn > turn || act.cost > left()) continue;
         spent += act.cost;
         drawExtra(act.n, `activate ${a.card.name}`);
         if (act.discard) discard(act.discard);
+        if (act.sacrifice === 'self') {
+          activators.splice(activators.indexOf(a), 1);
+          const land = lands.findIndex((l) => l.card === a.card);
+          if (land >= 0) lands.splice(land, 1);
+          const rock = rocks.findIndex((l) => l.card === a.card);
+          if (rock >= 0) rocks.splice(rock, 1);
+        }
       }
       playLand();
     }
@@ -309,7 +319,7 @@ export function simulateHand(model: DeckModel, seed: number, rules: KeepRules, o
         mulligans, hands, kept: keep, bottomed: bottom, forced,
         landsKept: keep.filter((c) => c.isLand).length,
         earlyKept: keep.filter(isEarlyPlay).length,
-        commanderTurn, manaByTurn, extraDrawnByTurn, nextDraws: library.slice(0, 4), log,
+        commanderTurn, manaByTurn, extraDrawnByTurn, nextDraws: library.slice(0, 4), library, log,
       };
     }
     mulligans++;

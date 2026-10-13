@@ -388,7 +388,7 @@ const RULES: Rule[] = [
     re: /^((?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+)(?:, (?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+))*): (?:you )?draw (a|one|two|three|x) cards?(?:, then discard (a|one|two|three) cards?)?(?:\.|$)/,
     apply: (m, ctx) =>
       ctx.set('activated_draw', {
-        cost: costOf(m[1]), n: num(m[2]) || 1, tap: m[1].includes('{t}'), sacrifice: /sacrifice/.test(m[1]), discard: m[3] ? num(m[3]) : 0,
+        cost: costOf(m[1]), n: num(m[2]) || 1, tap: m[1].includes('{t}'), sacrifice: /sacrifice/.test(m[1]), sacrifice_self: /sacrifice ~/.test(m[1]), discard: m[3] ? num(m[3]) : 0,
       }),
   },
   { re: new RegExp(`^draw ${NUM} cards?, then discard ${NUM} cards?`), apply: (m, ctx) => ctx.set('loot', { draw: num(m[1]), discard: num(m[2]) }) },

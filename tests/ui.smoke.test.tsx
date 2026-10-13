@@ -78,5 +78,21 @@ describe('UI smoke', () => {
     await until(() => el.textContent!.includes('keep the first 7'), 15000);
     expect(el.textContent).toContain('cast turn comes from the goldfish');
     expect(el.textContent).toContain('Mana available by turn');
-  }, 30000);
+
+    // Goldfish: a small run, then the sample game viewer.
+    const gfLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Goldfish')!;
+    await act(async () => gfLink.click());
+    await until(() => el.textContent!.includes('Strategy'));
+    expect(el.textContent).toContain('A goldfish has no opponents');
+    const gamesInput = [...el.querySelectorAll('label')].find((l) => l.textContent!.startsWith('Games'))!.querySelector('input') as HTMLInputElement;
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(gamesInput, '150');
+      gamesInput.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    const runGf = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Run' || b.textContent === 'Run both versions')!;
+    await act(async () => runGf.click());
+    await until(() => el.textContent!.includes('Sample game'), 20000);
+    expect(el.textContent).toContain('median win turn');
+    expect(el.textContent).toContain('Hand after the draw');
+  }, 60000);
 });
