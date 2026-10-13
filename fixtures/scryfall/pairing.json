@@ -1,0 +1,258 @@
+[
+ {
+  "name": "Clan Crafter",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Legendary Enchantment — Background",
+  "oracle_text": "Commander creatures you own have \"{2}, Sacrifice an artifact: Put a +1/+1 counter on this creature and draw a card.\"",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Vhal, Candlekeep Researcher",
+  "layout": "normal",
+  "mana_cost": "{3}{U}",
+  "cmc": 4,
+  "type_line": "Legendary Creature — Human Wizard",
+  "oracle_text": "Vigilance\n{T}: Add an amount of {C} equal to Vhal's toughness. This mana can't be spent to cast spells from your hand.\nChoose a Background (You can have a Background as a second commander.)",
+  "power": "2",
+  "toughness": "3",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Vigilance",
+   "Choose a background"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Pir, Imaginative Rascal",
+  "layout": "normal",
+  "mana_cost": "{2}{G}",
+  "cmc": 3,
+  "type_line": "Legendary Creature — Human",
+  "oracle_text": "Partner with Toothy, Imaginary Friend (When this creature enters, target player may put Toothy into their hand from their library, then shuffle.)\nIf one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.",
+  "power": "1",
+  "toughness": "1",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Partner with",
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Toothy, Imaginary Friend",
+  "layout": "normal",
+  "mana_cost": "{3}{U}",
+  "cmc": 4,
+  "type_line": "Legendary Creature — Illusion",
+  "oracle_text": "Partner with Pir, Imaginative Rascal (When this creature enters, target player may put Pir into their hand from their library, then shuffle.)\nWhenever you draw a card, put a +1/+1 counter on Toothy.\nWhen Toothy leaves the battlefield, draw a card for each +1/+1 counter on it.",
+  "power": "1",
+  "toughness": "1",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Partner with",
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Thrasios, Triton Hero",
+  "layout": "normal",
+  "mana_cost": "{G}{U}",
+  "cmc": 2,
+  "type_line": "Legendary Creature — Merfolk Wizard",
+  "oracle_text": "{4}: Scry 1, then reveal the top card of your library. If it's a land card, put it onto the battlefield tapped. Otherwise, draw a card.\nPartner (You can have two commanders if both have partner.)",
+  "power": "1",
+  "toughness": "3",
+  "colors": [
+   "G",
+   "U"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Partner",
+   "Scry"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Rograkh, Son of Rohgahh",
+  "layout": "normal",
+  "mana_cost": "{0}",
+  "cmc": 0,
+  "type_line": "Legendary Creature — Kobold Warrior",
+  "oracle_text": "First strike, menace, trample\nPartner (You can have two commanders if both have partner.)",
+  "power": "0",
+  "toughness": "1",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "keywords": [
+   "First strike",
+   "Partner",
+   "Trample",
+   "Menace"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Clara Oswald",
+  "layout": "normal",
+  "mana_cost": "{6}",
+  "cmc": 6,
+  "type_line": "Legendary Creature — Human Advisor",
+  "oracle_text": "Impossible Girl — If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color.\nIf a triggered ability of a Doctor you control triggers, that ability triggers an additional time.\nDoctor's companion (You can have two commanders if the other is the Doctor.)",
+  "power": "2",
+  "toughness": "6",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Impossible Girl",
+   "Doctor's companion"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "The Tenth Doctor",
+  "layout": "normal",
+  "mana_cost": "{3}{U}{R}",
+  "cmc": 5,
+  "type_line": "Legendary Creature — Time Lord Doctor",
+  "oracle_text": "Allons-y! — Whenever you attack, exile cards from the top of your library until you exile a nonland card. Put three time counters on it. If it doesn't have suspend, it gains suspend.\nTimey-Wimey — {7}: Time travel three times. Activate only as a sorcery. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter. Then do it two more times.)",
+  "power": "3",
+  "toughness": "5",
+  "colors": [
+   "R",
+   "U"
+  ],
+  "color_identity": [
+   "R",
+   "U"
+  ],
+  "keywords": [
+   "Allons-y!",
+   "Time Travel",
+   "Timey-Wimey"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Atreus, Impulsive Son",
+  "layout": "normal",
+  "mana_cost": "{1}{U}{R}",
+  "cmc": 3,
+  "type_line": "Legendary Creature — God Archer",
+  "oracle_text": "Reach\n{3}, {T}: Draw a card for each experience counter you have, then discard a card. Atreus deals 2 damage to each opponent.\nPartner—Father & son (You can have two commanders if both have this ability.)",
+  "power": "2",
+  "toughness": "4",
+  "colors": [
+   "R",
+   "U"
+  ],
+  "color_identity": [
+   "R",
+   "U"
+  ],
+  "keywords": [
+   "Reach",
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Kratos, Stoic Father",
+  "layout": "normal",
+  "mana_cost": "{2}{R}{W}",
+  "cmc": 4,
+  "type_line": "Legendary Creature — God Warrior",
+  "oracle_text": "Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.\nAt the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.\nPartner—Father & son (You can have two commanders if both have this ability.)",
+  "power": "4",
+  "toughness": "4",
+  "colors": [
+   "R",
+   "W"
+  ],
+  "color_identity": [
+   "R",
+   "W"
+  ],
+  "keywords": [
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Bjorna, Nightfall Alchemist",
+  "layout": "normal",
+  "mana_cost": "{U}{R}",
+  "cmc": 2,
+  "type_line": "Legendary Creature — Human",
+  "oracle_text": "{T}, Sacrifice an artifact: Bjorna, Nightfall Alchemist deals 1 damage to target creature. Goad that creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)\nPartner—Friends forever (You can have two commanders if both have this ability.)",
+  "power": "1",
+  "toughness": "3",
+  "colors": [
+   "R",
+   "U"
+  ],
+  "color_identity": [
+   "R",
+   "U"
+  ],
+  "keywords": [
+   "Goad",
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ }
+]

@@ -2,8 +2,9 @@ import { describe, expect, it } from 'vitest';
 import cardsJson from '../fixtures/scryfall/cards.json';
 import current from '../fixtures/decks/pride-current.json';
 import revised from '../fixtures/decks/pride-revised.json';
-import { validateDeck } from '../src/data/validateDeck';
-import { cardKeys } from '../src/data/names';
+import pairingJson from '../fixtures/scryfall/pairing.json';
+import { pairing, pairProblem, validateDeck } from '../src/data/validateDeck';
+import { cardKeys, nameKey } from '../src/data/names';
 import type { DeckList, ScryfallCard } from '../src/data/types';
 
 const cards = new Map<string, ScryfallCard>();
@@ -53,5 +54,53 @@ describe('validateDeck', () => {
 
   it('rejects a non-legendary commander', () => {
     expect(errors({ ...current, commanders: ['Aegis Turtle'] }).some((e) => /can't be a commander/.test(e.message))).toBe(true);
+  });
+});
+
+describe('commander pairs', () => {
+  const pairCards = new Map<string, ScryfallCard>();
+  for (const c of pairingJson as ScryfallCard[]) pairCards.set(nameKey(c.name), c);
+  const get = (n: string) => pairCards.get(nameKey(n))!;
+  const deckWith = (commanders: string[]) =>
+    validateDeck({ commanders, cards: [{ name: 'Wastes', qty: 98 }] }, new Map([...pairCards, ['wastes', wastes]]));
+  const wastes: ScryfallCard = { name: 'Wastes', layout: 'normal', cmc: 0, type_line: 'Basic Land', color_identity: [], keywords: [] };
+  const commanderErrors = (commanders: string[]) =>
+    deckWith(commanders).filter((i) => i.level === 'error' && !/color identity/.test(i.message)).map((i) => i.message);
+
+  it('Choose a Background + Background is legal, either order', () => {
+    expect(commanderErrors(['Clan Crafter', 'Vhal, Candlekeep Researcher'])).toEqual([]);
+    expect(commanderErrors(['Vhal, Candlekeep Researcher', 'Clan Crafter'])).toEqual([]);
+  });
+
+  it('a Background alone, or with a non-background commander, is not', () => {
+    expect(commanderErrors(['Clan Crafter']).join()).toMatch(/Choose a Background/);
+    expect(commanderErrors(['Clan Crafter', 'Thrasios, Triton Hero']).join()).toMatch(/Background can only/);
+  });
+
+  it('Partner pairs with Partner', () => {
+    expect(commanderErrors(['Thrasios, Triton Hero', 'Rograkh, Son of Rohgahh'])).toEqual([]);
+  });
+
+  it('Partner with only pairs with the named card', () => {
+    expect(commanderErrors(['Pir, Imaginative Rascal', 'Toothy, Imaginary Friend'])).toEqual([]);
+    expect(commanderErrors(['Pir, Imaginative Rascal', 'Thrasios, Triton Hero']).join()).toMatch(/only partner with Toothy/);
+  });
+
+  it('Partner—group only pairs within the same group', () => {
+    expect(commanderErrors(['Atreus, Impulsive Son', 'Kratos, Stoic Father'])).toEqual([]);
+    expect(commanderErrors(['Atreus, Impulsive Son', 'Bjorna, Nightfall Alchemist'])).not.toEqual([]);
+    expect(commanderErrors(['Atreus, Impulsive Son', 'Thrasios, Triton Hero'])).not.toEqual([]);
+  });
+
+  it("Doctor's companion pairs with a Time Lord Doctor", () => {
+    expect(commanderErrors(['Clara Oswald', 'The Tenth Doctor'])).toEqual([]);
+    expect(commanderErrors(['Clara Oswald', 'Thrasios, Triton Hero'])).not.toEqual([]);
+  });
+
+  it('pairing helper reads the abilities from text', () => {
+    expect(pairing(get('Vhal, Candlekeep Researcher')).choosesBackground).toBe(true);
+    expect(pairing(get('Clan Crafter')).background).toBe(true);
+    expect(pairing(get('Pir, Imaginative Rascal'))).toMatchObject({ partner: false, partnerWith: 'Toothy, Imaginary Friend' });
+    expect(pairProblem(get('Thrasios, Triton Hero'), get('Rograkh, Son of Rohgahh'))).toBeNull();
   });
 });

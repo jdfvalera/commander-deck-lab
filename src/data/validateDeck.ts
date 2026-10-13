@@ -9,15 +9,52 @@ export interface DeckIssue {
 
 export const DECK_SIZE = 100;
 
+function typeLine(card: ScryfallCard): string {
+  return card.card_faces?.[0]?.type_line ?? card.type_line;
+}
+
+function isBackground(card: ScryfallCard): boolean {
+  return /Legendary/.test(typeLine(card)) && /\bBackground\b/.test(typeLine(card));
+}
+
 function canBeCommander(card: ScryfallCard): boolean {
-  const type = card.card_faces?.[0]?.type_line ?? card.type_line;
+  const type = typeLine(card);
   return (/Legendary/.test(type) && /Creature/.test(type)) || /can be your commander/i.test(oracleText(card));
 }
 
-function allowsPartner(card: ScryfallCard): boolean {
-  const kw = card.keywords.map((k) => k.toLowerCase());
-  return kw.some((k) => k.startsWith('partner') || k === 'friends forever' || k === "doctor's companion") ||
-    /choose a background/i.test(oracleText(card));
+/** What lets a card share the command zone, read from its rules text (rule 702.124 and friends). */
+export function pairing(card: ScryfallCard) {
+  const text = oracleText(card);
+  const line = (re: RegExp) => text.split('\n').map((l) => l.replace(/\s*\(.*\)\s*$/, '').trim()).find((l) => re.test(l));
+  return {
+    partner: !!line(/^Partner$/),
+    partnerWith: line(/^Partner with /)?.slice('Partner with '.length).trim(),
+    partnerGroup: line(/^Partner—/)?.slice('Partner—'.length).trim(),
+    friendsForever: !!line(/^Friends forever$/i),
+    choosesBackground: !!line(/^Choose a Background$/i),
+    background: isBackground(card),
+    doctorsCompanion: !!line(/^Doctor's companion$/i),
+    doctor: /Legendary/.test(typeLine(card)) && /\bCreature\b.*—\s*Time Lord Doctor$/.test(typeLine(card)),
+  };
+}
+
+/** Whether two cards may be commanders together. Returns null when they can, else the reason they can't. */
+export function pairProblem(a: ScryfallCard, b: ScryfallCard): string | null {
+  const pa = pairing(a);
+  const pb = pairing(b);
+  const either = (f: (x: typeof pa, y: typeof pb) => boolean) => f(pa, pb) || f(pb, pa);
+  if (pa.partner && pb.partner) return null;
+  if (pa.partnerWith && pb.partnerWith && pa.partnerWith === b.name && pb.partnerWith === a.name) return null;
+  if (pa.partnerGroup && pa.partnerGroup === pb.partnerGroup) return null;
+  if (pa.friendsForever && pb.friendsForever) return null;
+  if (either((x, y) => x.choosesBackground && y.background)) return null;
+  if (either((x, y) => x.doctorsCompanion && y.doctor)) return null;
+  if (pa.partnerWith || pb.partnerWith) {
+    const [c, p] = pa.partnerWith ? [a, pa] : [b, pb];
+    return `${c.name} can only partner with ${p.partnerWith}.`;
+  }
+  if (either((x) => x.background)) return 'A Background can only be a commander alongside a creature with "Choose a Background".';
+  return "These two can't be commanders together: they need matching Partner, Friends forever, Choose a Background + Background, or Doctor's companion + the Doctor.";
 }
 
 /** Commander deck rules: 100 cards with commanders, color identity, singleton (basics excepted), legality. */
@@ -41,13 +78,17 @@ export function validateDeck(list: DeckList, cards: Map<string, ScryfallCard>): 
     const c = lookup(name);
     if (!c) continue;
     c.color_identity.forEach((x) => identity.add(x));
-    if (!canBeCommander(c)) issues.push({ level: 'error', message: `${c.name} can't be a commander.`, cards: [c.name] });
+    // A Background is a legal commander only as the second half of a pair, checked below.
+    const pairedBackground = isBackground(c) && list.commanders.length === 2;
+    if (!canBeCommander(c) && !pairedBackground) {
+      const why = isBackground(c) ? ' A Background needs a commander with "Choose a Background" beside it.' : '';
+      issues.push({ level: 'error', message: `${c.name} can't be a commander.${why}`, cards: [c.name] });
+    }
   }
   if (list.commanders.length === 2) {
-    const both = list.commanders.map(lookup);
-    if (both.every(Boolean) && !both.every((c) => allowsPartner(c!))) {
-      issues.push({ level: 'warning', message: "Two commanders, but they don't both have Partner (or a similar ability).", cards: list.commanders });
-    }
+    const [a, b] = list.commanders.map(lookup);
+    const problem = a && b ? pairProblem(a, b) : null;
+    if (problem) issues.push({ level: 'error', message: problem, cards: list.commanders });
   }
 
   const missing = [...list.commanders, ...list.cards.map((c) => c.name)].filter((n) => !lookup(n));
