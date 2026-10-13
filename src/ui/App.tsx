@@ -6,6 +6,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ManaPage } from './pages/ManaPage';
 import { GoldfishPage } from './pages/GoldfishPage';
 import { MatchupsPage } from './pages/MatchupsPage';
+import { SharePage } from './pages/SharePage';
 
 type Theme = 'system' | 'light' | 'dark';
 
@@ -50,12 +51,13 @@ function ThemeToggle() {
   );
 }
 
+// [path, label, short label for phones]
 const NAV = [
-  ['/', 'Decks'],
-  ['/goldfish', 'Goldfish'],
-  ['/mana', 'Mana & Hands'],
-  ['/matchups', 'Matchups'],
-  ['/about', 'About'],
+  ['/', 'Decks', 'Decks'],
+  ['/goldfish', 'Goldfish', 'Goldfish'],
+  ['/mana', 'Mana & Hands', 'Mana'],
+  ['/matchups', 'Matchups', 'Matchups'],
+  ['/about', 'About', 'About'],
 ] as const;
 
 export function App() {
@@ -67,9 +69,10 @@ export function App() {
             🐢 <span>Commander Deck Lab</span>
           </NavLink>
           <nav className="nav">
-            {NAV.map(([to, label]) => (
+            {NAV.map(([to, label, short]) => (
               <NavLink key={to} to={to} end>
-                {label}
+                <span className="long">{label}</span>
+                <span className="short">{short}</span>
               </NavLink>
             ))}
           </nav>
@@ -82,6 +85,7 @@ export function App() {
             <Route path="/mana" element={<ManaPage />} />
             <Route path="/matchups" element={<MatchupsPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/share/:data" element={<SharePage />} />
             <Route path="*" element={<DecksPage />} />
           </Routes>
         </main>

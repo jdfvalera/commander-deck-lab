@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useApp } from '../state';
 import { useActiveDeck } from '../useActiveDeck';
 import { DeckPicker } from '../components/DeckPicker';
 import { RulesForm } from '../components/RulesForm';
+import { SampleGame, type SampleRun } from '../components/SampleGame';
 import { Progress, ResultsHeader, pct } from '../components/Results';
 import { TimingChart } from '../components/charts/TimingChart';
 import { WIN_LABELS, WinTurnChart } from '../components/charts/WinTurnChart';
@@ -149,7 +150,7 @@ export function GoldfishPage() {
       )}
 
       {result && <Results r={result} />}
-      {result && <SampleGame deck={result.deckA} opts={result.opts} />}
+      {result && <GoldfishSample deck={result.deckA} opts={result.opts} />}
     </div>
   );
 }
@@ -304,37 +305,11 @@ function Impact({ s }: { s: GoldfishSummary }) {
   );
 }
 
-function SampleGame({ deck, opts }: { deck: CompiledDeck; opts: GoldfishOptions }) {
-  const [gameIndex, setGameIndex] = useState(0);
-  const [turn, setTurn] = useState(0);
-  const sample = useMemo(() => sampleGame(deck, opts, gameIndex), [deck, opts, gameIndex]);
-  const log = sample.logs[Math.min(turn, sample.logs.length - 1)];
-  const g = sample.game;
-  return (
-    <div className="card stack">
-      <div className="row">
-        <h2 style={{ margin: 0 }}>Sample game</h2>
-        <span className="spacer" />
-        <label className="small">Game # <input type="number" min={0} max={opts.games - 1} value={gameIndex} onChange={(e) => { setGameIndex(Number(e.target.value)); setTurn(0); }} style={{ width: 80 }} /></label>
-      </div>
-      <p className="small muted" style={{ margin: 0 }}>
-        Game {gameIndex} of the run above (seed <code>{sample.seed}</code>): {g.mulligans} mulligan{g.mulligans === 1 ? '' : 's'},{' '}
-        {g.winTurn ? <>won on turn {g.winTurn} by {WIN_LABELS[g.winType!].toLowerCase()}</> : g.decked ? <>decked on turn {g.turn}</> : <>no win in {g.turn} turns</>}.
-      </p>
-      {log && (
-        <>
-          <div className="row">
-            <button onClick={() => setTurn((t) => Math.max(0, t - 1))} disabled={turn === 0}>← Turn {Math.max(1, log.turn - 1)}</button>
-            <strong>Turn {log.turn}</strong>
-            <button onClick={() => setTurn((t) => Math.min(sample.logs.length - 1, t + 1))} disabled={turn >= sample.logs.length - 1}>Turn {log.turn + 1} →</button>
-            <span className="spacer" />
-            <span className="small muted">{log.opponents}</span>
-          </div>
-          <div className="small"><span className="muted">Hand after the draw ({log.hand.length}):</span> {log.hand.join(', ')}</div>
-          <ol className="small event-list">{log.events.map((e, i) => <li key={i}>{e}</li>)}</ol>
-          <div className="small"><span className="muted">Battlefield at end of turn:</span> {log.board.join(' · ')}</div>
-        </>
-      )}
-    </div>
-  );
+function GoldfishSample({ deck, opts }: { deck: CompiledDeck; opts: GoldfishOptions }) {
+  const play = useCallback((i: number): SampleRun => {
+    const { game: g, logs, seed } = sampleGame(deck, opts, i);
+    const outcome = g.winTurn ? `won on turn ${g.winTurn} by ${WIN_LABELS[g.winType!].toLowerCase()}` : g.decked ? `decked on turn ${g.turn}` : `no win in ${g.turn} turns`;
+    return { logs, seed, summary: `${g.mulligans} mulligan${g.mulligans === 1 ? '' : 's'}, ${outcome}.` };
+  }, [deck, opts]);
+  return <SampleGame play={play} games={opts.games} />;
 }

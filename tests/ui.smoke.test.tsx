@@ -64,7 +64,7 @@ describe('UI smoke', () => {
     expect(el.querySelector('a[href^="https://commanderspellbook.com/combo/"]') || el.textContent!.includes('No complete combos found')).toBeTruthy();
 
     // Mana & Hands for the saved example deck.
-    const manaLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Mana & Hands')!;
+    const manaLink = el.querySelector('a[href$="#/mana"]') as HTMLAnchorElement;
     await act(async () => manaLink.click());
     await until(() => el.textContent!.includes('Lands in your opening hand'));
     for (const h of ['Odds of drawing a card', 'Color sources', 'Mulligans', 'Hand sampler', 'Curve']) expect(el.textContent).toContain(h);
@@ -81,7 +81,7 @@ describe('UI smoke', () => {
     expect(el.textContent).toContain('Mana available by turn');
 
     // Goldfish: a small run, then the sample game viewer.
-    const gfLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Goldfish')!;
+    const gfLink = el.querySelector('a[href$="#/goldfish"]') as HTMLAnchorElement;
     await act(async () => gfLink.click());
     await until(() => el.textContent!.includes('Strategy'));
     expect(el.textContent).toContain('A goldfish has no opponents');
@@ -97,7 +97,7 @@ describe('UI smoke', () => {
     expect(el.textContent).toContain('Hand after the draw');
 
     // Matchups: presets build profiles from their decklists; run a small pod without the matrix.
-    const muLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Matchups')!;
+    const muLink = el.querySelector('a[href$="#/matchups"]') as HTMLAnchorElement;
     await act(async () => muLink.click());
     await until(() => el.textContent!.includes('of their power flies'), 20000);
     expect(el.textContent).toContain('This is an approximation');
@@ -115,5 +115,17 @@ describe('UI smoke', () => {
     await act(async () => runMu.click());
     await until(() => el.textContent!.includes('How you lost'), 30000);
     expect(el.textContent).toContain('Your pod:');
+
+    // A share link opens a preview and saves the deck.
+    const { encodeDeck } = await import('../src/data/share');
+    await act(async () => {
+      window.location.hash = `#/share/${encodeDeck({ v: 1, name: 'Shared Pride', list: { commanders: ['The Pride of Hull Clade'], cards: [{ name: 'Forest', qty: 99 }] } })}`;
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.dispatchEvent(new Event('hashchange'));
+    });
+    await until(() => el.textContent!.includes('Shared deck: Shared Pride'));
+    const save = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Save to my decks')!;
+    await act(async () => save.click());
+    await until(() => el.textContent!.includes('Shared Pride'));
   }, 90000);
 });

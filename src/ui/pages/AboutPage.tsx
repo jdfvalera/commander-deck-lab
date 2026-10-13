@@ -3,8 +3,10 @@ export function AboutPage() {
     <div className="card stack" style={{ maxWidth: 760 }}>
       <h1>How it works</h1>
       <p>
-        Commander Deck Lab runs entirely in your browser. There is no account and no server: decks, tag edits and results are
-        stored in this browser only (IndexedDB). Card data comes from{' '}
+        Commander Deck Lab runs entirely in your browser. There is no account and no server: your decks and tag edits are
+        stored in this browser only (IndexedDB). Use <strong>Share link</strong> on a deck to send it (with your tag edits) to
+        someone else, and <strong>Back up or move your data</strong> on the Decks page to download or restore everything as a
+        JSON file. Card data comes from{' '}
         <a href="https://scryfall.com/docs/api" target="_blank" rel="noreferrer">
           Scryfall
         </a>{' '}
@@ -23,6 +25,13 @@ export function AboutPage() {
         <li><strong>Mana &amp; Hands</strong>: exact hypergeometric odds, color sources, London mulligan with the free first mulligan.</li>
         <li><strong>Matchups</strong>: your deck card by card against opponent <em>profiles</em> built from their decklists. An approximation: compare versions on the same seeds rather than trusting absolute win rates.</li>
       </ul>
+      <h2>How far to trust the numbers</h2>
+      <p>
+        Every result shows its seed, so the same seed always gives the same numbers. Comparing two versions of a deck on the same
+        seeds is the most trustworthy thing these tools do; absolute win rates (especially in Matchups) depend on modelling
+        choices. <a href="https://github.com/jdfvalera/commander-deck-lab/blob/main/VALIDATION.md" target="_blank" rel="noreferrer">VALIDATION.md</a>{' '}
+        compares the engine with the original prototypes and explains every difference.
+      </p>
       <h2>Combos</h2>
       <p>
         The Combos panel on the Decks page checks your list against{' '}

@@ -4,7 +4,19 @@ Goldfish, mana and matchup simulators for Magic: The Gathering Commander decks. 
 
 **Live:** https://jdfvalera.github.io/commander-deck-lab/
 
-The full brief is in [PROMPT.md](PROMPT.md). `reference/` holds the Python prototypes the models are checked against.
+The full brief is in [PROMPT.md](PROMPT.md). `reference/` holds the Python prototypes the models are checked against, and
+[VALIDATION.md](VALIDATION.md) compares the engine with them.
+
+| Page | What it does |
+|---|---|
+| **Decks** | Paste a list (Moxfield, Archidekt, Arena, MTGO), validate it, see every card's oracle text next to its tags, edit tags or add custom effects, keep versions, find Commander Spellbook combos, share a link, back up / restore. |
+| **Mana & Hands** | Exact hypergeometric odds, color sources (Karsten's method), London mulligan with the free first mulligan, mana by turn, hand sampler, curve. |
+| **Goldfish** | Seeded solo games with a generic strategy or the Pride plan: win turn by type, commander timing, cards drawn, failure modes, per-card impact, same-seed version compare, turn-by-turn sample games. |
+| **Matchups** | Your deck card by card against opponent profiles built from their decklists (Foundations presets or pasted), with real blocks and interaction; matrix against each preset. |
+
+Code map: `src/data` (parsing, Scryfall, storage, share links), `src/tags` (tag schema and the oracle-text tagger),
+`src/engine` (mana math, mulligans, the game engine, goldfish and table runners, strategies), `src/opponents` (profiles,
+presets), `src/combos` (Spellbook matching), `src/worker` (simulations off the main thread), `src/ui`.
 
 ## Develop
 

@@ -4,13 +4,27 @@ import { formatDecklist, parseDecklist } from '../../data/parseDecklist';
 import { guessCommanders, validateDeck } from '../../data/validateDeck';
 import { addVersion, diffLists, newId } from '../../data/storage';
 import { EXAMPLE_DECKS } from '../../data/examples';
+import { download, makeBackup, mergeBackup, overridesFor, parseBackup, shareUrl } from '../../data/share';
 import type { DeckList, SavedDeck } from '../../data/types';
 import { CardTable } from '../components/CardTable';
 import { TagEditor } from '../components/TagEditor';
 import { ComboPanel } from '../components/ComboPanel';
 
 export function DecksPage() {
-  const { ready, decks, updateDecks, storageOk } = useApp();
+  const { ready, decks, updateDecks, storageOk, overrides, updateOverrides } = useApp();
+  const [backupMsg, setBackupMsg] = useState<string | null>(null);
+  const restore = async (file: File | undefined) => {
+    if (!file) return;
+    try {
+      const b = parseBackup(await file.text());
+      const r = mergeBackup(decks, overrides, b);
+      updateDecks(() => r.decks);
+      updateOverrides(() => r.overrides);
+      setBackupMsg(`Restored: ${r.added} new deck${r.added === 1 ? '' : 's'}, ${r.updated} with new versions, tag edits for ${Object.keys(b.tagOverrides).length} cards.`);
+    } catch (e) {
+      setBackupMsg(e instanceof Error ? e.message : 'That file could not be read.');
+    }
+  };
   const [deckId, setDeckId] = useState<string | null>(null);
   const [versionId, setVersionId] = useState<string | null>(null);
 
@@ -60,6 +74,20 @@ export function DecksPage() {
           {decks.length === 0 && <p className="muted small">No saved decks yet.</p>}
         </div>
         <button onClick={loadExample}>Load example: The Pride of Hull Clade</button>
+        <details className="small">
+          <summary>Back up or move your data</summary>
+          <div className="stack" style={{ gap: 6, marginTop: 6 }}>
+            <button onClick={() => download(`commander-deck-lab-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(makeBackup(decks, overrides), null, 1))}>
+              Download backup (.json)
+            </button>
+            <label className="button" style={{ textAlign: 'center' }}>
+              Restore from backup…
+              <input type="file" accept="application/json,.json" style={{ display: 'none' }} onChange={(e) => restore(e.target.files?.[0])} />
+            </label>
+            <span className="muted">Decks and tag edits live only in this browser. A backup merges in without deleting anything.</span>
+            {backupMsg && <span>{backupMsg}</span>}
+          </div>
+        </details>
         {!storageOk && <div className="notice warn small">This browser isn’t letting the site save data. Decks last until you close the tab.</div>}
       </aside>
 
@@ -148,6 +176,7 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
 
   const versions = deck?.versions ?? [];
   const vIndex = versions.findIndex((v) => v.id === versionId);
+  const version = versions[vIndex];
 
   return (
     <div className="stack">
@@ -159,8 +188,10 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
             value={name}
             onChange={(e) => setName(e.target.value)}
             onBlur={() => onRename && name.trim() && name !== initialName && onRename(name.trim())}
-            style={{ fontSize: '1.1rem', fontWeight: 600, flex: 1, minWidth: 0 }}
+            className="deck-name"
+            style={{ fontSize: '1.1rem', fontWeight: 600 }}
           />
+          {deck && version && <ShareButton name={name || deck.name} list={version.list} />}
           {onDelete && (
             <button className="danger" onClick={onDelete}>
               Delete
@@ -310,6 +341,22 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
       {selected && <TagEditor name={selected} onClose={() => setSelected(null)} />}
     </div>
   );
+}
+
+function ShareButton({ name, list }: { name: string; list: DeckList }) {
+  const { overrides } = useApp();
+  const [copied, setCopied] = useState(false);
+  const share = async () => {
+    const url = shareUrl({ v: 1, name, list, overrides: overridesFor(list, overrides) });
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      window.prompt('Copy this link:', url);
+    }
+  };
+  return <button onClick={share} title="Copy a link that opens this version of the deck (with your tag edits) in anyone's browser">{copied ? 'Link copied ✓' : 'Share link'}</button>;
 }
 
 function TextList({ rows, onSelect }: { rows: { name: string; text: string }[]; onSelect: (name: string) => void }) {

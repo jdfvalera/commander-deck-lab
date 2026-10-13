@@ -1,13 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useApp } from '../state';
 import { useActiveDeck } from '../useActiveDeck';
 import { DeckPicker } from '../components/DeckPicker';
 import { Progress, ResultsHeader, pct } from '../components/Results';
 import { TimingChart } from '../components/charts/TimingChart';
 import { WIN_LABELS } from '../components/charts/WinTurnChart';
-import { compileDeck } from '../../engine/cards';
+import { compileDeck, type CompiledDeck } from '../../engine/cards';
+import { SampleGame, type SampleRun } from '../components/SampleGame';
 import { defaultStrategyFor, STRATEGIES, strategyById } from '../../engine/goldfish';
-import { DEFAULT_TABLE, type LossReason, type MatchupSummary, type TableSettings } from '../../engine/table';
+import { DEFAULT_TABLE, sampleTable, type LossReason, type MatchupSummary, type TableSettings } from '../../engine/table';
 import { defaults } from '../../engine/strategies/types';
 import { buildProfile, type InteractionSpec, type OpponentProfile } from '../../opponents/profile';
 import { PRESETS } from '../../opponents/presets';
@@ -46,7 +47,7 @@ export function MatchupsPage() {
   const [compareId, setCompareId] = useState('');
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ pods: { label: string; a: MatchupSummary; b?: MatchupSummary }[]; labelA: string; labelB?: string; opts: TableSettings } | null>(null);
+  const [result, setResult] = useState<{ pods: { label: string; a: MatchupSummary; b?: MatchupSummary }[]; labelA: string; labelB?: string; opts: TableSettings; podProfiles: OpponentProfile[] } | null>(null);
   const cancel = useRef<() => void>(() => {});
 
   const slotList = (s: Slot): { name: string; list: DeckList } | null => {
@@ -128,7 +129,7 @@ export function MatchupsPage() {
     const job = startJob({ kind: 'matchup', deck: compiled, compareWith: b, pods, opts }, (done, t) => setProgress({ done, total: t }));
     cancel.current = job.cancel;
     job.promise
-      .then((r) => r.kind === 'matchup' && setResult({ pods: r.pods, labelA: `${deck.name} · ${version.label}`, labelB: compareVersion ? `${deck.name} · ${compareVersion.label}` : undefined, opts }))
+      .then((r) => r.kind === 'matchup' && setResult({ pods: r.pods, labelA: `${deck.name} · ${version.label}`, labelB: compareVersion ? `${deck.name} · ${compareVersion.label}` : undefined, opts, podProfiles: pod }))
       .catch((e) => !(e instanceof CancelledError) && setError(String(e)))
       .finally(() => setProgress(null));
   };
@@ -193,6 +194,7 @@ export function MatchupsPage() {
       )}
 
       {result && <MatchupResults r={result} />}
+      {result && compiled && <MatchupSample deck={compiled} profiles={result.podProfiles} opts={result.opts} />}
     </div>
   );
 }
@@ -267,6 +269,15 @@ function OpponentCard({ index, slot, profile, missing, onSlot, onEdit }: { index
   );
 }
 
+function MatchupSample({ deck, profiles, opts }: { deck: CompiledDeck; profiles: OpponentProfile[]; opts: TableSettings }) {
+  const play = useCallback((i: number): SampleRun => {
+    const { game: g, seed } = sampleTable(deck, profiles, opts, i);
+    const outcome = g.winTurn ? `won on turn ${g.winTurn} by ${WIN_LABELS[g.winType!].toLowerCase()}` : g.decked ? `decked on turn ${g.turn}` : g.lost === 'timeout' ? `no result in ${g.turn} turns` : `died on turn ${g.turn} (${g.lost === 'fliers' ? 'mostly to fliers' : 'mostly to ground creatures'})`;
+    return { logs: g.logs, seed, summary: `${g.mulligans} mulligan${g.mulligans === 1 ? '' : 's'}, ${outcome}.` };
+  }, [deck, profiles, opts]);
+  return <SampleGame play={play} games={opts.games} title={`Sample game: ${profiles.map((p) => p.name).join(' · ')}`} />;
+}
+
 function MatchupResults({ r }: { r: { pods: { label: string; a: MatchupSummary; b?: MatchupSummary }[]; labelA: string; labelB?: string; opts: TableSettings } }) {
   const main = r.pods[0];
   const s = main.a;
@@ -308,8 +319,8 @@ function MatchupResults({ r }: { r: { pods: { label: string; a: MatchupSummary; 
               {r.labelB && <th className="num">{short(r.labelA)} vs {short(r.labelB)}</th>}
               <th className="num">Killed by fliers</th>
               <th className="num">by ground</th>
-              <th className="num">Decked</th>
-              <th className="num">Timeout</th>
+              <th className="num hide-sm">Decked</th>
+              <th className="num hide-sm">Timeout</th>
             </tr>
           </thead>
           <tbody>
@@ -323,8 +334,8 @@ function MatchupResults({ r }: { r: { pods: { label: string; a: MatchupSummary; 
                   {r.labelB && <td className="num"><span className={`status ${Math.abs(d) < 0.005 ? '' : d > 0 ? 'ok' : 'short'}`}>{Math.abs(d) < 0.005 ? '—' : `${d > 0 ? '▲ +' : '▼ '}${(100 * d).toFixed(1)} pts`}</span></td>}
                   <td className="num">{pct(p.a.losses.fliers)}</td>
                   <td className="num">{pct(p.a.losses.ground)}</td>
-                  <td className="num">{pct(p.a.losses.decked)}</td>
-                  <td className="num">{pct(p.a.losses.timeout)}</td>
+                  <td className="num hide-sm">{pct(p.a.losses.decked)}</td>
+                  <td className="num hide-sm">{pct(p.a.losses.timeout)}</td>
                 </tr>
               );
             })}

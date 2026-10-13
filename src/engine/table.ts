@@ -605,6 +605,12 @@ export function playTable(deck: CompiledDeck, profiles: OpponentProfile[], seed:
   return g;
 }
 
+/** One logged matchup game, game i of a run (same seed as the run used). */
+export function sampleTable(deck: CompiledDeck, profiles: OpponentProfile[], opts: TableSettings, gameIndex: number): { game: TableGame; seed: number } {
+  const seed = deriveSeed(opts.seed, gameIndex);
+  return { game: playTable(deck, profiles, seed, opts, true), seed };
+}
+
 export interface MatchupSummary {
   games: number;
   seed: number;

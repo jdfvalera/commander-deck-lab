@@ -243,3 +243,14 @@ table.plain td.num, table.plain th.num { text-align: right; font-variant-numeric
 .event-list li { margin: 1px 0; }
 .opp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .opp-card input[type='range'] { width: 100%; }
+.nav .short { display: none; }
+.deck-name { flex: 1 1 240px; min-width: 0; }
+@media (max-width: 760px) {
+  .nav .long { display: none; }
+  .nav .short { display: inline; }
+  .nav a { padding: 6px 5px; font-size: 0.85rem; }
+  .topbar button { padding: 4px 8px; }
+  .topbar { gap: 6px; padding: 8px 10px; }
+  .hide-sm { display: none; }
+  .deck-name { flex-basis: 100%; }
+}
