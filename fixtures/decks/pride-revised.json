@@ -1,0 +1,394 @@
+{
+  "id": "pride-revised",
+  "name": "The Pride of Hull Clade (revised)",
+  "commanders": [
+    "The Pride of Hull Clade"
+  ],
+  "cards": [
+    {
+      "name": "Access Tunnel",
+      "qty": 1
+    },
+    {
+      "name": "Aegis Turtle",
+      "qty": 1
+    },
+    {
+      "name": "Alhammarret's Archive",
+      "qty": 1
+    },
+    {
+      "name": "An Offer You Can't Refuse",
+      "qty": 1
+    },
+    {
+      "name": "Ancient Adamantoise",
+      "qty": 1
+    },
+    {
+      "name": "Armored Scrapgorger",
+      "qty": 1
+    },
+    {
+      "name": "Assault Formation",
+      "qty": 1
+    },
+    {
+      "name": "Axebane Guardian",
+      "qty": 1
+    },
+    {
+      "name": "Beast Within",
+      "qty": 1
+    },
+    {
+      "name": "Bedrock Tortoise",
+      "qty": 1
+    },
+    {
+      "name": "Biomancer's Familiar",
+      "qty": 1
+    },
+    {
+      "name": "Cephalid Facetaker",
+      "qty": 1
+    },
+    {
+      "name": "Charix, the Raging Isle",
+      "qty": 1
+    },
+    {
+      "name": "Command Tower",
+      "qty": 1
+    },
+    {
+      "name": "Counterspell",
+      "qty": 1
+    },
+    {
+      "name": "Crashing Drawbridge",
+      "qty": 1
+    },
+    {
+      "name": "Dreamroot Cascade",
+      "qty": 1
+    },
+    {
+      "name": "Drift of Phantasms",
+      "qty": 1
+    },
+    {
+      "name": "Elusive Krasis",
+      "qty": 1
+    },
+    {
+      "name": "Escape Tunnel",
+      "qty": 1
+    },
+    {
+      "name": "Esior, Wardwing Familiar",
+      "qty": 1
+    },
+    {
+      "name": "Excavated Wall",
+      "qty": 1
+    },
+    {
+      "name": "Exotic Orchard",
+      "qty": 1
+    },
+    {
+      "name": "Fabled Passage",
+      "qty": 1
+    },
+    {
+      "name": "Fecund Greenshell",
+      "qty": 1
+    },
+    {
+      "name": "Fertile Ground",
+      "qty": 1
+    },
+    {
+      "name": "Final-Word Phantom",
+      "qty": 1
+    },
+    {
+      "name": "Flooded Grove",
+      "qty": 1
+    },
+    {
+      "name": "Forest",
+      "qty": 9
+    },
+    {
+      "name": "Geralf, Visionary Stitcher",
+      "qty": 1
+    },
+    {
+      "name": "Guardian Project",
+      "qty": 1
+    },
+    {
+      "name": "Heroic Intervention",
+      "qty": 1
+    },
+    {
+      "name": "Hinterland Harbor",
+      "qty": 1
+    },
+    {
+      "name": "Hover Barrier",
+      "qty": 1
+    },
+    {
+      "name": "Island",
+      "qty": 13
+    },
+    {
+      "name": "Karn's Bastion",
+      "qty": 1
+    },
+    {
+      "name": "Key to the City",
+      "qty": 1
+    },
+    {
+      "name": "Leafkin Druid",
+      "qty": 1
+    },
+    {
+      "name": "Lightning Greaves",
+      "qty": 1
+    },
+    {
+      "name": "Miscast",
+      "qty": 1
+    },
+    {
+      "name": "Mistford River Turtle",
+      "qty": 1
+    },
+    {
+      "name": "Mnemonic Wall",
+      "qty": 1
+    },
+    {
+      "name": "Ohran Frostfang",
+      "qty": 1
+    },
+    {
+      "name": "Ornithopter of Paradise",
+      "qty": 1
+    },
+    {
+      "name": "Overgrown Battlement",
+      "qty": 1
+    },
+    {
+      "name": "Portcullis Vine",
+      "qty": 1
+    },
+    {
+      "name": "Prowler's Helm",
+      "qty": 1
+    },
+    {
+      "name": "Psychosis Crawler",
+      "qty": 1
+    },
+    {
+      "name": "Reality Shift",
+      "qty": 1
+    },
+    {
+      "name": "Regrowth",
+      "qty": 1
+    },
+    {
+      "name": "Reliquary Tower",
+      "qty": 1
+    },
+    {
+      "name": "Riptide Turtle",
+      "qty": 1
+    },
+    {
+      "name": "Rogue's Passage",
+      "qty": 1
+    },
+    {
+      "name": "Saved by the Shell",
+      "qty": 1
+    },
+    {
+      "name": "Shield Sphere",
+      "qty": 1
+    },
+    {
+      "name": "Sol Ring",
+      "qty": 1
+    },
+    {
+      "name": "Suspicious Bookcase",
+      "qty": 1
+    },
+    {
+      "name": "Sylvan Caryatid",
+      "qty": 1
+    },
+    {
+      "name": "Tetsuko Umezawa, Fugitive",
+      "qty": 1
+    },
+    {
+      "name": "The Enigma Jewel // Locus of Enlightenment",
+      "qty": 1
+    },
+    {
+      "name": "The Reality Chip",
+      "qty": 1
+    },
+    {
+      "name": "Tower Defense",
+      "qty": 1
+    },
+    {
+      "name": "Training Grounds",
+      "qty": 1
+    },
+    {
+      "name": "Tree of Redemption",
+      "qty": 1
+    },
+    {
+      "name": "Treefolk Umbra",
+      "qty": 1
+    },
+    {
+      "name": "Triumph of the Hordes",
+      "qty": 1
+    },
+    {
+      "name": "Trygon Predator",
+      "qty": 1
+    },
+    {
+      "name": "Utopia Sprawl",
+      "qty": 1
+    },
+    {
+      "name": "Veil of Summer",
+      "qty": 1
+    },
+    {
+      "name": "Vine Trellis",
+      "qty": 1
+    },
+    {
+      "name": "Walking Bulwark",
+      "qty": 1
+    },
+    {
+      "name": "Wall of Blossoms",
+      "qty": 1
+    },
+    {
+      "name": "Wall of Frost",
+      "qty": 1
+    },
+    {
+      "name": "Wall of Junk",
+      "qty": 1
+    },
+    {
+      "name": "Wall of Roots",
+      "qty": 1
+    },
+    {
+      "name": "Wall of Tanglecord",
+      "qty": 1
+    },
+    {
+      "name": "Waterlogged Grove",
+      "qty": 1
+    },
+    {
+      "name": "Wild Growth",
+      "qty": 1
+    },
+    {
+      "name": "Yavimaya Coast",
+      "qty": 1
+    }
+  ],
+  "swapsFrom": {
+    "deck": "pride-current",
+    "swaps": [
+      {
+        "cut": "Ornithopter",
+        "add": "Shield Sphere"
+      },
+      {
+        "cut": "Gilded Goose",
+        "add": "Tree of Redemption"
+      },
+      {
+        "cut": "Gray Harbor Merfolk",
+        "add": "Vine Trellis"
+      },
+      {
+        "cut": "Snapping Voidcraw",
+        "add": "Wall of Frost"
+      },
+      {
+        "cut": "Fae Flight",
+        "add": "Drift of Phantasms"
+      },
+      {
+        "cut": "Horizon Chimera",
+        "add": "Axebane Guardian"
+      },
+      {
+        "cut": "Angler Turtle",
+        "add": "Tower Defense"
+      },
+      {
+        "cut": "Lost in the Maze",
+        "add": "Regrowth"
+      },
+      {
+        "cut": "Carpet of Flowers",
+        "add": "Mnemonic Wall"
+      },
+      {
+        "cut": "Dispel",
+        "add": "Veil of Summer"
+      },
+      {
+        "cut": "Forest",
+        "add": "Heroic Intervention"
+      },
+      {
+        "cut": "Forest",
+        "add": "Karn's Bastion"
+      },
+      {
+        "cut": "Intrude on the Mind",
+        "add": "Prowler's Helm"
+      },
+      {
+        "cut": "Energy Tap",
+        "add": "Saved by the Shell"
+      },
+      {
+        "cut": "Ivory Tower",
+        "add": "Alhammarret's Archive"
+      },
+      {
+        "cut": "Island",
+        "add": "Rogue's Passage"
+      }
+    ]
+  }
+}

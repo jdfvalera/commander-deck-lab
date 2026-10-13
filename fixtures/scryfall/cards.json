@@ -1,0 +1,1942 @@
+[
+ {
+  "name": "Access Tunnel",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add {C}.\n{3}, {T}: Target creature with power 3 or less can't be blocked this turn.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Aegis Turtle",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "",
+  "power": "0",
+  "toughness": "5",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Alhammarret's Archive",
+  "layout": "normal",
+  "mana_cost": "{5}",
+  "cmc": 5,
+  "type_line": "Legendary Artifact",
+  "oracle_text": "If you would gain life, you gain twice that much life instead.\nIf you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "An Offer You Can't Refuse",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Instant",
+  "oracle_text": "Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Treasure"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Ancient Adamantoise",
+  "layout": "normal",
+  "mana_cost": "{5}{G}{G}{G}",
+  "cmc": 8,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "Vigilance, ward {3}\nDamage isn't removed from this creature during cleanup steps.\nAll damage that would be dealt to you and other permanents you control is dealt to this creature instead.\nWhen this creature dies, exile it and create ten tapped Treasure tokens.",
+  "power": "8",
+  "toughness": "20",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Vigilance",
+   "Treasure",
+   "Ward"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Angler Turtle",
+  "layout": "normal",
+  "mana_cost": "{5}{U}{U}",
+  "cmc": 7,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "Hexproof\nCreatures your opponents control attack each combat if able.",
+  "power": "5",
+  "toughness": "7",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Hexproof"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Armored Scrapgorger",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Phyrexian Beast",
+  "oracle_text": "This creature gets +3/+0 as long as it has three or more oil counters on it.\n{T}: Add one mana of any color.\nWhenever this creature becomes tapped, exile target card from a graveyard and put an oil counter on this creature.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Assault Formation",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Enchantment",
+  "oracle_text": "Each creature you control assigns combat damage equal to its toughness rather than its power.\n{G}: Target creature with defender can attack this turn as though it didn't have defender.\n{2}{G}: Creatures you control get +0/+1 until end of turn.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Axebane Guardian",
+  "layout": "normal",
+  "mana_cost": "{2}{G}",
+  "cmc": 3,
+  "type_line": "Creature — Human Druid",
+  "oracle_text": "Defender\n{T}: Add X mana in any combination of colors, where X is the number of creatures you control with defender.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Beast Within",
+  "layout": "normal",
+  "mana_cost": "{2}{G}",
+  "cmc": 3,
+  "type_line": "Instant",
+  "oracle_text": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Bedrock Tortoise",
+  "layout": "normal",
+  "mana_cost": "{3}{G}",
+  "cmc": 4,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "During your turn, creatures you control have hexproof.\nEach creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.",
+  "power": "0",
+  "toughness": "6",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Biomancer's Familiar",
+  "layout": "normal",
+  "mana_cost": "{G}{U}",
+  "cmc": 2,
+  "type_line": "Creature — Mutant",
+  "oracle_text": "Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.\n{T}: The next time target creature adapts this turn, it adapts as though it had no +1/+1 counters on it.",
+  "power": "2",
+  "toughness": "2",
+  "colors": [
+   "G",
+   "U"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Carpet of Flowers",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Enchantment",
+  "oracle_text": "At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add X mana of any one color, where X is the number of Islands target opponent controls.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Cephalid Facetaker",
+  "layout": "normal",
+  "mana_cost": "{2}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Octopus Rogue",
+  "oracle_text": "This creature can't be blocked.\nAt the beginning of combat on your turn, you may have this creature become a copy of another target creature until end of turn, except it's 1/4 and has \"This creature can't be blocked.\"",
+  "power": "1",
+  "toughness": "4",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Charix, the Raging Isle",
+  "layout": "normal",
+  "mana_cost": "{2}{U}{U}",
+  "cmc": 4,
+  "type_line": "Legendary Creature — Leviathan Crab",
+  "oracle_text": "Spells your opponents cast that target Charix cost {2} more to cast.\n{3}: Charix gets +X/-X until end of turn, where X is the number of Islands you control.",
+  "power": "0",
+  "toughness": "17",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Command Tower",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add one mana of any color in your commander's color identity.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Counterspell",
+  "layout": "normal",
+  "mana_cost": "{U}{U}",
+  "cmc": 2,
+  "type_line": "Instant",
+  "oracle_text": "Counter target spell.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Crashing Drawbridge",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender\n{T}: Creatures you control gain haste until end of turn.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Dispel",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Instant",
+  "oracle_text": "Counter target instant spell.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Dreamroot Cascade",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}.",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "G",
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Drift of Phantasms",
+  "layout": "normal",
+  "mana_cost": "{2}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Spirit",
+  "oracle_text": "Defender (This creature can't attack.)\nFlying\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)",
+  "power": "0",
+  "toughness": "5",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flying",
+   "Defender",
+   "Transmute"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Elusive Krasis",
+  "layout": "normal",
+  "mana_cost": "{1}{G}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Fish Mutant",
+  "oracle_text": "This creature can't be blocked.\nEvolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "G",
+   "U"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Evolve"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Energy Tap",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Sorcery",
+  "oracle_text": "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's mana value.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Escape Tunnel",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked this turn.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Esior, Wardwing Familiar",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Legendary Creature — Bird",
+  "oracle_text": "Flying\nSpells your opponents cast that target one or more commanders you control cost {3} more to cast.\nPartner (You can have two commanders if both have partner.)",
+  "power": "1",
+  "toughness": "3",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flying",
+   "Partner"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Excavated Wall",
+  "layout": "normal",
+  "mana_cost": "{1}",
+  "cmc": 1,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender\n{1}, {T}: Mill a card. (Put the top card of your library into your graveyard.)",
+  "power": "0",
+  "toughness": "4",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Mill",
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Exotic Orchard",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add one mana of any color that a land an opponent controls could produce.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Fabled Passage",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Fae Flight",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Enchantment — Aura",
+  "oracle_text": "Flash\nEnchant creature\nWhen this Aura enters, enchanted creature gains hexproof until end of turn.\nEnchanted creature gets +1/+0 and has flying.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Enchant",
+   "Flash"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Fecund Greenshell",
+  "layout": "normal",
+  "mana_cost": "{3}{G}{G}",
+  "cmc": 5,
+  "type_line": "Creature — Elemental Turtle",
+  "oracle_text": "Reach\nAs long as you control ten or more lands, creatures you control get +2/+2.\nWhenever this creature or another creature you control with toughness greater than its power enters, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. Otherwise, put it into your hand.",
+  "power": "4",
+  "toughness": "6",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Reach"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Fertile Ground",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Enchantment — Aura",
+  "oracle_text": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Enchant"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Final-Word Phantom",
+  "layout": "normal",
+  "mana_cost": "{2}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Spirit Detective",
+  "oracle_text": "Flash\nFlying\nDuring each opponent's end step, you may cast spells as though they had flash.",
+  "power": "1",
+  "toughness": "4",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flying",
+   "Flash"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Flooded Grove",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add {C}.\n{G/U}, {T}: Add {G}{G}, {G}{U}, or {U}{U}.",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "C",
+   "G",
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Forest",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Basic Land — Forest",
+  "oracle_text": "({T}: Add {G}.)",
+  "colors": [],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Geralf, Visionary Stitcher",
+  "layout": "normal",
+  "mana_cost": "{2}{U}",
+  "cmc": 3,
+  "type_line": "Legendary Creature — Human Wizard",
+  "oracle_text": "Zombies you control have flying.\n{U}, {T}, Sacrifice another nontoken creature: Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness.",
+  "power": "1",
+  "toughness": "4",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Gilded Goose",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Creature — Bird",
+  "oracle_text": "Flying\nWhen this creature enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\n{1}{G}, {T}: Create a Food token.\n{T}, Sacrifice a Food: Add one mana of any color.",
+  "power": "0",
+  "toughness": "2",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Flying",
+   "Food"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Gray Harbor Merfolk",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Creature — Merfolk Rogue",
+  "oracle_text": "This creature can't be blocked.\nThis creature gets +2/+0 as long as you control a commander that's a creature or planeswalker.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Guardian Project",
+  "layout": "normal",
+  "mana_cost": "{3}{G}",
+  "cmc": 4,
+  "type_line": "Enchantment",
+  "oracle_text": "Whenever a nontoken creature you control enters, if it doesn't have the same name as another creature you control or a creature card in your graveyard, draw a card.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Heroic Intervention",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Instant",
+  "oracle_text": "Permanents you control gain hexproof and indestructible until end of turn.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Hinterland Harbor",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}.",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "G",
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Horizon Chimera",
+  "layout": "normal",
+  "mana_cost": "{2}{G}{U}",
+  "cmc": 4,
+  "type_line": "Creature — Chimera",
+  "oracle_text": "Flash\nFlying, trample\nWhenever you draw a card, you gain 1 life.",
+  "power": "3",
+  "toughness": "2",
+  "colors": [
+   "G",
+   "U"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Flying",
+   "Trample",
+   "Flash"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Hover Barrier",
+  "layout": "normal",
+  "mana_cost": "{2}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Illusion Wall",
+  "oracle_text": "Defender, flying",
+  "power": "0",
+  "toughness": "6",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flying",
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Intrude on the Mind",
+  "layout": "normal",
+  "mana_cost": "{3}{U}{U}",
+  "cmc": 5,
+  "type_line": "Instant",
+  "oracle_text": "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. Create a 0/0 colorless Thopter artifact creature token with flying, then put a +1/+1 counter on it for each card put into your graveyard this way.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Island",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Basic Land — Island",
+  "oracle_text": "({T}: Add {U}.)",
+  "colors": [],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Ivory Tower",
+  "layout": "normal",
+  "mana_cost": "{1}",
+  "cmc": 1,
+  "type_line": "Artifact",
+  "oracle_text": "At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Karn's Bastion",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Proliferate"
+  ],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Key to the City",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact",
+  "oracle_text": "{T}, Discard a card: Up to one target creature can't be blocked this turn.\nWhenever this artifact becomes untapped, you may pay {2}. If you do, draw a card.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Leafkin Druid",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Elemental Druid",
+  "oracle_text": "{T}: Add {G}. If you control four or more creatures, add {G}{G} instead.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Lightning Greaves",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact — Equipment",
+  "oracle_text": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Equip"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Lost in the Maze",
+  "layout": "normal",
+  "mana_cost": "{X}{U}{U}",
+  "cmc": 2,
+  "type_line": "Enchantment",
+  "oracle_text": "Flash\nWhen this enchantment enters, tap X target creatures. Put a stun counter on each of those creatures you don't control. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nTapped creatures you control have hexproof.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flash"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Miscast",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Instant",
+  "oracle_text": "Counter target instant or sorcery spell unless its controller pays {3}.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Mistford River Turtle",
+  "layout": "normal",
+  "mana_cost": "{3}{U}",
+  "cmc": 4,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "Whenever this creature attacks, another target attacking non-Human creature can't be blocked this turn.",
+  "power": "1",
+  "toughness": "5",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Mnemonic Wall",
+  "layout": "normal",
+  "mana_cost": "{4}{U}",
+  "cmc": 5,
+  "type_line": "Creature — Wall",
+  "oracle_text": "Defender\nWhen this creature enters, you may return target instant or sorcery card from your graveyard to your hand.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Ohran Frostfang",
+  "layout": "normal",
+  "mana_cost": "{3}{G}{G}",
+  "cmc": 5,
+  "type_line": "Snow Creature — Snake",
+  "oracle_text": "Attacking creatures you control have deathtouch.\nWhenever a creature you control deals combat damage to a player, draw a card.",
+  "power": "2",
+  "toughness": "6",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Ornithopter",
+  "layout": "normal",
+  "mana_cost": "{0}",
+  "cmc": 0,
+  "type_line": "Artifact Creature — Thopter",
+  "oracle_text": "Flying",
+  "power": "0",
+  "toughness": "2",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Flying"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Ornithopter of Paradise",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact Creature — Thopter",
+  "oracle_text": "Flying\n{T}: Add one mana of any color.",
+  "power": "0",
+  "toughness": "2",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Flying"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Overgrown Battlement",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Wall",
+  "oracle_text": "Defender\n{T}: Add {G} for each creature you control with defender.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Portcullis Vine",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Creature — Plant Wall",
+  "oracle_text": "Defender (This creature can't attack.)\n{2}, {T}, Sacrifice a creature with defender: Draw a card.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Prowler's Helm",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact — Equipment",
+  "oracle_text": "Equipped creature can't be blocked except by Walls.\nEquip {2}",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Equip"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Psychosis Crawler",
+  "layout": "normal",
+  "mana_cost": "{5}",
+  "cmc": 5,
+  "type_line": "Artifact Creature — Phyrexian Horror",
+  "oracle_text": "Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life.",
+  "power": "*",
+  "toughness": "*",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Reality Shift",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Instant",
+  "oracle_text": "Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Manifest"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Regrowth",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Sorcery",
+  "oracle_text": "Return target card from your graveyard to your hand.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Reliquary Tower",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "You have no maximum hand size.\n{T}: Add {C}.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Riptide Turtle",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Creature — Turtle",
+  "oracle_text": "Flash\nDefender",
+  "power": "0",
+  "toughness": "5",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Flash",
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Rogue's Passage",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Saved by the Shell",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Instant",
+  "oracle_text": "This spell costs {1} less to cast if you control a Turtle.\nPut a +1/+1 counter on target creature you control. It gains trample, hexproof, and indestructible until end of turn.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Shield Sphere",
+  "layout": "normal",
+  "mana_cost": "{0}",
+  "cmc": 0,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender\nWhenever this creature blocks, put a -0/-1 counter on it.",
+  "power": "0",
+  "toughness": "6",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Snapping Voidcraw",
+  "layout": "normal",
+  "mana_cost": "{1}{G}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Eldrazi Turtle",
+  "oracle_text": "Devoid (This card has no color.)\n{T}: Add {C}{C}.\n{3}{C}, {T}: Draw a card.",
+  "power": "1",
+  "toughness": "3",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Devoid"
+  ],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Sol Ring",
+  "layout": "normal",
+  "mana_cost": "{1}",
+  "cmc": 1,
+  "type_line": "Artifact",
+  "oracle_text": "{T}: Add {C}{C}.",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Suspicious Bookcase",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender\n{3}, {T}: Target creature can't be blocked this turn.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Sylvan Caryatid",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Plant",
+  "oracle_text": "Defender, hexproof\n{T}: Add one mana of any color.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Hexproof",
+   "Defender"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Tetsuko Umezawa, Fugitive",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Legendary Creature — Human Rogue",
+  "oracle_text": "Creatures you control with power or toughness 1 or less can't be blocked.",
+  "power": "1",
+  "toughness": "3",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "The Enigma Jewel // Locus of Enlightenment",
+  "layout": "transform",
+  "cmc": 1,
+  "type_line": "Legendary Artifact // Legendary Artifact",
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Craft",
+   "Transform"
+  ],
+  "produced_mana": [
+   "C"
+  ],
+  "legalities": {
+   "commander": "legal"
+  },
+  "card_faces": [
+   {
+    "name": "The Enigma Jewel",
+    "mana_cost": "{U}",
+    "type_line": "Legendary Artifact",
+    "oracle_text": "The Enigma Jewel enters tapped.\n{T}: Add {C}{C}. Spend this mana only to activate abilities.\nCraft with four or more nonlands with activated abilities {8}{U} ({8}{U}, Exile this artifact, Exile the four or more from among other permanents you control and/or cards in your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)",
+    "colors": [
+     "U"
+    ]
+   },
+   {
+    "name": "Locus of Enlightenment",
+    "mana_cost": "",
+    "type_line": "Legendary Artifact",
+    "oracle_text": "Locus of Enlightenment has each activated ability of the exiled cards used to craft it. You may activate each of those abilities only once each turn.\nWhenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.",
+    "colors": [
+     "U"
+    ]
+   }
+  ]
+ },
+ {
+  "name": "The Pride of Hull Clade",
+  "layout": "normal",
+  "mana_cost": "{10}{G}",
+  "cmc": 11,
+  "type_line": "Legendary Creature — Crocodile Elk Turtle",
+  "oracle_text": "This spell costs {X} less to cast, where X is the total toughness of creatures you control.\nDefender\n{2}{U}{U}: Until end of turn, target creature you control gets +1/+0, gains \"Whenever this creature deals combat damage to a player, draw cards equal to its toughness,\" and can attack as though it didn't have defender.",
+  "power": "2",
+  "toughness": "15",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "The Reality Chip",
+  "layout": "normal",
+  "mana_cost": "{1}{U}",
+  "cmc": 2,
+  "type_line": "Legendary Artifact Creature — Equipment Jellyfish",
+  "oracle_text": "You may look at the top card of your library any time.\nAs long as The Reality Chip is attached to a creature, you may play lands and cast spells from the top of your library.\nReconfigure {2}{U} ({2}{U}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Reconfigure"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Tower Defense",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Instant",
+  "oracle_text": "Creatures you control get +0/+5 and gain reach until end of turn.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Training Grounds",
+  "layout": "normal",
+  "mana_cost": "{U}",
+  "cmc": 1,
+  "type_line": "Enchantment",
+  "oracle_text": "Activated abilities of creatures you control cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Tree of Redemption",
+  "layout": "normal",
+  "mana_cost": "{3}{G}",
+  "cmc": 4,
+  "type_line": "Creature — Plant",
+  "oracle_text": "Defender\n{T}: Exchange your life total with this creature's toughness.",
+  "power": "0",
+  "toughness": "13",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Treefolk Umbra",
+  "layout": "normal",
+  "mana_cost": "{2}{G}",
+  "cmc": 3,
+  "type_line": "Enchantment — Aura",
+  "oracle_text": "Enchant creature\nEnchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Umbra armor",
+   "Enchant"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Triumph of the Hordes",
+  "layout": "normal",
+  "mana_cost": "{2}{G}{G}",
+  "cmc": 4,
+  "type_line": "Sorcery",
+  "oracle_text": "Until end of turn, creatures you control get +1/+1 and gain trample and infect. (Creatures with infect deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Trygon Predator",
+  "layout": "normal",
+  "mana_cost": "{1}{G}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Beast",
+  "oracle_text": "Flying\nWhenever this creature deals combat damage to a player, you may destroy target artifact or enchantment that player controls.",
+  "power": "2",
+  "toughness": "3",
+  "colors": [
+   "G",
+   "U"
+  ],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [
+   "Flying"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Utopia Sprawl",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Enchantment — Aura",
+  "oracle_text": "Enchant Forest\nAs this Aura enters, choose a color.\nWhenever enchanted Forest is tapped for mana, its controller adds an additional one mana of the chosen color.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Enchant"
+  ],
+  "produced_mana": [
+   "B",
+   "G",
+   "R",
+   "U",
+   "W"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Veil of Summer",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Instant",
+  "oracle_text": "Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Vine Trellis",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Plant Wall",
+  "oracle_text": "Defender (This creature can't attack.)\n{T}: Add {G}.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Walking Bulwark",
+  "layout": "normal",
+  "mana_cost": "{1}",
+  "cmc": 1,
+  "type_line": "Artifact Creature — Golem",
+  "oracle_text": "Defender\n{2}: Until end of turn, target creature with defender gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power. Activate only as a sorcery.",
+  "power": "0",
+  "toughness": "3",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wall of Blossoms",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Plant Wall",
+  "oracle_text": "Defender\nWhen this creature enters, draw a card.",
+  "power": "0",
+  "toughness": "4",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wall of Frost",
+  "layout": "normal",
+  "mana_cost": "{1}{U}{U}",
+  "cmc": 3,
+  "type_line": "Creature — Wall",
+  "oracle_text": "Defender\nWhenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step.",
+  "power": "0",
+  "toughness": "7",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wall of Junk",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender (This creature can't attack.)\nWhen this creature blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)",
+  "power": "0",
+  "toughness": "7",
+  "colors": [],
+  "color_identity": [],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wall of Roots",
+  "layout": "normal",
+  "mana_cost": "{1}{G}",
+  "cmc": 2,
+  "type_line": "Creature — Plant Wall",
+  "oracle_text": "Defender\nPut a -0/-1 counter on this creature: Add {G}. Activate only once each turn.",
+  "power": "0",
+  "toughness": "5",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wall of Tanglecord",
+  "layout": "normal",
+  "mana_cost": "{2}",
+  "cmc": 2,
+  "type_line": "Artifact Creature — Wall",
+  "oracle_text": "Defender\n{G}: This creature gains reach until end of turn. (It can block creatures with flying.)",
+  "power": "0",
+  "toughness": "6",
+  "colors": [],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Defender"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Waterlogged Grove",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}, Pay 1 life: Add {G} or {U}.\n{1}, {T}, Sacrifice this land: Draw a card.",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "G",
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Wild Growth",
+  "layout": "normal",
+  "mana_cost": "{G}",
+  "cmc": 1,
+  "type_line": "Enchantment — Aura",
+  "oracle_text": "Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "keywords": [
+   "Enchant"
+  ],
+  "produced_mana": [
+   "G"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ },
+ {
+  "name": "Yavimaya Coast",
+  "layout": "normal",
+  "mana_cost": "",
+  "cmc": 0,
+  "type_line": "Land",
+  "oracle_text": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you.",
+  "colors": [],
+  "color_identity": [
+   "G",
+   "U"
+  ],
+  "keywords": [],
+  "produced_mana": [
+   "C",
+   "G",
+   "U"
+  ],
+  "legalities": {
+   "commander": "legal"
+  }
+ }
+]
