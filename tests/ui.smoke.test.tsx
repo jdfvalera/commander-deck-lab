@@ -61,5 +61,21 @@ describe('UI smoke', () => {
     await until(() => el.textContent!.includes('One card away'));
     expect(el.textContent).toContain('In your deck');
     expect(el.querySelector('a[href^="https://commanderspellbook.com/combo/"]') || el.textContent!.includes('No complete combos found')).toBeTruthy();
-  });
+
+    // Mana & Hands for the saved example deck.
+    const manaLink = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Mana & Hands')!;
+    await act(async () => manaLink.click());
+    await until(() => el.textContent!.includes('Lands in your opening hand'));
+    for (const h of ['Odds of drawing a card', 'Color sources', 'Mulligans', 'Hand sampler', 'Curve']) expect(el.textContent).toContain(h);
+    expect(el.textContent).toContain('The Pride of Hull Clade: {2}{U}{U}');
+    const hands = el.querySelector('input[type="number"][step="1000"]') as HTMLInputElement;
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(hands, '300');
+      hands.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    const runBtn = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Run')!;
+    await act(async () => runBtn.click());
+    await until(() => el.textContent!.includes('keep the first 7'), 15000);
+    expect(el.textContent).toContain('cast turn comes from the goldfish');
+  }, 30000);
 });

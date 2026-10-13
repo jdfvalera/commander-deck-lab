@@ -4,6 +4,7 @@ import { AppProvider } from './state';
 import { DecksPage } from './pages/DecksPage';
 import { AboutPage } from './pages/AboutPage';
 import { ComingSoon } from './pages/ComingSoon';
+import { ManaPage } from './pages/ManaPage';
 
 type Theme = 'system' | 'light' | 'dark';
 
@@ -77,7 +78,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<DecksPage />} />
             <Route path="/goldfish" element={<ComingSoon title="Goldfish simulator" milestone="M3" />} />
-            <Route path="/mana" element={<ComingSoon title="Opening hand & mana analyzer" milestone="M2" />} />
+            <Route path="/mana" element={<ManaPage />} />
             <Route path="/matchups" element={<ComingSoon title="Matchup simulator" milestone="M4" />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<DecksPage />} />

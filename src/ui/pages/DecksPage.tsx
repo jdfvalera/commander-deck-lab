@@ -69,7 +69,7 @@ export function DecksPage() {
           initialName=""
           initialText=""
           onSave={(name, list, label) => {
-            let d: SavedDeck = { id: newId(), name: name || list.commanders[0] || 'Untitled deck', updatedAt: Date.now(), versions: [] };
+            let d: SavedDeck = { id: newId(), name: name || list.commanders.join(' + ') || 'Untitled deck', updatedAt: Date.now(), versions: [] };
             d = addVersion(d, list, label);
             updateDecks((prev) => [d, ...prev]);
             setDeckId(d.id);
