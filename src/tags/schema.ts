@@ -82,7 +82,7 @@ export const TAG_DEFS = {
   unblockable: { group: 'body', label: 'Can’t be blocked', help: 'This creature can’t be blocked.' },
 
   // ---- plan pieces ----
-  self_cost_reduction: { group: 'plan', label: 'Self cost reduction', help: 'This spell costs less (the Pride: X = total toughness of your creatures).', params: { by: one(['total_toughness', 'control_turtle', 'other'] as const, 'total_toughness'), amount: n(0, 'Fixed reduction, when not by total toughness.') } },
+  self_cost_reduction: { group: 'plan', label: 'Self cost reduction', help: 'This spell costs less (the Pride: X = total toughness of your creatures).', params: { by: one(['total_toughness', 'total_power', 'control_turtle', 'other'] as const, 'total_toughness'), amount: n(0, 'Fixed reduction, when not by total toughness.') } },
   grant_toughness_draw: { group: 'plan', label: 'Grants “draw = toughness”', help: 'Activated: target creature gets +1/+0, can attack despite defender, and draws cards equal to its toughness on combat damage to a player.', params: { cost: cost('{2}{U}{U}'), creature_ability: b(true, 'Reduced by Training Grounds / Biomancer’s Familiar.') } },
   butt_damage: { group: 'plan', label: 'Damage = toughness', help: 'Creatures assign combat damage equal to toughness.', params: { scope: one(['self', 'team', 'team_t_gt_p', 'enchanted', 'target'] as const, 'team') } },
   defender_can_attack: { group: 'plan', label: 'Lets defenders attack', help: 'Pays to let a creature with defender attack.', params: { cost: cost('{2}'), scope: one(['target', 'team'] as const, 'target'), haste: b(false), butt: b(false, 'Also assigns damage equal to toughness.'), creature_ability: b(false), sorcery: b(false) } },
@@ -96,6 +96,13 @@ export const TAG_DEFS = {
   draw_doubler: { group: 'plan', label: 'Draw doubler', help: 'Draws (except the first in your draw step) become two.' },
   combat_damage_draw: { group: 'plan', label: 'Combat damage → draw', help: 'Whenever a creature you control (or this one) deals combat damage to a player, draw.', params: { n: n(1), scope: one(['team', 'self', 'equipped', 'artifact_creatures'] as const, 'team') } },
   token_maker: { group: 'plan', label: 'Makes creature tokens', help: 'Creates creature tokens.', params: { count: n(1), power: n(1), toughness: n(1), flying: b(false), trigger: one(['cast', 'etb', 'activated', 'upkeep', 'cast_trigger', 'other'] as const, 'cast'), cost: cost('') } },
+  counters: { group: 'plan', label: '+1/+1 counters', help: 'Puts +1/+1 counters on creatures.', params: { n: n(1), scope: one(['self', 'target', 'up_to_two', 'team', 'each_player'] as const, 'target') } },
+  counter_doubler: { group: 'plan', label: 'Counter doubler', help: 'Extra counters whenever you put counters (Hardened Scales, Lae’zel).' },
+  vehicle: { group: 'plan', label: 'Vehicle / Spacecraft', help: 'Becomes a creature when crewed (or stationed).', params: { crew: n(1) } },
+  team_keywords: { group: 'plan', label: 'Team keywords', help: 'Your creatures have or gain keywords (trample, flying, deathtouch…).', params: { keywords: { type: 'text', default: '' }, until_eot: b(false) } },
+  drain: { group: 'plan', label: 'Drain / burn opponents', help: 'Opponents lose life or take damage.', params: { amount: n(1), trigger: { type: 'text', default: '' } } },
+  etb_counters: { group: 'plan', label: 'Enters with counters', help: 'Enters with +1/+1 counters (X = paid).', params: { n: n(0, '0 = X') } },
+  graveyard_hate: { group: 'interaction', label: 'Graveyard hate', help: 'Exiles cards from graveyards.' },
   untapper: { group: 'plan', label: 'Untapper', help: 'Untaps permanents (combo piece with mana creatures).', params: { cost: cost(''), scope: { type: 'text', default: 'target creature' } } },
   tapper: { group: 'plan', label: 'Tapper', help: 'Taps a permanent (e.g. an opposing blocker).', params: { cost: cost(''), scope: { type: 'text', default: 'target creature' } } },
   play_from_top: { group: 'plan', label: 'Play from top of library', help: 'You may play cards from the top of your library (card advantage).', params: { scope: { type: 'text', default: 'lands and spells' } } },
@@ -122,6 +129,9 @@ export const TAG_DEFS = {
   activated_draw: { group: 'flow', label: 'Activated draw', help: 'Pay to draw (Arcane Encyclopedia, Mind Stone).', params: { cost: cost('{3}'), n: n(1), tap: b(true), sacrifice: b(false, 'Sacrifices something (itself or another permanent) as part of the cost.'), discard: n(0, 'Cards discarded after drawing (loot).') } },
   loot: { group: 'flow', label: 'Loot', help: 'Draw, then discard.', params: { draw: n(1), discard: n(1) } },
   repeat_draw: { group: 'flow', label: 'Repeating draw', help: 'Draws every turn or on a trigger.', params: { n: n(1), when: one(['upkeep', 'cast_spell', 'opponent_casts', 'end_step', 'other'] as const, 'upkeep') } },
+  dig: { group: 'flow', label: 'Dig', help: 'Look at the top N cards and take some (card selection).', params: { look: n(3), take: n(1), lands_to_battlefield: b(false) } },
+  impulse: { group: 'flow', label: 'Impulse draw', help: 'Exile the top N cards; you may play them for a while.', params: { n: n(1) } },
+  death_draw: { group: 'flow', label: 'Death → draw', help: 'Draws when this or other creatures die.', params: { n: n(1), scope: one(['self', 'yours', 'any'] as const, 'self') } },
   wheel: { group: 'flow', label: 'Wheel', help: 'Each player discards/shuffles their hand and draws a new one.', params: { n: n(7) } },
   clue: { group: 'flow', label: 'Makes Clues', help: 'Creates Clue tokens ({2}, sacrifice: draw).', params: { n: n(1) } },
 

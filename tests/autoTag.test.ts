@@ -20,7 +20,7 @@ const EXPECTED: Record<string, string[]> = {
   "An Offer You Can't Refuse": ['counterspell', 'ignored_text'],
   "Ancient Adamantoise": ['vigilance', 'ward', 'damage_redirect', 'unmodelled'],
   "Angler Turtle": ['hexproof', 'unmodelled'],
-  "Armored Scrapgorger": ['ramp_dork', 'unmodelled'],
+  "Armored Scrapgorger": ['ramp_dork', 'graveyard_hate', 'unmodelled'],
   "Assault Formation": ['butt_damage', 'defender_can_attack', 'team_toughness_pump'],
   "Axebane Guardian": ['defender', 'ramp_dork'],
   "Beast Within": ['spot_removal', 'ignored_text'],
@@ -39,7 +39,7 @@ const EXPECTED: Record<string, string[]> = {
   "Energy Tap": ['unmodelled'],
   "Escape Tunnel": ['land', 'land_fetch', 'unblockable_enabler'],
   "Esior, Wardwing Familiar": ['flying', 'target_tax', 'ignored_text'],
-  "Excavated Wall": ['defender', 'unmodelled'],
+  "Excavated Wall": ['defender', 'mill'],
   "Exotic Orchard": ['land'],
   "Fabled Passage": ['land', 'land_fetch'],
   "Fae Flight": ['flash', 'aura', 'unmodelled'],
@@ -55,7 +55,7 @@ const EXPECTED: Record<string, string[]> = {
   "Hinterland Harbor": ['land', 'enters_tapped'],
   "Horizon Chimera": ['flash', 'flying', 'trample', 'ignored_text'],
   "Hover Barrier": ['defender', 'flying'],
-  "Intrude on the Mind": ['unmodelled'],
+  "Intrude on the Mind": ['dig', 'unmodelled'],
   "Ivory Tower": ['ignored_text'],
   "Karn's Bastion": ['land', 'proliferate'],
   "Key to the City": ['unblockable_enabler', 'unmodelled'],
@@ -77,7 +77,7 @@ const EXPECTED: Record<string, string[]> = {
   "Reliquary Tower": ['land', 'no_max_hand_size'],
   "Riptide Turtle": ['flash', 'defender'],
   "Rogue's Passage": ['land', 'unblockable_enabler'],
-  "Saved by the Shell": ['self_cost_reduction', 'protection'],
+  "Saved by the Shell": ['self_cost_reduction', 'counters', 'protection'],
   "Shield Sphere": ['defender', 'unmodelled'],
   "Snapping Voidcraw": ['ramp_dork', 'activated_draw', 'ignored_text'],
   "Sol Ring": ['ramp_rock'],
@@ -214,7 +214,7 @@ describe('autoTag details that the simulator depends on', () => {
   });
 
   it('lists the text it does not understand', () => {
-    expect(String(tagsOf('Intrude on the Mind').unmodelled?.params.text)).toMatch(/Reveal the top five/);
+    expect(String(tagsOf('Intrude on the Mind').unmodelled?.params.text)).toMatch(/An opponent chooses one of those piles/);
     expect(tagsOf('Hover Barrier').unmodelled).toBeUndefined();
   });
 

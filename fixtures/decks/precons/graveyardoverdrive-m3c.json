@@ -1,0 +1,371 @@
+{
+ "id": "graveyardoverdrive-m3c",
+ "name": "Graveyard Overdrive (M3C)",
+ "source": "MTGJSON GraveyardOverdrive_M3C",
+ "releaseDate": "2024-06-14",
+ "commanders": [
+  "Disa the Restless"
+ ],
+ "cards": [
+  {
+   "name": "Accursed Marauder",
+   "qty": 1
+  },
+  {
+   "name": "Altar of the Goyf",
+   "qty": 1
+  },
+  {
+   "name": "Anger",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archon of Cruelty",
+   "qty": 1
+  },
+  {
+   "name": "Barrowgoyf",
+   "qty": 1
+  },
+  {
+   "name": "Bituminous Blast",
+   "qty": 1
+  },
+  {
+   "name": "Bloodbraid Challenger",
+   "qty": 1
+  },
+  {
+   "name": "Bloodbraid Elf",
+   "qty": 1
+  },
+  {
+   "name": "Brawn",
+   "qty": 1
+  },
+  {
+   "name": "Broodmate Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Burnished Hart",
+   "qty": 1
+  },
+  {
+   "name": "Canyon Slough",
+   "qty": 1
+  },
+  {
+   "name": "Chandra's Ignition",
+   "qty": 1
+  },
+  {
+   "name": "Cinder Glade",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Coram, the Undertaker",
+   "qty": 1
+  },
+  {
+   "name": "Dakmor Salvage",
+   "qty": 1
+  },
+  {
+   "name": "Deadbridge Chant",
+   "qty": 1
+  },
+  {
+   "name": "Deathreap Ritual",
+   "qty": 1
+  },
+  {
+   "name": "Demolition Field",
+   "qty": 1
+  },
+  {
+   "name": "Eternal Witness",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Exterminator Magmarch",
+   "qty": 1
+  },
+  {
+   "name": "Faithless Looting",
+   "qty": 1
+  },
+  {
+   "name": "Final Act",
+   "qty": 1
+  },
+  {
+   "name": "Find // Finality",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 5
+  },
+  {
+   "name": "Forgotten Cave",
+   "qty": 1
+  },
+  {
+   "name": "Garruk, Apex Predator",
+   "qty": 1
+  },
+  {
+   "name": "Gluttonous Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Grapple with the Past",
+   "qty": 1
+  },
+  {
+   "name": "Graveshifter",
+   "qty": 1
+  },
+  {
+   "name": "Grisly Salvage",
+   "qty": 1
+  },
+  {
+   "name": "Grist, the Hunger Tide",
+   "qty": 1
+  },
+  {
+   "name": "Ignoble Hierarch",
+   "qty": 1
+  },
+  {
+   "name": "Infested Thrinax",
+   "qty": 1
+  },
+  {
+   "name": "Izoni, Thousand-Eyed",
+   "qty": 1
+  },
+  {
+   "name": "Junji, the Midnight Sky",
+   "qty": 1
+  },
+  {
+   "name": "Kessig Wolf Run",
+   "qty": 1
+  },
+  {
+   "name": "Kolaghan's Command",
+   "qty": 1
+  },
+  {
+   "name": "Lhurgoyf",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1
+  },
+  {
+   "name": "Liliana, Death's Majesty",
+   "qty": 1
+  },
+  {
+   "name": "Maelstrom Pulse",
+   "qty": 1
+  },
+  {
+   "name": "Maskwood Nexus",
+   "qty": 1
+  },
+  {
+   "name": "Mortivore",
+   "qty": 1
+  },
+  {
+   "name": "Mossfire Valley",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 3
+  },
+  {
+   "name": "Myriad Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Necrogoyf",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Polygoyf",
+   "qty": 1
+  },
+  {
+   "name": "Pyrogoyf",
+   "qty": 1
+  },
+  {
+   "name": "Raging Ravine",
+   "qty": 1
+  },
+  {
+   "name": "Rampant Growth",
+   "qty": 1
+  },
+  {
+   "name": "Riveteers Charm",
+   "qty": 1
+  },
+  {
+   "name": "Riveteers Overlook",
+   "qty": 1
+  },
+  {
+   "name": "Sakura-Tribe Elder",
+   "qty": 1
+  },
+  {
+   "name": "Savage Lands",
+   "qty": 1
+  },
+  {
+   "name": "Sawhorn Nemesis",
+   "qty": 1
+  },
+  {
+   "name": "Selvala, Heart of the Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Shadowblood Ridge",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Siege-Gang Lieutenant",
+   "qty": 1
+  },
+  {
+   "name": "Smoldering Marsh",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Stitcher's Supplier",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 4
+  },
+  {
+   "name": "Syphon Mind",
+   "qty": 1
+  },
+  {
+   "name": "Syr Konrad, the Grim",
+   "qty": 1
+  },
+  {
+   "name": "Tainted Peak",
+   "qty": 1
+  },
+  {
+   "name": "Tainted Wood",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Impulse",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Indulgence",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Resilience",
+   "qty": 1
+  },
+  {
+   "name": "Tarmogoyf Nest",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Abandon",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malice",
+   "qty": 1
+  },
+  {
+   "name": "Tempt with Mayhem",
+   "qty": 1
+  },
+  {
+   "name": "Terminate",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Reaver Cleaver",
+   "qty": 1
+  },
+  {
+   "name": "Tranquil Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Twisted Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Viridescent Bog",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Elder",
+   "qty": 1
+  },
+  {
+   "name": "Ziatora, the Incinerator",
+   "qty": 1
+  }
+ ]
+}

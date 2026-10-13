@@ -1,0 +1,282 @@
+{
+ "id": "nils",
+ "name": "Nils, Discipline Enforcer (Archidekt)",
+ "source": "paste: nils-archidekt-export.txt",
+ "commanders": [
+  "Nils, Discipline Enforcer"
+ ],
+ "cards": [
+  {
+   "name": "Abzan Falconer",
+   "qty": 1
+  },
+  {
+   "name": "Ajani, Adversary of Tyrants",
+   "qty": 1
+  },
+  {
+   "name": "Ajani, Caller of the Pride",
+   "qty": 1
+  },
+  {
+   "name": "Archangel of Tithes",
+   "qty": 1
+  },
+  {
+   "name": "Archon of Absolution",
+   "qty": 1
+  },
+  {
+   "name": "Baird, Steward of Argive",
+   "qty": 1
+  },
+  {
+   "name": "Basri Ket",
+   "qty": 1
+  },
+  {
+   "name": "Belladonna Took",
+   "qty": 1
+  },
+  {
+   "name": "Chivalric Alliance",
+   "qty": 1
+  },
+  {
+   "name": "Combat Calligrapher",
+   "qty": 1
+  },
+  {
+   "name": "Condemn",
+   "qty": 1
+  },
+  {
+   "name": "Cut a Deal",
+   "qty": 1
+  },
+  {
+   "name": "Darksteel Mutation",
+   "qty": 1
+  },
+  {
+   "name": "Dawn Charm",
+   "qty": 1
+  },
+  {
+   "name": "Dusk Legion Duelist",
+   "qty": 1
+  },
+  {
+   "name": "Elspeth, Knight-Errant",
+   "qty": 1
+  },
+  {
+   "name": "Elspeth, Sun's Champion",
+   "qty": 1
+  },
+  {
+   "name": "Firemane Commando",
+   "qty": 1
+  },
+  {
+   "name": "Flumph",
+   "qty": 1
+  },
+  {
+   "name": "Generous Gift",
+   "qty": 1
+  },
+  {
+   "name": "Ghostly Prison",
+   "qty": 1
+  },
+  {
+   "name": "Grateful Apparition",
+   "qty": 1
+  },
+  {
+   "name": "Holy Day",
+   "qty": 1
+  },
+  {
+   "name": "Honor",
+   "qty": 1
+  },
+  {
+   "name": "Joined Researchers // Secret Rendezvous",
+   "qty": 1
+  },
+  {
+   "name": "Karn's Bastion",
+   "qty": 1
+  },
+  {
+   "name": "Keeper of the Accord",
+   "qty": 1
+  },
+  {
+   "name": "Lae'zel, Vlaakith's Champion",
+   "qty": 1
+  },
+  {
+   "name": "Light of Hope",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1
+  },
+  {
+   "name": "Loran of the Third Path",
+   "qty": 1
+  },
+  {
+   "name": "Mana Tithe",
+   "qty": 1
+  },
+  {
+   "name": "Metastatic Evangel",
+   "qty": 1
+  },
+  {
+   "name": "Mikaeus, the Lunarch",
+   "qty": 1
+  },
+  {
+   "name": "Moonshaker Cavalry",
+   "qty": 1
+  },
+  {
+   "name": "Nesting Grounds",
+   "qty": 1
+  },
+  {
+   "name": "Noble Heritage",
+   "qty": 1
+  },
+  {
+   "name": "Norn's Decree",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Advokist",
+   "qty": 1
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1
+  },
+  {
+   "name": "Patrolling Peacemaker",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 32
+  },
+  {
+   "name": "Practiced Offense",
+   "qty": 1
+  },
+  {
+   "name": "Promise of Loyalty",
+   "qty": 1
+  },
+  {
+   "name": "Ravenous Amulet",
+   "qty": 1
+  },
+  {
+   "name": "Razorgrass Ambush // Razorgrass Field",
+   "qty": 1
+  },
+  {
+   "name": "Rebuff the Wicked",
+   "qty": 1
+  },
+  {
+   "name": "Regna's Sanction",
+   "qty": 1
+  },
+  {
+   "name": "Reliquary Tower",
+   "qty": 1
+  },
+  {
+   "name": "Requisition Raid",
+   "qty": 1
+  },
+  {
+   "name": "Sejiri Shelter // Sejiri Glacier",
+   "qty": 1
+  },
+  {
+   "name": "Selfless Squire",
+   "qty": 1
+  },
+  {
+   "name": "Skyboon Evangelist",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Stroke of Midnight",
+   "qty": 1
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Tataru Taru",
+   "qty": 1
+  },
+  {
+   "name": "The Queen of Dale",
+   "qty": 1
+  },
+  {
+   "name": "The Wind Crystal",
+   "qty": 1
+  },
+  {
+   "name": "Thought Vessel",
+   "qty": 1
+  },
+  {
+   "name": "Thran Dynamo",
+   "qty": 1
+  },
+  {
+   "name": "Together Forever",
+   "qty": 1
+  },
+  {
+   "name": "Unbounded Potential",
+   "qty": 1
+  },
+  {
+   "name": "Wanderer's Strike",
+   "qty": 1
+  },
+  {
+   "name": "Weathered Wayfarer",
+   "qty": 1
+  },
+  {
+   "name": "Windborn Muse",
+   "qty": 1
+  },
+  {
+   "name": "Your Temple Is Under Attack",
+   "qty": 1
+  }
+ ]
+}

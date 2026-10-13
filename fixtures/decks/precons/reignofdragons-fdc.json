@@ -1,0 +1,283 @@
+{
+ "id": "reignofdragons-fdc",
+ "name": "Reign of Dragons (FDC)",
+ "source": "MTGJSON ReignOfDragons_FDC",
+ "releaseDate": "2026-10-02",
+ "commanders": [
+  "Lathliss, Dragon Queen"
+ ],
+ "cards": [
+  {
+   "name": "Abrade",
+   "qty": 1
+  },
+  {
+   "name": "Anger",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Atsushi, the Blazing Sky",
+   "qty": 1
+  },
+  {
+   "name": "Basilisk Collar",
+   "qty": 1
+  },
+  {
+   "name": "Bitter Reunion",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Bonders' Enclave",
+   "qty": 1
+  },
+  {
+   "name": "Breaching Dragonstorm",
+   "qty": 1
+  },
+  {
+   "name": "Breath Weapon",
+   "qty": 1
+  },
+  {
+   "name": "Carnelian Orb of Dragonkind",
+   "qty": 1
+  },
+  {
+   "name": "Chain Reaction",
+   "qty": 1
+  },
+  {
+   "name": "Chandra's Ignition",
+   "qty": 1
+  },
+  {
+   "name": "Chaos Warp",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Count on Luck",
+   "qty": 1
+  },
+  {
+   "name": "Crucible of Fire",
+   "qty": 1
+  },
+  {
+   "name": "Cursed Mirror",
+   "qty": 1
+  },
+  {
+   "name": "Dragon Tempest",
+   "qty": 1
+  },
+  {
+   "name": "Dragon's Hoard",
+   "qty": 1
+  },
+  {
+   "name": "Dragonhawk, Fate's Tempest",
+   "qty": 1
+  },
+  {
+   "name": "Dragonlord's Servant",
+   "qty": 1
+  },
+  {
+   "name": "Dragonmaster Outcast",
+   "qty": 1
+  },
+  {
+   "name": "Dragonspeaker Shaman",
+   "qty": 1
+  },
+  {
+   "name": "Dragonstorm Globe",
+   "qty": 1
+  },
+  {
+   "name": "Drakuseth, Maw of Flames",
+   "qty": 1
+  },
+  {
+   "name": "Fire Diamond",
+   "qty": 1
+  },
+  {
+   "name": "Firespitter Whelp",
+   "qty": 1
+  },
+  {
+   "name": "Forgotten Cave",
+   "qty": 1
+  },
+  {
+   "name": "Goddric, Cloaked Reveler",
+   "qty": 1
+  },
+  {
+   "name": "Goldlust Triad",
+   "qty": 1
+  },
+  {
+   "name": "Haven of the Spirit Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Hazoret's Monument",
+   "qty": 1
+  },
+  {
+   "name": "Hellkite Charger",
+   "qty": 1
+  },
+  {
+   "name": "Herald's Horn",
+   "qty": 1
+  },
+  {
+   "name": "Hit the Mother Lode",
+   "qty": 1
+  },
+  {
+   "name": "Leyline Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Bolt",
+   "qty": 1
+  },
+  {
+   "name": "Magmaquake",
+   "qty": 1
+  },
+  {
+   "name": "Mana Geyser",
+   "qty": 1
+  },
+  {
+   "name": "Minion of the Mighty",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 32
+  },
+  {
+   "name": "Nogi, Draco-Zealot",
+   "qty": 1
+  },
+  {
+   "name": "Orb of Dragonkind",
+   "qty": 1
+  },
+  {
+   "name": "Outpost Siege",
+   "qty": 1
+  },
+  {
+   "name": "Parapet Thrasher",
+   "qty": 1
+  },
+  {
+   "name": "Rapacious Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Sarkhan, Dragon Ascendant",
+   "qty": 1
+  },
+  {
+   "name": "Scourge of the Throne",
+   "qty": 1
+  },
+  {
+   "name": "Scourge of Valkas",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Devastator",
+   "qty": 1
+  },
+  {
+   "name": "Skyline Despot",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Spinerock Knoll",
+   "qty": 1
+  },
+  {
+   "name": "Spit Flame",
+   "qty": 1
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Taurean Mauler",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the False God",
+   "qty": 1
+  },
+  {
+   "name": "Terror of Mount Velus",
+   "qty": 1
+  },
+  {
+   "name": "The Elder Dragon War",
+   "qty": 1
+  },
+  {
+   "name": "Thrill of Possibility",
+   "qty": 1
+  },
+  {
+   "name": "Thunderbreak Regent",
+   "qty": 1
+  },
+  {
+   "name": "Thundermane Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Tyrant's Familiar",
+   "qty": 1
+  },
+  {
+   "name": "Unexpected Windfall",
+   "qty": 1
+  },
+  {
+   "name": "Utvara Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "War Room",
+   "qty": 1
+  },
+  {
+   "name": "Warstorm Surge",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,347 @@
+{
+ "id": "squirreledaway-blc",
+ "name": "Squirreled Away (BLC)",
+ "source": "MTGJSON SquirreledAway_BLC",
+ "releaseDate": "2024-08-02",
+ "commanders": [
+  "Hazel of the Rootbloom"
+ ],
+ "cards": [
+  {
+   "name": "Academy Manufactor",
+   "qty": 1
+  },
+  {
+   "name": "Arasta of the Endless Web",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Barren Moor",
+   "qty": 1
+  },
+  {
+   "name": "Bastion of Remembrance",
+   "qty": 1
+  },
+  {
+   "name": "Beastmaster Ascension",
+   "qty": 1
+  },
+  {
+   "name": "Beledros Witherbloom",
+   "qty": 1
+  },
+  {
+   "name": "Binding the Old Gods",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Cache Grab",
+   "qty": 1
+  },
+  {
+   "name": "Casualties of War",
+   "qty": 1
+  },
+  {
+   "name": "Chatterfang, Squirrel General",
+   "qty": 1
+  },
+  {
+   "name": "Chatterstorm",
+   "qty": 1
+  },
+  {
+   "name": "Chittering Witch",
+   "qty": 1
+  },
+  {
+   "name": "Chitterspitter",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Deadly Dispute",
+   "qty": 1
+  },
+  {
+   "name": "Decree of Pain",
+   "qty": 1
+  },
+  {
+   "name": "Deep Forest Hermit",
+   "qty": 1
+  },
+  {
+   "name": "End-Raze Forerunners",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 9
+  },
+  {
+   "name": "Garruk, Cursed Huntsman",
+   "qty": 1
+  },
+  {
+   "name": "Gilded Goose",
+   "qty": 1
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "qty": 1
+  },
+  {
+   "name": "Golgari Signet",
+   "qty": 1
+  },
+  {
+   "name": "Gourmand's Talent",
+   "qty": 1
+  },
+  {
+   "name": "Grim Backwoods",
+   "qty": 1
+  },
+  {
+   "name": "Haunted Mire",
+   "qty": 1
+  },
+  {
+   "name": "Haywire Mite",
+   "qty": 1
+  },
+  {
+   "name": "Hazel's Brewmaster",
+   "qty": 1
+  },
+  {
+   "name": "Honored Dreyleader",
+   "qty": 1
+  },
+  {
+   "name": "Idol of Oblivion",
+   "qty": 1
+  },
+  {
+   "name": "Insatiable Frugivore",
+   "qty": 1
+  },
+  {
+   "name": "Jungle Hollow",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Maelstrom Pulse",
+   "qty": 1
+  },
+  {
+   "name": "Maskwood Nexus",
+   "qty": 1
+  },
+  {
+   "name": "Moldervine Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Moonstone Eulogist",
+   "qty": 1
+  },
+  {
+   "name": "Morbid Opportunist",
+   "qty": 1
+  },
+  {
+   "name": "Nadier's Nightblade",
+   "qty": 1
+  },
+  {
+   "name": "Necroblossom Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Nested Shambler",
+   "qty": 1
+  },
+  {
+   "name": "Ogre Slumlord",
+   "qty": 1
+  },
+  {
+   "name": "Oran-Rief, the Vastwood",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plaguecrafter",
+   "qty": 1
+  },
+  {
+   "name": "Plumb the Forbidden",
+   "qty": 1
+  },
+  {
+   "name": "Poison-Tip Archer",
+   "qty": 1
+  },
+  {
+   "name": "Prosperous Innkeeper",
+   "qty": 1
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1
+  },
+  {
+   "name": "Ravenous Squirrel",
+   "qty": 1
+  },
+  {
+   "name": "Rootcast Apprenticeship",
+   "qty": 1
+  },
+  {
+   "name": "Saw in Half",
+   "qty": 1
+  },
+  {
+   "name": "Scurry of Squirrels",
+   "qty": 1
+  },
+  {
+   "name": "Second Harvest",
+   "qty": 1
+  },
+  {
+   "name": "Shamanic Revelation",
+   "qty": 1
+  },
+  {
+   "name": "Skullclamp",
+   "qty": 1
+  },
+  {
+   "name": "Skyfisher Spider",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Squirrel Nest",
+   "qty": 1
+  },
+  {
+   "name": "Squirrel Sovereign",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 8
+  },
+  {
+   "name": "Swarmyard",
+   "qty": 1
+  },
+  {
+   "name": "Swarmyard Massacre",
+   "qty": 1
+  },
+  {
+   "name": "Sword of the Squeak",
+   "qty": 1
+  },
+  {
+   "name": "Tainted Wood",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Resilience",
+   "qty": 1
+  },
+  {
+   "name": "Tear Asunder",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Odd Acorn Gang",
+   "qty": 1
+  },
+  {
+   "name": "Tireless Provisioner",
+   "qty": 1
+  },
+  {
+   "name": "Toski, Bearer of Secrets",
+   "qty": 1
+  },
+  {
+   "name": "Tranquil Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Twilight Mire",
+   "qty": 1
+  },
+  {
+   "name": "Viridescent Bog",
+   "qty": 1
+  },
+  {
+   "name": "Windgrace's Judgment",
+   "qty": 1
+  },
+  {
+   "name": "Woe Strider",
+   "qty": 1
+  },
+  {
+   "name": "Wolfwillow Haven",
+   "qty": 1
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1
+  },
+  {
+   "name": "Zulaport Cutthroat",
+   "qty": 1
+  }
+ ]
+}

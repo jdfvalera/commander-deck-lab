@@ -1,0 +1,355 @@
+{
+ "id": "prismariartistry-soc",
+ "name": "Prismari Artistry (SOC)",
+ "source": "MTGJSON PrismariArtistry_SOC",
+ "releaseDate": "2026-04-24",
+ "commanders": [
+  "Rootha, Mastering the Moment"
+ ],
+ "cards": [
+  {
+   "name": "Abrade",
+   "qty": 1
+  },
+  {
+   "name": "Abstract Performance",
+   "qty": 1
+  },
+  {
+   "name": "Aether Gale",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Denial",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archmage Emeritus",
+   "qty": 1
+  },
+  {
+   "name": "Big Score",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Brazen Borrower // Petty Theft",
+   "qty": 1
+  },
+  {
+   "name": "Brudiclad, Telchor Engineer",
+   "qty": 1
+  },
+  {
+   "name": "Cascade Bluffs",
+   "qty": 1
+  },
+  {
+   "name": "Chain Reaction",
+   "qty": 1
+  },
+  {
+   "name": "Chaos Warp",
+   "qty": 1
+  },
+  {
+   "name": "Coastal Peak",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Creative Technique",
+   "qty": 1
+  },
+  {
+   "name": "Curiosity Crafter",
+   "qty": 1
+  },
+  {
+   "name": "Cursed Mirror",
+   "qty": 1
+  },
+  {
+   "name": "Dance with Calamity",
+   "qty": 1
+  },
+  {
+   "name": "Deep Analysis",
+   "qty": 1
+  },
+  {
+   "name": "Determined Iteration",
+   "qty": 1
+  },
+  {
+   "name": "Dig Through Time",
+   "qty": 1
+  },
+  {
+   "name": "Dirgur Focusmage // Braingeyser",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Expressive Iteration",
+   "qty": 1
+  },
+  {
+   "name": "Fabled Passage",
+   "qty": 1
+  },
+  {
+   "name": "Faerie Mastermind",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Ferrous Lake",
+   "qty": 1
+  },
+  {
+   "name": "Frostboil Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Furygale Flocking",
+   "qty": 1
+  },
+  {
+   "name": "Galazeth Prismari",
+   "qty": 1
+  },
+  {
+   "name": "Goldspan Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Hall of Oracles",
+   "qty": 1
+  },
+  {
+   "name": "Harmonic Prodigy",
+   "qty": 1
+  },
+  {
+   "name": "Inspired Skypainter // Maestro's Gift",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 8
+  },
+  {
+   "name": "Leitmotif Composer",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1
+  },
+  {
+   "name": "Magma Opus",
+   "qty": 1
+  },
+  {
+   "name": "Mana Geyser",
+   "qty": 1
+  },
+  {
+   "name": "Manaform Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Mirrorwing Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Molten Tributary",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 7
+  },
+  {
+   "name": "Muddle, the Ever-Changing",
+   "qty": 1
+  },
+  {
+   "name": "Mystic Sanctuary",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plargg and Nassari",
+   "qty": 1
+  },
+  {
+   "name": "Prismari Campus",
+   "qty": 1
+  },
+  {
+   "name": "Prismari Charm",
+   "qty": 1
+  },
+  {
+   "name": "Prismari Command",
+   "qty": 1
+  },
+  {
+   "name": "Prismari Pianist",
+   "qty": 1
+  },
+  {
+   "name": "Reality Shift",
+   "qty": 1
+  },
+  {
+   "name": "Redoubled Stormsinger",
+   "qty": 1
+  },
+  {
+   "name": "Reliquary Tower",
+   "qty": 1
+  },
+  {
+   "name": "Renegade Bull",
+   "qty": 1
+  },
+  {
+   "name": "Replication Technique",
+   "qty": 1
+  },
+  {
+   "name": "Resculpt",
+   "qty": 1
+  },
+  {
+   "name": "Restless Spire",
+   "qty": 1
+  },
+  {
+   "name": "Rionya, Fire Dancer",
+   "qty": 1
+  },
+  {
+   "name": "Rite of Replication",
+   "qty": 1
+  },
+  {
+   "name": "Rootha, Mercurial Artist",
+   "qty": 1
+  },
+  {
+   "name": "Rousing Refrain",
+   "qty": 1
+  },
+  {
+   "name": "Scorched Geyser",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Spectacle Summit",
+   "qty": 1
+  },
+  {
+   "name": "Storm-Kiln Artist",
+   "qty": 1
+  },
+  {
+   "name": "Stormcatch Mentor",
+   "qty": 1
+  },
+  {
+   "name": "Study Hall",
+   "qty": 1
+  },
+  {
+   "name": "Sulfur Falls",
+   "qty": 1
+  },
+  {
+   "name": "Surge to Victory",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Creativity",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Epiphany",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the False God",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Throes of Chaos",
+   "qty": 1
+  },
+  {
+   "name": "Thunderclap Drake",
+   "qty": 1
+  },
+  {
+   "name": "Treasure Cruise",
+   "qty": 1
+  },
+  {
+   "name": "Turbulent Springs",
+   "qty": 1
+  },
+  {
+   "name": "Twinflame",
+   "qty": 1
+  },
+  {
+   "name": "Veyran, Voice of Duality",
+   "qty": 1
+  },
+  {
+   "name": "Volcanic Salvo",
+   "qty": 1
+  },
+  {
+   "name": "Volcanic Torrent",
+   "qty": 1
+  }
+ ]
+}

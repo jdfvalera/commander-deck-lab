@@ -1,0 +1,359 @@
+{
+ "id": "deathtoll-dsc",
+ "name": "Death Toll (DSC)",
+ "source": "MTGJSON DeathToll_DSC",
+ "releaseDate": "2024-09-27",
+ "commanders": [
+  "Winter, Cynical Opportunist"
+ ],
+ "cards": [
+  {
+   "name": "Arachnogenesis",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Ash Barrens",
+   "qty": 1
+  },
+  {
+   "name": "Barren Moor",
+   "qty": 1
+  },
+  {
+   "name": "Binding the Old Gods",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Burnished Hart",
+   "qty": 1
+  },
+  {
+   "name": "Carrion Grub",
+   "qty": 1
+  },
+  {
+   "name": "Cemetery Tampering",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Convert to Slime",
+   "qty": 1
+  },
+  {
+   "name": "Crawling Sensation",
+   "qty": 1
+  },
+  {
+   "name": "Culling Ritual",
+   "qty": 1
+  },
+  {
+   "name": "Darkmoss Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Deadbridge Chant",
+   "qty": 1
+  },
+  {
+   "name": "Deathcap Cultivator",
+   "qty": 1
+  },
+  {
+   "name": "Deathreap Ritual",
+   "qty": 1
+  },
+  {
+   "name": "Deluge of Doom",
+   "qty": 1
+  },
+  {
+   "name": "Demolisher Spawn",
+   "qty": 1
+  },
+  {
+   "name": "Demonic Covenant",
+   "qty": 1
+  },
+  {
+   "name": "Dryad Arbor",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 7
+  },
+  {
+   "name": "Formless Genesis",
+   "qty": 1
+  },
+  {
+   "name": "Giant Adephage",
+   "qty": 1
+  },
+  {
+   "name": "Gnarlwood Dryad",
+   "qty": 1
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "qty": 1
+  },
+  {
+   "name": "Golgari Signet",
+   "qty": 1
+  },
+  {
+   "name": "Grapple with the Past",
+   "qty": 1
+  },
+  {
+   "name": "Grim Backwoods",
+   "qty": 1
+  },
+  {
+   "name": "Grim Flayer",
+   "qty": 1
+  },
+  {
+   "name": "Grisly Salvage",
+   "qty": 1
+  },
+  {
+   "name": "Grist, the Hunger Tide",
+   "qty": 1
+  },
+  {
+   "name": "Harmonize",
+   "qty": 1
+  },
+  {
+   "name": "Harrow",
+   "qty": 1
+  },
+  {
+   "name": "Haywire Mite",
+   "qty": 1
+  },
+  {
+   "name": "Hornet Queen",
+   "qty": 1
+  },
+  {
+   "name": "Inscription of Abundance",
+   "qty": 1
+  },
+  {
+   "name": "Into the Pit",
+   "qty": 1
+  },
+  {
+   "name": "Ishkanah, Grafwidow",
+   "qty": 1
+  },
+  {
+   "name": "Jungle Hollow",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Moldgraf Millipede",
+   "qty": 1
+  },
+  {
+   "name": "Moldgraf Monstrosity",
+   "qty": 1
+  },
+  {
+   "name": "Mulch",
+   "qty": 1
+  },
+  {
+   "name": "Necroblossom Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Night's Whisper",
+   "qty": 1
+  },
+  {
+   "name": "Noxious Gearhulk",
+   "qty": 1
+  },
+  {
+   "name": "Nyx Weaver",
+   "qty": 1
+  },
+  {
+   "name": "Ob Nixilis Reignited",
+   "qty": 1
+  },
+  {
+   "name": "Obsessive Skinner",
+   "qty": 1
+  },
+  {
+   "name": "Old Stickfingers",
+   "qty": 1
+  },
+  {
+   "name": "Polluted Cistern // Dim Oubliette",
+   "qty": 1
+  },
+  {
+   "name": "Professor Onyx",
+   "qty": 1
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1
+  },
+  {
+   "name": "Rampant Growth",
+   "qty": 1
+  },
+  {
+   "name": "Reanimate",
+   "qty": 1
+  },
+  {
+   "name": "Reliquary Tower",
+   "qty": 1
+  },
+  {
+   "name": "Rendmaw, Creaking Nest",
+   "qty": 1
+  },
+  {
+   "name": "Sakura-Tribe Elder",
+   "qty": 1
+  },
+  {
+   "name": "Scavenging Ooze",
+   "qty": 1
+  },
+  {
+   "name": "Skola Grovedancer",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Stitcher's Supplier",
+   "qty": 1
+  },
+  {
+   "name": "Suspicious Bookcase",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 7
+  },
+  {
+   "name": "Tainted Wood",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Resilience",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the False God",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Titania, Nature's Force",
+   "qty": 1
+  },
+  {
+   "name": "Tranquil Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Tree of Tales",
+   "qty": 1
+  },
+  {
+   "name": "Twilight Mire",
+   "qty": 1
+  },
+  {
+   "name": "Ursine Monstrosity",
+   "qty": 1
+  },
+  {
+   "name": "Vault of Whispers",
+   "qty": 1
+  },
+  {
+   "name": "Vile Mutilator",
+   "qty": 1
+  },
+  {
+   "name": "Viridescent Bog",
+   "qty": 1
+  },
+  {
+   "name": "Whip of Erebos",
+   "qty": 1
+  },
+  {
+   "name": "Whispersilk Cloak",
+   "qty": 1
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1
+  },
+  {
+   "name": "Wrenn and Seven",
+   "qty": 1
+  }
+ ]
+}

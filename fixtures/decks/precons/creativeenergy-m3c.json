@@ -1,0 +1,339 @@
+{
+ "id": "creativeenergy-m3c",
+ "name": "Creative Energy (M3C)",
+ "source": "MTGJSON CreativeEnergy_M3C",
+ "releaseDate": "2024-06-14",
+ "commanders": [
+  "Satya, Aetherflux Genius"
+ ],
+ "cards": [
+  {
+   "name": "Adarkar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Aether Hub",
+   "qty": 1
+  },
+  {
+   "name": "Aether Refinery",
+   "qty": 1
+  },
+  {
+   "name": "Aethergeode Miner",
+   "qty": 1
+  },
+  {
+   "name": "Aethersphere Harvester",
+   "qty": 1
+  },
+  {
+   "name": "Aethersquall Ancient",
+   "qty": 1
+  },
+  {
+   "name": "Aetherstorm Roc",
+   "qty": 1
+  },
+  {
+   "name": "Aethertide Whale",
+   "qty": 1
+  },
+  {
+   "name": "Aetherworks Marvel",
+   "qty": 1
+  },
+  {
+   "name": "Akroma's Will",
+   "qty": 1
+  },
+  {
+   "name": "Amped Raptor",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Invention",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Aurora Shifter",
+   "qty": 1
+  },
+  {
+   "name": "Austere Command",
+   "qty": 1
+  },
+  {
+   "name": "Azorius Chancery",
+   "qty": 1
+  },
+  {
+   "name": "Battlefield Forge",
+   "qty": 1
+  },
+  {
+   "name": "Bespoke Battlewagon",
+   "qty": 1
+  },
+  {
+   "name": "Bident of Thassa",
+   "qty": 1
+  },
+  {
+   "name": "Blaster Hulk",
+   "qty": 1
+  },
+  {
+   "name": "Brudiclad, Telchor Engineer",
+   "qty": 1
+  },
+  {
+   "name": "Burnished Hart",
+   "qty": 1
+  },
+  {
+   "name": "Castle Vantress",
+   "qty": 1
+  },
+  {
+   "name": "Cayth, Famed Mechanist",
+   "qty": 1
+  },
+  {
+   "name": "Coalition Relic",
+   "qty": 1
+  },
+  {
+   "name": "Combustible Gearhulk",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Confiscation Coup",
+   "qty": 1
+  },
+  {
+   "name": "Conversion Apparatus",
+   "qty": 1
+  },
+  {
+   "name": "Coveted Jewel",
+   "qty": 1
+  },
+  {
+   "name": "Decoction Module",
+   "qty": 1
+  },
+  {
+   "name": "Demolition Field",
+   "qty": 1
+  },
+  {
+   "name": "Era of Innovation",
+   "qty": 1
+  },
+  {
+   "name": "Farewell",
+   "qty": 1
+  },
+  {
+   "name": "Filigree Racer",
+   "qty": 1
+  },
+  {
+   "name": "Frostboil Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Furycalm Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Glimmer of Genius",
+   "qty": 1
+  },
+  {
+   "name": "Goldspan Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Gonti's Aether Heart",
+   "qty": 1
+  },
+  {
+   "name": "Grenzo, Havoc Raiser",
+   "qty": 1
+  },
+  {
+   "name": "Hourglass of the Lost",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 5
+  },
+  {
+   "name": "Izzet Boilerworks",
+   "qty": 1
+  },
+  {
+   "name": "Izzet Generatorium",
+   "qty": 1
+  },
+  {
+   "name": "Jolted Awake",
+   "qty": 1
+  },
+  {
+   "name": "Legion Loyalty",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Runner",
+   "qty": 1
+  },
+  {
+   "name": "Localized Destruction",
+   "qty": 1
+  },
+  {
+   "name": "Midnight Clock",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 5
+  },
+  {
+   "name": "Myr Battlesphere",
+   "qty": 1
+  },
+  {
+   "name": "Mystic Gate",
+   "qty": 1
+  },
+  {
+   "name": "Mystic Monastery",
+   "qty": 1
+  },
+  {
+   "name": "Overclocked Electromancer",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 10
+  },
+  {
+   "name": "Port Town",
+   "qty": 1
+  },
+  {
+   "name": "Prairie Stream",
+   "qty": 1
+  },
+  {
+   "name": "Professional Face-Breaker",
+   "qty": 1
+  },
+  {
+   "name": "Razorfield Ripper",
+   "qty": 1
+  },
+  {
+   "name": "Roil Cartographer",
+   "qty": 1
+  },
+  {
+   "name": "Salvation Colossus",
+   "qty": 1
+  },
+  {
+   "name": "Scurry of Gremlins",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Silverquill Lecturer",
+   "qty": 1
+  },
+  {
+   "name": "Skyclave Apparition",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solar Transformer",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Sphinx of the Revelation",
+   "qty": 1
+  },
+  {
+   "name": "Stone Idol Generator",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Conviction",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Creativity",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Progress",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Enlightenment",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Epiphany",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Triumph",
+   "qty": 1
+  },
+  {
+   "name": "Tezzeret's Gambit",
+   "qty": 1
+  },
+  {
+   "name": "Unstable Amulet",
+   "qty": 1
+  },
+  {
+   "name": "Wayfarer's Bauble",
+   "qty": 1
+  },
+  {
+   "name": "Whirler Virtuoso",
+   "qty": 1
+  }
+ ]
+}

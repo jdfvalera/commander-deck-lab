@@ -1,0 +1,351 @@
+{
+ "id": "silverquillinfluence-soc",
+ "name": "Silverquill Influence (SOC)",
+ "source": "MTGJSON SilverquillInfluence_SOC",
+ "releaseDate": "2026-04-24",
+ "commanders": [
+  "Killian, Decisive Mentor"
+ ],
+ "cards": [
+  {
+   "name": "Ajani's Chosen",
+   "qty": 1
+  },
+  {
+   "name": "Angelic Destiny",
+   "qty": 1
+  },
+  {
+   "name": "Anguished Unmaking",
+   "qty": 1
+  },
+  {
+   "name": "Animate Dead",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Lighthouse",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archon of Sun's Grace",
+   "qty": 1
+  },
+  {
+   "name": "Armored Skyhunter",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Breena, the Demagogue",
+   "qty": 1
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1
+  },
+  {
+   "name": "Chains of Custody",
+   "qty": 1
+  },
+  {
+   "name": "Changing Loyalty",
+   "qty": 1
+  },
+  {
+   "name": "Coercive Impetus",
+   "qty": 1
+  },
+  {
+   "name": "Combat Calligrapher",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Darksteel Mutation",
+   "qty": 1
+  },
+  {
+   "name": "Defacing Duskmage // Vandal's Edit",
+   "qty": 1
+  },
+  {
+   "name": "Desolate Mire",
+   "qty": 1
+  },
+  {
+   "name": "Doomwake Giant",
+   "qty": 1
+  },
+  {
+   "name": "Eclipsed Steppe",
+   "qty": 1
+  },
+  {
+   "name": "Eidolon of Countless Battles",
+   "qty": 1
+  },
+  {
+   "name": "Eiganjo Dynastorian // Replenish",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Conscription",
+   "qty": 1
+  },
+  {
+   "name": "Eriette of the Charmed Apple",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Fabled Passage",
+   "qty": 1
+  },
+  {
+   "name": "Fallen Ideal",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Fetid Heath",
+   "qty": 1
+  },
+  {
+   "name": "Firemane Commando",
+   "qty": 1
+  },
+  {
+   "name": "Flickering Ward",
+   "qty": 1
+  },
+  {
+   "name": "Forum Filibuster",
+   "qty": 1
+  },
+  {
+   "name": "Forum of Amity",
+   "qty": 1
+  },
+  {
+   "name": "Fracture",
+   "qty": 1
+  },
+  {
+   "name": "Ghostly Prison",
+   "qty": 1
+  },
+  {
+   "name": "Ghoulish Impetus",
+   "qty": 1
+  },
+  {
+   "name": "Gift of Immortality",
+   "qty": 1
+  },
+  {
+   "name": "Hateful Eidolon",
+   "qty": 1
+  },
+  {
+   "name": "Herald of Amity",
+   "qty": 1
+  },
+  {
+   "name": "Inkshield",
+   "qty": 1
+  },
+  {
+   "name": "Intermediate Chirography",
+   "qty": 1
+  },
+  {
+   "name": "Isolated Chapel",
+   "qty": 1
+  },
+  {
+   "name": "Keen Duelist",
+   "qty": 1
+  },
+  {
+   "name": "Killian, Ink Duelist",
+   "qty": 1
+  },
+  {
+   "name": "Kor Spiritdancer",
+   "qty": 1
+  },
+  {
+   "name": "Land Tax",
+   "qty": 1
+  },
+  {
+   "name": "Mangara, the Diplomat",
+   "qty": 1
+  },
+  {
+   "name": "Martial Impetus",
+   "qty": 1
+  },
+  {
+   "name": "Nils, Discipline Enforcer",
+   "qty": 1
+  },
+  {
+   "name": "Parasitic Impetus",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Pearl-Ear, Imperial Advisor",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 8
+  },
+  {
+   "name": "Promise of Loyalty",
+   "qty": 1
+  },
+  {
+   "name": "Raffine's Guidance",
+   "qty": 1
+  },
+  {
+   "name": "Redemption Arc",
+   "qty": 1
+  },
+  {
+   "name": "Sage's Reverie",
+   "qty": 1
+  },
+  {
+   "name": "Screams from Within",
+   "qty": 1
+  },
+  {
+   "name": "Scriv, the Obligator",
+   "qty": 1
+  },
+  {
+   "name": "Secret Rendezvous",
+   "qty": 1
+  },
+  {
+   "name": "Sentinel's Eyes",
+   "qty": 1
+  },
+  {
+   "name": "Shadrix Silverquill",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered by Ghosts",
+   "qty": 1
+  },
+  {
+   "name": "Shielded by Faith",
+   "qty": 1
+  },
+  {
+   "name": "Shineshadow Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Silverquill Campus",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Songbirds' Blessing",
+   "qty": 1
+  },
+  {
+   "name": "Spirit Mantle",
+   "qty": 1
+  },
+  {
+   "name": "Sram, Senior Edificer",
+   "qty": 1
+  },
+  {
+   "name": "Starfield Mystic",
+   "qty": 1
+  },
+  {
+   "name": "Study Hall",
+   "qty": 1
+  },
+  {
+   "name": "Sunlit Marsh",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 8
+  },
+  {
+   "name": "Talisman of Hierarchy",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Tomik, Wielder of Law",
+   "qty": 1
+  },
+  {
+   "name": "Transcendent Envoy",
+   "qty": 1
+  },
+  {
+   "name": "Turbulent Moor",
+   "qty": 1
+  },
+  {
+   "name": "Umbral Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Vanishing Verse",
+   "qty": 1
+  },
+  {
+   "name": "War Room",
+   "qty": 1
+  },
+  {
+   "name": "Winds of Rath",
+   "qty": 1
+  }
+ ]
+}

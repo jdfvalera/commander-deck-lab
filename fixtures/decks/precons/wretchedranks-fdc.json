@@ -1,0 +1,279 @@
+{
+ "id": "wretchedranks-fdc",
+ "name": "Wretched Ranks (FDC)",
+ "source": "MTGJSON WretchedRanks_FDC",
+ "releaseDate": "2026-10-02",
+ "commanders": [
+  "Ghoulcaller Gisa"
+ ],
+ "cards": [
+  {
+   "name": "Ambition's Cost",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Army of the Damned",
+   "qty": 1
+  },
+  {
+   "name": "Ayara, First of Locthwain",
+   "qty": 1
+  },
+  {
+   "name": "Bad Moon",
+   "qty": 1
+  },
+  {
+   "name": "Barren Moor",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Bontu's Monument",
+   "qty": 1
+  },
+  {
+   "name": "Carrion Feeder",
+   "qty": 1
+  },
+  {
+   "name": "Castle Locthwain",
+   "qty": 1
+  },
+  {
+   "name": "Cemetery Reaper",
+   "qty": 1
+  },
+  {
+   "name": "Cemetery Recruitment",
+   "qty": 1
+  },
+  {
+   "name": "Champion of the Perished",
+   "qty": 1
+  },
+  {
+   "name": "Charcoal Diamond",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Consumed by Greed",
+   "qty": 1
+  },
+  {
+   "name": "Consuming Corruption",
+   "qty": 1
+  },
+  {
+   "name": "Cryptbreaker",
+   "qty": 1
+  },
+  {
+   "name": "Death Baron",
+   "qty": 1
+  },
+  {
+   "name": "Diregraf Colossus",
+   "qty": 1
+  },
+  {
+   "name": "Endless Ranks of the Dead",
+   "qty": 1
+  },
+  {
+   "name": "Eternal Taskmaster",
+   "qty": 1
+  },
+  {
+   "name": "Fleshbag Marauder",
+   "qty": 1
+  },
+  {
+   "name": "Geier Reach Sanitarium",
+   "qty": 1
+  },
+  {
+   "name": "Go for the Throat",
+   "qty": 1
+  },
+  {
+   "name": "God-Eternal Bontu",
+   "qty": 1
+  },
+  {
+   "name": "Grave Titan",
+   "qty": 1
+  },
+  {
+   "name": "Graveborn Muse",
+   "qty": 1
+  },
+  {
+   "name": "Gravecrawler",
+   "qty": 1
+  },
+  {
+   "name": "Gray Merchant of Asphodel",
+   "qty": 1
+  },
+  {
+   "name": "Headless Rider",
+   "qty": 1
+  },
+  {
+   "name": "Infernal Idol",
+   "qty": 1
+  },
+  {
+   "name": "Josu Vess, Lich Knight",
+   "qty": 1
+  },
+  {
+   "name": "Kalitas, Traitor of Ghet",
+   "qty": 1
+  },
+  {
+   "name": "Liliana's Mastery",
+   "qty": 1
+  },
+  {
+   "name": "Liliana's Reaver",
+   "qty": 1
+  },
+  {
+   "name": "Lord of the Accursed",
+   "qty": 1
+  },
+  {
+   "name": "Lord of the Undead",
+   "qty": 1
+  },
+  {
+   "name": "Marchesa's Decree",
+   "qty": 1
+  },
+  {
+   "name": "Memorial to Folly",
+   "qty": 1
+  },
+  {
+   "name": "Midnight Reaper",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Mire Triton",
+   "qty": 1
+  },
+  {
+   "name": "Moan of the Unhallowed",
+   "qty": 1
+  },
+  {
+   "name": "Mutilate",
+   "qty": 1
+  },
+  {
+   "name": "Necrotic Hex",
+   "qty": 1
+  },
+  {
+   "name": "Night's Whisper",
+   "qty": 1
+  },
+  {
+   "name": "Noxious Ghoul",
+   "qty": 1
+  },
+  {
+   "name": "Open the Graves",
+   "qty": 1
+  },
+  {
+   "name": "Oversold Cemetery",
+   "qty": 1
+  },
+  {
+   "name": "Patchwork Banner",
+   "qty": 1
+  },
+  {
+   "name": "Phyrexian Arena",
+   "qty": 1
+  },
+  {
+   "name": "Razorlash Transmogrant",
+   "qty": 1
+  },
+  {
+   "name": "Sign in Blood",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Soulless One",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 33
+  },
+  {
+   "name": "Syphon Flesh",
+   "qty": 1
+  },
+  {
+   "name": "Tendrils of Corruption",
+   "qty": 1
+  },
+  {
+   "name": "Undead Augur",
+   "qty": 1
+  },
+  {
+   "name": "Undead Butler",
+   "qty": 1
+  },
+  {
+   "name": "Undead Warchief",
+   "qty": 1
+  },
+  {
+   "name": "Vengeful Dead",
+   "qty": 1
+  },
+  {
+   "name": "Wight of Precinct Six",
+   "qty": 1
+  },
+  {
+   "name": "Witch's Cottage",
+   "qty": 1
+  },
+  {
+   "name": "Withering Torment",
+   "qty": 1
+  },
+  {
+   "name": "Zul Ashur, Lich Lord",
+   "qty": 1
+  }
+ ]
+}

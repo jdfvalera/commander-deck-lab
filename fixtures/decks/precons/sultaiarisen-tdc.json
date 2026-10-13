@@ -1,0 +1,359 @@
+{
+ "id": "sultaiarisen-tdc",
+ "name": "Sultai Arisen (TDC)",
+ "source": "MTGJSON SultaiArisen_TDC",
+ "releaseDate": "2025-04-11",
+ "commanders": [
+  "Teval, the Balanced Scale"
+ ],
+ "cards": [
+  {
+   "name": "Afterlife from the Loam",
+   "qty": 1
+  },
+  {
+   "name": "Amphin Mutineer",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Avenger of Zendikar",
+   "qty": 1
+  },
+  {
+   "name": "Casualties of War",
+   "qty": 1
+  },
+  {
+   "name": "Cephalid Coliseum",
+   "qty": 1
+  },
+  {
+   "name": "Colossal Grave-Reaver",
+   "qty": 1
+  },
+  {
+   "name": "Command Beacon",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Conduit of Worlds",
+   "qty": 1
+  },
+  {
+   "name": "Consuming Aberration",
+   "qty": 1
+  },
+  {
+   "name": "Contaminated Aquifer",
+   "qty": 1
+  },
+  {
+   "name": "Crawling Sensation",
+   "qty": 1
+  },
+  {
+   "name": "Crypt of Agadeem",
+   "qty": 1
+  },
+  {
+   "name": "Cultivate",
+   "qty": 1
+  },
+  {
+   "name": "Darkwater Catacombs",
+   "qty": 1
+  },
+  {
+   "name": "Dauthi Voidwalker",
+   "qty": 1
+  },
+  {
+   "name": "Disciple of Bolas",
+   "qty": 1
+  },
+  {
+   "name": "Diviner of Mist",
+   "qty": 1
+  },
+  {
+   "name": "Dreamroot Cascade",
+   "qty": 1
+  },
+  {
+   "name": "Drownyard Temple",
+   "qty": 1
+  },
+  {
+   "name": "Essence Anchor",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Farseek",
+   "qty": 1
+  },
+  {
+   "name": "Fetid Pools",
+   "qty": 1
+  },
+  {
+   "name": "Floral Evoker",
+   "qty": 1
+  },
+  {
+   "name": "Forbidden Alchemy",
+   "qty": 1
+  },
+  {
+   "name": "Foreboding Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 6
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "qty": 1
+  },
+  {
+   "name": "Grapple with the Past",
+   "qty": 1
+  },
+  {
+   "name": "Gravecrawler",
+   "qty": 1
+  },
+  {
+   "name": "Grisly Salvage",
+   "qty": 1
+  },
+  {
+   "name": "Harrow",
+   "qty": 1
+  },
+  {
+   "name": "Haunted Mire",
+   "qty": 1
+  },
+  {
+   "name": "Hedron Crab",
+   "qty": 1
+  },
+  {
+   "name": "Hinterland Harbor",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 4
+  },
+  {
+   "name": "Jarad, Golgari Lich Lord",
+   "qty": 1
+  },
+  {
+   "name": "Junji, the Midnight Sky",
+   "qty": 1
+  },
+  {
+   "name": "Kishla Skimmer",
+   "qty": 1
+  },
+  {
+   "name": "Kotis, Sibsig Champion",
+   "qty": 1
+  },
+  {
+   "name": "Lethal Scheme",
+   "qty": 1
+  },
+  {
+   "name": "Life from the Loam",
+   "qty": 1
+  },
+  {
+   "name": "Living Death",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Lord of Extinction",
+   "qty": 1
+  },
+  {
+   "name": "Lord of the Forsaken",
+   "qty": 1
+  },
+  {
+   "name": "Memorial to Folly",
+   "qty": 1
+  },
+  {
+   "name": "Meren of Clan Nel Toth",
+   "qty": 1
+  },
+  {
+   "name": "Millikin",
+   "qty": 1
+  },
+  {
+   "name": "Multani, Yavimaya's Avatar",
+   "qty": 1
+  },
+  {
+   "name": "Myriad Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Necromantic Selection",
+   "qty": 1
+  },
+  {
+   "name": "Necropolis Fiend",
+   "qty": 1
+  },
+  {
+   "name": "Noxious Gearhulk",
+   "qty": 1
+  },
+  {
+   "name": "Nyx Weaver",
+   "qty": 1
+  },
+  {
+   "name": "Ob Nixilis, the Fallen",
+   "qty": 1
+  },
+  {
+   "name": "Opulent Palace",
+   "qty": 1
+  },
+  {
+   "name": "Phyrexian Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1
+  },
+  {
+   "name": "Rampant Growth",
+   "qty": 1
+  },
+  {
+   "name": "Reassembling Skeleton",
+   "qty": 1
+  },
+  {
+   "name": "River Kelpie",
+   "qty": 1
+  },
+  {
+   "name": "Sakura-Tribe Elder",
+   "qty": 1
+  },
+  {
+   "name": "Satyr Wayfinder",
+   "qty": 1
+  },
+  {
+   "name": "Shigeki, Jukai Visionary",
+   "qty": 1
+  },
+  {
+   "name": "Skull Prophet",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Springbloom Druid",
+   "qty": 1
+  },
+  {
+   "name": "Steward of the Harvest",
+   "qty": 1
+  },
+  {
+   "name": "Stitcher's Supplier",
+   "qty": 1
+  },
+  {
+   "name": "Sunken Hollow",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Tasigur, the Golden Fang",
+   "qty": 1
+  },
+  {
+   "name": "Tear Asunder",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Teval's Judgment",
+   "qty": 1
+  },
+  {
+   "name": "Timeless Witness",
+   "qty": 1
+  },
+  {
+   "name": "Treasure Cruise",
+   "qty": 1
+  },
+  {
+   "name": "Victimize",
+   "qty": 1
+  },
+  {
+   "name": "Welcome the Dead",
+   "qty": 1
+  },
+  {
+   "name": "Will of the Sultai",
+   "qty": 1
+  },
+  {
+   "name": "Woe Strider",
+   "qty": 1
+  },
+  {
+   "name": "Wonder",
+   "qty": 1
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1
+  }
+ ]
+}

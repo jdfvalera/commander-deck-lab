@@ -1,0 +1,347 @@
+{
+ "id": "blightcurse-ecc",
+ "name": "Blight Curse (ECC)",
+ "source": "MTGJSON BlightCurse_ECC",
+ "releaseDate": "2026-01-23",
+ "commanders": [
+  "Auntie Ool, Cursewretch"
+ ],
+ "cards": [
+  {
+   "name": "Aberrant Return",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archfiend of Ifnir",
+   "qty": 1
+  },
+  {
+   "name": "Assassin's Trophy",
+   "qty": 1
+  },
+  {
+   "name": "Binding the Old Gods",
+   "qty": 1
+  },
+  {
+   "name": "Black Sun's Zenith",
+   "qty": 1
+  },
+  {
+   "name": "Blowfly Infestation",
+   "qty": 1
+  },
+  {
+   "name": "Burning Curiosity",
+   "qty": 1
+  },
+  {
+   "name": "Canyon Slough",
+   "qty": 1
+  },
+  {
+   "name": "Carnifex Demon",
+   "qty": 1
+  },
+  {
+   "name": "Cathartic Pyre",
+   "qty": 1
+  },
+  {
+   "name": "Cathartic Reunion",
+   "qty": 1
+  },
+  {
+   "name": "Chain Reaction",
+   "qty": 1
+  },
+  {
+   "name": "Channeler Initiate",
+   "qty": 1
+  },
+  {
+   "name": "Chimil, the Inner Sun",
+   "qty": 1
+  },
+  {
+   "name": "Cinder Glade",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Contagion Clasp",
+   "qty": 1
+  },
+  {
+   "name": "Devoted Druid",
+   "qty": 1
+  },
+  {
+   "name": "Dragonskull Summit",
+   "qty": 1
+  },
+  {
+   "name": "Dread Tiller",
+   "qty": 1
+  },
+  {
+   "name": "Dusk Urchins",
+   "qty": 1
+  },
+  {
+   "name": "Eventide's Shadow",
+   "qty": 1
+  },
+  {
+   "name": "Everlasting Torment",
+   "qty": 1
+  },
+  {
+   "name": "Evolution Sage",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Ferrafor, Young Yew",
+   "qty": 1
+  },
+  {
+   "name": "Festering Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Fire Covenant",
+   "qty": 1
+  },
+  {
+   "name": "Flourishing Defenses",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 6
+  },
+  {
+   "name": "Glissa Sunslayer",
+   "qty": 1
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "qty": 1
+  },
+  {
+   "name": "Grave Titan",
+   "qty": 1
+  },
+  {
+   "name": "Grave Venerations",
+   "qty": 1
+  },
+  {
+   "name": "Grim Poppet",
+   "qty": 1
+  },
+  {
+   "name": "Gruul Turf",
+   "qty": 1
+  },
+  {
+   "name": "Hapatra, Vizier of Poisons",
+   "qty": 1
+  },
+  {
+   "name": "Harmonize",
+   "qty": 1
+  },
+  {
+   "name": "Hoarder's Greed",
+   "qty": 1
+  },
+  {
+   "name": "Ifnir Deadlands",
+   "qty": 1
+  },
+  {
+   "name": "Ignoble Hierarch",
+   "qty": 1
+  },
+  {
+   "name": "Incremental Blight",
+   "qty": 1
+  },
+  {
+   "name": "Infernal Grasp",
+   "qty": 1
+  },
+  {
+   "name": "Kulrath Knight",
+   "qty": 1
+  },
+  {
+   "name": "Lasting Tarfire",
+   "qty": 1
+  },
+  {
+   "name": "Liliana, Death Wielder",
+   "qty": 1
+  },
+  {
+   "name": "Massacre Girl, Known Killer",
+   "qty": 1
+  },
+  {
+   "name": "Midnight Banshee",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 4
+  },
+  {
+   "name": "Necroskitter",
+   "qty": 1
+  },
+  {
+   "name": "Nesting Grounds",
+   "qty": 1
+  },
+  {
+   "name": "Night's Whisper",
+   "qty": 1
+  },
+  {
+   "name": "Oft-Nabbed Goat",
+   "qty": 1
+  },
+  {
+   "name": "Painful Truths",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Persist",
+   "qty": 1
+  },
+  {
+   "name": "Puca's Covenant",
+   "qty": 1
+  },
+  {
+   "name": "Puppeteer Clique",
+   "qty": 1
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1
+  },
+  {
+   "name": "Rakdos Carnarium",
+   "qty": 1
+  },
+  {
+   "name": "Riveteers Overlook",
+   "qty": 1
+  },
+  {
+   "name": "Rootbound Crag",
+   "qty": 1
+  },
+  {
+   "name": "Savage Lands",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Sinister Gnarlbark",
+   "qty": 1
+  },
+  {
+   "name": "Skinrender",
+   "qty": 1
+  },
+  {
+   "name": "Smoldering Marsh",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Soul Snuffers",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 8
+  },
+  {
+   "name": "Terminate",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Reaper, King No More",
+   "qty": 1
+  },
+  {
+   "name": "The Scorpion God",
+   "qty": 1
+  },
+  {
+   "name": "Tree of Perdition",
+   "qty": 1
+  },
+  {
+   "name": "Vernal Fen",
+   "qty": 1
+  },
+  {
+   "name": "Village Pillagers",
+   "qty": 1
+  },
+  {
+   "name": "Vraska, Betrayal's Sting",
+   "qty": 1
+  },
+  {
+   "name": "Wickerbough Elder",
+   "qty": 1
+  },
+  {
+   "name": "Wickersmith's Tools",
+   "qty": 1
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1
+  }
+ ]
+}

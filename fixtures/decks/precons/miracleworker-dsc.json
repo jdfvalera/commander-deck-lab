@@ -1,0 +1,363 @@
+{
+ "id": "miracleworker-dsc",
+ "name": "Miracle Worker (DSC)",
+ "source": "MTGJSON MiracleWorker_DSC",
+ "releaseDate": "2024-09-27",
+ "commanders": [
+  "Aminatou, Veil Piercer"
+ ],
+ "cards": [
+  {
+   "name": "Adarkar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Aminatou's Augury",
+   "qty": 1
+  },
+  {
+   "name": "Ancient Cellarspawn",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Denial",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Sanctum",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archetype of Imagination",
+   "qty": 1
+  },
+  {
+   "name": "Arvinox, the Mind Flail",
+   "qty": 1
+  },
+  {
+   "name": "Ash Barrens",
+   "qty": 1
+  },
+  {
+   "name": "Athreos, Shroud-Veiled",
+   "qty": 1
+  },
+  {
+   "name": "Auramancer",
+   "qty": 1
+  },
+  {
+   "name": "Azorius Chancery",
+   "qty": 1
+  },
+  {
+   "name": "Azorius Signet",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Bottomless Pool // Locker Room",
+   "qty": 1
+  },
+  {
+   "name": "Brainstone",
+   "qty": 1
+  },
+  {
+   "name": "Brainstorm",
+   "qty": 1
+  },
+  {
+   "name": "Burnished Hart",
+   "qty": 1
+  },
+  {
+   "name": "Cast Out",
+   "qty": 1
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Cramped Vents // Access Maze",
+   "qty": 1
+  },
+  {
+   "name": "Demon of Fate's Design",
+   "qty": 1
+  },
+  {
+   "name": "Diabolic Vision",
+   "qty": 1
+  },
+  {
+   "name": "Dimir Aqueduct",
+   "qty": 1
+  },
+  {
+   "name": "Doomwake Giant",
+   "qty": 1
+  },
+  {
+   "name": "Dream Eater",
+   "qty": 1
+  },
+  {
+   "name": "Entreat the Angels",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Extravagant Replication",
+   "qty": 1
+  },
+  {
+   "name": "Fear of Sleep Paralysis",
+   "qty": 1
+  },
+  {
+   "name": "Halimar Depths",
+   "qty": 1
+  },
+  {
+   "name": "Hall of Heliod's Generosity",
+   "qty": 1
+  },
+  {
+   "name": "Inkshield",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 4
+  },
+  {
+   "name": "Life Insurance",
+   "qty": 1
+  },
+  {
+   "name": "Mesa Enchantress",
+   "qty": 1
+  },
+  {
+   "name": "Metamorphosis Fanatic",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Mirrormade",
+   "qty": 1
+  },
+  {
+   "name": "Monologue Tax",
+   "qty": 1
+  },
+  {
+   "name": "Moon-Blessed Cleric",
+   "qty": 1
+  },
+  {
+   "name": "Nightmare Shepherd",
+   "qty": 1
+  },
+  {
+   "name": "Obscura Storefront",
+   "qty": 1
+  },
+  {
+   "name": "Ondu Spiritdancer",
+   "qty": 1
+  },
+  {
+   "name": "One with the Multiverse",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Basilica",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Signet",
+   "qty": 1
+  },
+  {
+   "name": "Otherworldly Gaze",
+   "qty": 1
+  },
+  {
+   "name": "Phenomenon Investigators",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 5
+  },
+  {
+   "name": "Ponder",
+   "qty": 1
+  },
+  {
+   "name": "Portent",
+   "qty": 1
+  },
+  {
+   "name": "Prognostic Sphinx",
+   "qty": 1
+  },
+  {
+   "name": "Read the Bones",
+   "qty": 1
+  },
+  {
+   "name": "Redress Fate",
+   "qty": 1
+  },
+  {
+   "name": "Return to Dust",
+   "qty": 1
+  },
+  {
+   "name": "Secret Arcade // Dusty Parlor",
+   "qty": 1
+  },
+  {
+   "name": "Shark Typhoon",
+   "qty": 1
+  },
+  {
+   "name": "Sigil of the Empty Throne",
+   "qty": 1
+  },
+  {
+   "name": "Soaring Lightbringer",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Sphere of Safety",
+   "qty": 1
+  },
+  {
+   "name": "Spirit-Sister's Call",
+   "qty": 1
+  },
+  {
+   "name": "Starfield Mystic",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Tainted Field",
+   "qty": 1
+  },
+  {
+   "name": "Tainted Isle",
+   "qty": 1
+  },
+  {
+   "name": "Telling Time",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Deceit",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Enlightenment",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Terminus",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Eldest Reborn",
+   "qty": 1
+  },
+  {
+   "name": "The Master of Keys",
+   "qty": 1
+  },
+  {
+   "name": "Thirst for Meaning",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Heath",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Isle",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Moor",
+   "qty": 1
+  },
+  {
+   "name": "Time Wipe",
+   "qty": 1
+  },
+  {
+   "name": "Timely Ward",
+   "qty": 1
+  },
+  {
+   "name": "Underground River",
+   "qty": 1
+  },
+  {
+   "name": "Utter End",
+   "qty": 1
+  },
+  {
+   "name": "Verge Rangers",
+   "qty": 1
+  }
+ ]
+}

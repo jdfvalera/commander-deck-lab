@@ -1,0 +1,355 @@
+{
+ "id": "worldshaper-eoc",
+ "name": "World Shaper (EOC)",
+ "source": "MTGJSON WorldShaper_EOC",
+ "releaseDate": "2025-08-01",
+ "commanders": [
+  "Hearthhull, the Worldseed"
+ ],
+ "cards": [
+  {
+   "name": "Aftermath Analyst",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Augur of Autumn",
+   "qty": 1
+  },
+  {
+   "name": "Baloth Prime",
+   "qty": 1
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1
+  },
+  {
+   "name": "Binding the Old Gods",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Braids, Arisen Nightmare",
+   "qty": 1
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "qty": 1
+  },
+  {
+   "name": "Canyon Slough",
+   "qty": 1
+  },
+  {
+   "name": "Centaur Vinecrasher",
+   "qty": 1
+  },
+  {
+   "name": "Cinder Glade",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Cultivate",
+   "qty": 1
+  },
+  {
+   "name": "Dakmor Salvage",
+   "qty": 1
+  },
+  {
+   "name": "Escape to the Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Escape Tunnel",
+   "qty": 1
+  },
+  {
+   "name": "Eumidian Hatchery",
+   "qty": 1
+  },
+  {
+   "name": "Eumidian Wastewaker",
+   "qty": 1
+  },
+  {
+   "name": "Evendo Brushrazer",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exploration Broodship",
+   "qty": 1
+  },
+  {
+   "name": "Fabled Passage",
+   "qty": 1
+  },
+  {
+   "name": "Farseek",
+   "qty": 1
+  },
+  {
+   "name": "Festering Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 8
+  },
+  {
+   "name": "Formless Genesis",
+   "qty": 1
+  },
+  {
+   "name": "Gaze of Granite",
+   "qty": 1
+  },
+  {
+   "name": "God-Eternal Bontu",
+   "qty": 1
+  },
+  {
+   "name": "Groundskeeper",
+   "qty": 1
+  },
+  {
+   "name": "Hammer of Purphoros",
+   "qty": 1
+  },
+  {
+   "name": "Harrow",
+   "qty": 1
+  },
+  {
+   "name": "Horizon Explorer",
+   "qty": 1
+  },
+  {
+   "name": "Infernal Grasp",
+   "qty": 1
+  },
+  {
+   "name": "Juri, Master of the Revue",
+   "qty": 1
+  },
+  {
+   "name": "Karplusan Forest",
+   "qty": 1
+  },
+  {
+   "name": "Korvold, Fae-Cursed King",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Loamcrafter Faun",
+   "qty": 1
+  },
+  {
+   "name": "Maestros Theater",
+   "qty": 1
+  },
+  {
+   "name": "Mayhem Devil",
+   "qty": 1
+  },
+  {
+   "name": "Mazirek, Kraul Death Priest",
+   "qty": 1
+  },
+  {
+   "name": "Moraug, Fury of Akoum",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 3
+  },
+  {
+   "name": "Mountain Valley",
+   "qty": 1
+  },
+  {
+   "name": "Multani, Yavimaya's Avatar",
+   "qty": 1
+  },
+  {
+   "name": "Myriad Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Nature's Lore",
+   "qty": 1
+  },
+  {
+   "name": "Night's Whisper",
+   "qty": 1
+  },
+  {
+   "name": "Omnath, Locus of Rage",
+   "qty": 1
+  },
+  {
+   "name": "Oracle of Mul Daya",
+   "qty": 1
+  },
+  {
+   "name": "Pest Infestation",
+   "qty": 1
+  },
+  {
+   "name": "Planetary Annihilation",
+   "qty": 1
+  },
+  {
+   "name": "Putrefy",
+   "qty": 1
+  },
+  {
+   "name": "Rakdos Charm",
+   "qty": 1
+  },
+  {
+   "name": "Rampaging Baloths",
+   "qty": 1
+  },
+  {
+   "name": "Riveteers Overlook",
+   "qty": 1
+  },
+  {
+   "name": "Rocky Tar Pit",
+   "qty": 1
+  },
+  {
+   "name": "Roiling Regrowth",
+   "qty": 1
+  },
+  {
+   "name": "Satyr Wayfinder",
+   "qty": 1
+  },
+  {
+   "name": "Scouring Swarm",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Skyshroud Claim",
+   "qty": 1
+  },
+  {
+   "name": "Smoldering Marsh",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Soul of Windgrace",
+   "qty": 1
+  },
+  {
+   "name": "Splendid Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Springbloom Druid",
+   "qty": 1
+  },
+  {
+   "name": "Sprouting Goblin",
+   "qty": 1
+  },
+  {
+   "name": "Sulfurous Springs",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Szarel, Genesis Shepherd",
+   "qty": 1
+  },
+  {
+   "name": "Tear Asunder",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Gitrog Monster",
+   "qty": 1
+  },
+  {
+   "name": "Tireless Tracker",
+   "qty": 1
+  },
+  {
+   "name": "Titania, Protector of Argoth",
+   "qty": 1
+  },
+  {
+   "name": "Twilight Mire",
+   "qty": 1
+  },
+  {
+   "name": "Uurg, Spawn of Turg",
+   "qty": 1
+  },
+  {
+   "name": "Vernal Fen",
+   "qty": 1
+  },
+  {
+   "name": "Viridescent Bog",
+   "qty": 1
+  },
+  {
+   "name": "Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Windgrace's Judgment",
+   "qty": 1
+  },
+  {
+   "name": "World Breaker",
+   "qty": 1
+  },
+  {
+   "name": "Worldsoul's Rage",
+   "qty": 1
+  }
+ ]
+}

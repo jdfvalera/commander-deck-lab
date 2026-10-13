@@ -1,0 +1,347 @@
+{
+ "id": "loreholdspirit-soc",
+ "name": "Lorehold Spirit (SOC)",
+ "source": "MTGJSON LoreholdSpirit_SOC",
+ "releaseDate": "2026-04-24",
+ "commanders": [
+  "Quintorius, History Chaser"
+ ],
+ "cards": [
+  {
+   "name": "Advanced Reconstruction",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Indemnity",
+   "qty": 1
+  },
+  {
+   "name": "Anger",
+   "qty": 1
+  },
+  {
+   "name": "Ao, the Dawn Sky",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archaeomancer's Map",
+   "qty": 1
+  },
+  {
+   "name": "Atsushi, the Blazing Sky",
+   "qty": 1
+  },
+  {
+   "name": "Augusta, Order Returned",
+   "qty": 1
+  },
+  {
+   "name": "Balefire Liege",
+   "qty": 1
+  },
+  {
+   "name": "Battlefield Forge",
+   "qty": 1
+  },
+  {
+   "name": "Bitterthorn, Nissa's Animus",
+   "qty": 1
+  },
+  {
+   "name": "Ceaseless Conflict",
+   "qty": 1
+  },
+  {
+   "name": "Claim Jumper",
+   "qty": 1
+  },
+  {
+   "name": "Clifftop Retreat",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Conspiracy Theorist",
+   "qty": 1
+  },
+  {
+   "name": "Containment Construct",
+   "qty": 1
+  },
+  {
+   "name": "Currency Converter",
+   "qty": 1
+  },
+  {
+   "name": "Drumbellower",
+   "qty": 1
+  },
+  {
+   "name": "Emeria, the Sky Ruin",
+   "qty": 1
+  },
+  {
+   "name": "Excava, the Risen Past",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Fabled Passage",
+   "qty": 1
+  },
+  {
+   "name": "Faithless Looting",
+   "qty": 1
+  },
+  {
+   "name": "Fateful Tempest",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Fields of Strife",
+   "qty": 1
+  },
+  {
+   "name": "Furycalm Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Glittering Massif",
+   "qty": 1
+  },
+  {
+   "name": "Guardian of Faith",
+   "qty": 1
+  },
+  {
+   "name": "Guardian Scalelord",
+   "qty": 1
+  },
+  {
+   "name": "Hofri Ghostforge",
+   "qty": 1
+  },
+  {
+   "name": "Kami of Ancient Law",
+   "qty": 1
+  },
+  {
+   "name": "Karmic Guide",
+   "qty": 1
+  },
+  {
+   "name": "Kirol, History Buff // Pack a Punch",
+   "qty": 1
+  },
+  {
+   "name": "Laelia, the Blade Reforged",
+   "qty": 1
+  },
+  {
+   "name": "Lorehold Archivist // Restore Relic",
+   "qty": 1
+  },
+  {
+   "name": "Lorehold Campus",
+   "qty": 1
+  },
+  {
+   "name": "Lorehold Charm",
+   "qty": 1
+  },
+  {
+   "name": "Lotus Field",
+   "qty": 1
+  },
+  {
+   "name": "Millikin",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Mistveil Plains",
+   "qty": 1
+  },
+  {
+   "name": "Monologue Tax",
+   "qty": 1
+  },
+  {
+   "name": "Moonshaker Cavalry",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 6
+  },
+  {
+   "name": "Naktamun Lorespinner // Wheel of Fortune",
+   "qty": 1
+  },
+  {
+   "name": "Patchwork Banner",
+   "qty": 1
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1
+  },
+  {
+   "name": "Perpetual Timepiece",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 11
+  },
+  {
+   "name": "Primary Research",
+   "qty": 1
+  },
+  {
+   "name": "Quintorius, Field Historian",
+   "qty": 1
+  },
+  {
+   "name": "Quintorius, Loremaster",
+   "qty": 1
+  },
+  {
+   "name": "Radiant Summit",
+   "qty": 1
+  },
+  {
+   "name": "Relic Retriever",
+   "qty": 1
+  },
+  {
+   "name": "Remorseful Cleric",
+   "qty": 1
+  },
+  {
+   "name": "Rip Apart",
+   "qty": 1
+  },
+  {
+   "name": "Rugged Prairie",
+   "qty": 1
+  },
+  {
+   "name": "Sacred Peaks",
+   "qty": 1
+  },
+  {
+   "name": "Secret Rendezvous",
+   "qty": 1
+  },
+  {
+   "name": "Seize the Spoils",
+   "qty": 1
+  },
+  {
+   "name": "Selfless Spirit",
+   "qty": 1
+  },
+  {
+   "name": "Serra Paragon",
+   "qty": 1
+  },
+  {
+   "name": "Sevinne's Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Skyclave Apparition",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Spirit of Resilience",
+   "qty": 1
+  },
+  {
+   "name": "Squee, Goblin Nabob",
+   "qty": 1
+  },
+  {
+   "name": "Staff of the Storyteller",
+   "qty": 1
+  },
+  {
+   "name": "Study Hall",
+   "qty": 1
+  },
+  {
+   "name": "Sun Titan",
+   "qty": 1
+  },
+  {
+   "name": "Sunscorched Divide",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Triumph",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Teshar, Ancestor's Apostle",
+   "qty": 1
+  },
+  {
+   "name": "Tocasia's Welcome",
+   "qty": 1
+  },
+  {
+   "name": "Tragic Arrogance",
+   "qty": 1
+  },
+  {
+   "name": "Turbulent Steppe",
+   "qty": 1
+  },
+  {
+   "name": "Vanguard of the Restless",
+   "qty": 1
+  },
+  {
+   "name": "Venerable Warsinger",
+   "qty": 1
+  },
+  {
+   "name": "Wave of Reckoning",
+   "qty": 1
+  },
+  {
+   "name": "White Orchid Phantom",
+   "qty": 1
+  }
+ ]
+}

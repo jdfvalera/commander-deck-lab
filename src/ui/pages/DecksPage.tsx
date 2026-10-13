@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useApp } from '../state';
 import { formatDecklist, parseDecklist } from '../../data/parseDecklist';
-import { validateDeck } from '../../data/validateDeck';
+import { guessCommanders, validateDeck } from '../../data/validateDeck';
 import { addVersion, diffLists, newId } from '../../data/storage';
 import { EXAMPLE_DECKS } from '../../data/examples';
 import type { DeckList, SavedDeck } from '../../data/types';
@@ -120,7 +120,6 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
   const [selected, setSelected] = useState<string | null>(null);
 
   const parsed = useMemo(() => parseDecklist(text), [text]);
-  const list: DeckList = { commanders: parsed.commanders, cards: parsed.cards };
   const dirty = text.trim() !== initialText.trim();
   const names = useMemo(() => [...parsed.commanders, ...parsed.cards.map((c) => c.name)], [parsed]);
 
@@ -137,6 +136,10 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
   }, []);
 
   const loaded = names.length > 0 && names.every((n) => !!card(n) || notFound.includes(n));
+  // Exports that put the commander first without a heading: use it once card data says it can lead.
+  const { list, guessed } = loaded
+    ? guessCommanders({ commanders: parsed.commanders, cards: parsed.cards }, card)
+    : { list: { commanders: parsed.commanders, cards: parsed.cards } as DeckList, guessed: [] as string[] };
   const issues = loaded ? validateDeck(list, cards) : [];
   const unique = loaded ? names.filter((n, i) => names.indexOf(n) === i && card(n)) : [];
   const textOf = (n: string, key: 'unmodelled' | 'ignored_text') => String(tagsFor(n)?.[key]?.params.text ?? '');
@@ -198,7 +201,7 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
             Check cards
           </button>
           <span className="muted small">
-            {parsed.cards.reduce((a, c) => a + c.qty, 0) + parsed.commanders.length} cards · {parsed.commanders.length ? `Commander: ${parsed.commanders.join(' + ')}` : 'no commander'}
+            {parsed.cards.reduce((a, c) => a + c.qty, 0) + parsed.commanders.length} cards · {list.commanders.length ? `Commander: ${list.commanders.join(' + ')}` : 'no commander'}
           </span>
           <span className="spacer" />
           {(dirty || !deck) && names.length > 0 && (
@@ -220,6 +223,12 @@ function DeckEditor({ deck, versionId, onSelectVersion, initialName, initialText
           </div>
         )}
         {cardError && <div className="notice error">{cardError}</div>}
+        {guessed.length > 0 && (
+          <div className="notice warn small">
+            No commander was marked, so the first card{guessed.length > 1 ? 's' : ''} ({guessed.join(' + ')}) {guessed.length > 1 ? 'are' : 'is'} used.
+            To change it, add a “Commander” heading or *CMDR* in the list.
+          </div>
+        )}
         {parsed.warnings.map((w) => (
           <div key={w} className="notice warn">
             {w}

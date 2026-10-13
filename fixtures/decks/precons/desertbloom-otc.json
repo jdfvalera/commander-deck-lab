@@ -1,0 +1,351 @@
+{
+ "id": "desertbloom-otc",
+ "name": "Desert Bloom (OTC)",
+ "source": "MTGJSON DesertBloom_OTC",
+ "releaseDate": "2024-04-19",
+ "commanders": [
+  "Yuma, Proud Protector"
+ ],
+ "cards": [
+  {
+   "name": "Abraded Bluffs",
+   "qty": 1
+  },
+  {
+   "name": "Ancient Greenwarden",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Indemnity",
+   "qty": 1
+  },
+  {
+   "name": "Angel of the Ruins",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Avenger of Zendikar",
+   "qty": 1
+  },
+  {
+   "name": "Bitter Reunion",
+   "qty": 1
+  },
+  {
+   "name": "Bovine Intervention",
+   "qty": 1
+  },
+  {
+   "name": "Bristling Backwoods",
+   "qty": 1
+  },
+  {
+   "name": "Cactus Preserve",
+   "qty": 1
+  },
+  {
+   "name": "Cataclysmic Prospecting",
+   "qty": 1
+  },
+  {
+   "name": "Chromatic Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Conduit Pylons",
+   "qty": 1
+  },
+  {
+   "name": "Crawling Sensation",
+   "qty": 1
+  },
+  {
+   "name": "Creosote Heath",
+   "qty": 1
+  },
+  {
+   "name": "Decimate",
+   "qty": 1
+  },
+  {
+   "name": "Descend upon the Sinful",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Fervent",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Indomitable",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the True",
+   "qty": 1
+  },
+  {
+   "name": "Dune Chanter",
+   "qty": 1
+  },
+  {
+   "name": "Dunes of the Dead",
+   "qty": 1
+  },
+  {
+   "name": "Eccentric Farmer",
+   "qty": 1
+  },
+  {
+   "name": "Electric Revelation",
+   "qty": 1
+  },
+  {
+   "name": "Elvish Rejuvenator",
+   "qty": 1
+  },
+  {
+   "name": "Embrace the Unknown",
+   "qty": 1
+  },
+  {
+   "name": "Escape to the Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Explore",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 7
+  },
+  {
+   "name": "Genesis Hydra",
+   "qty": 1
+  },
+  {
+   "name": "Harrow",
+   "qty": 1
+  },
+  {
+   "name": "Hashep Oasis",
+   "qty": 1
+  },
+  {
+   "name": "Hazezon, Shaper of Sand",
+   "qty": 1
+  },
+  {
+   "name": "Heaven // Earth",
+   "qty": 1
+  },
+  {
+   "name": "Hour of Promise",
+   "qty": 1
+  },
+  {
+   "name": "Jungle Shrine",
+   "qty": 1
+  },
+  {
+   "name": "Kirri, Talented Sprout",
+   "qty": 1
+  },
+  {
+   "name": "Krosan Verge",
+   "qty": 1
+  },
+  {
+   "name": "Magmatic Insight",
+   "qty": 1
+  },
+  {
+   "name": "Map the Frontier",
+   "qty": 1
+  },
+  {
+   "name": "Marshal's Anthem",
+   "qty": 1
+  },
+  {
+   "name": "Mirage Mesa",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 4
+  },
+  {
+   "name": "Nantuko Cultivator",
+   "qty": 1
+  },
+  {
+   "name": "Nesting Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Omnath, Locus of Rage",
+   "qty": 1
+  },
+  {
+   "name": "Oracle of Mul Daya",
+   "qty": 1
+  },
+  {
+   "name": "Painted Bluffs",
+   "qty": 1
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1
+  },
+  {
+   "name": "Perennial Behemoth",
+   "qty": 1
+  },
+  {
+   "name": "Perpetual Timepiece",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 6
+  },
+  {
+   "name": "Ramunap Excavator",
+   "qty": 1
+  },
+  {
+   "name": "Ramunap Ruins",
+   "qty": 1
+  },
+  {
+   "name": "Requisition Raid",
+   "qty": 1
+  },
+  {
+   "name": "Return of the Wildspeaker",
+   "qty": 1
+  },
+  {
+   "name": "Rumbleweed",
+   "qty": 1
+  },
+  {
+   "name": "Sand Scout",
+   "qty": 1
+  },
+  {
+   "name": "Satyr Wayfinder",
+   "qty": 1
+  },
+  {
+   "name": "Scaretiller",
+   "qty": 1
+  },
+  {
+   "name": "Scattered Groves",
+   "qty": 1
+  },
+  {
+   "name": "Scavenger Grounds",
+   "qty": 1
+  },
+  {
+   "name": "Scute Swarm",
+   "qty": 1
+  },
+  {
+   "name": "Sevinne's Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Shefet Dunes",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Skullwinder",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Springbloom Druid",
+   "qty": 1
+  },
+  {
+   "name": "Sun Titan",
+   "qty": 1
+  },
+  {
+   "name": "Sunscorched Divide",
+   "qty": 1
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Mending of Dominaria",
+   "qty": 1
+  },
+  {
+   "name": "Thrilling Discovery",
+   "qty": 1
+  },
+  {
+   "name": "Titania, Protector of Argoth",
+   "qty": 1
+  },
+  {
+   "name": "Turntimber Sower",
+   "qty": 1
+  },
+  {
+   "name": "Unholy Heat",
+   "qty": 1
+  },
+  {
+   "name": "Valorous Stance",
+   "qty": 1
+  },
+  {
+   "name": "Vengeful Regrowth",
+   "qty": 1
+  },
+  {
+   "name": "Winding Way",
+   "qty": 1
+  },
+  {
+   "name": "World Shaper",
+   "qty": 1
+  },
+  {
+   "name": "Wreck and Rebuild",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,343 @@
+{
+ "id": "jumpscare-dsc",
+ "name": "Jump Scare! (DSC)",
+ "source": "MTGJSON JumpScare_DSC",
+ "releaseDate": "2024-09-27",
+ "commanders": [
+  "Zimone, Mystery Unraveler"
+ ],
+ "cards": [
+  {
+   "name": "Aesi, Tyrant of Gyre Strait",
+   "qty": 1
+  },
+  {
+   "name": "Aether Gale",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Arixmethes, Slumbering Isle",
+   "qty": 1
+  },
+  {
+   "name": "Ash Barrens",
+   "qty": 1
+  },
+  {
+   "name": "Ashaya, Soul of the Wild",
+   "qty": 1
+  },
+  {
+   "name": "Augur of Autumn",
+   "qty": 1
+  },
+  {
+   "name": "Beanstalk Giant // Fertile Footsteps",
+   "qty": 1
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1
+  },
+  {
+   "name": "Biomass Mutation",
+   "qty": 1
+  },
+  {
+   "name": "Body of Knowledge",
+   "qty": 1
+  },
+  {
+   "name": "Cackling Counterpart",
+   "qty": 1
+  },
+  {
+   "name": "Castle Vantress",
+   "qty": 1
+  },
+  {
+   "name": "Citanul Hierophants",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Counterspell",
+   "qty": 1
+  },
+  {
+   "name": "Cultivate",
+   "qty": 1
+  },
+  {
+   "name": "Curator Beastie",
+   "qty": 1
+  },
+  {
+   "name": "Deathmist Raptor",
+   "qty": 1
+  },
+  {
+   "name": "Dig Through Time",
+   "qty": 1
+  },
+  {
+   "name": "Disorienting Choice",
+   "qty": 1
+  },
+  {
+   "name": "Drownyard Temple",
+   "qty": 1
+  },
+  {
+   "name": "Eureka Moment",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Experimental Lab // Staff Room",
+   "qty": 1
+  },
+  {
+   "name": "Explosive Vegetation",
+   "qty": 1
+  },
+  {
+   "name": "Ezuri's Predation",
+   "qty": 1
+  },
+  {
+   "name": "Flooded Grove",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 9
+  },
+  {
+   "name": "Giggling Skitterspike",
+   "qty": 1
+  },
+  {
+   "name": "Glitch Interpreter",
+   "qty": 1
+  },
+  {
+   "name": "Greater Tanuki",
+   "qty": 1
+  },
+  {
+   "name": "Growing Dread",
+   "qty": 1
+  },
+  {
+   "name": "Growth Spiral",
+   "qty": 1
+  },
+  {
+   "name": "Hinterland Harbor",
+   "qty": 1
+  },
+  {
+   "name": "Hydra Omnivore",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 9
+  },
+  {
+   "name": "Kefnet the Mindful",
+   "qty": 1
+  },
+  {
+   "name": "Kheru Spellsnatcher",
+   "qty": 1
+  },
+  {
+   "name": "Kianne, Corrupted Memory",
+   "qty": 1
+  },
+  {
+   "name": "Mosswort Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Multani, Yavimaya's Avatar",
+   "qty": 1
+  },
+  {
+   "name": "Myriad Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Overflowing Basin",
+   "qty": 1
+  },
+  {
+   "name": "Overgrown Zealot",
+   "qty": 1
+  },
+  {
+   "name": "Oversimplify",
+   "qty": 1
+  },
+  {
+   "name": "Overwhelming Stampede",
+   "qty": 1
+  },
+  {
+   "name": "Primordial Mist",
+   "qty": 1
+  },
+  {
+   "name": "Quandrix Campus",
+   "qty": 1
+  },
+  {
+   "name": "Rampant Growth",
+   "qty": 1
+  },
+  {
+   "name": "Rashmi, Eternities Crafter",
+   "qty": 1
+  },
+  {
+   "name": "Reality Shift",
+   "qty": 1
+  },
+  {
+   "name": "Reliquary Tower",
+   "qty": 1
+  },
+  {
+   "name": "Retreat to Coralhelm",
+   "qty": 1
+  },
+  {
+   "name": "Sakura-Tribe Elder",
+   "qty": 1
+  },
+  {
+   "name": "Sandwurm Convergence",
+   "qty": 1
+  },
+  {
+   "name": "Scroll of Fate",
+   "qty": 1
+  },
+  {
+   "name": "Scute Swarm",
+   "qty": 1
+  },
+  {
+   "name": "Shigeki, Jukai Visionary",
+   "qty": 1
+  },
+  {
+   "name": "Shriekwood Devourer",
+   "qty": 1
+  },
+  {
+   "name": "Simic Growth Chamber",
+   "qty": 1
+  },
+  {
+   "name": "Simic Signet",
+   "qty": 1
+  },
+  {
+   "name": "Skaab Ruinator",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Tangled Islet",
+   "qty": 1
+  },
+  {
+   "name": "Tatyova, Benthic Druid",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Mystery",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the False God",
+   "qty": 1
+  },
+  {
+   "name": "Temur War Shaman",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "They Came from the Pipes",
+   "qty": 1
+  },
+  {
+   "name": "Thornwood Falls",
+   "qty": 1
+  },
+  {
+   "name": "Thunderfoot Baloth",
+   "qty": 1
+  },
+  {
+   "name": "Trail of Mystery",
+   "qty": 1
+  },
+  {
+   "name": "Trygon Predator",
+   "qty": 1
+  },
+  {
+   "name": "Vineglimmer Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Whisperwood Elemental",
+   "qty": 1
+  },
+  {
+   "name": "Wilderness Reclamation",
+   "qty": 1
+  },
+  {
+   "name": "Worldspine Wurm",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Elder",
+   "qty": 1
+  },
+  {
+   "name": "Yedora, Grave Gardener",
+   "qty": 1
+  },
+  {
+   "name": "Zimone's Hypothesis",
+   "qty": 1
+  }
+ ]
+}

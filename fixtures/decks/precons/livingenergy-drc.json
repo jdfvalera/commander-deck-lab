@@ -1,0 +1,355 @@
+{
+ "id": "livingenergy-drc",
+ "name": "Living Energy (DRC)",
+ "source": "MTGJSON LivingEnergy_DRC",
+ "releaseDate": "2025-02-14",
+ "commanders": [
+  "Saheeli, Radiant Creator"
+ ],
+ "cards": [
+  {
+   "name": "Academy Ruins",
+   "qty": 1
+  },
+  {
+   "name": "Adaptive Omnitool",
+   "qty": 1
+  },
+  {
+   "name": "Aether Hub",
+   "qty": 1
+  },
+  {
+   "name": "Aetherflux Conduit",
+   "qty": 1
+  },
+  {
+   "name": "Aetheric Amplifier",
+   "qty": 1
+  },
+  {
+   "name": "Aethersquall Ancient",
+   "qty": 1
+  },
+  {
+   "name": "Aethertide Whale",
+   "qty": 1
+  },
+  {
+   "name": "Aetherwind Basker",
+   "qty": 1
+  },
+  {
+   "name": "Aetherworks Marvel",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Denial",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Architect of the Untamed",
+   "qty": 1
+  },
+  {
+   "name": "Attune with Aether",
+   "qty": 1
+  },
+  {
+   "name": "Bespoke Battlewagon",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Bootleggers' Stash",
+   "qty": 1
+  },
+  {
+   "name": "Chain Reaction",
+   "qty": 1
+  },
+  {
+   "name": "Chaos Warp",
+   "qty": 1
+  },
+  {
+   "name": "Chromatic Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Combustible Gearhulk",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Confiscation Coup",
+   "qty": 1
+  },
+  {
+   "name": "Conjurer's Closet",
+   "qty": 1
+  },
+  {
+   "name": "Cultivator's Caravan",
+   "qty": 1
+  },
+  {
+   "name": "Decoction Module",
+   "qty": 1
+  },
+  {
+   "name": "Disallow",
+   "qty": 1
+  },
+  {
+   "name": "Druid of Purification",
+   "qty": 1
+  },
+  {
+   "name": "Duplicant",
+   "qty": 1
+  },
+  {
+   "name": "Elder Gargaroth",
+   "qty": 1
+  },
+  {
+   "name": "Era of Innovation",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Explosive Vegetation",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 6
+  },
+  {
+   "name": "Frontier Bivouac",
+   "qty": 1
+  },
+  {
+   "name": "Frostboil Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Glimmer of Genius",
+   "qty": 1
+  },
+  {
+   "name": "Hinterland Harbor",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 5
+  },
+  {
+   "name": "Karplusan Forest",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Runner",
+   "qty": 1
+  },
+  {
+   "name": "Loyal Apprentice",
+   "qty": 1
+  },
+  {
+   "name": "Midnight Clock",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 5
+  },
+  {
+   "name": "Nissa, Worldsoul Speaker",
+   "qty": 1
+  },
+  {
+   "name": "One with the Machine",
+   "qty": 1
+  },
+  {
+   "name": "Ornithopter of Paradise",
+   "qty": 1
+  },
+  {
+   "name": "Overflowing Basin",
+   "qty": 1
+  },
+  {
+   "name": "Panharmonicon",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Peema Aether-Seer",
+   "qty": 1
+  },
+  {
+   "name": "Peema Trailblazer",
+   "qty": 1
+  },
+  {
+   "name": "Pia and Kiran Nalaar",
+   "qty": 1
+  },
+  {
+   "name": "Pia Nalaar, Chief Mechanic",
+   "qty": 1
+  },
+  {
+   "name": "Rampaging Aetherhood",
+   "qty": 1
+  },
+  {
+   "name": "Reality Shift",
+   "qty": 1
+  },
+  {
+   "name": "Reckless Fireweaver",
+   "qty": 1
+  },
+  {
+   "name": "Retrofitter Foundry",
+   "qty": 1
+  },
+  {
+   "name": "Rogue Refiner",
+   "qty": 1
+  },
+  {
+   "name": "Rootbound Crag",
+   "qty": 1
+  },
+  {
+   "name": "Saheeli, Sublime Artificer",
+   "qty": 1
+  },
+  {
+   "name": "Sai, Master Thopterist",
+   "qty": 1
+  },
+  {
+   "name": "Servant of the Conduit",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Slagwoods Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solar Transformer",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Soul-Guide Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Spire of Industry",
+   "qty": 1
+  },
+  {
+   "name": "Stridehangar Automaton",
+   "qty": 1
+  },
+  {
+   "name": "Sulfur Falls",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Curiosity",
+   "qty": 1
+  },
+  {
+   "name": "Tanglepool Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Epiphany",
+   "qty": 1
+  },
+  {
+   "name": "Territorial Aetherkite",
+   "qty": 1
+  },
+  {
+   "name": "Thopter Spy Network",
+   "qty": 1
+  },
+  {
+   "name": "Treasure Vault",
+   "qty": 1
+  },
+  {
+   "name": "Triplicate Titan",
+   "qty": 1
+  },
+  {
+   "name": "Vineglimmer Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Whirler Rogue",
+   "qty": 1
+  },
+  {
+   "name": "Whirler Virtuoso",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1
+  }
+ ]
+}

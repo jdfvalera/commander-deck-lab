@@ -17,9 +17,32 @@ function isBackground(card: ScryfallCard): boolean {
   return /Legendary/.test(typeLine(card)) && /\bBackground\b/.test(typeLine(card));
 }
 
-function canBeCommander(card: ScryfallCard): boolean {
+/**
+ * Legendary creatures, cards that say so, and (since the 2025 rules update) legendary Vehicles and
+ * Spacecraft with a power/toughness box, like the Edge of Eternities precon commanders.
+ */
+export function canBeCommander(card: ScryfallCard): boolean {
   const type = typeLine(card);
-  return (/Legendary/.test(type) && /Creature/.test(type)) || /can be your commander/i.test(oracleText(card));
+  if (!/Legendary/.test(type)) return /can be your commander/i.test(oracleText(card));
+  if (/Creature/.test(type)) return true;
+  const hasPT = (card.power ?? card.card_faces?.[0]?.power) !== undefined;
+  return (/\b(Vehicle|Spacecraft)\b/.test(type) && hasPT) || /can be your commander/i.test(oracleText(card));
+}
+
+/**
+ * Many exports (Moxfield, Archidekt "text") list the commander first with no heading. When no
+ * commander is marked, use the first card, or the first two if they're a legal pair.
+ */
+export function guessCommanders(list: DeckList, lookup: (name: string) => ScryfallCard | undefined): { list: DeckList; guessed: string[] } {
+  if (list.commanders.length || !list.cards.length) return { list, guessed: [] };
+  const [a, b] = list.cards.map((e) => ({ e, c: lookup(e.name) }));
+  const ok = (x?: { e: { qty: number }; c?: ScryfallCard }) => !!x?.c && x.e.qty === 1 && (canBeCommander(x.c) || isBackground(x.c));
+  let take = 0;
+  if (ok(a) && ok(b) && !pairProblem(a.c!, b.c!)) take = 2;
+  else if (a?.c && a.e.qty === 1 && canBeCommander(a.c)) take = 1;
+  if (!take) return { list, guessed: [] };
+  const guessed = list.cards.slice(0, take).map((e) => e.name);
+  return { list: { commanders: guessed, cards: list.cards.slice(take) }, guessed };
 }
 
 /** What lets a card share the command zone, read from its rules text (rule 702.124 and friends). */

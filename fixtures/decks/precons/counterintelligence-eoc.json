@@ -1,0 +1,383 @@
+{
+ "id": "counterintelligence-eoc",
+ "name": "Counter Intelligence (EOC)",
+ "source": "MTGJSON CounterIntelligence_EOC",
+ "releaseDate": "2025-08-01",
+ "commanders": [
+  "Inspirit, Flagship Vessel"
+ ],
+ "cards": [
+  {
+   "name": "Adarkar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Alibou, Ancient Witness",
+   "qty": 1
+  },
+  {
+   "name": "Ancient Den",
+   "qty": 1
+  },
+  {
+   "name": "Angel of the Ruins",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Astral Cornucopia",
+   "qty": 1
+  },
+  {
+   "name": "Battlefield Forge",
+   "qty": 1
+  },
+  {
+   "name": "Buried Ruin",
+   "qty": 1
+  },
+  {
+   "name": "Cascade Bluffs",
+   "qty": 1
+  },
+  {
+   "name": "Chain Reaction",
+   "qty": 1
+  },
+  {
+   "name": "Chaos Warp",
+   "qty": 1
+  },
+  {
+   "name": "Chrome Host Seedshark",
+   "qty": 1
+  },
+  {
+   "name": "Clifftop Retreat",
+   "qty": 1
+  },
+  {
+   "name": "Cloud Key",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Coretapper",
+   "qty": 1
+  },
+  {
+   "name": "Crystalline Crawler",
+   "qty": 1
+  },
+  {
+   "name": "Cyberdrive Awakener",
+   "qty": 1
+  },
+  {
+   "name": "Darksteel Reactor",
+   "qty": 1
+  },
+  {
+   "name": "Deepglow Skate",
+   "qty": 1
+  },
+  {
+   "name": "Depthshaker Titan",
+   "qty": 1
+  },
+  {
+   "name": "Dispatch",
+   "qty": 1
+  },
+  {
+   "name": "Empowered Autogenerator",
+   "qty": 1
+  },
+  {
+   "name": "Emry, Lurker of the Loch",
+   "qty": 1
+  },
+  {
+   "name": "Enthusiastic Mechanaut",
+   "qty": 1
+  },
+  {
+   "name": "Etched Oracle",
+   "qty": 1
+  },
+  {
+   "name": "Etherium Sculptor",
+   "qty": 1
+  },
+  {
+   "name": "Everflowing Chalice",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Experimental Augury",
+   "qty": 1
+  },
+  {
+   "name": "Fumigate",
+   "qty": 1
+  },
+  {
+   "name": "Gavel of the Righteous",
+   "qty": 1
+  },
+  {
+   "name": "Glacial Fortress",
+   "qty": 1
+  },
+  {
+   "name": "Glittering Massif",
+   "qty": 1
+  },
+  {
+   "name": "Golem Foundry",
+   "qty": 1
+  },
+  {
+   "name": "Great Furnace",
+   "qty": 1
+  },
+  {
+   "name": "Hangarback Walker",
+   "qty": 1
+  },
+  {
+   "name": "Insight Engine",
+   "qty": 1
+  },
+  {
+   "name": "Irrigated Farmland",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 3
+  },
+  {
+   "name": "Jhoira, Weatherlight Captain",
+   "qty": 1
+  },
+  {
+   "name": "Kappa Cannoneer",
+   "qty": 1
+  },
+  {
+   "name": "Karn's Bastion",
+   "qty": 1
+  },
+  {
+   "name": "Kilo, Apogee Mind",
+   "qty": 1
+  },
+  {
+   "name": "Lonely Sandbar",
+   "qty": 1
+  },
+  {
+   "name": "Long-Range Sensor",
+   "qty": 1
+  },
+  {
+   "name": "Lux Artillery",
+   "qty": 1
+  },
+  {
+   "name": "Lux Cannon",
+   "qty": 1
+  },
+  {
+   "name": "Mindless Automaton",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 3
+  },
+  {
+   "name": "Moxite Refinery",
+   "qty": 1
+  },
+  {
+   "name": "Mystic Monastery",
+   "qty": 1
+  },
+  {
+   "name": "Organic Extinction",
+   "qty": 1
+  },
+  {
+   "name": "Patrolling Peacemaker",
+   "qty": 1
+  },
+  {
+   "name": "Pentad Prism",
+   "qty": 1
+  },
+  {
+   "name": "Phyrexian Metamorph",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 3
+  },
+  {
+   "name": "Pull from Tomorrow",
+   "qty": 1
+  },
+  {
+   "name": "Radiant Summit",
+   "qty": 1
+  },
+  {
+   "name": "Razortide Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Resourceful Defense",
+   "qty": 1
+  },
+  {
+   "name": "Ripples of Potential",
+   "qty": 1
+  },
+  {
+   "name": "Rugged Prairie",
+   "qty": 1
+  },
+  {
+   "name": "Rustvale Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Seat of the Synod",
+   "qty": 1
+  },
+  {
+   "name": "Secluded Steppe",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Silverbluff Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Skycloud Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solar Array",
+   "qty": 1
+  },
+  {
+   "name": "Soul-Guide Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Spire of Industry",
+   "qty": 1
+  },
+  {
+   "name": "Steel Overseer",
+   "qty": 1
+  },
+  {
+   "name": "Sulfur Falls",
+   "qty": 1
+  },
+  {
+   "name": "Surge Conductor",
+   "qty": 1
+  },
+  {
+   "name": "Swan Song",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Tekuthal, Inquiry Dominus",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Enlightenment",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Epiphany",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Triumph",
+   "qty": 1
+  },
+  {
+   "name": "Tezzeret's Gambit",
+   "qty": 1
+  },
+  {
+   "name": "The Mycosynth Gardens",
+   "qty": 1
+  },
+  {
+   "name": "Thirst for Knowledge",
+   "qty": 1
+  },
+  {
+   "name": "Thought Monitor",
+   "qty": 1
+  },
+  {
+   "name": "Threefold Thunderhulk",
+   "qty": 1
+  },
+  {
+   "name": "Thrummingbird",
+   "qty": 1
+  },
+  {
+   "name": "Titan Forge",
+   "qty": 1
+  },
+  {
+   "name": "Universal Surveillance",
+   "qty": 1
+  },
+  {
+   "name": "Uthros Research Craft",
+   "qty": 1
+  },
+  {
+   "name": "Wake the Past",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,283 @@
+{
+ "id": "tramplesaurusrex-fdc",
+ "name": "Tramplesaurus Rex (FDC)",
+ "source": "MTGJSON TramplesaurusRex_FDC",
+ "releaseDate": "2026-10-02",
+ "commanders": [
+  "Ghalta, Primal Hunger"
+ ],
+ "cards": [
+  {
+   "name": "Arachnogenesis",
+   "qty": 1
+  },
+  {
+   "name": "Arasta of the Endless Web",
+   "qty": 1
+  },
+  {
+   "name": "Beast Whisperer",
+   "qty": 1
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1
+  },
+  {
+   "name": "Birds of Paradise",
+   "qty": 1
+  },
+  {
+   "name": "Bite Down",
+   "qty": 1
+  },
+  {
+   "name": "Bonders' Enclave",
+   "qty": 1
+  },
+  {
+   "name": "Carnage Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Challenger Troll",
+   "qty": 1
+  },
+  {
+   "name": "Clifftop Lookout",
+   "qty": 1
+  },
+  {
+   "name": "Collective Resistance",
+   "qty": 1
+  },
+  {
+   "name": "Colossal Majesty",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Curious Altisaur",
+   "qty": 1
+  },
+  {
+   "name": "Dungrove Elder",
+   "qty": 1
+  },
+  {
+   "name": "Elder Gargaroth",
+   "qty": 1
+  },
+  {
+   "name": "Elemental Bond",
+   "qty": 1
+  },
+  {
+   "name": "Elvish Mystic",
+   "qty": 1
+  },
+  {
+   "name": "Ezuri's Predation",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 32
+  },
+  {
+   "name": "Fyndhorn Elves",
+   "qty": 1
+  },
+  {
+   "name": "Garruk's Packleader",
+   "qty": 1
+  },
+  {
+   "name": "Garruk's Uprising",
+   "qty": 1
+  },
+  {
+   "name": "Gigantosaurus",
+   "qty": 1
+  },
+  {
+   "name": "Goreclaw, Terror of Qal Sisma",
+   "qty": 1
+  },
+  {
+   "name": "Harmonize",
+   "qty": 1
+  },
+  {
+   "name": "Hulking Raptor",
+   "qty": 1
+  },
+  {
+   "name": "Ilysian Caryatid",
+   "qty": 1
+  },
+  {
+   "name": "Kenrith's Transformation",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Elves",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Tribe",
+   "qty": 1
+  },
+  {
+   "name": "Loot, Exuberant Explorer",
+   "qty": 1
+  },
+  {
+   "name": "Managorger Hydra",
+   "qty": 1
+  },
+  {
+   "name": "Monstrous Onslaught",
+   "qty": 1
+  },
+  {
+   "name": "Mosswort Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Overwhelming Stampede",
+   "qty": 1
+  },
+  {
+   "name": "Paradise Druid",
+   "qty": 1
+  },
+  {
+   "name": "Pugnacious Hammerskull",
+   "qty": 1
+  },
+  {
+   "name": "Ram Through",
+   "qty": 1
+  },
+  {
+   "name": "Regal Imperiosaur",
+   "qty": 1
+  },
+  {
+   "name": "Rhonas the Indomitable",
+   "qty": 1
+  },
+  {
+   "name": "Rhonas's Monument",
+   "qty": 1
+  },
+  {
+   "name": "Ripjaw Raptor",
+   "qty": 1
+  },
+  {
+   "name": "Rishkar, Peema Renegade",
+   "qty": 1
+  },
+  {
+   "name": "Rishkar's Expertise",
+   "qty": 1
+  },
+  {
+   "name": "Rogue's Passage",
+   "qty": 1
+  },
+  {
+   "name": "Scavenger Grounds",
+   "qty": 1
+  },
+  {
+   "name": "Scavenging Ooze",
+   "qty": 1
+  },
+  {
+   "name": "Scrapshooter",
+   "qty": 1
+  },
+  {
+   "name": "Shamanic Revelation",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Steel Leaf Champion",
+   "qty": 1
+  },
+  {
+   "name": "Surrak and Goreclaw",
+   "qty": 1
+  },
+  {
+   "name": "Surrak, the Hunt Caller",
+   "qty": 1
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Tamiyo's Safekeeping",
+   "qty": 1
+  },
+  {
+   "name": "Tangleweave Armor",
+   "qty": 1
+  },
+  {
+   "name": "Terrian, World Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Thickest in the Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Thrashing Brontodon",
+   "qty": 1
+  },
+  {
+   "name": "Tranquil Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Unnatural Growth",
+   "qty": 1
+  },
+  {
+   "name": "Verdant Sun's Avatar",
+   "qty": 1
+  },
+  {
+   "name": "War Room",
+   "qty": 1
+  },
+  {
+   "name": "Whiptongue Hydra",
+   "qty": 1
+  },
+  {
+   "name": "Whisperer of the Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Witch's Clinic",
+   "qty": 1
+  },
+  {
+   "name": "Yeva, Nature's Herald",
+   "qty": 1
+  }
+ ]
+}

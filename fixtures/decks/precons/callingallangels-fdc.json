@@ -1,0 +1,283 @@
+{
+ "id": "callingallangels-fdc",
+ "name": "Calling All Angels (FDC)",
+ "source": "MTGJSON CallingAllAngels_FDC",
+ "releaseDate": "2026-10-02",
+ "commanders": [
+  "Giada, Font of Hope"
+ ],
+ "cards": [
+  {
+   "name": "Always Watching",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Finality",
+   "qty": 1
+  },
+  {
+   "name": "Angel of the Ruins",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Vitality",
+   "qty": 1
+  },
+  {
+   "name": "Angelic Destiny",
+   "qty": 1
+  },
+  {
+   "name": "Angelic Field Marshal",
+   "qty": 1
+  },
+  {
+   "name": "Angelic Sleuth",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archangel of Tithes",
+   "qty": 1
+  },
+  {
+   "name": "Austere Command",
+   "qty": 1
+  },
+  {
+   "name": "Bishop of Wings",
+   "qty": 1
+  },
+  {
+   "name": "Bonders' Enclave",
+   "qty": 1
+  },
+  {
+   "name": "Cleansing Nova",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Court of Grace",
+   "qty": 1
+  },
+  {
+   "name": "Cut a Deal",
+   "qty": 1
+  },
+  {
+   "name": "Day of Judgment",
+   "qty": 1
+  },
+  {
+   "name": "Dazzling Angel",
+   "qty": 1
+  },
+  {
+   "name": "Defy Death",
+   "qty": 1
+  },
+  {
+   "name": "Destroy Evil",
+   "qty": 1
+  },
+  {
+   "name": "Emeria Shepherd",
+   "qty": 1
+  },
+  {
+   "name": "Endless Atlas",
+   "qty": 1
+  },
+  {
+   "name": "Exemplar of Light",
+   "qty": 1
+  },
+  {
+   "name": "Exorcise",
+   "qty": 1
+  },
+  {
+   "name": "Fateful Absence",
+   "qty": 1
+  },
+  {
+   "name": "Firemane Commando",
+   "qty": 1
+  },
+  {
+   "name": "Grasp of Fate",
+   "qty": 1
+  },
+  {
+   "name": "Herald of Eternal Dawn",
+   "qty": 1
+  },
+  {
+   "name": "Herald of War",
+   "qty": 1
+  },
+  {
+   "name": "Heraldic Banner",
+   "qty": 1
+  },
+  {
+   "name": "Inspiring Overseer",
+   "qty": 1
+  },
+  {
+   "name": "Invoke the Divine",
+   "qty": 1
+  },
+  {
+   "name": "Linvala, the Preserver",
+   "qty": 1
+  },
+  {
+   "name": "Lyra Dawnbringer",
+   "qty": 1
+  },
+  {
+   "name": "Marble Diamond",
+   "qty": 1
+  },
+  {
+   "name": "Merchant of Truth",
+   "qty": 1
+  },
+  {
+   "name": "Metallic Mimic",
+   "qty": 1
+  },
+  {
+   "name": "Metropolis Reformer",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Norn's Choirmaster",
+   "qty": 1
+  },
+  {
+   "name": "Patchwork Banner",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 32
+  },
+  {
+   "name": "Radiant Fountain",
+   "qty": 1
+  },
+  {
+   "name": "Reya Dawnbringer",
+   "qty": 1
+  },
+  {
+   "name": "Righteous Valkyrie",
+   "qty": 1
+  },
+  {
+   "name": "Search the Premises",
+   "qty": 1
+  },
+  {
+   "name": "Secluded Steppe",
+   "qty": 1
+  },
+  {
+   "name": "Secret Rendezvous",
+   "qty": 1
+  },
+  {
+   "name": "Segovian Angel",
+   "qty": 1
+  },
+  {
+   "name": "Sephara, Sky's Blade",
+   "qty": 1
+  },
+  {
+   "name": "Seraph of the Sword",
+   "qty": 1
+  },
+  {
+   "name": "Seraph Sanctuary",
+   "qty": 1
+  },
+  {
+   "name": "Serra Avenger",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Speaker of the Heavens",
+   "qty": 1
+  },
+  {
+   "name": "Starnheim Aspirant",
+   "qty": 1
+  },
+  {
+   "name": "Sunblast Angel",
+   "qty": 1
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the False God",
+   "qty": 1
+  },
+  {
+   "name": "Thraben Watcher",
+   "qty": 1
+  },
+  {
+   "name": "Tome of Legends",
+   "qty": 1
+  },
+  {
+   "name": "Valorous Stance",
+   "qty": 1
+  },
+  {
+   "name": "Vanguard Seraph",
+   "qty": 1
+  },
+  {
+   "name": "Vanquisher's Banner",
+   "qty": 1
+  },
+  {
+   "name": "War Room",
+   "qty": 1
+  },
+  {
+   "name": "Wojek Investigator",
+   "qty": 1
+  },
+  {
+   "name": "Youthful Valkyrie",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,387 @@
+{
+ "id": "trickyterrain-m3c",
+ "name": "Tricky Terrain (M3C)",
+ "source": "MTGJSON TrickyTerrain_M3C",
+ "releaseDate": "2024-06-14",
+ "commanders": [
+  "Omo, Queen of Vesuva"
+ ],
+ "cards": [
+  {
+   "name": "Acidic Slime",
+   "qty": 1
+  },
+  {
+   "name": "Aggressive Biomancy",
+   "qty": 1
+  },
+  {
+   "name": "Apex Devastator",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Denial",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Avenger of Zendikar",
+   "qty": 1
+  },
+  {
+   "name": "Basilisk Gate",
+   "qty": 1
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1
+  },
+  {
+   "name": "Blast Zone",
+   "qty": 1
+  },
+  {
+   "name": "Chromatic Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Cloudpost",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Copy Land",
+   "qty": 1
+  },
+  {
+   "name": "Curse of the Swine",
+   "qty": 1
+  },
+  {
+   "name": "Dark Depths",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Indomitable",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Mindful",
+   "qty": 1
+  },
+  {
+   "name": "Desert Warfare",
+   "qty": 1
+  },
+  {
+   "name": "Dreamroot Cascade",
+   "qty": 1
+  },
+  {
+   "name": "Drown in Dreams",
+   "qty": 1
+  },
+  {
+   "name": "Dryad of the Ilysian Grove",
+   "qty": 1
+  },
+  {
+   "name": "Elvish Rejuvenator",
+   "qty": 1
+  },
+  {
+   "name": "Eureka Moment",
+   "qty": 1
+  },
+  {
+   "name": "Evacuation",
+   "qty": 1
+  },
+  {
+   "name": "Expedition Map",
+   "qty": 1
+  },
+  {
+   "name": "Finale of Revelation",
+   "qty": 1
+  },
+  {
+   "name": "Flooded Grove",
+   "qty": 1
+  },
+  {
+   "name": "Floriferous Vinewall",
+   "qty": 1
+  },
+  {
+   "name": "Fog Bank",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 4
+  },
+  {
+   "name": "Glimmerpost",
+   "qty": 1
+  },
+  {
+   "name": "Growth Spiral",
+   "qty": 1
+  },
+  {
+   "name": "Harmonize",
+   "qty": 1
+  },
+  {
+   "name": "Hashep Oasis",
+   "qty": 1
+  },
+  {
+   "name": "Hidden Cataract",
+   "qty": 1
+  },
+  {
+   "name": "Hidden Nursery",
+   "qty": 1
+  },
+  {
+   "name": "Horizon of Progress",
+   "qty": 1
+  },
+  {
+   "name": "Hour of Promise",
+   "qty": 1
+  },
+  {
+   "name": "Hydra Broodmaster",
+   "qty": 1
+  },
+  {
+   "name": "Hydroid Krasis",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 3
+  },
+  {
+   "name": "Jyoti, Moag Ancient",
+   "qty": 1
+  },
+  {
+   "name": "Lair of the Hydra",
+   "qty": 1
+  },
+  {
+   "name": "Lazotep Quarry",
+   "qty": 1
+  },
+  {
+   "name": "Lumbering Falls",
+   "qty": 1
+  },
+  {
+   "name": "Lush Oasis",
+   "qty": 1
+  },
+  {
+   "name": "Magus of the Candelabra",
+   "qty": 1
+  },
+  {
+   "name": "Mana Reflection",
+   "qty": 1
+  },
+  {
+   "name": "March from Velis Vel",
+   "qty": 1
+  },
+  {
+   "name": "Mirage Mirror",
+   "qty": 1
+  },
+  {
+   "name": "Nissa, Steward of Elements",
+   "qty": 1
+  },
+  {
+   "name": "Oblivion Stone",
+   "qty": 1
+  },
+  {
+   "name": "Overflowing Basin",
+   "qty": 1
+  },
+  {
+   "name": "Planar Nexus",
+   "qty": 1
+  },
+  {
+   "name": "Poison Dart Frog",
+   "qty": 1
+  },
+  {
+   "name": "Pongify",
+   "qty": 1
+  },
+  {
+   "name": "Propaganda",
+   "qty": 1
+  },
+  {
+   "name": "Quandrix Campus",
+   "qty": 1
+  },
+  {
+   "name": "Rampaging Baloths",
+   "qty": 1
+  },
+  {
+   "name": "Rampant Frogantua",
+   "qty": 1
+  },
+  {
+   "name": "Ramunap Excavator",
+   "qty": 1
+  },
+  {
+   "name": "Replication Technique",
+   "qty": 1
+  },
+  {
+   "name": "Sage of the Maze",
+   "qty": 1
+  },
+  {
+   "name": "Satyr Wayfinder",
+   "qty": 1
+  },
+  {
+   "name": "Scute Swarm",
+   "qty": 1
+  },
+  {
+   "name": "Seer's Sundial",
+   "qty": 1
+  },
+  {
+   "name": "Simic Growth Chamber",
+   "qty": 1
+  },
+  {
+   "name": "Simic Guildgate",
+   "qty": 1
+  },
+  {
+   "name": "Skullwinder",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Summary Dismissal",
+   "qty": 1
+  },
+  {
+   "name": "Sunken Palace",
+   "qty": 1
+  },
+  {
+   "name": "Sylvan Scrying",
+   "qty": 1
+  },
+  {
+   "name": "Talon Gates of Madara",
+   "qty": 1
+  },
+  {
+   "name": "Tatyova, Benthic Druid",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Mystery",
+   "qty": 1
+  },
+  {
+   "name": "Terastodon",
+   "qty": 1
+  },
+  {
+   "name": "Thespian's Stage",
+   "qty": 1
+  },
+  {
+   "name": "Thornwood Falls",
+   "qty": 1
+  },
+  {
+   "name": "Treasure Cruise",
+   "qty": 1
+  },
+  {
+   "name": "Trenchpost",
+   "qty": 1
+  },
+  {
+   "name": "Ulvenwald Hydra",
+   "qty": 1
+  },
+  {
+   "name": "Urban Evolution",
+   "qty": 1
+  },
+  {
+   "name": "Uro, Titan of Nature's Wrath",
+   "qty": 1
+  },
+  {
+   "name": "Urza's Mine",
+   "qty": 1
+  },
+  {
+   "name": "Urza's Power Plant",
+   "qty": 1
+  },
+  {
+   "name": "Urza's Tower",
+   "qty": 1
+  },
+  {
+   "name": "Vesuva",
+   "qty": 1
+  },
+  {
+   "name": "Vineglimmer Snarl",
+   "qty": 1
+  },
+  {
+   "name": "Vivien Reid",
+   "qty": 1
+  },
+  {
+   "name": "Volatile Fault",
+   "qty": 1
+  },
+  {
+   "name": "Wonderscape Sage",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya, Cradle of Growth",
+   "qty": 1
+  }
+ ]
+}

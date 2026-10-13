@@ -1,0 +1,363 @@
+{
+ "id": "temurroar-tdc",
+ "name": "Temur Roar (TDC)",
+ "source": "MTGJSON TemurRoar_TDC",
+ "releaseDate": "2025-04-11",
+ "commanders": [
+  "Eshki, Temur's Roar"
+ ],
+ "cards": [
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Atarka, World Render",
+   "qty": 1
+  },
+  {
+   "name": "Atsushi, the Blazing Sky",
+   "qty": 1
+  },
+  {
+   "name": "Beast Within",
+   "qty": 1
+  },
+  {
+   "name": "Become the Avalanche",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Bountiful Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Breaching Dragonstorm",
+   "qty": 1
+  },
+  {
+   "name": "Broodcaller Scourge",
+   "qty": 1
+  },
+  {
+   "name": "Chaos Warp",
+   "qty": 1
+  },
+  {
+   "name": "Cinder Glade",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Deceptive Frostkite",
+   "qty": 1
+  },
+  {
+   "name": "Draconic Lore",
+   "qty": 1
+  },
+  {
+   "name": "Dragon Tempest",
+   "qty": 1
+  },
+  {
+   "name": "Dragon's Hoard",
+   "qty": 1
+  },
+  {
+   "name": "Dragonlord Atarka",
+   "qty": 1
+  },
+  {
+   "name": "Dragonlord's Servant",
+   "qty": 1
+  },
+  {
+   "name": "Dragonmaster Outcast",
+   "qty": 1
+  },
+  {
+   "name": "Elemental Bond",
+   "qty": 1
+  },
+  {
+   "name": "Encroaching Dragonstorm",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Farseek",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Flooded Grove",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 5
+  },
+  {
+   "name": "Frontier Bivouac",
+   "qty": 1
+  },
+  {
+   "name": "Frontier Siege",
+   "qty": 1
+  },
+  {
+   "name": "Gadrak, the Crown-Scourge",
+   "qty": 1
+  },
+  {
+   "name": "Glorybringer",
+   "qty": 1
+  },
+  {
+   "name": "Hammerhead Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Harbinger of the Hunt",
+   "qty": 1
+  },
+  {
+   "name": "Haven of the Spirit Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Hellkite Courser",
+   "qty": 1
+  },
+  {
+   "name": "Hinterland Harbor",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 3
+  },
+  {
+   "name": "Karplusan Forest",
+   "qty": 1
+  },
+  {
+   "name": "Keiga, the Tide Star",
+   "qty": 1
+  },
+  {
+   "name": "Kessig Wolf Run",
+   "qty": 1
+  },
+  {
+   "name": "Kodama's Reach",
+   "qty": 1
+  },
+  {
+   "name": "Lathliss, Dragon Queen",
+   "qty": 1
+  },
+  {
+   "name": "Leyline Tyrant",
+   "qty": 1
+  },
+  {
+   "name": "Migration Path",
+   "qty": 1
+  },
+  {
+   "name": "Mossfire Valley",
+   "qty": 1
+  },
+  {
+   "name": "Mosswort Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 6
+  },
+  {
+   "name": "Nesting Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Nogi, Draco-Zealot",
+   "qty": 1
+  },
+  {
+   "name": "Opportunistic Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Parapet Thrasher",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Rapacious Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Rapid Hybridization",
+   "qty": 1
+  },
+  {
+   "name": "Reality Shift",
+   "qty": 1
+  },
+  {
+   "name": "Reflections of Littjara",
+   "qty": 1
+  },
+  {
+   "name": "Rockfall Vale",
+   "qty": 1
+  },
+  {
+   "name": "Rootbound Crag",
+   "qty": 1
+  },
+  {
+   "name": "Sarkhan, Soul Aflame",
+   "qty": 1
+  },
+  {
+   "name": "Scourge of the Throne",
+   "qty": 1
+  },
+  {
+   "name": "Selvala's Stampede",
+   "qty": 1
+  },
+  {
+   "name": "Sheltered Thicket",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Skarrgan Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Spit Flame",
+   "qty": 1
+  },
+  {
+   "name": "Steel Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Storm's Wrath",
+   "qty": 1
+  },
+  {
+   "name": "Stormbreath Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Stormshriek Feral // Flush Out",
+   "qty": 1
+  },
+  {
+   "name": "Sulfur Falls",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Creativity",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Impulse",
+   "qty": 1
+  },
+  {
+   "name": "Taurean Mauler",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Abandon",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Mystery",
+   "qty": 1
+  },
+  {
+   "name": "Temple of the Dragon Queen",
+   "qty": 1
+  },
+  {
+   "name": "Temur Ascendancy",
+   "qty": 1
+  },
+  {
+   "name": "Territorial Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Thunderbreak Regent",
+   "qty": 1
+  },
+  {
+   "name": "Thundermane Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Ureni of the Unwritten",
+   "qty": 1
+  },
+  {
+   "name": "Vengeful Ancestor",
+   "qty": 1
+  },
+  {
+   "name": "Verix Bladewing",
+   "qty": 1
+  },
+  {
+   "name": "Whirlwing Stormbrood // Dynamic Soar",
+   "qty": 1
+  },
+  {
+   "name": "Will of the Temur",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1
+  },
+  {
+   "name": "Zenith Festival",
+   "qty": 1
+  }
+ ]
+}

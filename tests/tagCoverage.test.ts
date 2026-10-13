@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { writeFileSync } from 'node:fs';
 import corpusJson from '../fixtures/scryfall/corpus.json';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
+import wideJson from '../fixtures/scryfall/decks-wide.json';
 import { autoTag } from '../src/tags/autoTag';
 import { parseDecklist } from '../src/data/parseDecklist';
-import { nameKey } from '../src/data/names';
+import { cardKeys, nameKey } from '../src/data/names';
 import type { ScryfallCard } from '../src/data/types';
 
 const corpus = corpusJson as ScryfallCard[];
@@ -49,5 +50,29 @@ describe('auto-tag coverage on general Commander cards', () => {
     expect(cards.length).toBe(65); // 66 lines minus basic Islands
     // Was 56 of 65 before; most of what's left is combo-specific text.
     expect(c.withGaps).toBeLessThanOrEqual(22);
+  });
+});
+
+// 34 official Commander precons (MTGJSON) plus real user decks from Moxfield/Archidekt.
+describe('auto-tag coverage across real decks', () => {
+  const cards = new Map<string, ScryfallCard>();
+  for (const c of wideJson as ScryfallCard[]) for (const k of cardKeys(c)) cards.set(k, c);
+  const decks = ['fixtures/decks/precons', 'fixtures/decks/user'].flatMap((d) =>
+    readdirSync(d).filter((f) => f.endsWith('.json')).map((f) => JSON.parse(readFileSync(`${d}/${f}`, 'utf8')) as { name: string; commanders: string[]; cards: { name: string }[] }),
+  );
+  const perDeck = decks.map((d) => {
+    const uniq = [...new Set([...d.commanders, ...d.cards.map((c) => c.name)])].map((n) => cards.get(nameKey(n))!).filter((c) => !/Basic/.test(c.type_line));
+    return { name: d.name, ...coverage(uniq) };
+  });
+
+  it('overall share of cards with game-relevant gaps stays under 50% (was 57%)', () => {
+    const total = perDeck.reduce((a, d) => a + d.total, 0);
+    const gaps = perDeck.reduce((a, d) => a + d.withGaps, 0);
+    expect((100 * gaps) / total).toBeLessThan(50);
+  });
+
+  // Worst today: Creative Energy (M3C) at 64%, an energy deck; energy counters aren't simulated, so they stay flagged.
+  it('no deck is worse than 65%', () => {
+    expect(perDeck.filter((d) => d.pct >= 65).map((d) => `${d.name} ${d.pct.toFixed(0)}%`)).toEqual([]);
   });
 });

@@ -1,0 +1,359 @@
+{
+ "id": "mardusurge-tdc",
+ "name": "Mardu Surge (TDC)",
+ "source": "MTGJSON MarduSurge_TDC",
+ "releaseDate": "2025-04-11",
+ "commanders": [
+  "Zurgo Stormrender"
+ ],
+ "cards": [
+  {
+   "name": "Abrade",
+   "qty": 1
+  },
+  {
+   "name": "Adeline, Resplendent Cathar",
+   "qty": 1
+  },
+  {
+   "name": "Ainok Strike Leader",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Invention",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Aron, Benalia's Ruin",
+   "qty": 1
+  },
+  {
+   "name": "Bastion of Remembrance",
+   "qty": 1
+  },
+  {
+   "name": "Battlefield Forge",
+   "qty": 1
+  },
+  {
+   "name": "Beetleback Chief",
+   "qty": 1
+  },
+  {
+   "name": "Bitter Triumph",
+   "qty": 1
+  },
+  {
+   "name": "Blade of Selves",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Bone Devourer",
+   "qty": 1
+  },
+  {
+   "name": "Canyon Slough",
+   "qty": 1
+  },
+  {
+   "name": "Castle Ardenvale",
+   "qty": 1
+  },
+  {
+   "name": "Castle Embereth",
+   "qty": 1
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1
+  },
+  {
+   "name": "Chittering Witch",
+   "qty": 1
+  },
+  {
+   "name": "Clifftop Retreat",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Insignia",
+   "qty": 1
+  },
+  {
+   "name": "Deadly Dispute",
+   "qty": 1
+  },
+  {
+   "name": "Divine Visitation",
+   "qty": 1
+  },
+  {
+   "name": "Dragonskull Summit",
+   "qty": 1
+  },
+  {
+   "name": "Eliminate the Competition",
+   "qty": 1
+  },
+  {
+   "name": "Emeria Angel",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Fetid Heath",
+   "qty": 1
+  },
+  {
+   "name": "Gix, Yawgmoth Praetor",
+   "qty": 1
+  },
+  {
+   "name": "Goldlust Triad",
+   "qty": 1
+  },
+  {
+   "name": "Goldnight Commander",
+   "qty": 1
+  },
+  {
+   "name": "Grand Crescendo",
+   "qty": 1
+  },
+  {
+   "name": "Grenzo, Havoc Raiser",
+   "qty": 1
+  },
+  {
+   "name": "Hero of Bladehold",
+   "qty": 1
+  },
+  {
+   "name": "Hour of Reckoning",
+   "qty": 1
+  },
+  {
+   "name": "Idol of Oblivion",
+   "qty": 1
+  },
+  {
+   "name": "Infantry Shield",
+   "qty": 1
+  },
+  {
+   "name": "Ironwill Forger",
+   "qty": 1
+  },
+  {
+   "name": "Isolated Chapel",
+   "qty": 1
+  },
+  {
+   "name": "Kaya, Geist Hunter",
+   "qty": 1
+  },
+  {
+   "name": "Legion Loyalty",
+   "qty": 1
+  },
+  {
+   "name": "Legion Warboss",
+   "qty": 1
+  },
+  {
+   "name": "Lightning Greaves",
+   "qty": 1
+  },
+  {
+   "name": "Lingering Souls",
+   "qty": 1
+  },
+  {
+   "name": "Loyal Apprentice",
+   "qty": 1
+  },
+  {
+   "name": "Mindblade Render",
+   "qty": 1
+  },
+  {
+   "name": "Morbid Opportunist",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 5
+  },
+  {
+   "name": "Myr Battlesphere",
+   "qty": 1
+  },
+  {
+   "name": "Neriv, Crackling Vanguard",
+   "qty": 1
+  },
+  {
+   "name": "Nomad Outpost",
+   "qty": 1
+  },
+  {
+   "name": "Ogre Battledriver",
+   "qty": 1
+  },
+  {
+   "name": "Ophiomancer",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 5
+  },
+  {
+   "name": "Redoubled Stormsinger",
+   "qty": 1
+  },
+  {
+   "name": "Release the Dogs",
+   "qty": 1
+  },
+  {
+   "name": "Selfless Spirit",
+   "qty": 1
+  },
+  {
+   "name": "Shadow Summoning",
+   "qty": 1
+  },
+  {
+   "name": "Shattered Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Shattered Sanctum",
+   "qty": 1
+  },
+  {
+   "name": "Siege-Gang Commander",
+   "qty": 1
+  },
+  {
+   "name": "Skullclamp",
+   "qty": 1
+  },
+  {
+   "name": "Smoldering Marsh",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Solemn Simulacrum",
+   "qty": 1
+  },
+  {
+   "name": "Stroke of Midnight",
+   "qty": 1
+  },
+  {
+   "name": "Sun Titan",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Conviction",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Hierarchy",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Triumph",
+   "qty": 1
+  },
+  {
+   "name": "Tempt with Vengeance",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "Thalisse, Reverent Medium",
+   "qty": 1
+  },
+  {
+   "name": "Tocasia's Welcome",
+   "qty": 1
+  },
+  {
+   "name": "Twilight Drover",
+   "qty": 1
+  },
+  {
+   "name": "Vault of the Archangel",
+   "qty": 1
+  },
+  {
+   "name": "Viscera Seer",
+   "qty": 1
+  },
+  {
+   "name": "Wayfarer's Bauble",
+   "qty": 1
+  },
+  {
+   "name": "Will of the Mardu",
+   "qty": 1
+  },
+  {
+   "name": "Windbrisk Heights",
+   "qty": 1
+  },
+  {
+   "name": "Within Range",
+   "qty": 1
+  },
+  {
+   "name": "Yahenni, Undying Partisan",
+   "qty": 1
+  }
+ ]
+}

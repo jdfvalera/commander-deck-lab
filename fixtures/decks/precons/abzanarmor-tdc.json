@@ -1,0 +1,347 @@
+{
+ "id": "abzanarmor-tdc",
+ "name": "Abzan Armor (TDC)",
+ "source": "MTGJSON AbzanArmor_TDC",
+ "releaseDate": "2025-04-11",
+ "commanders": [
+  "Felothar the Steadfast"
+ ],
+ "cards": [
+  {
+   "name": "Access Tunnel",
+   "qty": 1
+  },
+  {
+   "name": "Anguished Unmaking",
+   "qty": 1
+  },
+  {
+   "name": "Arasta of the Endless Web",
+   "qty": 1
+  },
+  {
+   "name": "Arbor Adherent",
+   "qty": 1
+  },
+  {
+   "name": "Arboreal Grazer",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Assault Formation",
+   "qty": 1
+  },
+  {
+   "name": "Axebane Guardian",
+   "qty": 1
+  },
+  {
+   "name": "Baldin, Century Herdmaster",
+   "qty": 1
+  },
+  {
+   "name": "Behind the Scenes",
+   "qty": 1
+  },
+  {
+   "name": "Betor, Ancestor's Voice",
+   "qty": 1
+  },
+  {
+   "name": "Blight Pile",
+   "qty": 1
+  },
+  {
+   "name": "Bojuka Bog",
+   "qty": 1
+  },
+  {
+   "name": "Canopy Gargantuan",
+   "qty": 1
+  },
+  {
+   "name": "Canopy Vista",
+   "qty": 1
+  },
+  {
+   "name": "Carven Caryatid",
+   "qty": 1
+  },
+  {
+   "name": "Colfenor's Urn",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Crashing Drawbridge",
+   "qty": 1
+  },
+  {
+   "name": "Deceptive Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Despark",
+   "qty": 1
+  },
+  {
+   "name": "Dragonlord Dromoka",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Expel the Interlopers",
+   "qty": 1
+  },
+  {
+   "name": "Faeburrow Elder",
+   "qty": 1
+  },
+  {
+   "name": "Feed the Swarm",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 7
+  },
+  {
+   "name": "Fortified Village",
+   "qty": 1
+  },
+  {
+   "name": "Hornet Nest",
+   "qty": 1
+  },
+  {
+   "name": "Ikra Shidiqi, the Usurper",
+   "qty": 1
+  },
+  {
+   "name": "Indomitable Ancients",
+   "qty": 1
+  },
+  {
+   "name": "Indulging Patrician",
+   "qty": 1
+  },
+  {
+   "name": "Infernal Grasp",
+   "qty": 1
+  },
+  {
+   "name": "Isolated Chapel",
+   "qty": 1
+  },
+  {
+   "name": "Jaddi Offshoot",
+   "qty": 1
+  },
+  {
+   "name": "Jaws of Defeat",
+   "qty": 1
+  },
+  {
+   "name": "Nyx-Fleece Ram",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Signet",
+   "qty": 1
+  },
+  {
+   "name": "Overgrown Battlement",
+   "qty": 1
+  },
+  {
+   "name": "Overgrown Farmland",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 6
+  },
+  {
+   "name": "Protector of the Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Radiant Grove",
+   "qty": 1
+  },
+  {
+   "name": "Rampart Architect",
+   "qty": 1
+  },
+  {
+   "name": "Reunion of the House",
+   "qty": 1
+  },
+  {
+   "name": "Rhox Faithmender",
+   "qty": 1
+  },
+  {
+   "name": "Sandsteppe Citadel",
+   "qty": 1
+  },
+  {
+   "name": "Seedborn Muse",
+   "qty": 1
+  },
+  {
+   "name": "Selesnya Signet",
+   "qty": 1
+  },
+  {
+   "name": "Shadrix Silverquill",
+   "qty": 1
+  },
+  {
+   "name": "Shalai, Voice of Plenty",
+   "qty": 1
+  },
+  {
+   "name": "Sidar Kondo of Jamuraa",
+   "qty": 1
+  },
+  {
+   "name": "Slaughter the Strong",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Staff of Compleation",
+   "qty": 1
+  },
+  {
+   "name": "Sungrass Prairie",
+   "qty": 1
+  },
+  {
+   "name": "Sunpetal Grove",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Swiftfoot Boots",
+   "qty": 1
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Sylvan Caryatid",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Plenty",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Tip the Scales",
+   "qty": 1
+  },
+  {
+   "name": "Tower Defense",
+   "qty": 1
+  },
+  {
+   "name": "Towering Titan",
+   "qty": 1
+  },
+  {
+   "name": "Tree of Redemption",
+   "qty": 1
+  },
+  {
+   "name": "Twilight Mire",
+   "qty": 1
+  },
+  {
+   "name": "Wakestone Gargoyle",
+   "qty": 1
+  },
+  {
+   "name": "Walking Bulwark",
+   "qty": 1
+  },
+  {
+   "name": "Wall of Blossoms",
+   "qty": 1
+  },
+  {
+   "name": "Wall of Limbs",
+   "qty": 1
+  },
+  {
+   "name": "Wall of Omens",
+   "qty": 1
+  },
+  {
+   "name": "Wall of Reverence",
+   "qty": 1
+  },
+  {
+   "name": "Wall of Roots",
+   "qty": 1
+  },
+  {
+   "name": "Weathered Sentinels",
+   "qty": 1
+  },
+  {
+   "name": "Welcoming Vampire",
+   "qty": 1
+  },
+  {
+   "name": "Will of the Abzan",
+   "qty": 1
+  },
+  {
+   "name": "Wingmantle Chaplain",
+   "qty": 1
+  },
+  {
+   "name": "Woodland Cemetery",
+   "qty": 1
+  },
+  {
+   "name": "Zetalpa, Primal Dawn",
+   "qty": 1
+  }
+ ]
+}

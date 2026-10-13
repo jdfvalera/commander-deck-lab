@@ -1,10 +1,12 @@
-// Refreshes fixtures/scryfall/cards.json: the oracle data for every card in every fixture deck,
-// so unit tests run offline against real card text. Usage: npm run snapshot:scryfall
+// Refreshes the Scryfall fixtures: the oracle data for every card in the fixture decks, so unit
+// tests run offline against real card text. Usage: npm run snapshot:scryfall [-- --wide]
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const DECK_DIRS = ['fixtures/decks', 'fixtures/decks/precons'];
-const OUT = 'fixtures/scryfall/cards.json';
+// Default: the Pride decks -> cards.json. With --wide: precons + user decks -> decks-wide.json.
+const WIDE = process.argv.includes('--wide');
+const DECK_DIRS = WIDE ? ['fixtures/decks/precons', 'fixtures/decks/user'] : ['fixtures/decks'];
+const OUT = WIDE ? 'fixtures/scryfall/decks-wide.json' : 'fixtures/scryfall/cards.json';
 const BATCH = 75;
 const DELAY_MS = 150;
 

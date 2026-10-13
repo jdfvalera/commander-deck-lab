@@ -1,0 +1,407 @@
+{
+ "id": "eldraziincursion-m3c",
+ "name": "Eldrazi Incursion (M3C)",
+ "source": "MTGJSON EldraziIncursion_M3C",
+ "releaseDate": "2024-06-14",
+ "commanders": [
+  "Ulalek, Fused Atrocity"
+ ],
+ "cards": [
+  {
+   "name": "Adarkar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "All Is Dust",
+   "qty": 1
+  },
+  {
+   "name": "Ancient Stirrings",
+   "qty": 1
+  },
+  {
+   "name": "Angelic Aberration",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Artisan of Kozilek",
+   "qty": 1
+  },
+  {
+   "name": "Ash Barrens",
+   "qty": 1
+  },
+  {
+   "name": "Awakening Zone",
+   "qty": 1
+  },
+  {
+   "name": "Azlask, the Swelling Scourge",
+   "qty": 1
+  },
+  {
+   "name": "Battlefield Forge",
+   "qty": 1
+  },
+  {
+   "name": "Benthic Anomaly",
+   "qty": 1
+  },
+  {
+   "name": "Bismuth Mindrender",
+   "qty": 1
+  },
+  {
+   "name": "Bonders' Enclave",
+   "qty": 1
+  },
+  {
+   "name": "Brushland",
+   "qty": 1
+  },
+  {
+   "name": "Cascading Cataracts",
+   "qty": 1
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1
+  },
+  {
+   "name": "Chittering Dispatcher",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Corrupted Crossroads",
+   "qty": 1
+  },
+  {
+   "name": "Crib Swap",
+   "qty": 1
+  },
+  {
+   "name": "Deepfathom Skulker",
+   "qty": 1
+  },
+  {
+   "name": "Dreamstone Hedron",
+   "qty": 1
+  },
+  {
+   "name": "Drowner of Hope",
+   "qty": 1
+  },
+  {
+   "name": "Elder Deep-Fiend",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Confluence",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Conscription",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Displacer",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Monument",
+   "qty": 1
+  },
+  {
+   "name": "Eldrazi Temple",
+   "qty": 1
+  },
+  {
+   "name": "Eldritch Immunity",
+   "qty": 1
+  },
+  {
+   "name": "Endbringer",
+   "qty": 1
+  },
+  {
+   "name": "Everflowing Chalice",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 1
+  },
+  {
+   "name": "Forsaken Monument",
+   "qty": 1
+  },
+  {
+   "name": "Garruk's Uprising",
+   "qty": 1
+  },
+  {
+   "name": "Glaring Fleshraker",
+   "qty": 1
+  },
+  {
+   "name": "Hedron Archive",
+   "qty": 1
+  },
+  {
+   "name": "Herald's Horn",
+   "qty": 1
+  },
+  {
+   "name": "Hideous Taskmaster",
+   "qty": 1
+  },
+  {
+   "name": "Idol of Oblivion",
+   "qty": 1
+  },
+  {
+   "name": "Imprisoned in the Moon",
+   "qty": 1
+  },
+  {
+   "name": "Inversion Behemoth",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 1
+  },
+  {
+   "name": "Karplusan Forest",
+   "qty": 1
+  },
+  {
+   "name": "Kozilek's Return",
+   "qty": 1
+  },
+  {
+   "name": "Llanowar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Morophon, the Boundless",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 1
+  },
+  {
+   "name": "Mutated Cultist",
+   "qty": 1
+  },
+  {
+   "name": "Mystic Forge",
+   "qty": 1
+  },
+  {
+   "name": "Oblivion Sower",
+   "qty": 1
+  },
+  {
+   "name": "Opal Palace",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 1
+  },
+  {
+   "name": "Reliquary Tower",
+   "qty": 1
+  },
+  {
+   "name": "Return of the Wildspeaker",
+   "qty": 1
+  },
+  {
+   "name": "Rishkar's Expertise",
+   "qty": 1
+  },
+  {
+   "name": "Ruins of Oran-Rief",
+   "qty": 1
+  },
+  {
+   "name": "Secluded Courtyard",
+   "qty": 1
+  },
+  {
+   "name": "Selective Obliteration",
+   "qty": 1
+  },
+  {
+   "name": "Shivan Reef",
+   "qty": 1
+  },
+  {
+   "name": "Shrine of the Forsaken Gods",
+   "qty": 1
+  },
+  {
+   "name": "Sifter of Skulls",
+   "qty": 1
+  },
+  {
+   "name": "Sire of Stagnation",
+   "qty": 1
+  },
+  {
+   "name": "Skittering Invasion",
+   "qty": 1
+  },
+  {
+   "name": "Snapping Voidcraw",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Spawnbed Protector",
+   "qty": 1
+  },
+  {
+   "name": "Spawning Bed",
+   "qty": 1
+  },
+  {
+   "name": "Suffer the Past",
+   "qty": 1
+  },
+  {
+   "name": "Sulfurous Springs",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Curiosity",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Dominance",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Impulse",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Resilience",
+   "qty": 1
+  },
+  {
+   "name": "Tectonic Edge",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Malady",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Tendo Ice Bridge",
+   "qty": 1
+  },
+  {
+   "name": "Titans' Vanguard",
+   "qty": 1
+  },
+  {
+   "name": "Tomb of the Spirit Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Tranquil Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Twins of Discord",
+   "qty": 1
+  },
+  {
+   "name": "Twisted Landscape",
+   "qty": 1
+  },
+  {
+   "name": "Ugin, the Ineffable",
+   "qty": 1
+  },
+  {
+   "name": "Ugin's Insight",
+   "qty": 1
+  },
+  {
+   "name": "Ulamog's Crusher",
+   "qty": 1
+  },
+  {
+   "name": "Ulamog's Dreadsire",
+   "qty": 1
+  },
+  {
+   "name": "Ulamog's Nullifier",
+   "qty": 1
+  },
+  {
+   "name": "Unclaimed Territory",
+   "qty": 1
+  },
+  {
+   "name": "Underground River",
+   "qty": 1
+  },
+  {
+   "name": "Vile Redeemer",
+   "qty": 1
+  },
+  {
+   "name": "Warping Wail",
+   "qty": 1
+  },
+  {
+   "name": "Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Wastescape Battlemage",
+   "qty": 1
+  },
+  {
+   "name": "World Breaker",
+   "qty": 1
+  },
+  {
+   "name": "Yavimaya Coast",
+   "qty": 1
+  }
+ ]
+}

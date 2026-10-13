@@ -1,0 +1,275 @@
+{
+ "id": "keenengineering-fdc",
+ "name": "Keen Engineering (FDC)",
+ "source": "MTGJSON KeenEngineering_FDC",
+ "releaseDate": "2026-10-02",
+ "commanders": [
+  "Sai, Master Thopterist"
+ ],
+ "cards": [
+  {
+   "name": "Adaptive Omnitool",
+   "qty": 1
+  },
+  {
+   "name": "Aether Spellbomb",
+   "qty": 1
+  },
+  {
+   "name": "Aetherize",
+   "qty": 1
+  },
+  {
+   "name": "All Is Dust",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Broodstar",
+   "qty": 1
+  },
+  {
+   "name": "Buried Ruin",
+   "qty": 1
+  },
+  {
+   "name": "Chief of the Foundry",
+   "qty": 1
+  },
+  {
+   "name": "Counterspell",
+   "qty": 1
+  },
+  {
+   "name": "Cultivator's Caravan",
+   "qty": 1
+  },
+  {
+   "name": "Darksteel Citadel",
+   "qty": 1
+  },
+  {
+   "name": "Darksteel Juggernaut",
+   "qty": 1
+  },
+  {
+   "name": "Duplicant",
+   "qty": 1
+  },
+  {
+   "name": "Etherium Sculptor",
+   "qty": 1
+  },
+  {
+   "name": "Fall from Favor",
+   "qty": 1
+  },
+  {
+   "name": "Forsaken Monument",
+   "qty": 1
+  },
+  {
+   "name": "Foundry Inspector",
+   "qty": 1
+  },
+  {
+   "name": "Foundry of the Consuls",
+   "qty": 1
+  },
+  {
+   "name": "Graaz, Unstoppable Juggernaut",
+   "qty": 1
+  },
+  {
+   "name": "Hedron Archive",
+   "qty": 1
+  },
+  {
+   "name": "Ichor Wellspring",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 34
+  },
+  {
+   "name": "Kappa Cannoneer",
+   "qty": 1
+  },
+  {
+   "name": "Launch Mishap",
+   "qty": 1
+  },
+  {
+   "name": "Lonely Sandbar",
+   "qty": 1
+  },
+  {
+   "name": "Master of Etherium",
+   "qty": 1
+  },
+  {
+   "name": "Master Transmuter",
+   "qty": 1
+  },
+  {
+   "name": "Mazemind Tome",
+   "qty": 1
+  },
+  {
+   "name": "Memory Guardian",
+   "qty": 1
+  },
+  {
+   "name": "Meteor Golem",
+   "qty": 1
+  },
+  {
+   "name": "Mind Stone",
+   "qty": 1
+  },
+  {
+   "name": "Mind's Eye",
+   "qty": 1
+  },
+  {
+   "name": "Misleading Signpost",
+   "qty": 1
+  },
+  {
+   "name": "Myr Battlesphere",
+   "qty": 1
+  },
+  {
+   "name": "Myr Retriever",
+   "qty": 1
+  },
+  {
+   "name": "Negate",
+   "qty": 1
+  },
+  {
+   "name": "Nettlecyst",
+   "qty": 1
+  },
+  {
+   "name": "Nevinyrral's Disk",
+   "qty": 1
+  },
+  {
+   "name": "Ornithopter of Paradise",
+   "qty": 1
+  },
+  {
+   "name": "Padeem, Consul of Innovation",
+   "qty": 1
+  },
+  {
+   "name": "Palladium Myr",
+   "qty": 1
+  },
+  {
+   "name": "Propaganda",
+   "qty": 1
+  },
+  {
+   "name": "Psychosis Crawler",
+   "qty": 1
+  },
+  {
+   "name": "Pull from Tomorrow",
+   "qty": 1
+  },
+  {
+   "name": "Remote Isle",
+   "qty": 1
+  },
+  {
+   "name": "Research Thief",
+   "qty": 1
+  },
+  {
+   "name": "Scrawling Crawler",
+   "qty": 1
+  },
+  {
+   "name": "Shimmer Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Shimmer Myr",
+   "qty": 1
+  },
+  {
+   "name": "Silver Myr",
+   "qty": 1
+  },
+  {
+   "name": "Skysovereign, Consul Flagship",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Soul-Guide Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Spire Golem",
+   "qty": 1
+  },
+  {
+   "name": "Steel Hellkite",
+   "qty": 1
+  },
+  {
+   "name": "Steel Overseer",
+   "qty": 1
+  },
+  {
+   "name": "Tamiyo's Logbook",
+   "qty": 1
+  },
+  {
+   "name": "Thirst for Knowledge",
+   "qty": 1
+  },
+  {
+   "name": "Thopter Fabricator",
+   "qty": 1
+  },
+  {
+   "name": "Thopter Spy Network",
+   "qty": 1
+  },
+  {
+   "name": "Thought Monitor",
+   "qty": 1
+  },
+  {
+   "name": "Thought Vessel",
+   "qty": 1
+  },
+  {
+   "name": "Thoughtcast",
+   "qty": 1
+  },
+  {
+   "name": "Vedalken Archmage",
+   "qty": 1
+  },
+  {
+   "name": "War Room",
+   "qty": 1
+  },
+  {
+   "name": "Whirler Rogue",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,363 @@
+{
+ "id": "danceoftheelements-ecc",
+ "name": "Dance of the Elements (ECC)",
+ "source": "MTGJSON DanceOfTheElements_ECC",
+ "releaseDate": "2026-01-23",
+ "commanders": [
+  "Ashling, the Limitless"
+ ],
+ "cards": [
+  {
+   "name": "Abundant Countryside",
+   "qty": 1
+  },
+  {
+   "name": "Abundant Growth",
+   "qty": 1
+  },
+  {
+   "name": "Ancient Ziggurat",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Avenger of Zendikar",
+   "qty": 1
+  },
+  {
+   "name": "Bane of Progress",
+   "qty": 1
+  },
+  {
+   "name": "Belonging",
+   "qty": 1
+  },
+  {
+   "name": "Blasphemous Act",
+   "qty": 1
+  },
+  {
+   "name": "Cavalier of Thorns",
+   "qty": 1
+  },
+  {
+   "name": "Chromatic Lantern",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Cream of the Crop",
+   "qty": 1
+  },
+  {
+   "name": "Crib Swap",
+   "qty": 1
+  },
+  {
+   "name": "Cultivate",
+   "qty": 1
+  },
+  {
+   "name": "Descendants' Fury",
+   "qty": 1
+  },
+  {
+   "name": "Distant Melody",
+   "qty": 1
+  },
+  {
+   "name": "Eclipsed Flamekin",
+   "qty": 1
+  },
+  {
+   "name": "Elemental Spectacle",
+   "qty": 1
+  },
+  {
+   "name": "Endurance",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Faeburrow Elder",
+   "qty": 1
+  },
+  {
+   "name": "Fellwar Stone",
+   "qty": 1
+  },
+  {
+   "name": "Fertile Ground",
+   "qty": 1
+  },
+  {
+   "name": "Flamebraider",
+   "qty": 1
+  },
+  {
+   "name": "Flamekin Village",
+   "qty": 1
+  },
+  {
+   "name": "Forest",
+   "qty": 8
+  },
+  {
+   "name": "Foundation Breaker",
+   "qty": 1
+  },
+  {
+   "name": "Frontier Bivouac",
+   "qty": 1
+  },
+  {
+   "name": "Fury",
+   "qty": 1
+  },
+  {
+   "name": "Garruk's Uprising",
+   "qty": 1
+  },
+  {
+   "name": "Greenwarden of Murasa",
+   "qty": 1
+  },
+  {
+   "name": "Haunting Voyage",
+   "qty": 1
+  },
+  {
+   "name": "Hoofprints of the Stag",
+   "qty": 1
+  },
+  {
+   "name": "Horde of Notions",
+   "qty": 1
+  },
+  {
+   "name": "Impulsivity",
+   "qty": 1
+  },
+  {
+   "name": "Incandescent Soulstoke",
+   "qty": 1
+  },
+  {
+   "name": "Ingot Chewer",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 2
+  },
+  {
+   "name": "Jegantha, the Wellspring",
+   "qty": 1
+  },
+  {
+   "name": "Jubilation",
+   "qty": 1
+  },
+  {
+   "name": "Jungle Shrine",
+   "qty": 1
+  },
+  {
+   "name": "Kindred Summons",
+   "qty": 1
+  },
+  {
+   "name": "Kodama's Reach",
+   "qty": 1
+  },
+  {
+   "name": "Lamentation",
+   "qty": 1
+  },
+  {
+   "name": "Maelstrom Wanderer",
+   "qty": 1
+  },
+  {
+   "name": "Mass of Mysteries",
+   "qty": 1
+  },
+  {
+   "name": "Mountain",
+   "qty": 2
+  },
+  {
+   "name": "Muldrotha, the Gravetide",
+   "qty": 1
+  },
+  {
+   "name": "Mulldrifter",
+   "qty": 1
+  },
+  {
+   "name": "Omnath, Locus of Rage",
+   "qty": 1
+  },
+  {
+   "name": "Omnath, Locus of the Roil",
+   "qty": 1
+  },
+  {
+   "name": "Opal Palace",
+   "qty": 1
+  },
+  {
+   "name": "Opulent Palace",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Path to Exile",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 2
+  },
+  {
+   "name": "Primal Beyond",
+   "qty": 1
+  },
+  {
+   "name": "Raging Ravine",
+   "qty": 1
+  },
+  {
+   "name": "Rain-Slicked Copse",
+   "qty": 1
+  },
+  {
+   "name": "Reality Shift",
+   "qty": 1
+  },
+  {
+   "name": "Realmwalker",
+   "qty": 1
+  },
+  {
+   "name": "Return of the Wildspeaker",
+   "qty": 1
+  },
+  {
+   "name": "Risen Reef",
+   "qty": 1
+  },
+  {
+   "name": "Sandsteppe Citadel",
+   "qty": 1
+  },
+  {
+   "name": "Savage Lands",
+   "qty": 1
+  },
+  {
+   "name": "Seaside Citadel",
+   "qty": 1
+  },
+  {
+   "name": "Secluded Courtyard",
+   "qty": 1
+  },
+  {
+   "name": "Selvala, Heart of the Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Shatter the Sky",
+   "qty": 1
+  },
+  {
+   "name": "Shimmercreep",
+   "qty": 1
+  },
+  {
+   "name": "Shriekmaw",
+   "qty": 1
+  },
+  {
+   "name": "Slithermuse",
+   "qty": 1
+  },
+  {
+   "name": "Smokebraider",
+   "qty": 1
+  },
+  {
+   "name": "Sodden Verdure",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Springleaf Parade",
+   "qty": 1
+  },
+  {
+   "name": "Subterfuge",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 2
+  },
+  {
+   "name": "Thriving Bluff",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Grove",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Heath",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Isle",
+   "qty": 1
+  },
+  {
+   "name": "Thriving Moor",
+   "qty": 1
+  },
+  {
+   "name": "Timeless Lotus",
+   "qty": 1
+  },
+  {
+   "name": "Titan of Industry",
+   "qty": 1
+  },
+  {
+   "name": "Unclaimed Territory",
+   "qty": 1
+  },
+  {
+   "name": "Vernal Sovereign",
+   "qty": 1
+  },
+  {
+   "name": "Yarok, the Desecrated",
+   "qty": 1
+  }
+ ]
+}

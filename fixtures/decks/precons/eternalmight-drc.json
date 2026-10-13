@@ -1,0 +1,363 @@
+{
+ "id": "eternalmight-drc",
+ "name": "Eternal Might (DRC)",
+ "source": "MTGJSON EternalMight_DRC",
+ "releaseDate": "2025-02-14",
+ "commanders": [
+  "Temmet, Naktamun's Will"
+ ],
+ "cards": [
+  {
+   "name": "Accursed Duneyard",
+   "qty": 1
+  },
+  {
+   "name": "Adarkar Wastes",
+   "qty": 1
+  },
+  {
+   "name": "Angel of Sanctions",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Sanctum",
+   "qty": 1
+  },
+  {
+   "name": "Arcane Signet",
+   "qty": 1
+  },
+  {
+   "name": "Archfiend of Ifnir",
+   "qty": 1
+  },
+  {
+   "name": "Ash Barrens",
+   "qty": 1
+  },
+  {
+   "name": "Binding Mummy",
+   "qty": 1
+  },
+  {
+   "name": "Bontu's Monument",
+   "qty": 1
+  },
+  {
+   "name": "Cast Out",
+   "qty": 1
+  },
+  {
+   "name": "Caves of Koilos",
+   "qty": 1
+  },
+  {
+   "name": "Cemetery Reaper",
+   "qty": 1
+  },
+  {
+   "name": "Champion of Wits",
+   "qty": 1
+  },
+  {
+   "name": "Command Tower",
+   "qty": 1
+  },
+  {
+   "name": "Commander's Sphere",
+   "qty": 1
+  },
+  {
+   "name": "Commence the Endgame",
+   "qty": 1
+  },
+  {
+   "name": "Corpse Augur",
+   "qty": 1
+  },
+  {
+   "name": "Corpse Knight",
+   "qty": 1
+  },
+  {
+   "name": "Crowded Crypt",
+   "qty": 1
+  },
+  {
+   "name": "Cryptbreaker",
+   "qty": 1
+  },
+  {
+   "name": "Damn",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Glorified",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the Mindful",
+   "qty": 1
+  },
+  {
+   "name": "Desert of the True",
+   "qty": 1
+  },
+  {
+   "name": "Despark",
+   "qty": 1
+  },
+  {
+   "name": "Dimir Signet",
+   "qty": 1
+  },
+  {
+   "name": "Dread Summons",
+   "qty": 1
+  },
+  {
+   "name": "Dreadhorde Invasion",
+   "qty": 1
+  },
+  {
+   "name": "Drowned Catacomb",
+   "qty": 1
+  },
+  {
+   "name": "Dusk // Dawn",
+   "qty": 1
+  },
+  {
+   "name": "Eternal Skylord",
+   "qty": 1
+  },
+  {
+   "name": "Evolving Wilds",
+   "qty": 1
+  },
+  {
+   "name": "Exotic Orchard",
+   "qty": 1
+  },
+  {
+   "name": "Fetid Pools",
+   "qty": 1
+  },
+  {
+   "name": "Fleshbag Marauder",
+   "qty": 1
+  },
+  {
+   "name": "Forgotten Creation",
+   "qty": 1
+  },
+  {
+   "name": "Gate to the Afterlife",
+   "qty": 1
+  },
+  {
+   "name": "Gempalm Polluter",
+   "qty": 1
+  },
+  {
+   "name": "Glacial Fortress",
+   "qty": 1
+  },
+  {
+   "name": "Gleaming Overseer",
+   "qty": 1
+  },
+  {
+   "name": "God-Eternal Oketra",
+   "qty": 1
+  },
+  {
+   "name": "God-Pharaoh's Gift",
+   "qty": 1
+  },
+  {
+   "name": "Grave Titan",
+   "qty": 1
+  },
+  {
+   "name": "Gravecrawler",
+   "qty": 1
+  },
+  {
+   "name": "Hashaton, Scarab's Fist",
+   "qty": 1
+  },
+  {
+   "name": "Irrigated Farmland",
+   "qty": 1
+  },
+  {
+   "name": "Island",
+   "qty": 4
+  },
+  {
+   "name": "Isolated Chapel",
+   "qty": 1
+  },
+  {
+   "name": "Lazotep Chancellor",
+   "qty": 1
+  },
+  {
+   "name": "Liliana, Death's Majesty",
+   "qty": 1
+  },
+  {
+   "name": "Lord of the Accursed",
+   "qty": 1
+  },
+  {
+   "name": "Lost Monarch of Ifnir",
+   "qty": 1
+  },
+  {
+   "name": "Maskwood Nexus",
+   "qty": 1
+  },
+  {
+   "name": "Midnight Reaper",
+   "qty": 1
+  },
+  {
+   "name": "Murderous Rider // Swift End",
+   "qty": 1
+  },
+  {
+   "name": "Never // Return",
+   "qty": 1
+  },
+  {
+   "name": "On Wings of Gold",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Basilica",
+   "qty": 1
+  },
+  {
+   "name": "Orzhov Signet",
+   "qty": 1
+  },
+  {
+   "name": "Path of Ancestry",
+   "qty": 1
+  },
+  {
+   "name": "Plague Belcher",
+   "qty": 1
+  },
+  {
+   "name": "Plains",
+   "qty": 5
+  },
+  {
+   "name": "Prairie Stream",
+   "qty": 1
+  },
+  {
+   "name": "Priest of the Crossing",
+   "qty": 1
+  },
+  {
+   "name": "Prophet of the Scarab",
+   "qty": 1
+  },
+  {
+   "name": "Pull from Tomorrow",
+   "qty": 1
+  },
+  {
+   "name": "Renewed Solidarity",
+   "qty": 1
+  },
+  {
+   "name": "Rhet-Tomb Mystic",
+   "qty": 1
+  },
+  {
+   "name": "Rot Hulk",
+   "qty": 1
+  },
+  {
+   "name": "Sol Ring",
+   "qty": 1
+  },
+  {
+   "name": "Sunken Hollow",
+   "qty": 1
+  },
+  {
+   "name": "Swamp",
+   "qty": 5
+  },
+  {
+   "name": "Swords to Plowshares",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Dominance",
+   "qty": 1
+  },
+  {
+   "name": "Talisman of Hierarchy",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Deceit",
+   "qty": 1
+  },
+  {
+   "name": "Temple of Silence",
+   "qty": 1
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "qty": 1
+  },
+  {
+   "name": "The Scarab God",
+   "qty": 1
+  },
+  {
+   "name": "Timeless Dragon",
+   "qty": 1
+  },
+  {
+   "name": "Twisted Abomination",
+   "qty": 1
+  },
+  {
+   "name": "Undead Augur",
+   "qty": 1
+  },
+  {
+   "name": "Underground River",
+   "qty": 1
+  },
+  {
+   "name": "Unholy Grotto",
+   "qty": 1
+  },
+  {
+   "name": "Vizier of Many Faces",
+   "qty": 1
+  },
+  {
+   "name": "Wayward Servant",
+   "qty": 1
+  },
+  {
+   "name": "Wizened Mentor",
+   "qty": 1
+  },
+  {
+   "name": "Zombie Master",
+   "qty": 1
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+1 Tatsunari, Toad Rider (NEO) 345
+1 Abundant Growth (PLST) EMA-156
+1 Alpha Authority (GTC) 114
+1 Ancestral Mask (PLST) MMQ-229
+1 Aqueous Form (THS) 39
+1 Archetype of Imagination (DSC) 111
+1 Bear Umbra (NEC) 113
+1 Boar Umbra (UMA) 158
+1 Callaphe, Beloved of the Sea (THB) 45
+1 Combat Research (DMU) 44
+1 Command Tower (WHO) 264
+1 Croaking Counterpart (MID) 215
+1 Curator's Ward (DOM) 49
+1 Curiosity (PLST) 8ED-72
+1 Destiny Spinner (THB) 168
+1 Dimir Aqueduct (PC2) 116
+1 Dina, Soul Steeper (STX) 178
+1 Doomwake Giant (DSC) 138
+1 Drowned Catacomb (FIC) 388
+1 Eaten by Piranhas (LCI) 54
+1 Eel Umbra (2X2) 48
+1 Eidolon of Blossoms (CMM) 892
+1 Enchantress's Presence (MH2) 283
+1 Exotic Orchard (MKC) 260
+1 Extinguish All Hope (CMM) 157
+1 Fang of Shigeki (NEO) 183
+1 Fate Unraveler (BNG) 68
+1 Fertile Ground (BBD) 198
+1 Font of Fertility (JOU) 123
+7 Forest (HOU) 199
+1 Froghemoth (AFR) 184
+1 Frogify (ELD) 47
+1 Fungal Fortitude (LCI) 106
+1 Generous Visitor (NEO) 185
+1 Go for the Throat (C17) 114
+1 Golgari Rot Farm (TDC) 368
+1 Grim Guardian (JOU) 73
+1 Grolnok, the Omnivore (VOW) 324
+1 Hinterland Harbor (BLC) 312
+5 Island (M19) 267
+1 Ivy, Gleeful Spellthief (DMU) 300
+1 Kasmina's Transmutation (WAR) 57
+1 Kaya's Ghostform (WAR) 94
+1 Keen Sense (PLST) PLC-152
+1 Lion Umbra (MH3) 426
+1 Marauding Blight-Priest (FDN) 178
+1 Myriad Landscape (SCD) 311
+1 Nature's Will (WOT) 57
+1 Negate (BBD) 123
+1 Opulent Palace (TDM) 264
+1 Path of Ancestry (VOC) 177
+1 Promising Vein (LCI) 279
+1 Putrefy (C19) 197
+1 Rampant Growth (PLST) DDS-48
+1 Rancor (2X2) 156
+1 Retreat to Hagra (BFZ) 121
+1 Sanctum Weaver (WOC) 131
+1 Sanguine Bond (C17) 124
+1 Seal of Primordium (TSR) 228
+1 Seal of Removal (MH2) 269
+1 Shielding Plax (AFC) 192
+1 Shimmerwing Chimera (THB) 64
+1 Shire Terrace (LTR) 261
+1 Simic Growth Chamber (MKC) 293
+1 Sixth Sense (AKH) 187
+1 Snake Umbra (NEC) 130
+1 Sol Ring (C19) 221
+1 Stasis Field (MOM) 79
+1 Strong Back (PIP) 83
+1 Sunken Hollow (SCD) 322
+6 Swamp (M14) 241
+1 Swiftfoot Boots (PLIST) 271
+1 Temple of Deceit (PIP) 303
+1 Temple of Malady (NCC) 433
+1 Temple of Mystery (M3C) 390
+1 Toxic Deluge (2XM) 110
+1 Utopia Sprawl (WOT) 63
+1 Well Rested (PIP) 88
+1 Wicked Visitor (WOE) 118
+1 Wild Growth (DMR) 352
+1 Witness Protection (SNC) 66
+1 Wizard Class (BLC) 112
+1 Woodland Cemetery (TDC) 412
+1 Yargle and Multani (MOM) 317
+1 Yargle, Glutton of Urborg (MUL) 19
+
+SIDEBOARD:
+1 Crystal Chimes (USG) 292
