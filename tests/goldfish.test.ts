@@ -157,12 +157,6 @@ describe('goldfish runs', () => {
     expect({ median: a.medianWin, by10: a.winByTurn.total[9], pride4: a.commander.byTurn[3], decked: a.failures.decked }).toMatchSnapshot();
   });
 
-  it('5,000 Pride games run well under 10 seconds', () => {
-    const t = performance.now();
-    runGoldfish(pride, { ...opts, games: 5000 });
-    expect(performance.now() - t).toBeLessThan(10000);
-  }, 30000);
-
   it('version compare lines up the libraries: shared cards keep their slots', () => {
     const order = alignedOrder(pride, prideRev);
     expect(order).toHaveLength(99);

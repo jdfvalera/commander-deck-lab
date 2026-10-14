@@ -190,14 +190,41 @@ export class Game {
     return v + p.counters - p.minusToughness + p.eot.toughness + this.team.toughness + this.anthem().toughness;
   }
   attachments(p: Perm): Perm[] {
+    // Fast path: with no auras or equipment on the battlefield nothing can be attached.
+    if (!this.statics().attachable) return [];
     return this.bf.filter((a) => a.attachedTo === p.id);
   }
   private attachBonus(a: Perm) {
     const d = this.def(a.def);
     return d.aura ?? d.equipment ?? { power: 0, toughness: 0 };
   }
+  // Team-wide statics (anthems, "damage = toughness") are scanned once per battlefield change, not per creature.
+  private staticKey = -1;
+  private staticCache = { power: 0, toughness: 0, buttTeam: false, buttTGtP: false, attachable: false };
+  private statics() {
+    const key = this.bf.length * 4096 + this.turn;
+    if (key === this.staticKey) return this.staticCache;
+    const { power, toughness } = this.computeAnthem();
+    let buttTeam = false;
+    let buttTGtP = false;
+    let attachable = false;
+    for (const q of this.bf) {
+      if (q.token) continue;
+      if (this.def(q.def).types.aura || this.def(q.def).types.equipment) attachable = true;
+      const b = this.def(q.def).butt;
+      if (b === 'team') buttTeam = true;
+      if (b === 'team_t_gt_p') buttTGtP = true;
+    }
+    this.staticKey = key;
+    this.staticCache = { power, toughness, buttTeam, buttTGtP, attachable };
+    return this.staticCache;
+  }
   /** Static team pumps like Fecund Greenshell (+2/+2 with ten or more lands). */
   anthem() {
+    const s = this.statics();
+    return { power: s.power, toughness: s.toughness };
+  }
+  private computeAnthem() {
     let power = 0;
     let toughness = 0;
     const lands = this.lands().length;
@@ -238,13 +265,9 @@ export class Game {
   assignsToughness(p: Perm): boolean {
     if (p.eot.butt) return true;
     for (const a of this.attachments(p)) if (this.def(a.def).aura?.butt) return true;
-    for (const q of this.bf) {
-      if (q.token) continue;
-      const b = this.def(q.def).butt;
-      if (b === 'team') return true;
-      if (b === 'team_t_gt_p' && this.toughness(p) > this.power(p)) return true;
-    }
-    return false;
+    const s = this.statics();
+    if (s.buttTeam) return true;
+    return s.buttTGtP && this.toughness(p) > this.power(p);
   }
   canAttack(p: Perm): boolean {
     if (!this.isCreature(p) || p.tapped) return false;
@@ -263,6 +286,13 @@ export class Game {
   }
   sources(): SourceUnit[] {
     const out: SourceUnit[] = [];
+    // Land auras by the land they enchant (one pass, not one per land).
+    const auraOn = new Map<number, { amount: number; colors: (Color | 'C')[] }>();
+    for (const a of this.bf) {
+      if (a.token || a.attachedTo === null || this.def(a.def).sourceKind !== 'aura') continue;
+      const prev = auraOn.get(a.attachedTo) ?? { amount: 0, colors: [] };
+      auraOn.set(a.attachedTo, { amount: prev.amount + this.def(a.def).rampAmount, colors: [...prev.colors, ...this.def(a.def).produces] });
+    }
     for (const p of this.bf) {
       if (p.token) continue;
       const d = this.def(p.def);
@@ -273,10 +303,10 @@ export class Game {
         let amount = d.sourceKind === 'land' ? 1 : d.rampAmount;
         let colors: (Color | 'C')[] = d.produces.length ? d.produces : ['C'];
         // Land auras (Utopia Sprawl, Wild Growth): tapping the enchanted land adds their extra mana.
-        for (const a of this.bf) {
-          if (a.attachedTo !== p.id || a.token || this.def(a.def).sourceKind !== 'aura') continue;
-          amount += this.def(a.def).rampAmount;
-          colors = [...new Set([...colors, ...this.def(a.def).produces])];
+        const aura = auraOn.get(p.id);
+        if (aura) {
+          amount += aura.amount;
+          colors = [...new Set([...colors, ...aura.colors])];
         }
         if (amount <= 0) continue;
         out.push({ perm: p, amount, colors, restriction: d.abilitiesOnlyMana ? 'abilities' : null, dork: false, shrink: false });
