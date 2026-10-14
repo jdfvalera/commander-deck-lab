@@ -3,6 +3,7 @@
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 import type { DeckList, SavedDeck } from './types';
 import type { OverrideMap } from '../tags/overrides';
+import type { SavedRun } from './results';
 import { nameKey } from './names';
 
 export interface SharedDeck {
@@ -45,10 +46,12 @@ export interface Backup {
   exportedAt: string;
   decks: SavedDeck[];
   tagOverrides: OverrideMap;
+  /** Saved simulation runs (optional: older backups don't have them). */
+  runs?: SavedRun[];
 }
 
-export function makeBackup(decks: SavedDeck[], tagOverrides: OverrideMap): Backup {
-  return { app: 'commander-deck-lab', version: 1, exportedAt: new Date().toISOString(), decks, tagOverrides };
+export function makeBackup(decks: SavedDeck[], tagOverrides: OverrideMap, runs: SavedRun[] = []): Backup {
+  return { app: 'commander-deck-lab', version: 1, exportedAt: new Date().toISOString(), decks, tagOverrides, runs };
 }
 
 export function parseBackup(text: string): Backup {

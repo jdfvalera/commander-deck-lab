@@ -35,3 +35,17 @@ describe('backups', () => {
     expect(r.overrides['sol ring']).toBeDefined();
   });
 });
+
+describe('saved runs', () => {
+  it('keeps the newest 30, deletes by id, and travels in backups', async () => {
+    const { addRun, deleteRun, loadRuns, saveRuns } = await import('../src/data/results');
+    await saveRuns([]);
+    for (let i = 0; i < 32; i++) await addRun({ id: `r${i}`, kind: 'goldfish', createdAt: i, label: 'x', headline: '', data: {} });
+    const runs = await loadRuns();
+    expect(runs).toHaveLength(30);
+    expect(runs[0].id).toBe('r31');
+    expect((await deleteRun('r31')).map((r) => r.id)).not.toContain('r31');
+    const b = makeBackup([], {}, await loadRuns());
+    expect(parseBackup(JSON.stringify(b)).runs).toHaveLength(29);
+  });
+});

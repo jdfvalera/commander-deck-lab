@@ -26,8 +26,12 @@ export interface CardDef extends ModelCard {
   types: { creature: boolean; land: boolean; artifact: boolean; enchantment: boolean; instant: boolean; sorcery: boolean; planeswalker: boolean; aura: boolean; equipment: boolean };
   permanent: boolean;
   legendary: boolean;
+  /** Creature/artifact subtypes from the type line ("Crocodile Elk Turtle"). */
+  subtypes: string;
+  /** What an aura enchants, from its "Enchant …" line (e.g. "Forest", "land", "creature"). */
+  oracleHint: string;
   power: number;
-  keywords: { defender: boolean; flying: boolean; reach: boolean; haste: boolean; vigilance: boolean; trample: boolean; shroud: boolean; hexproof: boolean; unblockable: boolean; indestructible: boolean };
+  keywords: { defender: boolean; flying: boolean; reach: boolean; haste: boolean; vigilance: boolean; trample: boolean; shroud: boolean; hexproof: boolean; unblockable: boolean; indestructible: boolean; lifelink: boolean };
   handSizePT: boolean;
   /** Mana an ability-only rock/dork makes, usable just for activated abilities (Enigma Jewel). */
   abilitiesOnlyMana: boolean;
@@ -128,10 +132,14 @@ export function compileCard(card: ScryfallCard, tags: CardTags, identity: Set<Co
     types,
     permanent: !types.instant && !types.sorcery,
     legendary: /\bLegendary\b/.test(type),
+    subtypes: type.split('—')[1]?.trim() ?? '',
+    oracleHint: (playedFace(card).oracle_text.match(/^Enchant ([^\n]+)/m)?.[1] ?? '').trim(),
     power: Number(p('power').value ?? 0),
     keywords: {
       defender: has('defender'), flying: has('flying'), reach: has('reach') && !p('reach').cost, haste: has('haste'), vigilance: has('vigilance'),
       trample: has('trample'), shroud: has('shroud'), hexproof: has('hexproof'), unblockable: has('unblockable'), indestructible: has('indestructible'),
+      // Lifelink is an "ignored on purpose" keyword for your deck; opponents' life totals still use it.
+      lifelink: card.keywords.some((k) => k.toLowerCase() === 'lifelink'),
     },
     handSizePT: has('hand_size_pt'),
     abilitiesOnlyMana: !!p('ramp_rock').abilities_only,

@@ -7,6 +7,9 @@ import { TimingChart } from '../components/charts/TimingChart';
 import { WIN_LABELS } from '../components/charts/WinTurnChart';
 import { compileDeck, type CompiledDeck } from '../../engine/cards';
 import { SampleGame, type SampleRun } from '../components/SampleGame';
+import { SavedRuns } from '../components/SavedRuns';
+import { addRun } from '../../data/results';
+import { newId } from '../../data/storage';
 import { defaultStrategyFor, STRATEGIES, strategyById } from '../../engine/goldfish';
 import { DEFAULT_TABLE, sampleTable, type LossReason, type MatchupSummary, type TableSettings } from '../../engine/table';
 import { defaults } from '../../engine/strategies/types';
@@ -49,6 +52,9 @@ export function MatchupsPage() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ pods: { label: string; a: MatchupSummary; b?: MatchupSummary }[]; labelA: string; labelB?: string; opts: TableSettings; podProfiles: OpponentProfile[] } | null>(null);
   const cancel = useRef<() => void>(() => {});
+  const [saved, setSaved] = useState(0);
+  const [seat, setSeat] = useState(1);
+  const [fromSaved, setFromSaved] = useState(false);
 
   const slotList = (s: Slot): { name: string; list: DeckList } | null => {
     const preset = PRESETS.find((p) => p.id === s.source);
@@ -114,7 +120,7 @@ export function MatchupsPage() {
     } catch {
       // run without combos
     }
-    const opts: TableSettings = { ...DEFAULT_TABLE, games, seed: parseSeed(seedText), strategy: strat.id, settings: defaults(strat.settings), holdProtection, combos };
+    const opts: TableSettings = { ...DEFAULT_TABLE, games, seed: parseSeed(seedText), strategy: strat.id, settings: defaults(strat.settings), holdProtection, combos, seat };
     const pods = [{ label: `Your pod: ${pod.map((p) => p.name).join(' · ')}`, profiles: pod }];
     if (matrix) {
       for (const p of PRESETS) {
@@ -129,7 +135,17 @@ export function MatchupsPage() {
     const job = startJob({ kind: 'matchup', deck: compiled, compareWith: b, pods, opts }, (done, t) => setProgress({ done, total: t }));
     cancel.current = job.cancel;
     job.promise
-      .then((r) => r.kind === 'matchup' && setResult({ pods: r.pods, labelA: `${deck.name} · ${version.label}`, labelB: compareVersion ? `${deck.name} · ${compareVersion.label}` : undefined, opts, podProfiles: pod }))
+      .then((r) => {
+        if (r.kind !== 'matchup') return;
+        const res = { pods: r.pods, labelA: `${deck.name} · ${version.label}`, labelB: compareVersion ? `${deck.name} · ${compareVersion.label}` : undefined, opts, podProfiles: pod };
+        setResult(res);
+        setFromSaved(false);
+        addRun({
+          id: newId(), kind: 'matchup', createdAt: Date.now(), label: res.labelB ? `${res.labelA} vs ${res.labelB}` : res.labelA,
+          headline: r.pods.map((p) => `${p.label.replace('Your pod: ', '')} ${Math.round(100 * p.a.winRate)}%`).join(' · '),
+          data: res,
+        }).then(() => setSaved((n) => n + 1));
+      })
       .catch((e) => !(e instanceof CancelledError) && setError(String(e)))
       .finally(() => setProgress(null));
   };
@@ -184,6 +200,16 @@ export function MatchupsPage() {
             <label className="field">Games per pod <input type="number" min={100} max={10000} step={100} value={games} onChange={(e) => setGames(Number(e.target.value))} style={{ width: 90 }} /></label>
             <label className="field">Seed <input value={seedText} onChange={(e) => setSeedText(e.target.value)} style={{ width: 90 }} /></label>
           </div>
+          <label className="small">
+            Your seat{' '}
+            <select value={seat} onChange={(e) => setSeat(Number(e.target.value))}>
+              <option value={1}>1 (you go first)</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4 (you go last)</option>
+              <option value={0}>Random each game</option>
+            </select>
+          </label>
           <label className="small"><input type="checkbox" checked={holdProtection} onChange={(e) => setHoldProtection(e.target.checked)} /> Keep mana open for your best protection (Counterspell, Heroic Intervention, Saved by the Shell…)</label>
           <label className="small"><input type="checkbox" checked={matrix} onChange={(e) => setMatrix(e.target.checked)} /> Also run the matchup matrix: your deck against three copies of each Foundations precon</label>
           <div className="row"><button className="primary" onClick={run} disabled={!!progress || !effective.some(Boolean) || (matrix && presetProfiles.size < PRESETS.length)}>Run matchups</button>
@@ -193,8 +219,9 @@ export function MatchupsPage() {
         </div>
       )}
 
+      <SavedRuns<NonNullable<typeof result>> kind="matchup" refresh={saved} onOpen={(run) => { setResult(run.data); setFromSaved(true); }} />
       {result && <MatchupResults r={result} />}
-      {result && compiled && <MatchupSample deck={compiled} profiles={result.podProfiles} opts={result.opts} />}
+      {result && compiled && !fromSaved && <MatchupSample deck={compiled} profiles={result.podProfiles} opts={result.opts} />}
     </div>
   );
 }
@@ -306,7 +333,7 @@ function MatchupResults({ r }: { r: { pods: { label: string; a: MatchupSummary; 
           counters key spells (commander, Triumph, wipes, combo pieces, 6+ mana) and Aetherizes big attacks. Each turn an opponent attacks one
           player, chosen by how much damage gets through and how threatening that player looks, so they also fight each other. You sit in seat 1.
         </p>
-        <p>Not modelled: politics and deals, opponents’ specific triggered abilities, combat tricks, lifegain.</p>
+        <p>Not modelled: politics and deals, opponents’ triggered abilities beyond tokens, politics and deals.</p>
       </ResultsHeader>
 
       <div className="table-scroll">
@@ -373,7 +400,7 @@ function MatchupResults({ r }: { r: { pods: { label: string; a: MatchupSummary; 
         </div>
       </div>
       <p className="small muted" style={{ margin: 0 }}>
-        Per game: {s.perGame.removalFaced.toFixed(2)} removal spells aimed at you, {s.perGame.spellsCountered.toFixed(2)} of your spells countered, {s.perGame.aetherized.toFixed(2)} attacks Aetherized. Average life left at the end: {s.avgLifeAtEnd.toFixed(0)}.
+        Per game: {s.perGame.removalFaced.toFixed(2)} removal spells aimed at you, {s.perGame.spellsCountered.toFixed(2)} of your spells countered, {s.perGame.aetherized.toFixed(2)} attacks Aetherized, {(s.perGame.combosDisrupted ?? 0).toFixed(2)} combos answered. Average life left at the end: {s.avgLifeAtEnd.toFixed(0)}.
       </p>
     </div>
   );

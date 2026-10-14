@@ -16,6 +16,7 @@ export interface CreatureSpec {
   trample: boolean;
   unblockable: boolean;
   defender: boolean;
+  lifelink: boolean;
   mv: number;
   count: number;
 }
@@ -40,6 +41,10 @@ export interface OpponentProfile {
   counters: InteractionSpec[];
   aetherize: InteractionSpec[];
   taxes: InteractionSpec[];
+  /** Instant pumps they use in combat (Giant Growth style): power/toughness bonus. */
+  tricks: InteractionSpec[];
+  /** Spells that save their creatures from your removal. */
+  protection: InteractionSpec[];
   creatures: CreatureSpec[];
   /** Average total creature power on their board at the end of each turn (from their own goldfish). */
   powerCurve: number[];
@@ -75,6 +80,8 @@ export function buildProfile(
   const counters: InteractionSpec[] = [];
   const aetherize: InteractionSpec[] = [];
   const taxes: InteractionSpec[] = [];
+  const tricks: InteractionSpec[] = [];
+  const protection: InteractionSpec[] = [];
   const pool = new Map<string, CreatureSpec>();
   let draw = 0;
   for (const i of deck.library) {
@@ -84,6 +91,9 @@ export function buildProfile(
     if (d.counterspell) counters.push({ name: d.name, kind: 'counter', scope: d.counterspell.scope });
     if (d.aetherize) aetherize.push({ name: d.name, kind: 'aetherize' });
     if (d.attackTax) taxes.push({ name: d.name, kind: 'tax', per: d.attackTax });
+    const pump = d.teamPumpEot ?? (d.custom.find((c) => c.effect === 'pump' && c.when === 'cast') ? { power: d.custom.find((c) => c.effect === 'pump')!.power, toughness: d.custom.find((c) => c.effect === 'pump')!.toughness } : null);
+    if (d.types.instant && pump && pump.power + pump.toughness > 0) tricks.push({ name: d.name, kind: 'trick', x: pump.power, per: pump.toughness });
+    if (d.types.instant && d.protectionKind && d.protectionKind !== 'uncounterable') protection.push({ name: d.name, kind: d.protectionKind });
     if (d.draw?.perTurn) draw += d.draw.perTurn * 0.4; // engines are only out part of the game
     const add = (c: Omit<CreatureSpec, 'count'>, n = 1) => {
       const prev = pool.get(c.name);
@@ -91,15 +101,15 @@ export function buildProfile(
       else pool.set(c.name, { ...c, count: n });
     };
     if (d.types.creature && d.power + d.toughness > 0) {
-      add({ name: d.name, power: d.power, toughness: Math.max(1, d.toughness), flying: d.keywords.flying, reach: d.keywords.reach, trample: d.keywords.trample, unblockable: d.keywords.unblockable, defender: d.keywords.defender, mv: d.mv });
+      add({ name: d.name, power: d.power, toughness: Math.max(1, d.toughness), flying: d.keywords.flying, reach: d.keywords.reach, trample: d.keywords.trample, unblockable: d.keywords.unblockable, defender: d.keywords.defender, lifelink: d.keywords.lifelink, mv: d.mv });
     }
     if (d.tokenMaker && d.tokenMaker.power + d.tokenMaker.toughness > 0) {
-      add({ name: `${d.name} token`, power: d.tokenMaker.power, toughness: Math.max(1, d.tokenMaker.toughness), flying: d.tokenMaker.flying, reach: false, trample: false, unblockable: false, defender: false, mv: d.mv }, Math.max(1, d.tokenMaker.count));
+      add({ name: `${d.name} token`, power: d.tokenMaker.power, toughness: Math.max(1, d.tokenMaker.toughness), flying: d.tokenMaker.flying, reach: false, trample: false, unblockable: false, defender: false, lifelink: false, mv: d.mv }, Math.max(1, d.tokenMaker.count));
     }
   }
   for (const c of deck.commanders) {
     const d = deck.defs[c];
-    if (d.types.creature) pool.set(d.name, { name: d.name, power: d.power, toughness: Math.max(1, d.toughness), flying: d.keywords.flying, reach: d.keywords.reach, trample: d.keywords.trample, unblockable: d.keywords.unblockable, defender: d.keywords.defender, mv: d.mv, count: 3 });
+    if (d.types.creature) pool.set(d.name, { name: d.name, power: d.power, toughness: Math.max(1, d.toughness), flying: d.keywords.flying, reach: d.keywords.reach, trample: d.keywords.trample, unblockable: d.keywords.unblockable, defender: d.keywords.defender, lifelink: d.keywords.lifelink, mv: d.mv, count: 3 });
   }
   // Their own goldfish: how much power they put on the board, turn by turn.
   const T = 20;
@@ -121,7 +131,7 @@ export function buildProfile(
     name,
     commander: list.commanders.join(' + '),
     colors: deck.identity.join(''),
-    wipes, removal, counters, aetherize, taxes,
+    wipes, removal, counters, aetherize, taxes, tricks, protection,
     creatures: [...pool.values()].sort((a, b) => a.mv - b.mv),
     powerCurve,
     flyingShare: sums.reduce((a, x) => a + x.flying, 0) / totalP,

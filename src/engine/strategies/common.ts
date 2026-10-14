@@ -34,7 +34,7 @@ export function isRamp(d: CardDef): boolean {
 export function castWhile(g: Game, pick: (d: CardDef, i: number) => boolean, score: (d: CardDef) => number, after?: (p: Perm | null, d: CardDef) => void): number {
   let n = 0;
   for (let guard = 0; guard < 30; guard++) {
-    const options = [...new Set(g.hand)].filter((i) => pick(g.def(i), i) && g.canPay(g.castCost(i), 'hand')).sort((a, b) => score(g.def(b)) - score(g.def(a)));
+    const options = [...new Set(g.hand)].filter((i) => pick(g.def(i), i) && hasAuraTarget(g, g.def(i)) && g.canPay(g.castCost(i), 'hand')).sort((a, b) => score(g.def(b)) - score(g.def(a)));
     if (!options.length || g.over()) return n;
     const i = options[0];
     const p = g.cast(i);
@@ -43,6 +43,16 @@ export function castWhile(g: Game, pick: (d: CardDef, i: number) => boolean, sco
     n++;
   }
   return n;
+}
+
+/** An aura can only be cast with something legal to enchant (Utopia Sprawl needs an unenchanted Forest). */
+export function hasAuraTarget(g: Game, d: CardDef): boolean {
+  if (!d.types.aura) return true;
+  if (d.sourceKind === 'aura') {
+    const free = g.lands().filter((l) => !g.bf.some((a) => a.attachedTo === l.id));
+    return /forest/i.test(d.oracleHint) ? free.some((l) => /Forest/.test(g.def(l.def).subtypes) || g.name(l) === 'Forest') : free.length > 0;
+  }
+  return g.creatures().length > 0;
 }
 
 export function castRamp(g: Game): number {
@@ -70,7 +80,18 @@ export function castDraw(g: Game, minLibrary = 0): number {
 
 /** Auras attach to the creature that benefits most; land auras just sit on a land. */
 export function attachIfNeeded(g: Game, p: Perm | null, d: CardDef, prefer?: (q: Perm) => number) {
-  if (!p || !d.types.aura || d.sourceKind === 'aura') return;
+  if (!p || !d.types.aura) return;
+  if (d.sourceKind === 'aura') {
+    // Land auras go on a land without one; "Enchant Forest" (Utopia Sprawl) needs a Forest.
+    const lands = g.lands().filter((l) => !g.bf.some((a) => a.attachedTo === l.id));
+    const needsForest = /forest/i.test(d.oracleHint);
+    const land = lands.find((l) => /Forest/.test(g.def(l.def).subtypes) || g.name(l) === 'Forest') ?? (needsForest ? undefined : lands[0]);
+    if (land) {
+      p.attachedTo = land.id;
+      g.say(`${d.name} on ${g.name(land)}`);
+    }
+    return;
+  }
   const targets = g.creatures().filter((q) => q.id !== p.id);
   if (!targets.length) return;
   const score = prefer ?? ((q: Perm) => g.toughness(q) + g.power(q));
@@ -102,12 +123,18 @@ export function activateAbilities(g: Game, keep = 0, minLibrary = 0) {
     const a = d.draw?.activated;
     const canTap = !a?.tap || (!p.tapped && (!p.sick || !d.types.creature));
     const libOk = a && g.lib.length - a.n * (g.has((x) => x.drawDoubler) ? 2 : 1) >= minLibrary;
-    if (a && a.sacrifice !== 'other' && canTap && libOk && !p.usedThisTurn.has('draw') && g.manaAvailable('ability') - a.cost >= keep) {
+    // "Sacrifice another …" costs: only with cheap fodder (tokens, 0/2s), never the commander or a combo piece.
+    const fodder = a?.sacrifice === 'other' ? g.fodder(a.sacrificeWhat, p) : [];
+    if (a && fodder && canTap && libOk && !p.usedThisTurn.has('draw') && g.manaAvailable('ability') - a.cost >= keep) {
       const cost = { generic: a.cost, pips: { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 }, hybrid: [], x: 0, mv: a.cost };
       // Paying with the source itself would tap it before its own {T} cost: keep it out of the payment.
       if (g.pay(cost, 'ability', { avoidPerms: a.tap ? new Set([p.id]) : undefined })) {
         if (a.tap) p.tapped = true;
         p.usedThisTurn.add('draw');
+        for (const f of fodder) {
+          g.say(`sacrifice ${g.name(f)}`);
+          g.destroy(f);
+        }
         g.draw(a.n, `activate ${d.name}`);
         if (a.discard) g.discardWorst(a.discard);
         if (a.sacrifice === 'self') {
@@ -165,6 +192,18 @@ export function attackAll(g: Game, filter: (p: Perm) => boolean = () => true) {
  * Passage, Access/Escape Tunnel, Suspicious Bookcase, Prowler's Helm), cheapest first. Returns true on success.
  */
 export function makeUnblockable(g: Game, p: Perm, opts: { dryRun?: boolean } = {}): boolean {
+  // Mistford River Turtle: "whenever this attacks, another target attacking non-Human creature can't be blocked".
+  if (!(!p.token && /\bHuman\b/.test(g.def(p.def).subtypes))) {
+    const turtle = g.onBattlefield((d, q) => d.unblockableEnabler?.kind === 'attack_trigger' && q !== p && !q.usedThisTurn.has('trigger') && g.canAttack(q))[0];
+    if (turtle) {
+      if (opts.dryRun) return true;
+      turtle.usedThisTurn.add('trigger');
+      turtle.attackTarget = g.alive().sort((a, b) => b.life - a.life)[0] ?? null; // it has to attack for the trigger
+      p.eot.unblockable = true;
+      g.say(`${g.name(turtle)} attacks too, making ${g.name(p)} unblockable`);
+      return true;
+    }
+  }
   const sources = g
     .onBattlefield((d, q) => !!d.unblockableEnabler && d.unblockableEnabler.kind !== 'attack_trigger' && (!d.unblockableEnabler.tap || (!q.tapped && !(d.types.creature && q.sick))))
     .sort((a, b) => g.def(a.def).unblockableEnabler!.cost.mv - g.def(b.def).unblockableEnabler!.cost.mv);

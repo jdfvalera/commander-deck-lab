@@ -95,6 +95,7 @@ describe('UI smoke', () => {
     await until(() => el.textContent!.includes('Sample game'), 20000);
     expect(el.textContent).toContain('median win turn');
     expect(el.textContent).toContain('Hand after the draw');
+    await until(() => el.textContent!.includes('Saved runs'));
 
     // Matchups: presets build profiles from their decklists; run a small pod without the matrix.
     const muLink = el.querySelector('a[href$="#/matchups"]') as HTMLAnchorElement;

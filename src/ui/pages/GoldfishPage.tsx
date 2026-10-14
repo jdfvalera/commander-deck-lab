@@ -4,6 +4,9 @@ import { useActiveDeck } from '../useActiveDeck';
 import { DeckPicker } from '../components/DeckPicker';
 import { RulesForm } from '../components/RulesForm';
 import { SampleGame, type SampleRun } from '../components/SampleGame';
+import { SavedRuns } from '../components/SavedRuns';
+import { addRun } from '../../data/results';
+import { newId } from '../../data/storage';
 import { Progress, ResultsHeader, pct } from '../components/Results';
 import { TimingChart } from '../components/charts/TimingChart';
 import { WIN_LABELS, WinTurnChart } from '../components/charts/WinTurnChart';
@@ -17,6 +20,17 @@ import { loadComboDb } from '../../combos/comboDb';
 import { deckIdentityOf, findCombos } from '../../combos/findCombos';
 import { CancelledError, startJob } from '../../worker/client';
 import type { DeckList } from '../../data/types';
+
+type GoldfishRunData = { a: GoldfishSummary; b?: GoldfishSummary; opts: GoldfishOptions; labelA: string; labelB?: string };
+
+function saveGoldfishRun(r: GoldfishRunData) {
+  const at = (x: number[], t: number) => `${Math.round(100 * (x[t - 1] ?? 0))}%`;
+  return addRun({
+    id: newId(), kind: 'goldfish', createdAt: Date.now(), label: r.labelB ? `${r.labelA} vs ${r.labelB}` : r.labelA,
+    headline: `median T${r.a.medianWin ?? '—'} · ${at(r.a.winByTurn.total, 10)} by T10 · ${r.a.games} games, seed ${r.a.seed}`,
+    data: r,
+  });
+}
 
 /** Combos that end games (or loop something infinitely), as the engine's win condition. */
 const WINNING = /infinite|win the game|each opponent loses/i;
@@ -40,7 +54,9 @@ export function GoldfishPage() {
   const [compareId, setCompareId] = useState<string>('');
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ a: GoldfishSummary; b?: GoldfishSummary; opts: GoldfishOptions; labelA: string; labelB?: string; deckA: CompiledDeck } | null>(null);
+  const [result, setResult] = useState<{ a: GoldfishSummary; b?: GoldfishSummary; opts: GoldfishOptions; labelA: string; labelB?: string; deckA?: CompiledDeck } | null>(null);
+  const [saved, setSaved] = useState(0);
+  const keep = (r: GoldfishRunData) => saveGoldfishRun(r).then(() => setSaved((n) => n + 1));
   const cancel = useRef<() => void>(() => {});
 
   const compareVersion = deck?.versions.find((v) => v.id === compareId);
@@ -75,8 +91,15 @@ export function GoldfishPage() {
     cancel.current = job.cancel;
     job.promise
       .then((r) => {
-        if (r.kind === 'goldfish') setResult({ a: r.result, opts, labelA, deckA: compiled });
-        if (r.kind === 'compare') setResult({ a: r.a, b: r.b, opts, labelA, labelB: `${deck.name} · ${compareVersion!.label}`, deckA: compiled });
+        if (r.kind === 'goldfish') {
+          setResult({ a: r.result, opts, labelA, deckA: compiled });
+          keep({ a: r.result, opts, labelA });
+        }
+        if (r.kind === 'compare') {
+          const labelB = `${deck.name} · ${compareVersion!.label}`;
+          setResult({ a: r.a, b: r.b, opts, labelA, labelB, deckA: compiled });
+          keep({ a: r.a, b: r.b, opts, labelA, labelB });
+        }
       })
       .catch((e) => !(e instanceof CancelledError) && setError(String(e)))
       .finally(() => setProgress(null));
@@ -149,8 +172,9 @@ export function GoldfishPage() {
         </div>
       )}
 
+      <SavedRuns<{ a: GoldfishSummary; b?: GoldfishSummary; opts: GoldfishOptions; labelA: string; labelB?: string }> kind="goldfish" refresh={saved} onOpen={(run) => setResult(run.data)} />
       {result && <Results r={result} />}
-      {result && <GoldfishSample deck={result.deckA} opts={result.opts} />}
+      {result?.deckA && <GoldfishSample deck={result.deckA} opts={result.opts} />}
     </div>
   );
 }

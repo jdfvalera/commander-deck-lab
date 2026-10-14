@@ -210,3 +210,30 @@ describe('goldfish runs', () => {
     expect(g.logs[0].hand.length).toBeGreaterThan(0);
   });
 });
+
+describe('sacrifice-another costs', () => {
+  it('Portcullis Vine sacrifices a cheap defender (Ornithopter-sized), never a big wall or the commander', () => {
+    const g = board(pride, ['Portcullis Vine', 'Ornithopter', 'Wall of Junk', 'Island', 'Island', 'Island']);
+    // Ornithopter has no defender, so only Wall of Junk (0/7) qualifies, and it's too valuable to feed.
+    expect(g.fodder('1 creature with defender', g.bf.find((p) => g.name(p) === 'Portcullis Vine')!)).toBeNull();
+    const h = board(prideRev, ['Portcullis Vine', 'Shield Sphere']);
+    expect(h.fodder('1 creature with defender', h.bf[0])).toBeNull(); // 0/6
+    const t = board(pride, ['Portcullis Vine']);
+    t.makeToken(0, 1, false, 'Plant token');
+    expect(t.fodder('1 token', t.bf[0])?.length).toBe(1);
+  });
+});
+
+describe('land auras', () => {
+  it('Utopia Sprawl adds mana only through its Forest, and only once a turn', async () => {
+    const { attachIfNeeded } = await import('../src/engine/strategies/common');
+    const g = board(pride, ['Forest', 'Island', 'Utopia Sprawl']);
+    const sprawl = g.bf.find((p) => g.name(p) === 'Utopia Sprawl')!;
+    expect(g.manaAvailable()).toBe(2); // not attached yet: nothing extra
+    attachIfNeeded(g, sprawl, g.def(sprawl.def));
+    expect(g.name(g.bf.find((p) => p.id === sprawl.attachedTo)!)).toBe('Forest');
+    expect(g.manaAvailable()).toBe(3);
+    g.bf.find((p) => g.name(p) === 'Forest')!.tapped = true;
+    expect(g.manaAvailable()).toBe(1); // the Forest is tapped: the Sprawl's mana went with it
+  });
+});

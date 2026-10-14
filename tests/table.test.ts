@@ -153,3 +153,73 @@ describe('matchup runs', () => {
     expect(performance.now() - t).toBeLessThan(15000);
   }, 30000);
 });
+
+describe('Mistford River Turtle', () => {
+  it('attacks alongside a Pride target to make it unblockable', async () => {
+    const { makeUnblockable } = await import('../src/engine/strategies/common');
+    const cur = compileDeck((await import('../fixtures/decks/pride-current.json')).default, lookup, tagsFor);
+    const g = new TableGame(cur, 1, settings, [rex, rex, rex]);
+    g.hand = [];
+    g.turn = 5;
+    const enter = (n: string) => {
+      const p = g.enter(cur.defs.findIndex((d) => d.name === n), { tapped: false });
+      p.sick = false;
+      return p;
+    };
+    const turtle = enter('Mistford River Turtle');
+    const wall = enter('Wall of Junk');
+    g.os[0].o.creatures.push({ name: 'Blocker', power: 2, toughness: 2, flying: false, reach: false, trample: false, unblockable: false, defender: false, tapped: false, sick: false });
+    expect(g.connects(wall, g.os[0].o)).toBe(false);
+    expect(makeUnblockable(g, wall)).toBe(true);
+    expect(wall.eot.unblockable).toBe(true);
+    expect(turtle.attackTarget).toBeTruthy();
+    expect(g.connects(wall, g.os[0].o)).toBe(true);
+  });
+});
+
+describe('opponent lifelink, tricks and protection', () => {
+  it('Angels have lifelink creatures and the profile carries them', () => {
+    expect(angels.creatures.some((c) => c.lifelink)).toBe(true);
+  });
+  it('a lifelink attacker that gets through gains its controller life', () => {
+    const g = table([angels, angels, angels], []);
+    const st = g.os[0];
+    const before = st.o.life;
+    (g as unknown as { defend: (s: unknown, a: OppCreature[]) => void }).defend(st, [opp({ power: 4, lifelink: true, flying: true })]);
+    expect(g.myLife).toBe(36);
+    expect(st.o.life).toBe(before + 4);
+  });
+  it('a combat trick lets their attacker beat your wall', () => {
+    const g = table([rex, rex, rex], ['Hover Barrier']);
+    const st = g.os[0];
+    st.hand = [{ k: 'trick', spec: { name: 'Giant Growth', kind: 'trick', x: 3, per: 3 } }] as never;
+    st.rng = () => 0;
+    (g as unknown as { defend: (s: unknown, a: OppCreature[]) => void }).defend(st, [opp({ power: 4, toughness: 4, flying: true })]);
+    expect(g.bf.some((p) => g.name(p) === 'Hover Barrier')).toBe(false); // 7 damage kills the 0/6
+  });
+});
+
+describe('seat and combo interaction', () => {
+  it('sitting last against fliers is worse than going first (they swing before you each round)', () => {
+    const first = runTable(pride, [dragons, dragons, dragons], { ...opts, games: 200, seat: 1 });
+    const last = runTable(pride, [dragons, dragons, dragons], { ...opts, games: 200, seat: 4 });
+    expect(last.winRate).toBeLessThanOrEqual(first.winRate + 0.02);
+  });
+  it('opponents with removal answer assembled combos (Vhal vs Wretched Ranks)', async () => {
+    const corpus = (await import('../fixtures/scryfall/corpus.json')).default as ScryfallCard[];
+    for (const c of corpus) for (const k of cardKeys(c)) if (!byKey.has(k)) byKey.set(k, c);
+    const { parseDecklist } = await import('../src/data/parseDecklist');
+    const { guessCommanders } = await import('../src/data/validateDeck');
+    const { findCombos } = await import('../src/combos/findCombos');
+    const subset = (await import('../fixtures/spellbook/combos-subset.json')).default;
+    const list = guessCommanders(parseDecklist(readFileSync('fixtures/decks/vhal.txt', 'utf8')), lookup).list;
+    const vhal = compileDeck(list, lookup, tagsFor);
+    const combos = findCombos(subset as never, { commanders: list.commanders, cards: list.cards.map((c) => c.name) }, new Set(['U']))
+      .complete.filter((c) => c.produces.some((p) => /infinite/i.test(p)))
+      .map((c) => ({ cards: c.cards, manaNeeded: c.manaValueNeeded, label: c.cards.join(' + ') }));
+    const ranks = precon('wretchedranks-fdc');
+    const r = runTable(vhal, [ranks, ranks, ranks], { ...DEFAULT_TABLE, games: 200, strategy: 'generic', settings: {}, combos });
+    expect(r.perGame.combosDisrupted).toBeGreaterThan(0);
+    expect(r.winTypes.combo ?? 0).toBeGreaterThan(0);
+  }, 60000);
+});

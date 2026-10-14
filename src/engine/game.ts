@@ -41,6 +41,7 @@ export interface OppCreature {
   trample: boolean;
   unblockable: boolean;
   defender: boolean;
+  lifelink?: boolean;
   tapped: boolean;
   sick: boolean;
 }
@@ -266,12 +267,18 @@ export class Game {
       if (p.token) continue;
       const d = this.def(p.def);
       if (!d.sourceKind) continue;
-      if (d.sourceKind === 'land' || d.sourceKind === 'rock' || d.sourceKind === 'aura') {
-        if (p.tapped && d.sourceKind !== 'aura') continue;
-        if (d.sourceKind === 'aura' && p.usedThisTurn.has('mana')) continue;
-        const amount = d.sourceKind === 'land' ? 1 : d.rampAmount;
+      if (d.sourceKind === 'aura') continue; // its mana comes with the enchanted land, below
+      if (d.sourceKind === 'land' || d.sourceKind === 'rock') {
+        if (p.tapped) continue;
+        let amount = d.sourceKind === 'land' ? 1 : d.rampAmount;
+        let colors: (Color | 'C')[] = d.produces.length ? d.produces : ['C'];
+        // Land auras (Utopia Sprawl, Wild Growth): tapping the enchanted land adds their extra mana.
+        for (const a of this.bf) {
+          if (a.attachedTo !== p.id || a.token || this.def(a.def).sourceKind !== 'aura') continue;
+          amount += this.def(a.def).rampAmount;
+          colors = [...new Set([...colors, ...this.def(a.def).produces])];
+        }
         if (amount <= 0) continue;
-        const colors: (Color | 'C')[] = d.produces.length ? d.produces : ['C'];
         out.push({ perm: p, amount, colors, restriction: d.abilitiesOnlyMana ? 'abilities' : null, dork: false, shrink: false });
       } else if (d.sourceKind === 'dork') {
         if (d.shrinksForMana) {
@@ -359,8 +366,7 @@ export class Game {
       if (u.shrink) {
         u.perm.minusToughness++;
         u.perm.usedThisTurn.add('mana');
-      } else if (this.def(u.perm.def).sourceKind === 'aura') u.perm.usedThisTurn.add('mana');
-      else u.perm.tapped = true;
+      } else u.perm.tapped = true;
     }
     this.floating = floating;
     this.treasures = treasures;
@@ -431,6 +437,10 @@ export class Game {
   lost: string | null = null;
   over(): boolean {
     return this.winTurn !== null || this.decked || this.lost !== null;
+  }
+  /** Matchups: an opponent may answer an assembled combo by removing a piece. */
+  protected comboDisrupted(_pieces: number[]): boolean {
+    return false;
   }
   /** Matchups: opponents may counter it. Returns true if the spell was countered. */
   protected countered(_defIdx: number, _fromCommandZone: boolean): boolean {
@@ -609,6 +619,38 @@ export class Game {
         break;
     }
   }
+  /**
+   * Picks permanents to sacrifice for "sacrifice N <thing>" costs: tokens first, then the cheapest match.
+   * Never the commander, a combo piece, or (unless `cheapOnly` is off) anything worth more than a 0/2-ish body.
+   */
+  fodder(what: string, exclude: Perm, cheapOnly = true): Perm[] | null {
+    const m = what.match(/^(\d+) (.+)$/);
+    if (!m) return null;
+    const count = Number(m[1]);
+    const kind = m[2];
+    const combo = new Set(this.s.combos.flatMap((c) => c.cards));
+    const matches = (p: Perm) => {
+      if (p === exclude || p.commander || (!p.token && combo.has(p.def))) return false;
+      const d = p.token ? null : this.def(p.def);
+      if (kind.includes('token')) return !!p.token;
+      if (kind.startsWith('land')) return !!d?.types.land;
+      if (kind.startsWith('artifact')) return !!d?.types.artifact;
+      if (kind.startsWith('creature') || kind.endsWith('creature')) {
+        if (!this.isCreature(p)) return false;
+        if (kind.includes('defender') && !this.defender(p)) return false;
+        return true;
+      }
+      return false;
+    };
+    // Toughness counts fully: in a deck like the Pride, a big-butted wall is a draw engine, not fodder.
+    const value = (p: Perm) => (p.token ? 0 : 1 + this.def(p.def).mv + Math.max(0, this.power(p)) + Math.max(0, this.toughness(p)) + (this.def(p.def).sourceKind ? 5 : 0));
+    const options = this.bf.filter(matches).sort((a, b) => value(a) - value(b));
+    const picked = options.slice(0, count);
+    if (picked.length < count) return null;
+    if (cheapOnly && picked.some((p) => value(p) > 4)) return null;
+    return picked;
+  }
+
   /** A permanent leaves: commanders go to the command zone, tokens vanish, attachments fall off. */
   destroy(p: Perm, to: 'graveyard' | 'hand' | 'library' = 'graveyard') {
     const i = this.bf.indexOf(p);
@@ -693,6 +735,7 @@ export class Game {
         const toBlocker = Math.min(dmg, Math.max(1, blocker.toughness));
         if (toBlocker >= blocker.toughness) blocker.toughness = 0; // marked for death
         perm.damage += blocker.power;
+        if (blocker.lifelink) target.life += blocker.power;
         this.say(`${this.name(perm)} is blocked by ${blocker.name}`);
         dmg = trample ? dmg - toBlocker : 0;
       }
@@ -781,6 +824,7 @@ export class Game {
     for (const c of this.s.combos) {
       const ready = c.cards.every((i) => onBf.has(i) || (this.hand.includes(i) && !this.def(i).permanent));
       if (!ready || this.manaAvailable('ability') < c.manaNeeded) continue;
+      if (this.comboDisrupted(c.cards)) return;
       this.comboTurn = this.turn;
       this.comboLabel = c.label;
       this.say(`combo assembled: ${c.label}`);

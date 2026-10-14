@@ -12,7 +12,7 @@ import { defaults, type StrategySettings } from './strategies/types';
 import type { InteractionSpec, OpponentProfile } from '../opponents/profile';
 
 /** An opponent's card, reduced to the one thing the model tracks: what kind of interaction it is. */
-type Card = { k: 'wipe' | 'removal' | 'counter' | 'aetherize' | 'tax' | 'blank'; spec: InteractionSpec };
+type Card = { k: 'wipe' | 'removal' | 'counter' | 'aetherize' | 'tax' | 'trick' | 'protect' | 'blank'; spec: InteractionSpec };
 const BLANK: Card = { k: 'blank', spec: { name: '', kind: 'blank' } };
 
 interface OppState {
@@ -37,6 +37,8 @@ export interface TableSettings {
   comboWins: boolean;
   /** Keep mana open for your best instant-speed protection. */
   holdProtection: boolean;
+  /** Your seat: 1–4 (1 goes first), or 0 for a random seat each game. */
+  seat: number;
 }
 
 export type LossReason = 'fliers' | 'ground' | 'decked' | 'timeout' | 'other';
@@ -49,6 +51,7 @@ export interface TableStats {
   triumphCountered: number;
   spellsCountered: number;
   aetherized: number;
+  combosDisrupted: number;
   protectionUsed: Record<string, number>;
   damageFliers: number;
   damageGround: number;
@@ -59,7 +62,8 @@ const DAMAGE_X = 5; // "X" damage / -X/-X wipes when the card doesn't fix X
 export class TableGame extends Game {
   os: OppState[];
   myLife = 40;
-  stats: TableStats = { commanderRemoved: 0, wipesFaced: 0, removalFaced: 0, triumphCast: 0, triumphCountered: 0, spellsCountered: 0, aetherized: 0, protectionUsed: {}, damageFliers: 0, damageGround: 0 };
+  seat = 1;
+  stats: TableStats = { commanderRemoved: 0, wipesFaced: 0, removalFaced: 0, triumphCast: 0, triumphCountered: 0, spellsCountered: 0, aetherized: 0, combosDisrupted: 0, protectionUsed: {}, damageFliers: 0, damageGround: 0 };
 
   constructor(deck: CompiledDeck, seed: number, settings: GameSettings, profiles: OpponentProfile[], order?: number[]) {
     super(deck, seed, settings, order);
@@ -80,6 +84,8 @@ export class TableGame extends Game {
         ...p.counters.map((spec) => ({ k: 'counter' as const, spec })),
         ...p.aetherize.map((spec) => ({ k: 'aetherize' as const, spec })),
         ...p.taxes.map((spec) => ({ k: 'tax' as const, spec })),
+        ...(p.tricks ?? []).map((spec) => ({ k: 'trick' as const, spec })),
+        ...(p.protection ?? []).map((spec) => ({ k: 'protect' as const, spec })),
       ];
       while (lib.length < 99) lib.push(BLANK);
       shuffle(lib, rng);
@@ -137,6 +143,32 @@ export class TableGame extends Game {
       this.say(`${st.p.name} counters ${d.name} with ${c.spec.name}`);
       this.stats.spellsCountered++;
       if (d.massInfect) this.stats.triumphCountered++;
+      return true;
+    }
+    return false;
+  }
+
+  // ---------------- your combos ----------------
+  /** When a combo comes together, an opponent holding removal may kill a piece in response. */
+  protected override comboDisrupted(pieces: number[]): boolean {
+    for (const st of this.liveOpps()) {
+      const r = st.hand.find((x) => x.k === 'removal');
+      if (!r || st.rng() > st.p.interactionRate) continue;
+      const scope = r.spec.scope ?? 'creature';
+      const target = this.bf.find((p) => {
+        if (p.token || !pieces.includes(p.def)) return false;
+        const d = this.def(p.def);
+        if (this.shroud(p) || d.keywords.hexproof) return false;
+        if (scope === 'creature') return d.types.creature;
+        if (scope === 'artifact_enchantment') return d.types.artifact || d.types.enchantment;
+        return !d.types.land;
+      });
+      if (!target) continue;
+      st.hand.splice(st.hand.indexOf(r), 1);
+      this.stats.combosDisrupted++;
+      this.say(`${st.p.name} answers the combo: ${r.spec.name} on ${this.name(target)}`);
+      if (target.commander) this.stats.commanderRemoved++;
+      this.destroy(target, r.spec.kind === 'bounce' ? 'hand' : 'graveyard');
       return true;
     }
     return false;
@@ -226,8 +258,10 @@ export class TableGame extends Game {
     if (cur) cur.opponents = `you ${this.myLife} · ` + cur.opponents;
   }
 
-  opponentTurn(st: OppState) {
+  /** Their turn in round `round` (their board grows along their curve for that turn number). */
+  opponentTurn(st: OppState, round = this.turn) {
     const { o, p } = st;
+    this.round = round;
     for (const c of o.creatures) {
       c.tapped = false;
       c.sick = false;
@@ -252,8 +286,10 @@ export class TableGame extends Game {
   }
 
   /** Grow the board along their measured curve, casting real creatures from their list. */
+  private round = 0;
+
   private develop(st: OppState) {
-    const t = this.turn;
+    const t = Math.max(1, this.round);
     const curve = st.p.powerCurve;
     const delta = Math.max(0, ((curve[Math.min(t, curve.length) - 1] ?? 0) - (t > 1 ? curve[Math.min(t - 1, curve.length) - 1] : 0)) * st.p.curveScale);
     const castable = st.p.creatures.filter((c) => c.mv <= Math.min(t + 1, 8));
@@ -263,7 +299,7 @@ export class TableGame extends Game {
     for (let n = 0; n < 4 && added < delta; n++) {
       let r = st.rng() * total;
       const pick = castable.find((c) => (r -= c.count) < 0) ?? castable[0];
-      st.o.creatures.push({ name: pick.name, power: pick.power, toughness: pick.toughness, flying: pick.flying, reach: pick.reach, trample: pick.trample, unblockable: pick.unblockable, defender: pick.defender, tapped: false, sick: true });
+      st.o.creatures.push({ name: pick.name, power: pick.power, toughness: pick.toughness, flying: pick.flying, reach: pick.reach, trample: pick.trample, unblockable: pick.unblockable, defender: pick.defender, lifelink: pick.lifelink, tapped: false, sick: true });
       added += Math.max(1, pick.power);
     }
   }
@@ -448,9 +484,11 @@ export class TableGame extends Game {
     const blocker = can.find((b) => b.toughness > c.power) ?? can.find((b) => b.power >= c.toughness);
     if (!blocker) {
       target.o.life -= c.power;
+      if (c.lifelink) this.os.find((x) => x.o.creatures.includes(c))!.o.life += c.power;
       return;
     }
     blocker.tapped = true; // used up this combat
+    if (blocker.lifelink) target.o.life += blocker.power;
     if (c.power >= blocker.toughness) blocker.toughness = 0;
     if (blocker.power >= c.toughness) c.toughness = 0;
     if (c.trample) target.o.life -= Math.max(0, c.power - blocker.toughness);
@@ -494,10 +532,21 @@ export class TableGame extends Game {
       const value = (b: Perm) => this.targetValue(b);
       const good = can.filter((b) => this.toughness(b) > c.power).sort((a, b) => value(a) - value(b));
       const pick = good[0] ?? (desperate ? can.sort((a, b) => value(a) - value(b))[0] : undefined);
+      // Combat trick: an instant pump when their attacker runs into a blocker it can't beat.
+      if (pick && this.toughness(pick) >= c.power) {
+        const trick = st.hand.find((x) => x.k === 'trick');
+        if (trick && st.rng() < st.p.interactionRate) {
+          st.hand.splice(st.hand.indexOf(trick), 1);
+          c.power += trick.spec.x ?? 2;
+          c.toughness += trick.spec.per ?? 2;
+          this.say(`${st.p.name}: ${trick.spec.name} on ${c.name}`);
+        }
+      }
       let through = c.power;
       if (pick) {
         blockers.splice(blockers.indexOf(pick), 1);
         pick.damage += c.power;
+        if (c.lifelink) st.o.life += c.power;
         if (this.combatDamage(pick) >= c.toughness) c.toughness = 0;
         through = c.trample ? Math.max(0, c.power - this.toughness(pick)) : 0;
         if (pick.damage >= this.toughness(pick) && !(!pick.token && this.def(pick.def).keywords.indestructible)) {
@@ -505,7 +554,10 @@ export class TableGame extends Game {
           this.destroy(pick);
         }
       }
-      if (through > 0) this.takeDamage(through, c.flying);
+      if (through > 0) {
+        this.takeDamage(through, c.flying);
+        if (c.lifelink && !pick) st.o.life += through; // blocked: already gained for all its damage
+      }
       if (this.over()) break;
     }
     st.o.creatures = st.o.creatures.filter((c) => c.toughness > 0);
@@ -545,6 +597,12 @@ export class TableGame extends Game {
       const best = threats.sort((a, b) => score(b.c) - score(a.c))[0];
       if (!best || score(best.c) < 4 || !this.canPay(d.cost, 'hand')) continue;
       this.cast(i);
+      const save = best.st.hand.find((x) => x.k === 'protect');
+      if (save && best.st.rng() < best.st.p.interactionRate) {
+        best.st.hand.splice(best.st.hand.indexOf(save), 1);
+        this.say(`${best.st.p.name}: ${save.spec.name} saves ${best.c.name} from ${d.name}`);
+        continue;
+      }
       best.st.o.creatures.splice(best.st.o.creatures.indexOf(best.c), 1);
       this.say(`${d.name} removes ${best.st.p.name}'s ${best.c.name}`);
     }
@@ -583,7 +641,15 @@ export function playTable(deck: CompiledDeck, profiles: OpponentProfile[], seed:
     g.lib.push(...seven);
     shuffle(g.lib, g.rng);
   }
+  // Seat: opponents sitting before you take their turn first each round.
+  const seat = opts.seat >= 1 && opts.seat <= 4 ? opts.seat : 1 + Math.floor(g.rng() * 4);
+  g.seat = seat;
   for (let t = 0; t < opts.maxTurns && !g.over(); t++) {
+    for (const st of g.os.slice(0, seat - 1)) {
+      if (g.over()) break;
+      if (st.o.life > 0 && st.o.poison < 10) g.opponentTurn(st, t + 1);
+    }
+    if (g.over()) break;
     g.beginTurn();
     g.setReserve(opts.holdProtection);
     if (!g.over()) strategy.main1(g, settings);
@@ -596,9 +662,9 @@ export function playTable(deck: CompiledDeck, profiles: OpponentProfile[], seed:
     }
     g.endTurn();
     // Untapped mana stays available for responses on their turns.
-    for (const st of g.liveOpps()) {
+    for (const st of g.os.slice(seat - 1)) {
       if (g.over()) break;
-      g.opponentTurn(st);
+      if (st.o.life > 0 && st.o.poison < 10) g.opponentTurn(st, t + 1);
     }
   }
   if (!g.over()) g.lost = 'timeout';
@@ -620,7 +686,7 @@ export interface MatchupSummary {
   medianWin: number | null;
   winTypes: Partial<Record<WinType, number>>;
   losses: Record<LossReason, number>;
-  perGame: { commanderRemoved: number; wipesFaced: number; removalFaced: number; spellsCountered: number; aetherized: number };
+  perGame: { commanderRemoved: number; wipesFaced: number; removalFaced: number; spellsCountered: number; aetherized: number; combosDisrupted: number };
   triumph: { cast: number; countered: number };
   protectionUsed: { name: string; perGame: number }[];
   avgLifeAtEnd: number;
@@ -663,6 +729,7 @@ export function runTable(deck: CompiledDeck, profiles: OpponentProfile[], opts: 
       removalFaced: sum((s) => s.removalFaced) / n,
       spellsCountered: sum((s) => s.spellsCountered) / n,
       aetherized: sum((s) => s.aetherized) / n,
+      combosDisrupted: sum((s) => s.combosDisrupted) / n,
     },
     triumph: { cast: sum((s) => s.triumphCast) / n, countered: sum((s) => s.triumphCountered) / Math.max(1, sum((s) => s.triumphCast)) },
     protectionUsed: [...prot].map(([name, v]) => ({ name, perGame: v / n })).sort((a, b) => b.perGame - a.perGame),
@@ -679,4 +746,5 @@ export const DEFAULT_TABLE: Omit<TableSettings, 'strategy' | 'settings'> = {
   combos: [],
   comboWins: true,
   holdProtection: true,
+  seat: 1,
 };

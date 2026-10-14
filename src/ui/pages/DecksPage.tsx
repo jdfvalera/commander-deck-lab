@@ -5,6 +5,7 @@ import { guessCommanders, validateDeck } from '../../data/validateDeck';
 import { addVersion, diffLists, newId } from '../../data/storage';
 import { EXAMPLE_DECKS } from '../../data/examples';
 import { download, makeBackup, mergeBackup, overridesFor, parseBackup, shareUrl } from '../../data/share';
+import { loadRuns, saveRuns } from '../../data/results';
 import type { DeckList, SavedDeck } from '../../data/types';
 import { CardTable } from '../components/CardTable';
 import { TagEditor } from '../components/TagEditor';
@@ -20,6 +21,11 @@ export function DecksPage() {
       const r = mergeBackup(decks, overrides, b);
       updateDecks(() => r.decks);
       updateOverrides(() => r.overrides);
+      if (b.runs?.length) {
+        const mine = await loadRuns();
+        const have = new Set(mine.map((x) => x.id));
+        await saveRuns([...mine, ...b.runs.filter((x) => !have.has(x.id))].sort((x, y) => y.createdAt - x.createdAt));
+      }
       setBackupMsg(`Restored: ${r.added} new deck${r.added === 1 ? '' : 's'}, ${r.updated} with new versions, tag edits for ${Object.keys(b.tagOverrides).length} cards.`);
     } catch (e) {
       setBackupMsg(e instanceof Error ? e.message : 'That file could not be read.');
@@ -77,14 +83,14 @@ export function DecksPage() {
         <details className="small">
           <summary>Back up or move your data</summary>
           <div className="stack" style={{ gap: 6, marginTop: 6 }}>
-            <button onClick={() => download(`commander-deck-lab-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(makeBackup(decks, overrides), null, 1))}>
+            <button onClick={async () => download(`commander-deck-lab-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(makeBackup(decks, overrides, await loadRuns()), null, 1))}>
               Download backup (.json)
             </button>
             <label className="button" style={{ textAlign: 'center' }}>
               Restore from backup…
               <input type="file" accept="application/json,.json" style={{ display: 'none' }} onChange={(e) => restore(e.target.files?.[0])} />
             </label>
-            <span className="muted">Decks and tag edits live only in this browser. A backup merges in without deleting anything.</span>
+            <span className="muted">Decks, tag edits and saved runs live only in this browser. A backup merges in without deleting anything.</span>
             {backupMsg && <span>{backupMsg}</span>}
           </div>
         </details>

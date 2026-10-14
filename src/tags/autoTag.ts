@@ -388,7 +388,8 @@ const RULES: Rule[] = [
     re: /^((?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+)(?:, (?:(?:\{[^}]+\})+|sacrifice [^,:]+|discard [^,:]+|pay \d+ life|exile [^,:]+))*): (?:you )?draw (a|one|two|three|x) cards?(?:, then discard (a|one|two|three) cards?)?(?:\.|$)/,
     apply: (m, ctx) =>
       ctx.set('activated_draw', {
-        cost: costOf(m[1]), n: num(m[2]) || 1, tap: m[1].includes('{t}'), sacrifice: /sacrifice/.test(m[1]), sacrifice_self: /sacrifice ~/.test(m[1]), discard: m[3] ? num(m[3]) : 0,
+        cost: costOf(m[1]), n: num(m[2]) || 1, tap: m[1].includes('{t}'), sacrifice: /sacrifice/.test(m[1]), sacrifice_self: /sacrifice ~/.test(m[1]),
+        sacrifice_what: sacrificeWhat(m[1]), discard: m[3] ? num(m[3]) : 0,
       }),
   },
   { re: new RegExp(`^draw ${NUM} cards?, then discard ${NUM} cards?`), apply: (m, ctx) => ctx.set('loot', { draw: num(m[1]), discard: num(m[2]) }) },
@@ -705,6 +706,13 @@ const RULES: Rule[] = [
   },
   { re: /^prevent all combat damage that would be dealt this turn\.?$/, apply: (_m, ctx) => ctx.set('fog') },
 ];
+
+/** "{2}, {T}, Sacrifice two artifacts" -> "2 artifact"; "sacrifice another creature with defender" -> "1 creature with defender". */
+function sacrificeWhat(cost: string): string {
+  const m = cost.match(/sacrifice (?:another |a |an |(two|three) )?(?!~)([a-z ]+?)s?(?:,|$)/);
+  if (!m) return '';
+  return `${m[1] ? num(m[1]) : 1} ${m[2].trim()}`;
+}
 
 function isCreature(ctx: Ctx) {
   return ctx.type.includes('creature');

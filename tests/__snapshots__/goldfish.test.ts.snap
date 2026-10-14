@@ -2,9 +2,9 @@
 
 exports[`goldfish runs > golden: a fixed seed gives exactly the same summary 1`] = `
 {
-  "by10": 0.33666666666666667,
-  "decked": 0.013333333333333334,
+  "by10": 0.2866666666666667,
+  "decked": 0.01,
   "median": 11,
-  "pride4": 0.7133333333333334,
+  "pride4": 0.6833333333333333,
 }
 `;
